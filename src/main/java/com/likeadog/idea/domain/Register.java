@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,14 +16,14 @@ import java.time.LocalDateTime;
 public class Register {
     @Id
     @GeneratedValue
-    private Long register_idx;
+    private Long registerIdx;
 
     @ManyToOne
-    @JoinColumn(name ="user_idx")
-    private User user_idx;
+    @JoinColumn(name ="userIdx")
+    private User user;
 
-    private String ani_Id; //동물등록번호
-    private String ani_name; //동물이름
+    private String aniId; //동물등록번호
+    private String aniName; //동물이름
     private int weight; //몸무게
     private String kind; //견종
     private String color; //모색
@@ -31,9 +33,18 @@ public class Register {
 
     private String creater; //생성자
     private String modifier; //수정자
-    private LocalDateTime c_date; //생성날짜
-    private LocalDateTime m_date; //수정날짜
+    private LocalDateTime cDate; //생성날짜
+    private LocalDateTime mDate; //수정날짜
 
     @Enumerated(EnumType.STRING)
     private DeleteEnum del; //삭제여부
+
+    @OneToMany(mappedBy = "register")
+    private List<Donation> donations = new ArrayList<>();
+
+    @OneToMany (mappedBy = "register")
+    private List<Vaccine> vaccines  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "register")
+    private List<Transfusion> transfusions = new ArrayList<>();
 }
