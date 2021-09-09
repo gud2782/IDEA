@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Transfusion {
+public class Transfusion extends BaseEntity{
     @Id
     @GeneratedValue
     private Long transfusionIdx;
@@ -32,11 +32,5 @@ public class Transfusion {
     private String tPack; //수혈양
     private char neutralization; //중성화
 
-    private String creater; //생성자
-    private String modifier; //수정자
-    private LocalDateTime cDate; //생성날짜
-    private LocalDateTime mDate; //수정날짜
 
-    @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
 }

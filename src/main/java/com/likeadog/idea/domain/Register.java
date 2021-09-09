@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Register {
+public class Register extends BaseEntity{
     @Id
     @GeneratedValue
     private Long registerIdx;
@@ -31,13 +31,6 @@ public class Register {
     private LocalDate birth; //출생년도
     private char neutralization; //중성화
 
-    private String creater; //생성자
-    private String modifier; //수정자
-    private LocalDateTime cDate; //생성날짜
-    private LocalDateTime mDate; //수정날짜
-
-    @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
 
     @OneToMany(mappedBy = "register")
     private List<Donation> donations = new ArrayList<>();

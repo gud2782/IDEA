@@ -11,20 +11,13 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Qrcode {
+public class Qrcode extends BaseEntity{
     @Id @GeneratedValue
     private Long qrcodeIdx;
 
     private String bNumber; //혈액번호
     private String url; //url
 
-    private String creater; //생성자
-    private String modifier; //수정자
-    private LocalDateTime cDate; //생성날짜
-    private LocalDateTime mDate; //수정날짜
-
-    @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
 
     @OneToOne(mappedBy = "qrcode")
     private Transfusion transfusion;

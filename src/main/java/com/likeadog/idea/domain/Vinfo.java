@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Vinfo {
+public class Vinfo extends BaseEntity{
     @Id @GeneratedValue
     private Long vInfoIdx;
 
@@ -27,14 +27,6 @@ public class Vinfo {
 
     @Enumerated(EnumType.STRING)
     private ThirdEnum third; //소분류 [홍역 / 간염 / 파보장염 / 파라인플루엔자 / 럽토스피라]
-
-    private String creater; //생성자
-    private String modifier; //수정자
-    private LocalDateTime cDate; //생성날짜
-    private LocalDateTime mDate; //수정날짜
-
-    @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
 
     @OneToMany(mappedBy = "vInfo")
     private List<Vaccine> vaccines = new ArrayList<>();

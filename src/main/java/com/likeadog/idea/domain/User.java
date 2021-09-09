@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class User {
+public class User extends BaseEntity{
     @Id
     @GeneratedValue
     private Long userIdx;
@@ -23,13 +23,7 @@ public class User {
     private String address; //주소
     private String phone; //핸드폰번호
 
-    private String creater; //생성자
-    private String modifier; //수정자
-    private LocalDateTime cDate; //생성날짜
-    private LocalDateTime mDate; //수정날짜
 
-    @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
 
     @OneToMany(mappedBy = "user")
     private List<Register> registers = new ArrayList<>();

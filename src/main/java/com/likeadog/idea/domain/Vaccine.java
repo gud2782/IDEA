@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Vaccine {
+public class Vaccine extends BaseEntity{
     @Id
     @GeneratedValue
     private Long vaccineIdx;
@@ -28,11 +28,5 @@ public class Vaccine {
     private LocalDate vDate; //접종일
     private LocalDate nDate; //다음 접종일
 
-    private String creater; //생성자
-    private String modifier; //수정자
-    private LocalDateTime cDate; //생성날짜
-    private LocalDateTime mDate; //수정날짜
 
-    @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
 }
