@@ -4,7 +4,6 @@ import com.likeadog.idea.domain.User;
 import com.likeadog.idea.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +11,7 @@ import java.util.List;
 
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
 
@@ -19,11 +19,12 @@ public class UserService {
 
 
     //회원가입
+    @Transactional
     public Long join(User user) {
 
         validateDuplicateUser(user); //중복 회원 검증
         userRepository.save(user);
-        return user.getUser_idx();
+        return user.getUserIdx();
 
     }
 
