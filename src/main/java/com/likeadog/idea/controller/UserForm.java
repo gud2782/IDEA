@@ -1,30 +1,23 @@
-package com.likeadog.idea.domain;
+package com.likeadog.idea.controller;
 
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
 @Getter
 @Setter
-public class User extends BaseEntity{
+public class UserForm {
 
-    @Id
-    @GeneratedValue
-    private Long userIdx;
 
+    @NotEmpty(message = "견주 아이디는 필수 입니다")
     private String userId; //견주ID
+
     private String pw; //비밀번호
     private String name; //이름
     private String address; //주소
     private String phone; //핸드폰번호
 
-
-
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Register> registers = new ArrayList<>();
 
 }
