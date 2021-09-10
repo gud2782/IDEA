@@ -1,6 +1,5 @@
 package com.likeadog.idea.domain;
 
-import com.likeadog.idea.enumCollection.DeleteEnum;
 import com.likeadog.idea.enumCollection.FirstEnum;
 import com.likeadog.idea.enumCollection.SecondEnum;
 import com.likeadog.idea.enumCollection.ThirdEnum;
@@ -8,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +26,8 @@ public class Vinfo extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ThirdEnum third; //소분류 [홍역 / 간염 / 파보장염 / 파라인플루엔자 / 럽토스피라]
 
-    @OneToMany(mappedBy = "vInfo")
-    private List<Vaccine> vaccines = new ArrayList<>();
+    @OneToMany(mappedBy = "vinfo")
+    private List<Vaccine_Vinfo> vaccines = new ArrayList<>();
 
 }
 

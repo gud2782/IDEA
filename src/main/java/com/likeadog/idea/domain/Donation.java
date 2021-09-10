@@ -1,12 +1,12 @@
 package com.likeadog.idea.domain;
 
-import com.likeadog.idea.enumCollection.DeleteEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter
@@ -16,11 +16,11 @@ public class Donation extends BaseEntity{
     @Id @GeneratedValue
     private Long donationIdx;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "registerIdx")
     private Register register; //동물 등록번호를 가져옴
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "qrcodeIdx")
     private Qrcode qrcode; //혈액번호를 가져옴
 

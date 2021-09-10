@@ -1,14 +1,14 @@
 package com.likeadog.idea.domain;
 
-import com.likeadog.idea.enumCollection.DeleteEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -18,7 +18,7 @@ public class Register extends BaseEntity{
     @GeneratedValue
     private Long registerIdx;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name ="userIdx")
     private User user;
 
@@ -31,13 +31,13 @@ public class Register extends BaseEntity{
     private LocalDate birth; //출생년도
     private char neutralization; //중성화
 
-
-    @OneToMany(mappedBy = "register")
-    private List<Donation> donations = new ArrayList<>();
-
     @OneToMany (mappedBy = "register")
-    private List<Vaccine> vaccines  = new ArrayList<>();
+    private List<Register_Vaccine> register_vaccines  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "register")
-    private List<Transfusion> transfusions = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "register")
+//    private List<Donation> donations = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "register")
+//    private List<Transfusion> transfusions = new ArrayList<>();
 }

@@ -1,9 +1,15 @@
 package com.likeadog.idea.repository;
 
 import com.likeadog.idea.domain.Vinfo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+
 @Repository
-public interface V_infoRepository extends JpaRepository<Vinfo, Long> {
+@RequiredArgsConstructor
+public class V_infoRepository {
+
+    private final EntityManager em;
 }

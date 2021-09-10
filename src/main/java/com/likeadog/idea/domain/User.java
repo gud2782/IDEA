@@ -1,11 +1,9 @@
 package com.likeadog.idea.domain;
 
-import com.likeadog.idea.enumCollection.DeleteEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,6 @@ public class User extends BaseEntity{
 
 
 
-    @OneToMany(mappedBy = "user")
-    private List<Register> registers = new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<Register> registers = new ArrayList<>();
 }
