@@ -44,7 +44,7 @@ public class UserController {
 
         userService.join(user);
 
-        return "redirect:/Home/main";
+        return "redirect:/main";
 
     }
 
