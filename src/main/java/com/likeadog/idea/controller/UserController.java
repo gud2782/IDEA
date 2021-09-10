@@ -1,13 +1,21 @@
 package com.likeadog.idea.controller;
 
+import com.likeadog.idea.domain.User;
+
 import com.likeadog.idea.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(value = "user")
 public class UserController {
 
@@ -19,9 +27,28 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public void userRegister() {
+    public String createForm(Model model){
+        model.addAttribute("userForm", new UserForm());
+        return "user/createUserForm";
+    }
+
+    @PostMapping("/register")
+    public String create(@Valid UserForm form){
+
+        User user = new User();
+        user.setUserId(form.getUserId());
+        user.setPw(form.getPw());
+        user.setName(form.getName());
+        user.setAddress(form.getAddress());
+        user.setPhone(form.getPhone());
+
+        userService.join(user);
+
+        return "redirect:/Home/main";
 
     }
+
+
 
     @GetMapping("/update")
     public void userUpdate() {
