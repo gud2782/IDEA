@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,7 +26,7 @@ public class User extends BaseEntity{
 
 
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Register> registers = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Register> registers = new ArrayList<>();
 
 }

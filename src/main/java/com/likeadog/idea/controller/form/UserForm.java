@@ -1,4 +1,4 @@
-package com.likeadog.idea.controller;
+package com.likeadog.idea.controller.form;
 
 
 import lombok.Getter;
