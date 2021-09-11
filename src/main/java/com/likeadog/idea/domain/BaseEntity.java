@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 @Setter
+
 public class BaseEntity {
 
     private String creater; //생성자

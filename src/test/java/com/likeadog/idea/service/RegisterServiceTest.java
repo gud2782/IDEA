@@ -4,6 +4,7 @@ import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.User;
 import com.likeadog.idea.repository.RegisterRepository;
 import com.likeadog.idea.repository.UserRepository;
+//import org.assertj.core.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,12 +61,27 @@ public class RegisterServiceTest {
 
         Long saveAni = registerService.regJoin(register);
         List<Register> all = registerRepository.findAll();
+//        List<Object[]> all = registerRepository.findAll();
+//        List<Object> arr = Arrays.asList(all);
+
 
         //then
         Assert.assertEquals(register, registerRepository.findOneRegister(saveAni));
         System.out.println("register == saveAni : " + (register == registerRepository.findOneRegister(saveAni)));
         System.out.println("=============================");
         System.out.println(all);
+        System.out.println(all.size());
+        for(Register r : all){
+            System.out.println(r.toString());
+        }
+//       for(Object[] a : all){
+//           for(Object obj : a) {
+//              // System.out.println(Arrays.toString(a));
+//               Register r = (Register)obj;
+//               System.out.println(r);
+//               System.out.println(obj);
+//           }
+//       }
         System.out.println("=============================");
     }
 

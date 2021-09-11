@@ -1,7 +1,6 @@
 package com.likeadog.idea.repository;
 
 import com.likeadog.idea.domain.Register;
-import com.likeadog.idea.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +24,12 @@ public class RegisterRepository {
     }
 
 
+//    public List<Object[]> findAll() {
+//        Query query = em.createQuery("select r, u.userId from Register r , User u where r.user = u.userIdx");
+//        List<Object[]> listRegister = query.getResultList();
+//        return listRegister;
+//
+//    }
     public List<Register> findAll() {
         Query query = em.createQuery("select r, u.userId from Register r , User u where r.user = u.userIdx");
         List<Register> listRegister = query.getResultList();

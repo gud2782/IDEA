@@ -24,7 +24,7 @@ public class Donation extends BaseEntity{
     @JoinColumn(name = "qrcodeIdx")
     private Qrcode qrcode; //혈액번호를 가져옴
 
-    private int dWeight; //헌혈 당시 몸무게
+    private double dWeight; //헌혈 당시 몸무게
     private String kind; //견종
 
     private LocalDate dDate; //헌혈일시
