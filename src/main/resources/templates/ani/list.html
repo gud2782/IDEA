@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
 <body>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>동물등록번호</th>
+                <th>동물이름</th>
+                <th>몸무게</th>
+                <th>견종</th>
+                <th>모색</th>
+                <th>성별</th>
+                <th>출생년도</th>
+                <th>중성화여부</th>
 
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ani : ${anis}">
+                <td th:text="${ani.registerIdx}"></td>
+                <td th:text="${ani.aniId}"></td>
+                <td th:text="${ani.aniName}"></td>
+                <td th:text="${ani.weight}"></td>
+                <td th:text="${ani.kind}"></td>
+                <td th:text="${ani.color}"></td>
+                <td th:text="${ani.gender}"></td>
+                <td th:text="${ani.birth}"></td>
+                <td th:text="${ani.neutralization}"></td>
+                <td>
+                    <a href="#" th:href="@{/ani/{idx}/update (idx=${ani.registerIdx})}"
+                       class="btn btn-primary" role="button">수정</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"
+                       class="btn btn-primary" role="button">자세히</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
 </body>
 </html>

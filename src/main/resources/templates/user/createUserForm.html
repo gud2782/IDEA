@@ -12,8 +12,7 @@
             <label th:for="userId">견주Id</label>
             <input type="text" th:field="*{userId}" class="form-control"
                    placeholder="견주Id를 입력하세요"
-                   th:class="${#fields.hasErrors('userId')}? 'form-control
-fieldError' : 'form-control'">
+                   th:class="${#fields.hasErrors('userId')}? 'form-control fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('userId')}"
                th:errors="*{userId}">Incorrect date</p>
         </div>

@@ -11,15 +11,18 @@ import java.time.LocalDate;
 @Setter
 public class RegisterForm {
 
+    private Long registerIdx;
 
-    @NotEmpty(message = "동물등록번호를 입력하세요")
+    @NotEmpty(message = "동물등록번호는 필수입니다.")
     private String aniId; //동물등록번호
+
+
     private String aniName; //동물이름
-    private int weight; //몸무게
+    private String weight; //몸무게
     private String kind; //견종
     private String color; //모색
-    private char gender; //성별
-    private LocalDate birth; //출생년도
-    private char neutralization; //중성화
+    private String gender; //성별
+    private String birth; //출생년도
+    private String neutralization; //중성화
 
 }

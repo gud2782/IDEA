@@ -1,14 +1,17 @@
 package com.likeadog.idea.repository;
 
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Repository
-@RequiredArgsConstructor
 public class TransfusionRepository {
 
-    private final EntityManager em;
+    @PersistenceContext
+    EntityManager em;
+
+    public TransfusionRepository(EntityManager em) {
+        this.em = em;
+    }
 }

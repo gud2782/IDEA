@@ -5,41 +5,48 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class RegisterRepository {
 
+
     private final EntityManager em;
 
+
+
     public void regSave(Register register) {
+        if(register.getRegisterIdx() == null) {
+            em.persist(register); //신규생성 개념
+        } else {
+            em.merge(register); //업데이트 개념
+        }
 
-        em.persist(register);
     }
-    public Register findOneRegister(Long registerIdx) {
 
-        return em.find(Register.class, registerIdx);
+    public Register findOne(Long registerIdx) {
+
+        return  em.find(Register.class, registerIdx);
     }
 
 
-//    public List<Object[]> findAll() {
-//        Query query = em.createQuery("select r, u.userId from Register r , User u where r.user = u.userIdx");
-//        List<Object[]> listRegister = query.getResultList();
-//        return listRegister;
-//
-//    }
     public List<Register> findAll() {
-        Query query = em.createQuery("select r, u.userId from Register r , User u where r.user = u.userIdx");
-        List<Register> listRegister = query.getResultList();
-        return listRegister;
+        return em.createQuery("select r from Register r", Register.class)
+                .getResultList();
 
     }
+
     public List<Register> findByAniId(String aniId) {
         return em.createQuery("select r from Register r where r.aniId = :aniId",
                         Register.class)
                 .setParameter("aniId", aniId)
                 .getResultList();
     }
+//    public Register deleteOne(Long registerIdx) {
+//        return "";
+//    }
+
+
+
 }

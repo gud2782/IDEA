@@ -3,10 +3,9 @@ package com.likeadog.idea.service;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.User;
 import com.likeadog.idea.repository.RegisterRepository;
-import com.likeadog.idea.repository.UserRepository;
 //import org.assertj.core.util.Arrays;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,25 +15,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 public class RegisterServiceTest {
 
-    @Autowired RegisterRepository registerRepository;
-    @Autowired RegisterService registerService;
-    @Autowired UserService userService;
-    @Autowired EntityManager em;
+    @Autowired
+    RegisterRepository registerRepository;
+    @Autowired
+    RegisterService registerService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    EntityManager em;
 
     @Test
     @Rollback(value = false)
-    public void 동물등록() throws Exception {
+    public void 동물등록() {
         //given
         User user1 = new User();
         user1.setUserId("LHN");
@@ -48,44 +47,43 @@ public class RegisterServiceTest {
         Register register = new Register();
         register.setAniId("1111111");
         register.setAniName("연이");
-        register.setWeight(3);
+        register.setWeight("3");
         register.setKind("푸들");
         register.setColor("흰색");
-        register.setGender('여');
-        register.setNeutralization('Y');
+        register.setGender("여");
+        register.setNeutralization("Y");
         register.setUser(user1);
         register.getUser().getUserId();
 
 
         //when
 
-        Long saveAni = registerService.regJoin(register);
-        List<Register> all = registerRepository.findAll();
-//        List<Object[]> all = registerRepository.findAll();
+        registerService.saveAni(register);
+        registerRepository.findOne(2L);
+//        List<Object> all = registerRepository.findAll();
 //        List<Object> arr = Arrays.asList(all);
 
 
         //then
-        Assert.assertEquals(register, registerRepository.findOneRegister(saveAni));
-        System.out.println("register == saveAni : " + (register == registerRepository.findOneRegister(saveAni)));
+        Assert.assertEquals(register, registerRepository.findOne(2L));
+        System.out.println("register == saveAni : " + (register == registerRepository.findOne(2L)));
         System.out.println("=============================");
-        System.out.println(all);
-        System.out.println(all.size());
-        for(Register r : all){
-            System.out.println(r.toString());
-        }
-//       for(Object[] a : all){
-//           for(Object obj : a) {
-//              // System.out.println(Arrays.toString(a));
-//               Register r = (Register)obj;
-//               System.out.println(r);
-//               System.out.println(obj);
-//           }
-//       }
+
+
+//
+//        for (Object r : all) {
+//            System.out.println(r.toString());
+//        }
+//        for (Object obj : arr) {
+//            System.out.println(Arrays.toString(a));
+//            Register r = (Register) obj;
+//            System.out.println(r);
+//            System.out.println(arr);
+//        }
+
         System.out.println("=============================");
     }
 
 
-
-
 }
+

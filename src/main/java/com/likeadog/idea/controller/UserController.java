@@ -7,6 +7,7 @@ import com.likeadog.idea.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String create(@Valid UserForm form){
+    public String create(@Valid UserForm form, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "user/createUserForm";
+        }
 
         User user = new User();
         user.setUserId(form.getUserId());
