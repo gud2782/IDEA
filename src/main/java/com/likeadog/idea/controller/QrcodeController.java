@@ -21,20 +21,26 @@ public class QrcodeController {
     private final QrcodeService qrcodeService;
 
 
-    //혈액 등록
+    //반려동물등록 조회
     @RequestMapping("qr/{qrcodeIdx}")
     public String text2QRCode(@PathVariable("qrcodeIdx") String qrcodeIdx,
                               HttpServletResponse response)
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.3:8080/ani/new";
+        String text = "http://192.168.0.28:8080/ani/"+qrcodeIdx+"/detail";
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
         sos.close();
+
+
         return "qr/create";
     }
+
+
+
+
 
 
 }

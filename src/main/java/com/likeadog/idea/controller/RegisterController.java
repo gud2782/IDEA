@@ -33,6 +33,7 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "ani/createRegisterForm";
         }
+
         Register register= new Register();
 
         register.setAniId(form.getAniId());

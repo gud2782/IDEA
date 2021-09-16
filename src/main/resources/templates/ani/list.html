@@ -44,7 +44,12 @@
                     <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"
                        class="btn btn-primary" role="button">자세히</a>
                 </td>
-            </tr>
+<!--                <td>-->
+<!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
+<!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
+<!--                       class="btn btn-danger">CANCEL</a>-->
+<!--                </td>-->
+                </tr>
             <tr>
                 <td>
                     <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
@@ -56,4 +61,13 @@
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
+<script>
+    function cancel(id) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/orders/" + id + "/cancel");
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 </html>

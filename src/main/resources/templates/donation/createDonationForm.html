@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form role="form" action="/donation/new" th:object="${donationForm}" method="post">
+<!--        <div class="form-group">-->
+<!--            <label th:for="register">동물등록번호</label>-->
+<!--            <input type="text" th:field="*{register}" class="form-control" placeholder="이름을 입력하세요"-->
+<!--                   th:class="${#fields.hasErrors('register')}? 'form-control fieldError' : 'form-control'">-->
+<!--            <p th:if="${#fields.hasErrors('register')}" th:errors="*{register}">Incorrect date</p>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label th:for="qrcode">qr코드</label>-->
+<!--            <input type="text" th:field="*{qrcode}" class="form-control"-->
+<!--                   placeholder="동물이름을 입력하세요".>-->
+<!--        </div>-->
+
+        <div class="form-group">
+            <label th:for="dWeight">몸무게</label>
+            <input type="text" th:field="*{dWeight}" class="form-control"
+                   placeholder="동물이름을 입력하세요".>
+        </div>
+        <div class="form-group">
+            <label th:for="kind">견종</label>
+            <input type="text" th:field="*{kind}" class="form-control"
+                   placeholder="몸무게를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="dDate">헌혈일시</label>
+            <input type="text" th:field="*{dDate}" class="form-control"
+                   placeholder="견종을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="dHos">헌혈병원</label>
+            <input type="text" th:field="*{dHos}" class="form-control"
+                   placeholder="모색 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="type">혈액형</label>
+            <input type="text" th:field="*{type}" class="form-control"
+                   placeholder="성별 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="dPack">혈액양</label>
+            <input type="text" th:field="*{dPack}" class="form-control"
+                   placeholder="출생년도를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="neutralization">중성화 여부</label>
+            <input type="text" th:field="*{neutralization}" class="form-control"
+                   placeholder="중성화여부를 입력하세요">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div th:replace="fragments/footer :: footer" />
+</div>
+</body>
+</html>

@@ -29,9 +29,10 @@ dependencies {
     implementation 'junit:junit:4.13.1'
     implementation group: 'com.google.zxing', name: 'core', version: '3.4.0'
     implementation group: 'com.google.zxing', name: 'javase', version: '3.4.0'
-//    implementation 'com.klaytn.caver:core:1.6.3-rc.1'
+//    implementation 'com.klaytn.caver:core:1.4.0'
     implementation 'xyz.groundx.caver:caver-java-ext-kas:1.4.0'
     implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

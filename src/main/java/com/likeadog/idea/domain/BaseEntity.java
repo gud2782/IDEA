@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
-public class BaseEntity {
+public class    BaseEntity {
 
     private String creater; //생성자
     private String modifier; //수정자
