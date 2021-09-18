@@ -4,7 +4,7 @@
     <title>Text 2 QR Code</title>
     <script type="text/javascript">
         var generateQRCode = function() {
-            var url = "qr";
+            var url = "qr/{qrcodeIdx}";
 
             var text = document.getElementById("text").value;
             var size = document.getElementById("size").value;

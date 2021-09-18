@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+
 <body>
-<h1>test</h1>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>동물등록번호</th>
+                <th>동물이름</th>
+                <th>몸무게</th>
+                <th>견종</th>
+                <th>모색</th>
+                <th>성별</th>
+                <th>출생년도</th>
+                <th>중성화여부</th>
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="doss : ${dos}">
+                <td th:text="${doss.donationIdx}"></td>
+                <td th:text="${doss.register.aniId}"></td>
+                <td th:text="${doss.register.aniName}"></td>
+                <td th:text="${doss.DWeight}"></td>
+                <td th:text="${doss.kind}"></td>
+                <td th:text="${doss.type}"></td>
+                <td th:text="${doss.neutralization}"></td>
+                <td th:text="${doss.DHos}"></td>
+                <td th:text="${doss.DPack}"></td>
+                <td>
+                    <a href="#" th:href="@{/ani/{idx}/update (idx=${doss.register.registerIdx})}"
+                       class="btn btn-primary" role="button">수정</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/ani/{idx}/detail (idx=${doss.register.registerIdx})}"
+                       class="btn btn-primary" role="button">자세히</a>
+                </td>
+                <!--                <td>-->
+                <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
+                <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
+                <!--                       class="btn btn-danger">CANCEL</a>-->
+                <!--                </td>-->
+            </tr>
+            <tr>
+                <td>
+                    <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
 </body>
+<script>
+    function cancel(id) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/orders/" + id + "/cancel");
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 </html>

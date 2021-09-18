@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form role="form" action="/vc/new" th:object="${vaccineForm}" method="post">
+
+        <div class="form-group">
+            <label for="first">강아지</label>
+            <select name="first" id="first" class="form-control">
+                <option value="">강아지선택</option>
+                <option th:each="register : ${registers}"
+                        th:value="${register.registerIdx}"
+                        th:text="${register.aniName}" />
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="second">강아지</label>
+            <select name="second" id="second" class="form-control">
+                <option value="">강아지선택</option>
+                <option th:each="register : ${registers}"
+                        th:value="${register.registerIdx}"
+                        th:text="${register.aniName}" />
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vaccine">강아지</label>
+            <select name="vaccineIdx" id="vaccine" class="form-control">
+                <option value="">강아지선택</option>
+                <option th:each="register : ${registers}"
+                        th:value="${register.registerIdx}"
+                        th:text="${register.aniName}" />
+            </select>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div th:replace="fragments/footer :: footer" />
+</div>
+
+
+
+</body>
+</html>

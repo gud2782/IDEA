@@ -9,10 +9,8 @@ import com.likeadog.idea.service.RegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -23,76 +21,49 @@ public class DonationController {
     private final DonationService donationService;
     private final RegisterService registerService;
 
+
+    //기존 등록된 반려견의 헌혈 등록
     @GetMapping("/new")
     public String createForm(Model model){
+        List<Register> registers = registerService.findAnis();
+        DonationForm donationForm = new DonationForm();
+
+
         model.addAttribute("donationForm", new DonationForm());
+        model.addAttribute("registers", registers );
+
+
         return "donation/createDonationForm";
+
     }
+
+
+
     @PostMapping("/new")
-    public String create(@Valid DonationForm form, BindingResult result) {
+    public String create(@RequestParam("registerIdx") Long registerIdx, DonationForm form) {
 
-        if (result.hasErrors()) {
-            return "donation/createDonationForm";
-        }
+        Register registers = registerService.findOne(registerIdx);
+        Donation donation = new Donation();
 
-        Donation donation= new Donation();
-
-        donation.setRegister(form.getRegister());
-        donation.setQrcode(form.getQrcode());
-
+        donation.setRegister(registers);
         donation.setDWeight(form.getDWeight());
-        donation.setKind(form.getKind());
+        donation.setKind(registers.getKind());
         donation.setDDate(form.getDDate());
         donation.setDHos(form.getDHos());
         donation.setType(form.getType());
         donation.setDPack(form.getDPack());
-        donation.setNeutralization(form.getNeutralization());
+        donation.setNeutralization(registers.getNeutralization());
+        donation.getRegister().getAniId();
+
+        System.out.println(donation.getRegister().getRegisterIdx());
+        System.out.println(donation.getRegister().getAniName());
+
+
 
         donationService.saveDo(donation);
 
         return "redirect:/donation/list";
     }
-
-
-
-
-
-
-    //기존 등록된 반려견의 헌혈 등록
-//    @GetMapping("/new")
-//    public String createForm(Model model){
-//        List<Register> registers = registerService.findAnis();
-//
-//        model.addAttribute("donationForm", new DonationForm());
-//        model.addAttribute("registers", registers );
-//        return "donation/createDonationForm";
-//    }
-//
-//
-//
-//    @PostMapping("/new")
-//    public String create(@RequestParam("registerIdx") Long registerIdx, DonationForm form) {
-//
-//        Donation donation = new Donation();
-//        Register register = new Register();
-//        Qrcode qrcode = new Qrcode();
-//
-//
-//        donation.setRegister(register);
-//        donation.setQrcode(qrcode);
-//
-//        donation.setDWeight(form.getDWeight());
-//        donation.setKind(form.getKind());
-//        donation.setDDate(form.getDDate());
-//        donation.setDHos(form.getDHos());
-//        donation.setType(form.getType());
-//        donation.setDPack(form.getDPack());
-//        donation.setNeutralization(form.getNeutralization());
-//
-//        donationService.saveDo(donation);
-//
-//        return "redirect:/donation/list";
-//    }
 
     //등록한 동물정보 리스트조회
     @GetMapping("/list")
@@ -101,6 +72,8 @@ public class DonationController {
         model.addAttribute("dos", dos);
         return "donation/list";
     }
+
+
 
     //등록한 동물정보 수정
     @GetMapping("/{registerIdx}/update")

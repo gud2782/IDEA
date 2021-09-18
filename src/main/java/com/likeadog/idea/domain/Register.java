@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +29,8 @@ public class Register extends BaseEntity{
     private String gender; //성별
     private String birth; //출생년도
     private String neutralization; //중성화
+
+
 
     @OneToMany (mappedBy = "register")
     private List<Register_Vaccine> register_vaccines  = new ArrayList<>();

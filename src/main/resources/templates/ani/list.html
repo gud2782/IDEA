@@ -44,6 +44,10 @@
                     <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"
                        class="btn btn-primary" role="button">자세히</a>
                 </td>
+                <td>
+                    <a href="#" th:href="@{/qr/{idx} (idx=${ani.registerIdx})}"
+                       class="btn btn-primary" role="button">QR CODE</a>
+                </td>
 <!--                <td>-->
 <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
 <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->

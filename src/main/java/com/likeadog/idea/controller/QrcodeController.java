@@ -28,7 +28,9 @@ public class QrcodeController {
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://192.168.0.28:8080/ani/"+qrcodeIdx+"/detail";
+        String text = "http://172.30.1.30:8080/ani/"+qrcodeIdx+"/detail";
+//        172.30.1.16 집
+//        192.168.0.28 가산
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
