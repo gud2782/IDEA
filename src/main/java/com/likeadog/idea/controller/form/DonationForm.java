@@ -4,15 +4,18 @@ package com.likeadog.idea.controller.form;
 import com.likeadog.idea.domain.Qrcode;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.enumCollection.DeleteEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DonationForm {
 
 

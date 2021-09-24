@@ -29,24 +29,11 @@ public class RegisterController {
 
     @PostMapping("/new")
     public String create(@Valid RegisterForm form, BindingResult result) {
-
         if (result.hasErrors()) {
             return "ani/createRegisterForm";
         }
 
-        Register register= new Register();
-
-        register.setAniId(form.getAniId());
-        register.setAniName(form.getAniName());
-        register.setWeight(form.getWeight());
-        register.setKind(form.getKind());
-        register.setColor(form.getColor());
-        register.setGender(form.getGender());
-        register.setGender(form.getGender());
-        register.setBirth(form.getBirth());
-        register.setNeutralization(form.getNeutralization());
-
-        registerService.saveAni(register);
+        registerService.saveAni(form);
 
         return "redirect:/ani/list";
     }
@@ -62,19 +49,10 @@ public class RegisterController {
     //등록한 동물정보 수정
     @GetMapping("/{registerIdx}/update")
     public String aniNew(@PathVariable("registerIdx") Long registerIdx, Model model) {
-        Register register = registerService.findOne(registerIdx);
-        RegisterForm form = new RegisterForm();
 
-        form.setRegisterIdx(register.getRegisterIdx());
-        form.setAniId(register.getAniId());
-        form.setAniName(register.getAniName());
-        form.setWeight(register.getWeight());
-        form.setKind(register.getKind());
-        form.setColor(register.getColor());
-        form.setGender(register.getGender());
-        form.setBirth(register.getBirth());
-        form.setNeutralization(register.getNeutralization());
 
+
+        RegisterForm form = registerService.getForm(registerIdx);
         model.addAttribute("form", form);
         return "ani/updateRegisterForm";
 
@@ -83,21 +61,7 @@ public class RegisterController {
 
     @PostMapping("/{registerIdx}/update")
     public String updateAni(@PathVariable String registerIdx, @ModelAttribute("form") RegisterForm form) {
-
-        Register register = new Register();
-
-
-        register.setRegisterIdx(form.getRegisterIdx());
-        register.setAniId(form.getAniId());
-        register.setAniName(form.getAniName());
-        register.setWeight(form.getWeight());
-        register.setKind(form.getKind());
-        register.setColor(form.getColor());
-        register.setGender(form.getGender());
-        register.setBirth(form.getBirth());
-        register.setNeutralization(form.getNeutralization());
-
-        registerService.saveAni(register);
+        registerService.saveAni(form);
         return "redirect:/ani/list";
     }
 

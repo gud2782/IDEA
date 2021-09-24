@@ -2,16 +2,19 @@ package com.likeadog.idea.controller.form;
 
 
 import com.likeadog.idea.enumCollection.DeleteEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterForm {
 
     private Long registerIdx;

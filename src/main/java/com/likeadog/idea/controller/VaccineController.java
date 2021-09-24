@@ -68,13 +68,11 @@ public class VaccineController {
 //        vaccine.getRegister().getRegisterIdx();
 
 
-        System.out.println(donation.getDDate());
-        System.out.println(donation.getRegister().getRegisterIdx());
-        System.out.println(donation.getRegister().getAniName());
 
 
 
-        donationService.saveDo(donation);
+
+//        donationService.saveDo(donation);
 
         return "redirect:/donation/list";
     }

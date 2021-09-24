@@ -49,25 +49,17 @@ public class DonationController {
 
 
         Register registers = registerService.findOne(lngregisterIdx);
-        Donation donation = new Donation();
-
-        donation.setDonationIdx(form.getDonationIdx());
-        donation.setRegister(registers);
-        donation.setDWeight(form.getDWeight());
-        donation.setKind(registers.getKind());
-        donation.setDDate(form.getDDate());
-        donation.setDHos(form.getDHos());
-        donation.setType(form.getType());
-        donation.setDPack(form.getDPack());
-        donation.setNeutralization(registers.getNeutralization());
-        donation.getRegister().getAniId();
-        donation.getRegister().getRegisterIdx();
-
-
-        System.out.println(donation.getDDate());
-        System.out.println(donation.getRegister().getRegisterIdx());
-        System.out.println(donation.getRegister().getAniName());
-
+        Donation donation = Donation.builder()
+                .donationIdx(form.getDonationIdx())
+                .dWeight(form.getDWeight())
+                .dDate(form.getDDate())
+                .dHos(form.getDHos())
+                .dPack(form.getDPack())
+                .kind(registers.getKind())
+                .neutralization(registers.getNeutralization())
+                .register(registers)
+                .type(form.getType())
+                .build();
 
 
         donationService.saveDo(donation);
