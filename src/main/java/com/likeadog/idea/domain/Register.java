@@ -33,7 +33,7 @@ public class Register extends BaseEntity{
 
 
     @OneToMany (mappedBy = "register")
-    private List<Register_Vaccine> register_vaccines  = new ArrayList<>();
+    private List<RegisterVaccine> registerVaccines  = new ArrayList<>();
 
 
 //    @OneToMany(mappedBy = "register")

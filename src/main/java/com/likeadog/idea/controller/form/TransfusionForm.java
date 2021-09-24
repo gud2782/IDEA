@@ -9,8 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,18 +18,17 @@ public class TransfusionForm {
 
     private Long transfusionIdx;
 
-    @NotEmpty(message = "동물등록번호를 입력하세요")
     private Register register;
 
     private Qrcode qrcode;
 
-    private int tWeight; //수혈 당시 몸무게
+    private String tWeight; //수혈 당시 몸무게
     private String kind; //견종
-    private LocalDate tDate; //수혈일시
+    private String tDate; //수혈일시
     private String tHos; //수혈병원
     private String type; //혈액형
     private String tPack; //수혈양
-    private char neutralization; //중성화
+    private String neutralization; //중성화
 
     private String creater; //생성자
     private String modifier; //수정자

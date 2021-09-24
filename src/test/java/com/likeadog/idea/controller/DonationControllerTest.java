@@ -48,7 +48,7 @@ public class DonationControllerTest {
         register1.setAniName("연이");
         register1.setWeight("3");
         register1.setKind("푸들");
-        register1.setCreater("검정");
+        register1.setColor("검정");
         register1.setGender("여");
         register1.setBirth("2015.1.20");
         register1.setNeutralization("Y");
@@ -62,7 +62,7 @@ public class DonationControllerTest {
         register2.setAniName("단이");
         register2.setWeight("2");
         register2.setKind("푸들");
-        register2.setCreater("흰색");
+        register2.setColor("흰색");
         register2.setGender("여");
         register2.setBirth("2019.6.29");
         register2.setNeutralization("Y");

@@ -3,8 +3,10 @@ package com.likeadog.idea.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +19,14 @@ public class Vaccine extends BaseEntity{
     private Long vaccineIdx;
 
    @OneToMany(mappedBy = "vaccine")
-   private List<Register_Vaccine> registerVaccines = new ArrayList<>();
+   private List<RegisterVaccine> registerVaccines = new ArrayList<>();
 
     @OneToMany(mappedBy = "vaccine")
-    private List<Vaccine_Vinfo> vaccineVinfos = new ArrayList<>();
+    private List<VaccineVinfo> vaccineVinfos = new ArrayList<>();
 
     private String vNumber; //차수
-    private LocalDate vDate; //접종일
-    private LocalDate nDate; //다음 접종일
+    private String vDate; //접종일
+    private String nDate; //다음 접종일
 
 
 }

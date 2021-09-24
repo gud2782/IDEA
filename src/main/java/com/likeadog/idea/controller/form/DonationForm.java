@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,7 +18,6 @@ public class DonationForm {
 
     private Long donationIdx;
 
-    @NotEmpty(message = "동물등록번호를 입력하세요")
     private Register register;
 
     private Qrcode qrcode;
@@ -34,8 +33,8 @@ public class DonationForm {
 
     private String creater; //생성자
     private String modifier; //수정자
-    private String cDate; //생성날짜
-    private String mDate; //수정날짜
+    private LocalDateTime cDate; //생성날짜
+    private LocalDateTime mDate; //수정날짜
 
     @Enumerated(EnumType.STRING)
     private DeleteEnum del; //삭제여부

@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Vinfo extends BaseEntity{
+public class Vinfo {
     @Id @GeneratedValue
     private Long vInfoIdx;
 
@@ -27,7 +27,7 @@ public class Vinfo extends BaseEntity{
     private ThirdEnum third; //소분류 [홍역 / 간염 / 파보장염 / 파라인플루엔자 / 럽토스피라]
 
     @OneToMany(mappedBy = "vinfo")
-    private List<Vaccine_Vinfo> vaccines = new ArrayList<>();
+    private List<VaccineVinfo> vaccines = new ArrayList<>();
 
 }
 

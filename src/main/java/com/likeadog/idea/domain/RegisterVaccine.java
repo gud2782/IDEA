@@ -1,11 +1,16 @@
 package com.likeadog.idea.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-public class Register_Vaccine {
+@Getter
+@Setter
+public class RegisterVaccine {
 
     @Id @GeneratedValue
     private Long registerVaccineIdx;
@@ -17,6 +22,7 @@ public class Register_Vaccine {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "vaccineIdx")
     private Vaccine vaccine;
+
 
 
 }

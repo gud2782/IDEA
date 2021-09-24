@@ -1,6 +1,5 @@
 package com.likeadog.idea.repository;
 
-import com.likeadog.idea.domain.User;
 import com.likeadog.idea.domain.Vinfo;
 import org.springframework.stereotype.Repository;
 
@@ -9,13 +8,17 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class V_infoRepository {
+public class VinfoRepository {
 
     @PersistenceContext
     EntityManager em;
 
-    public void save(User user) {
-        em.persist(user);
+    public Vinfo findOne(Long vaccineIdx) {
+       return em.find(Vinfo.class, vaccineIdx);
+    }
+
+    public void save(Vinfo vinfo) {
+        em.persist(vinfo);
 
     }
 

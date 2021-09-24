@@ -78,9 +78,6 @@ public class RegisterController {
         model.addAttribute("form", form);
         return "ani/updateRegisterForm";
 
-
-//        model.addAttribute("registerForm", new RegisterForm());
-//        return "ani/createRegisterForm";
     }
 
 

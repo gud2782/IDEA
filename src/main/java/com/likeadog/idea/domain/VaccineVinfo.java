@@ -5,7 +5,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-public class Vaccine_Vinfo {
+public class VaccineVinfo {
 
     @Id @GeneratedValue
     private Long vaccineVinfoIdx;

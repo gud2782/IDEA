@@ -1,10 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
 <body>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>동물등록번호</th>
+                <th>동물이름</th>
+                <th>헌혈당시 몸무게</th>
+                <th>견종</th>
+                <th>혈액형</th>
+                <th>중성화여부</th>
+                <th>헌혈병원</th>
+                <th>혈액양<th>
 
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transs : ${trans}">
+                <td th:text="${transs.register.registerIdx}"></td>
+                <td th:text="${transs.register.aniId}"></td>
+                <td th:text="${transs.register.aniName}"></td>
+                <td th:text="${transs.TWeight}"></td>
+                <td th:text="${transs.kind}"></td>
+                <td th:text="${transs.type}"></td>
+                <td th:text="${transs.neutralization}"></td>
+                <td th:text="${transs.THos}"></td>
+                <td th:text="${transs.TPack}"></td>
+                <td>
+                    <a href="#" th:href="@{/transfusion/{idx}/update (idx=${transs.transfusionIdx})}"
+                       class="btn btn-primary" role="button">수정</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/transfusion/{idx}/detail (idx=${transs.transfusionIdx})}"
+                       class="btn btn-primary" role="button">자세히</a>
+                </td>
+                <!--                <td>-->
+                <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
+                <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
+                <!--                       class="btn btn-danger">CANCEL</a>-->
+                <!--                </td>-->
+            </tr>
+            <tr>
+                <td>
+                    <a href="/transfusion/new" class="btn btn-primary" role="button">추가</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
 </body>
+<script>
+    function cancel(id) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/orders/" + id + "/cancel");
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 </html>
