@@ -129,6 +129,7 @@ public class V_infoServiceTest {
         vinfo23.setFirst(FirstEnum.Rabies);
         vinfo23.setSecond(SecondEnum.additional);
 
+
         v_infoService.saveVcs(vinfo1);
         v_infoService.saveVcs(vinfo2);
         v_infoService.saveVcs(vinfo3);
@@ -152,6 +153,8 @@ public class V_infoServiceTest {
         v_infoService.saveVcs(vinfo21);
         v_infoService.saveVcs(vinfo22);
         v_infoService.saveVcs(vinfo23);
+
+
 
 
     }

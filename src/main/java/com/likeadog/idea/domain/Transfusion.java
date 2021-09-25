@@ -1,15 +1,17 @@
 package com.likeadog.idea.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+@Builder
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transfusion extends BaseEntity{
     @Id
     @GeneratedValue

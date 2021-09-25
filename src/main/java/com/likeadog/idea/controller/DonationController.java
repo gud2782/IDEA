@@ -4,7 +4,6 @@ import com.likeadog.idea.controller.form.DonationForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.service.DonationService;
-import com.likeadog.idea.service.RegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,54 +17,31 @@ import java.util.List;
 public class DonationController {
 
     private final DonationService donationService;
-    private final RegisterService registerService;
+
 
 
     //기존 등록된 반려견의 헌혈 등록
     @GetMapping("/new")
     public String createForm(Model model){
-        List<Register> registers = registerService.findAnis();
-        DonationForm donationForm = new DonationForm();
 
-
+        List<Register> registers = donationService.findAnis();
+        // DonationForm donationForm = DonationForm.builder().build();
         model.addAttribute("donationForm", new DonationForm());
         model.addAttribute("registers", registers );
-
-
         return "donation/createDonationForm";
-
     }
-
 
 
     @PostMapping("/new")
-    public String create(@RequestParam("registerIdx") String registerIdx, DonationForm form) {
+    public String create(@RequestParam("registerIdx") String registerIdx,@ModelAttribute("form") DonationForm form) {
 
-        //넘어오는 registerIdx , 기준 파싱
-        String[] parsedRegId = registerIdx.split(",");
-        System.out.println(registerIdx);
-        //파싱한 결과들 중 registerIdx에 해당하는 부분 Long으로 캐스팅
-        Long lngregisterIdx = Long.parseLong(parsedRegId[0]);
-
-
-        Register registers = registerService.findOne(lngregisterIdx);
-        Donation donation = Donation.builder()
-                .donationIdx(form.getDonationIdx())
-                .dWeight(form.getDWeight())
-                .dDate(form.getDDate())
-                .dHos(form.getDHos())
-                .dPack(form.getDPack())
-                .kind(registers.getKind())
-                .neutralization(registers.getNeutralization())
-                .register(registers)
-                .type(form.getType())
-                .build();
-
-
-        donationService.saveDo(donation);
+        System.out.println("getDonationIdx:" + form.getDonationIdx());
+        donationService.saveDonation(registerIdx, form);
 
         return "redirect:/donation/list";
     }
+
+
 
     //등록한 동물정보 리스트조회
     @GetMapping("/list")
@@ -77,60 +53,24 @@ public class DonationController {
 
 
 
-     //등록한 동물정보 수정
-        @GetMapping("/{donationIdx}/update")
-        public String dosNew(@PathVariable("donationIdx") Long donationIdx, Model model) {
-            Donation donation = donationService.findOne(donationIdx);
-            //Register register = registerService.findOne(donation.getRegister().getRegisterIdx());
+    //등록한 동물정보 수정
+    @GetMapping("/{donationIdx}/update")
+    public String dosNew(@PathVariable("donationIdx") Long donationIdx, Model model) {
 
-            DonationForm form = new DonationForm();
+        DonationForm form = donationService.getUpdateDonation(donationIdx);
 
-            form.setDonationIdx(donation.getDonationIdx());
-            form.setDWeight(donation.getDWeight());
-            form.setKind(donation.getKind());
-            form.setDDate(donation.getDDate());
-            form.setDHos(donation.getDHos());
-            form.setType(donation.getType());
-            form.setDPack(donation.getDPack());
-            form.setNeutralization(donation.getNeutralization());
-            form.setRegister(donation.getRegister());
-            //form.getRegister().getRegisterIdx();
+        model.addAttribute("form", form);
+        return "donation/updateDonationForm";
 
-            System.out.println("=========1==========");
-            System.out.println(form.getRegister().getRegisterIdx());
+    }
 
-            model.addAttribute("form", form);
-            return "donation/updateDonationForm";
-
-
-
-
-        }
 
 
     @PostMapping("/{donationIdx}/update")
     public String updateDos(@PathVariable String donationIdx, @ModelAttribute("form") DonationForm form) {
+        donationService.updateDonation(donationIdx, form);
+        //donationService.saveDonation(donationIdx,form);
 
-        Donation donation = new Donation();
-
-        System.out.println("=========2==========");
-        donation.setDonationIdx(form.getDonationIdx());
-        donation.setDWeight(form.getDWeight());
-        donation.setKind(form.getKind());
-        donation.setDDate(form.getDDate());
-        donation.setDHos(form.getDHos());
-        donation.setType(form.getType());
-        donation.setDPack(form.getDPack());
-        donation.setNeutralization(form.getNeutralization());
-        donation.setRegister(form.getRegister());
-
-
-
-        System.out.println("==========3==========");
-  
-
-
-        donationService.saveDo(donation);
         return "redirect:/donation/list";
     }
 
@@ -139,14 +79,12 @@ public class DonationController {
     public String dosDetail(@PathVariable("donationIdx") Long donationIdx, Model model) {
 
         Donation donation = donationService.findOne(donationIdx);
-        Register register = registerService.findOne(donation.getRegister().getRegisterIdx());
-
-        
         model.addAttribute("donation", donation);
-        model.addAttribute("register", register);
+
         return "donation/detail";
 
     }
+
 
 
 }
