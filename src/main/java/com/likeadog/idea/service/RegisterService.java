@@ -58,6 +58,7 @@ public class RegisterService {
     }
 
     public Register findOne(Long registerIdx) {
+        System.out.println("222222222222");
         return registerRepository.findOne(registerIdx);
     }
 

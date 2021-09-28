@@ -5,9 +5,11 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@SequenceGenerator(name = "VaccineVinfo_SEQ_Generator" , initialValue = 1, allocationSize = 1)
 public class VaccineVinfo {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VaccineVinfo_SEQ_Generator")
     private Long vaccineVinfoIdx;
 
     @ManyToOne(fetch = LAZY)

@@ -5,6 +5,7 @@ import com.google.zxing.WriterException;
 import com.likeadog.idea.service.QrcodeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +22,7 @@ public class QrcodeController {
 
 
     //반려동물등록 조회
-    @RequestMapping("qr/{qrcodeIdx}")
+    @GetMapping("qr/{qrcodeIdx}")
     public String text2QRCode(@PathVariable("qrcodeIdx") String qrcodeIdx,
                               HttpServletResponse response)
             throws IOException, WriterException {

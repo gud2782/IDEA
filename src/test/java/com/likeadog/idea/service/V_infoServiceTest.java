@@ -1,9 +1,9 @@
 package com.likeadog.idea.service;
 
 import com.likeadog.idea.domain.Vinfo;
-import com.likeadog.idea.enumCollection.FirstEnum;
-import com.likeadog.idea.enumCollection.SecondEnum;
-import com.likeadog.idea.enumCollection.ThirdEnum;
+import com.likeadog.idea.enumCollection.FirstStatus;
+import com.likeadog.idea.enumCollection.SecondStatus;
+import com.likeadog.idea.enumCollection.ThirdStatus;
 import com.likeadog.idea.repository.VinfoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +29,10 @@ public class V_infoServiceTest {
     @Test
     @Rollback(value = false)
     public void 백신접종정보() throws Exception {
+
+
+
+
         //given
         Vinfo vinfo1 = new Vinfo();
         Vinfo vinfo2 = new Vinfo();
@@ -56,78 +60,101 @@ public class V_infoServiceTest {
 
 
         //혼합예방접종 - 기초 - 홍역/간염/렙토스피라/파라인플루엔자/파보장염
-        vinfo1.setFirst(FirstEnum.DHPPL);
-        vinfo1.setSecond(SecondEnum.basic);
-        vinfo1.setThird(ThirdEnum.Canine_Distemper);
-        vinfo2.setFirst(FirstEnum.DHPPL);
-        vinfo2.setSecond(SecondEnum.basic);
-        vinfo2.setThird(ThirdEnum.Hepatitis);
-        vinfo3.setFirst(FirstEnum.DHPPL);
-        vinfo3.setSecond(SecondEnum.basic);
-        vinfo3.setThird(ThirdEnum.Leptospira);
-        vinfo4.setFirst(FirstEnum.DHPPL);
-        vinfo4.setSecond(SecondEnum.basic);
-        vinfo4.setThird(ThirdEnum.Parainfluenza);
-        vinfo5.setFirst(FirstEnum.DHPPL);
-        vinfo5.setSecond(SecondEnum.basic);
-        vinfo5.setThird(ThirdEnum.Parvovirus);
+        vinfo1.setVInfoIdx(111L);
+        vinfo1.setFirst(FirstStatus.DHPPL);
+        vinfo1.setSecond(SecondStatus.basic);
+        vinfo1.setThird(ThirdStatus.Canine_Distemper);
+        vinfo2.setVInfoIdx(112L);
+        vinfo2.setFirst(FirstStatus.DHPPL);
+        vinfo2.setSecond(SecondStatus.basic);
+        vinfo2.setThird(ThirdStatus.Hepatitis);
+        vinfo3.setVInfoIdx(113L);
+        vinfo3.setFirst(FirstStatus.DHPPL);
+        vinfo3.setSecond(SecondStatus.basic);
+        vinfo3.setThird(ThirdStatus.Leptospira);
+        vinfo4.setVInfoIdx(114L);
+        vinfo4.setFirst(FirstStatus.DHPPL);
+        vinfo4.setSecond(SecondStatus.basic);
+        vinfo4.setThird(ThirdStatus.Parainfluenza);
+        vinfo5.setVInfoIdx(115L);
+        vinfo5.setFirst(FirstStatus.DHPPL);
+        vinfo5.setSecond(SecondStatus.basic);
+        vinfo5.setThird(ThirdStatus.Parvovirus);
 
         //혼합예방접종 - 추가 - 홍역/간염/렙토스피라/파라인플루엔자/파보장염
-        vinfo6.setFirst(FirstEnum.DHPPL);
-        vinfo6.setSecond(SecondEnum.additional);
-        vinfo6.setThird(ThirdEnum.Canine_Distemper);
-        vinfo7.setFirst(FirstEnum.DHPPL);
-        vinfo7.setSecond(SecondEnum.additional);
-        vinfo7.setThird(ThirdEnum.Hepatitis);
-        vinfo8.setFirst(FirstEnum.DHPPL);
-        vinfo8.setSecond(SecondEnum.additional);
-        vinfo8.setThird(ThirdEnum.Leptospira);
-        vinfo9.setFirst(FirstEnum.DHPPL);
-        vinfo9.setSecond(SecondEnum.additional);
-        vinfo9.setThird(ThirdEnum.Parainfluenza);
-        vinfo10.setFirst(FirstEnum.DHPPL);
-        vinfo10.setSecond(SecondEnum.additional);
-        vinfo10.setThird(ThirdEnum.Parvovirus);
+        vinfo6.setVInfoIdx(121L);
+        vinfo6.setFirst(FirstStatus.DHPPL);
+        vinfo6.setSecond(SecondStatus.additional);
+        vinfo6.setThird(ThirdStatus.Canine_Distemper);
+        vinfo7.setVInfoIdx(122L);
+        vinfo7.setFirst(FirstStatus.DHPPL);
+        vinfo7.setSecond(SecondStatus.additional);
+        vinfo7.setThird(ThirdStatus.Hepatitis);
+        vinfo8.setVInfoIdx(123L);
+        vinfo8.setFirst(FirstStatus.DHPPL);
+        vinfo8.setSecond(SecondStatus.additional);
+        vinfo8.setThird(ThirdStatus.Leptospira);
+        vinfo9.setVInfoIdx(124L);
+        vinfo9.setFirst(FirstStatus.DHPPL);
+        vinfo9.setSecond(SecondStatus.additional);
+        vinfo9.setThird(ThirdStatus.Parainfluenza);
+        vinfo10.setVInfoIdx(125L);
+        vinfo10.setFirst(FirstStatus.DHPPL);
+        vinfo10.setSecond(SecondStatus.additional);
+        vinfo10.setThird(ThirdStatus.Parvovirus);
 
         //혼합예방접종 - 보강 - 홍역/간염/렙토스피라/파라인플루엔자/파보장염
-        vinfo11.setFirst(FirstEnum.DHPPL);
-        vinfo11.setSecond(SecondEnum.extra);
-        vinfo11.setThird(ThirdEnum.Canine_Distemper);
-        vinfo12.setFirst(FirstEnum.DHPPL);
-        vinfo12.setSecond(SecondEnum.extra);
-        vinfo12.setThird(ThirdEnum.Hepatitis);
-        vinfo13.setFirst(FirstEnum.DHPPL);
-        vinfo13.setSecond(SecondEnum.extra);
-        vinfo13.setThird(ThirdEnum.Leptospira);
-        vinfo14.setFirst(FirstEnum.DHPPL);
-        vinfo14.setSecond(SecondEnum.extra);
-        vinfo14.setThird(ThirdEnum.Parainfluenza);
-        vinfo15.setFirst(FirstEnum.DHPPL);
-        vinfo15.setSecond(SecondEnum.extra);
-        vinfo15.setThird(ThirdEnum.Parvovirus);
+        vinfo11.setVInfoIdx(131L);
+        vinfo11.setFirst(FirstStatus.DHPPL);
+        vinfo11.setSecond(SecondStatus.extra);
+        vinfo11.setThird(ThirdStatus.Canine_Distemper);
+        vinfo12.setVInfoIdx(132L);
+        vinfo12.setFirst(FirstStatus.DHPPL);
+        vinfo12.setSecond(SecondStatus.extra);
+        vinfo12.setThird(ThirdStatus.Hepatitis);
+        vinfo13.setVInfoIdx(133L);
+        vinfo13.setFirst(FirstStatus.DHPPL);
+        vinfo13.setSecond(SecondStatus.extra);
+        vinfo13.setThird(ThirdStatus.Leptospira);
+        vinfo14.setVInfoIdx(134L);
+        vinfo14.setFirst(FirstStatus.DHPPL);
+        vinfo14.setSecond(SecondStatus.extra);
+        vinfo14.setThird(ThirdStatus.Parainfluenza);
+        vinfo15.setVInfoIdx(135L);
+        vinfo15.setFirst(FirstStatus.DHPPL);
+        vinfo15.setSecond(SecondStatus.extra);
+        vinfo15.setThird(ThirdStatus.Parvovirus);
 
         //코로나바이러스성 장염 - 기초/추가/보강
-        vinfo16.setFirst(FirstEnum.Coronavirus);
-        vinfo16.setSecond(SecondEnum.basic);
-        vinfo17.setFirst(FirstEnum.Coronavirus);
-        vinfo17.setSecond(SecondEnum.additional);
-        vinfo18.setFirst(FirstEnum.Coronavirus);
-        vinfo18.setSecond(SecondEnum.extra);
+        vinfo16.setVInfoIdx(210L);
+        vinfo16.setFirst(FirstStatus.Coronavirus);
+        vinfo16.setSecond(SecondStatus.basic);
+        vinfo17.setVInfoIdx(220L);
+        vinfo17.setFirst(FirstStatus.Coronavirus);
+        vinfo17.setSecond(SecondStatus.additional);
+        vinfo18.setVInfoIdx(230L);
+        vinfo18.setFirst(FirstStatus.Coronavirus);
+        vinfo18.setSecond(SecondStatus.extra);
 
 
         //기관, 기관지염 - 기초/추가/보강
-        vinfo19.setFirst(FirstEnum.Kennel_Cough);
-        vinfo19.setSecond(SecondEnum.basic);
-        vinfo20.setFirst(FirstEnum.Kennel_Cough);
-        vinfo20.setSecond(SecondEnum.additional);
-        vinfo21.setFirst(FirstEnum.Kennel_Cough);
-        vinfo21.setSecond(SecondEnum.extra);
+        vinfo19.setVInfoIdx(310L);
+        vinfo19.setFirst(FirstStatus.Kennel_Cough);
+        vinfo19.setSecond(SecondStatus.basic);
+        vinfo20.setVInfoIdx(320L);
+        vinfo20.setFirst(FirstStatus.Kennel_Cough);
+        vinfo20.setSecond(SecondStatus.additional);
+        vinfo21.setVInfoIdx(330L);
+        vinfo21.setFirst(FirstStatus.Kennel_Cough);
+        vinfo21.setSecond(SecondStatus.extra);
 
         //광견병 - 기초/추가
-        vinfo22.setFirst(FirstEnum.Rabies);
-        vinfo22.setSecond(SecondEnum.basic);
-        vinfo23.setFirst(FirstEnum.Rabies);
-        vinfo23.setSecond(SecondEnum.additional);
+        vinfo22.setVInfoIdx(410L);
+        vinfo22.setFirst(FirstStatus.Rabies);
+        vinfo22.setSecond(SecondStatus.basic);
+        vinfo23.setVInfoIdx(420L);
+        vinfo23.setFirst(FirstStatus.Rabies);
+        vinfo23.setSecond(SecondStatus.additional);
 
 
         v_infoService.saveVcs(vinfo1);

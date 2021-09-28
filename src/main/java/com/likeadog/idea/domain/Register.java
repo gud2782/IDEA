@@ -14,9 +14,10 @@ import static javax.persistence.FetchType.LAZY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "Register_SEQ_Generator" , initialValue = 1, allocationSize = 1)
 public class Register extends BaseEntity{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Register_SEQ_Generator")
     private Long registerIdx;
 
     @ManyToOne(fetch = LAZY)
@@ -35,6 +36,7 @@ public class Register extends BaseEntity{
 
 
     @OneToMany (mappedBy = "register")
+    @Builder.Default
     private List<RegisterVaccine> registerVaccines  = new ArrayList<>();
 
 

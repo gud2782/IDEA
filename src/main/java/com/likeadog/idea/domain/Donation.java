@@ -12,9 +12,11 @@ import static javax.persistence.FetchType.LAZY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "Donation_SEQ_Generator" , initialValue = 1, allocationSize = 1)
 public class Donation extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Donation_SEQ_Generator")
     private Long donationIdx;
 
     @ManyToOne(fetch = LAZY)

@@ -23,7 +23,7 @@ public class VinfoRepository {
     }
 
     public List<Vinfo> findAll() {
-        return em.createQuery("select v from Vinfo v", Vinfo.class)
+        return em.createQuery("select v from Vinfo v ", Vinfo.class)
                     .getResultList();
     }
 

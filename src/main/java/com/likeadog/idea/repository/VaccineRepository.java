@@ -1,16 +1,16 @@
 package com.likeadog.idea.repository;
 
 import com.likeadog.idea.domain.Vaccine;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 @Repository
+@RequiredArgsConstructor
 public class VaccineRepository {
 
-    @PersistenceContext
-    EntityManager em;
+    private final EntityManager em;
 
     public void regVc(Vaccine vaccine) {
         if(vaccine.getVaccineIdx() == null) {

@@ -2,17 +2,19 @@ package com.likeadog.idea.controller.form;
 
 import com.likeadog.idea.domain.RegisterVaccine;
 import com.likeadog.idea.domain.VaccineVinfo;
-import com.likeadog.idea.enumCollection.DeleteEnum;
-import lombok.Getter;
-import lombok.Setter;
+import com.likeadog.idea.enumCollection.DeleteStatus;
+import lombok.*;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VaccineForm {
 
     private Long vaccineIdx;
@@ -29,6 +31,6 @@ public class VaccineForm {
     private LocalDateTime mDate; //수정날짜
 
     @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
+    private DeleteStatus del; //삭제여부
 
 }

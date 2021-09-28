@@ -1,6 +1,6 @@
 package com.likeadog.idea.enumCollection;
 
-public enum ThirdEnum {
+public enum ThirdStatus {
     Canine_Distemper, //홍역
     Hepatitis, //간염
     Parvovirus, //파보장염

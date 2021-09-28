@@ -1,5 +1,5 @@
 package com.likeadog.idea.enumCollection;
 
-public enum DeleteEnum {
+public enum DeleteStatus {
     YES,NO
 }

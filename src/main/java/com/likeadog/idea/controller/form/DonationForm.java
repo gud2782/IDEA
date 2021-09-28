@@ -3,10 +3,9 @@ package com.likeadog.idea.controller.form;
 
 import com.likeadog.idea.domain.Qrcode;
 import com.likeadog.idea.domain.Register;
-import com.likeadog.idea.enumCollection.DeleteEnum;
+import com.likeadog.idea.enumCollection.DeleteStatus;
 import lombok.*;
 
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
@@ -40,6 +39,6 @@ public class DonationForm {
     private LocalDateTime mDate; //수정날짜
 
     @Enumerated(EnumType.STRING)
-    private DeleteEnum del; //삭제여부
+    private DeleteStatus del; //삭제여부
 
 }

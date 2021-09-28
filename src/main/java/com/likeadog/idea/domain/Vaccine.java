@@ -1,27 +1,29 @@
 package com.likeadog.idea.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@SequenceGenerator(name = "Vaccine_SEQ_Generator" , initialValue = 1, allocationSize = 1)
 public class Vaccine extends BaseEntity{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Vaccine_SEQ_Generator")
     private Long vaccineIdx;
 
    @OneToMany(mappedBy = "vaccine")
+   @Builder.Default
    private List<RegisterVaccine> registerVaccines = new ArrayList<>();
 
     @OneToMany(mappedBy = "vaccine")
+    @Builder.Default
     private List<VaccineVinfo> vaccineVinfos = new ArrayList<>();
 
     private String vNumber; //차수
