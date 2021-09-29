@@ -1,10 +1,17 @@
 package com.likeadog.idea.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @SequenceGenerator(name = "VaccineVinfo_SEQ_Generator" , initialValue = 1, allocationSize = 1)
 public class VaccineVinfo {
 

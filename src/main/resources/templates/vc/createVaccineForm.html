@@ -40,6 +40,12 @@
             $("#VDate").datepicker( "option", "minDate", selectedDate );
         });
 
+        $('#NDate').datepicker();
+        $('#NDate').datepicker("option", "maxDate", $("#NDate").val());
+        $('#NDate').datepicker("option", "onClose", function ( selectedDate ) {
+            $("#NDate").datepicker( "option", "minDate", selectedDate );
+        });
+
     });
 </script>
 <body>
@@ -56,9 +62,10 @@
             <select name="registerIdx" id="register" class="form-control" th:onchange="changeValues()"  >
                 <option value="">강아지선택</option>
                 <option th:each="register : ${registers}"
-                        th:value="|${register.registerIdx},${register.aniId},${register.kind},${register.neutralization}|"
+                        th:value="|${register.registerIdx},${register.aniId}|"
                         th:text="${register.aniName}"
                 />
+
             </select>
 
             <label for="register">1차 선택</label>
@@ -95,7 +102,7 @@
 
         <div class="form-group">
             <label th:for="register">동물등록번호</label>
-            <input th:id="regidx"  type="text" th:field="*{registerVaccines.get(0).register.registerIdx}" class="form-control" readonly>
+            <input th:id="regidx"  type="text"  class="form-control" readonly>
         </div>
 
         <div class="form-group">
@@ -106,14 +113,14 @@
 
         <div class="form-group">
             <label th:for="VDate">접종 날짜</label>
-            <input type="text" th:field="*{VDate}" class="form-control"
-                   placeholder="몸무게를 입력하세요." autocomplete="off">
+            <input th:id="VDate" type="text" th:field="*{VDate}" class="form-control"
+                    autocomplete="off">
         </div>
 
         <div class="form-group">
             <label th:for="NDate">다음 날짜</label>
             <input th:id="NDate" type="text" th:field="*{NDate}" class="form-control"
-                   >
+                   autocomplete="off">
         </div>
 
 

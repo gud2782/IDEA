@@ -1,7 +1,6 @@
 package com.likeadog.idea.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -9,6 +8,9 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @SequenceGenerator(name = "Qrcode_SEQ_Generator" , initialValue = 1, allocationSize = 1)
 public class Qrcode extends BaseEntity{
     @Id

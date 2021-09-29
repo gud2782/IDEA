@@ -1,5 +1,7 @@
 package com.likeadog.idea.api;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class NumberGen {
@@ -38,5 +40,13 @@ public class NumberGen {
         }
         return numberGen();
     }
+    public static List<String> genLoop() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            list.add(numberGen());
+        }
+        return list;
+    }
+
 
 }

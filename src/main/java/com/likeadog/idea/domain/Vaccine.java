@@ -19,11 +19,9 @@ public class Vaccine extends BaseEntity{
     private Long vaccineIdx;
 
    @OneToMany(mappedBy = "vaccine")
-   @Builder.Default
    private List<RegisterVaccine> registerVaccines = new ArrayList<>();
 
     @OneToMany(mappedBy = "vaccine")
-    @Builder.Default
     private List<VaccineVinfo> vaccineVinfos = new ArrayList<>();
 
     private String vNumber; //차수

@@ -23,12 +23,12 @@ public class QrcodeController {
 
     //반려동물등록 조회
     @GetMapping("qr/{qrcodeIdx}")
-    public String text2QRCode(@PathVariable("qrcodeIdx") String qrcodeIdx,
+    public void text2QRCode(@PathVariable("qrcodeIdx") String qrcodeIdx,
                               HttpServletResponse response)
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.9:8080/ani/"+qrcodeIdx+"/detail";
+        String text = "http://172.16.101.8:8080/ani/"+qrcodeIdx+"/detail";
 //        172.30.1.16 집
 //        192.168.0.28 가산
         ServletOutputStream sos = response.getOutputStream();
@@ -37,7 +37,13 @@ public class QrcodeController {
         sos.close();
 
 
-        return "qr/create";
+
+      //  return "qr/create";
+    }
+
+
+    public void runGenLoop(){
+        qrcodeService.makeBnumbers();
     }
 
 

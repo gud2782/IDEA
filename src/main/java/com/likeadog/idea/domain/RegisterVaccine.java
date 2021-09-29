@@ -1,12 +1,14 @@
 package com.likeadog.idea.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
 @Setter

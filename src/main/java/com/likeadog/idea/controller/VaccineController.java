@@ -1,14 +1,15 @@
 package com.likeadog.idea.controller;
 
 import com.likeadog.idea.controller.form.VaccineForm;
-import com.likeadog.idea.domain.Register;
-import com.likeadog.idea.domain.RegisterVaccine;
-import com.likeadog.idea.domain.Vaccine;
-import com.likeadog.idea.domain.Vinfo;
+import com.likeadog.idea.domain.*;
+import com.likeadog.idea.enumCollection.FirstStatus;
+import com.likeadog.idea.enumCollection.SecondStatus;
+import com.likeadog.idea.enumCollection.ThirdStatus;
 import com.likeadog.idea.service.RegisterService;
 import com.likeadog.idea.service.VinfoService;
 import com.likeadog.idea.service.VaccineService;
 import lombok.AllArgsConstructor;
+import org.bouncycastle.math.raw.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class VaccineController {
 
 
     }
-    @PostMapping("/new")
+/*    @PostMapping("/new")
     public String create(@RequestParam("registerIdx") String registerIdx, @ModelAttribute("form") VaccineForm form, Model model) {
 
 //        List<Vinfo> vinfos = v_infoService.findVcs();
@@ -50,31 +51,40 @@ public class VaccineController {
 
 
         return "redirect:/vc/list";
-    }
+    }*/
 
-//    @PostMapping("/new")
-//    public String create(@RequestParam("first") String first,
-//                         @RequestParam("second") String second,
-//                         @RequestParam("third") String third, Long vaccineIdx, VaccineForm form) {
-//
-//        Vinfo vinfos = v_infoService.findVaccine(vaccineIdx);
-//
-//        Vaccine vaccine = new Vaccine();
-//
-//        vaccine.setVNumber(form.getVNumber());
-//
-//
-//
-//        vaccineService.saveVc(vaccine);
-//
-//        return "redirect:/donation/list";
-//
-//    }
+    @PostMapping("/new")
+    public String create(@RequestParam("first") FirstStatus first,
+                         @RequestParam("second") SecondStatus second,
+                         @RequestParam("third") ThirdStatus third,
+                         @RequestParam("registerIdx") String registerIdx
+                         ,VaccineForm form) {
+
+   /*
+        Vinfo vinfos = vinfoService.vInfoMaker(first,second,third);
+
+        Vaccine vaccine = new Vaccine();
+
+        vaccine.setVNumber(form.getVNumber());
+*/
+
+
+       // vaccineService.saveVc(vaccine);
+
+        vaccineService.saveVc(first,second,third,registerIdx,form);
+        return "redirect:/vc/list";
+
+    }
 
     @GetMapping("/list")
-    public void vaccineList() {
+    public String vaccineList(Model model) {
+        List<Vaccine> vcs = vaccineService.findVC();
+       // System.out.println("vccon:"+vcs.get(1).getNDate());
+        model.addAttribute("vcs", vcs);
+        return "vc/list";
 
     }
+
 
     @GetMapping("/update")
     public void vaccineUpdate() {

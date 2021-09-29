@@ -1,5 +1,6 @@
 package com.likeadog.idea.repository;
 
+import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Vinfo;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,19 @@ public class VinfoRepository {
     public List<Vinfo> findAll() {
         return em.createQuery("select v from Vinfo v ", Vinfo.class)
                     .getResultList();
+    }
+
+    public List<Vinfo> findVInfo(long vInfoIdx) {
+        return em.createQuery("select v from Vinfo v where v.vInfoIdx= :vInfoIdx", Vinfo.class)
+                .setParameter("vInfoIdx",vInfoIdx)
+                .getResultList();
+    }
+
+    public List<Register> findByAniId(String aniId) {
+        return em.createQuery("select r from Register r where r.aniId = :aniId",
+                Register.class)
+                .setParameter("aniId", aniId)
+                .getResultList();
     }
 
 

@@ -33,7 +33,7 @@ public class DonationController {
 
 
     @PostMapping("/new")
-    public String create(@RequestParam("registerIdx") String registerIdx,@ModelAttribute("form") DonationForm form) {
+    public String create(@RequestParam("registerIdx") String registerIdx, @ModelAttribute("form") DonationForm form) {
 
         System.out.println("getDonationIdx:" + form.getDonationIdx());
         donationService.saveDonation(registerIdx, form);
