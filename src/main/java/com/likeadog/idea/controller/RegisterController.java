@@ -52,7 +52,7 @@ public class RegisterController {
 
 
 
-        RegisterForm form = registerService.getForm(registerIdx);
+        RegisterForm form = registerService.getUpdateAni(registerIdx);
         model.addAttribute("form", form);
         return "ani/updateRegisterForm";
 
@@ -61,7 +61,7 @@ public class RegisterController {
 
     @PostMapping("/{registerIdx}/update")
     public String updateAni(@PathVariable String registerIdx, @ModelAttribute("form") RegisterForm form) {
-        registerService.saveAni(form);
+        registerService.updateAni(registerIdx, form);
         return "redirect:/ani/list";
     }
 

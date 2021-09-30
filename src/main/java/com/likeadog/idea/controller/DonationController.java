@@ -25,9 +25,9 @@ public class DonationController {
     public String createForm(Model model){
 
         List<Register> registers = donationService.findAnis();
-        // DonationForm donationForm = DonationForm.builder().build();
         model.addAttribute("donationForm", new DonationForm());
         model.addAttribute("registers", registers );
+
         return "donation/createDonationForm";
     }
 
@@ -35,7 +35,7 @@ public class DonationController {
     @PostMapping("/new")
     public String create(@RequestParam("registerIdx") String registerIdx, @ModelAttribute("form") DonationForm form) {
 
-        System.out.println("getDonationIdx:" + form.getDonationIdx());
+//        System.out.println("getDonationIdx:" + form.getDonationIdx());
         donationService.saveDonation(registerIdx, form);
 
         return "redirect:/donation/list";

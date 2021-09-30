@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -32,8 +33,9 @@ public class RegisterRepository {
 
 
     public List<Register> findAll() {
-        return em.createQuery("select r from Register r", Register.class)
-                .getResultList();
+        Query query = em.createQuery("select r from Register r", Register.class);
+        List<Register> listall = query.getResultList();
+                return listall;
 
     }
 

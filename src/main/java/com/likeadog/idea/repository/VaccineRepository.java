@@ -31,4 +31,8 @@ public class VaccineRepository {
         }
 
     }
+
+    public Vaccine findOne(Long vaccineIdx) {
+        return  em.find(Vaccine.class, vaccineIdx);
+    }
 }

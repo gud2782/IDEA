@@ -10,7 +10,7 @@
                 <th>#</th>
                 <th>동물등록번호</th>
                 <th>동물이름</th>
-                <th>헌혈당시 몸무게</th>
+                <th>수혈당시 몸무게</th>
                 <th>견종</th>
                 <th>혈액형</th>
                 <th>중성화여부</th>
@@ -22,7 +22,7 @@
             </thead>
             <tbody>
             <tr th:each="transs : ${trans}">
-                <td th:text="${transs.register.registerIdx}"></td>
+                <td th:text="${transs.transfusionIdx}"></td>
                 <td th:text="${transs.register.aniId}"></td>
                 <td th:text="${transs.register.aniName}"></td>
                 <td th:text="${transs.TWeight}"></td>
@@ -38,6 +38,10 @@
                 <td>
                     <a href="#" th:href="@{/transfusion/{idx}/detail (idx=${transs.transfusionIdx})}"
                        class="btn btn-primary" role="button">자세히</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/qr/t{idx} (idx=${transs.transfusionIdx})}"
+                       class="btn btn-primary" role="button">QR CODE</a>
                 </td>
                 <!--                <td>-->
                 <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->

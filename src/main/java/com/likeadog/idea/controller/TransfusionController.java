@@ -25,12 +25,8 @@ public class TransfusionController {
     @GetMapping("/new")
     public String createForm(Model model){
         List<Register> registers = transfusionService.findAnis();
-//        TransfusionForm transfusionForm = new TransfusionForm();
-
-
         model.addAttribute("transfusionForm", new TransfusionForm());
         model.addAttribute("registers", registers );
-
 
         return "transfusion/createTransfusionForm";
 
@@ -42,7 +38,7 @@ public class TransfusionController {
     public String create(@RequestParam("registerIdx") String registerIdx, @ModelAttribute("form") TransfusionForm form) {
 
 
-        System.out.println("getTransfusionIdx:" + form.getTransfusionIdx());
+//        System.out.println("getTransfusionIdx:" + form.getTransfusionIdx());
         transfusionService.saveTransfusion(registerIdx, form);
 //
 

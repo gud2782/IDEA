@@ -34,11 +34,12 @@ public class RegisterService {
         registerRepository.regSave(register);
     }
 
-    public RegisterForm getForm(Long registerIdx) {
+    public RegisterForm getUpdateAni(Long registerIdx) {
 
         Register register = findOne(registerIdx);
 
         RegisterForm form = RegisterForm.builder()
+                .registerIdx(register.getRegisterIdx())
                 .aniId(register.getAniId())
                 .aniName(register.getAniName())
                 .weight(register.getWeight())
@@ -63,5 +64,21 @@ public class RegisterService {
     }
 
 
+    @Transactional
+    public void updateAni(String registerIdx, RegisterForm form) {
+        Register register = Register.builder()
+                .registerIdx(form.getRegisterIdx())
+                .aniId(form.getAniId())
+                .aniName(form.getAniName())
+                .weight(form.getWeight())
+                .kind(form.getKind())
+                .color(form.getColor())
+                .gender(form.getGender())
+                .birth(form.getBirth())
+                .neutralization(form.getNeutralization())
+                .build();
 
+        registerRepository.regSave(register);
+
+    }
 }

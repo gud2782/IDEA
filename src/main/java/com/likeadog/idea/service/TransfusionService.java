@@ -28,16 +28,19 @@ public class TransfusionService {
         Long lngregisterIdx = Long.parseLong(parsedRegId[0]);
 
 
-        Register registers = findRegister(lngregisterIdx);
+        Register register = findRegister(lngregisterIdx);
 //        Transfusion transfusion = new Transfusion();
 
         Transfusion transfusion = Transfusion.builder()
                 .transfusionIdx(form.getTransfusionIdx())
-                .register(registers)
+                .register(register)
                 .tDate(form.getTDate())
                 .tHos(form.getTHos())
                 .type(form.getType())
                 .tPack(form.getTPack())
+                .neutralization(form.getNeutralization())
+                .kind(form.getKind())
+                .tWeight(form.getTWeight())
                 .build();
 
 

@@ -60,13 +60,6 @@ public class VaccineController {
                          @RequestParam("registerIdx") String registerIdx
                          ,VaccineForm form) {
 
-   /*
-        Vinfo vinfos = vinfoService.vInfoMaker(first,second,third);
-
-        Vaccine vaccine = new Vaccine();
-
-        vaccine.setVNumber(form.getVNumber());
-*/
 
 
        // vaccineService.saveVc(vaccine);
@@ -86,14 +79,35 @@ public class VaccineController {
     }
 
 
-    @GetMapping("/update")
-    public void vaccineUpdate() {
+    @GetMapping("/{vaccineIdx}/update")
+    public String vcNew(@PathVariable("vaccineIdx") Long vaccineIdx, Model model) {
+    VaccineForm form = vaccineService.getUpdateVaccine(vaccineIdx);
+
+    model.addAttribute("form", form);
+    return "vc/updateVaccineForm";
 
     }
 
-    @GetMapping("/delete")
-    public void vaccineDelete() {
+    @PostMapping("/{vaccineIdx}/update")
+    public String updateVc(@PathVariable String vaccineIdx, @ModelAttribute("form") VaccineForm form) {
+        vaccineService.updateVaccine(vaccineIdx, form);
+
+        return "redirect:/vc/list";
+    }
+
+    @GetMapping("/{vaccineIdx}/detail")
+    public String vcsDetail(@PathVariable("vaccineIdx") Long vaccineIdx, Model model) {
+
+        Vaccine vaccine = vaccineService.findOne(vaccineIdx);
+        model.addAttribute("vaccine", vaccine);
+
+        return "vc/detail";
 
     }
+
+//    @GetMapping("/{vaccineIdx}/delete")
+//    public void vaccineDelete() {
+//
+//    }
 
 }

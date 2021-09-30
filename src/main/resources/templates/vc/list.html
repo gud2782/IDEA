@@ -13,10 +13,11 @@
                 <th>견종</th>
                 <th>중성화여부</th>
                 <th>대분류</th>
-                <th>중분류<th>
-                <th>소분류<th>
-                <th>접종날짜</th><th>
-                <th>다음 접종날짜<th>
+                <th>중분류</th>
+                <th>소분류</th>
+                <th>접종날짜</th>
+                <th>다음 접종날짜</th>
+
 
                 <th></th>
             </tr>
@@ -24,13 +25,13 @@
             <tbody>
             <tr th:each="vc : ${vcs}">
                 <td th:text="${vc.vaccineIdx}"></td>
-                <td th:text="|${vc.registerVaccines.get(${vcStat.current}).register.aniId}|"></td>
-<!--                <td th:text="${vc.registerVaccines.get(${vcStat.index}).register.aniName}"></td>-->
-<!--                <td th:text="${vc.registerVaccines.get(${vcStat.index}).register.kind}"></td>-->
-<!--                <td th:text="${vc.registerVaccines.get(${vcStat.index}).register.neutralization}"></td>-->
-<!--                <td th:text="${vc.vaccineVinfos.get(${vcStat.index}).vinfo.first}"></td>-->
-<!--                <td th:text="${vc.vaccineVinfos.get(${vcStat.index}).vinfo.second}"></td>-->
-<!--                <td th:text="${vc.vaccineVinfos.get(${vcStat.index}).vinfo.third}"></td>-->
+                <td th:text="${vc.registerVaccines.get(0).register.aniId}"></td>
+                <td th:text="${vc.registerVaccines.get(0).register.aniName}"></td>
+                <td th:text="${vc.registerVaccines.get(0).register.kind}"></td>
+                <td th:text="${vc.registerVaccines.get(0).register.neutralization}"></td>
+                <td th:text="${vc.vaccineVinfos.get(0).vinfo.first}"></td>
+                <td th:text="${vc.vaccineVinfos.get(0).vinfo.second}"></td>
+                <td th:text="${vc.vaccineVinfos.get(0).vinfo.third}"></td>
                 <td th:text="${vc.VDate}"></td>
                 <td th:text="${vc.NDate}"></td>
                 <td>
@@ -41,6 +42,10 @@
                     <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
                        class="btn btn-primary" role="button">자세히</a>
                 </td>
+                <td>
+                    <a href="#" th:href="@{/qr/V{idx} (idx=${vc.vaccineIdx})}"
+                       class="btn btn-primary" role="button">QR CODE</a>
+                </td>
                 <!--                <td>-->
                 <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
                 <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
@@ -49,7 +54,7 @@
             </tr>
             <tr>
                 <td>
-                    <a href="/transfusion/new" class="btn btn-primary" role="button">추가</a>
+                    <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
                 </td>
             </tr>
             </tbody>
