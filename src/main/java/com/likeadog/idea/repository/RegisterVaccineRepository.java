@@ -26,4 +26,7 @@ public class RegisterVaccineRepository {
     }
 
 
+    public RegisterVaccine findRv(Long vaccineIdx) {
+        return em.find(RegisterVaccine.class, vaccineIdx);
+    }
 }

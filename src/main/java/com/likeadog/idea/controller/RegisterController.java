@@ -32,7 +32,7 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "ani/createRegisterForm";
         }
-
+        System.out.println("get:" + form.getAniId() + form.getBirth());
         registerService.saveAni(form);
 
         return "redirect:/ani/list";

@@ -68,35 +68,49 @@
 
             </select>
 
-            <label for="register">1차 선택</label>
-            <select name="first" id="first" class="form-control"  >
+            <label for="first">1차 선택</label>
+            <select name="first" id="first" class="form-control" onchange="itemChange()" >
                 <option value="">1차 선택</option>
                 <option th:each="first : ${T(com.likeadog.idea.enumCollection.FirstStatus).values()}"
                         th:value="${first}" th:text="${first}"
                 />
-
             </select>
 
 
 
 
-            <label for="register">2차 선택</label>
+
+
+            <label for="second">2차 선택</label>
             <select name="second" id="second" class="form-control" >
                 <option value="">2차 선택</option>
-                <option th:each="second : ${T(com.likeadog.idea.enumCollection.SecondStatus).values()}"
-                        th:value="${second}" th:text="${second}"
-                />
+                <option id="basic" th:value="${T(com.likeadog.idea.enumCollection.SecondStatus).basic}"
+                        th:text="${T(com.likeadog.idea.enumCollection.SecondStatus).basic}"/>
+                <option id="additional" th:value="${T(com.likeadog.idea.enumCollection.SecondStatus).additional}"
+                        th:text="${T(com.likeadog.idea.enumCollection.SecondStatus).additional}"/>
+                <option id="extra" th:value="${T(com.likeadog.idea.enumCollection.SecondStatus).extra}"
+                        th:text="${T(com.likeadog.idea.enumCollection.SecondStatus).extra}"/>
+
+<!--                <option th:each="second : ${T(com.likeadog.idea.enumCollection.SecondStatus).values()}"-->
+<!--                        th:value="${second}" th:text="${second}"-->
+<!--                />-->
 
             </select>
 
-            <label for="register">3차 선택</label>
-            <select name="third" id="third" class="form-control"  >
+
+
+            <div id="thirds" >
+            <label for="thirds" >3차 선택</label>
+            <select name="thirds"  class="form-control">
                 <option value="">3차 선택</option>
-                <option th:each="third : ${T(com.likeadog.idea.enumCollection.ThirdStatus).values()}"
-                        th:value="${third}" th:text="${third}"
+                <option th:each="thirds : ${T(com.likeadog.idea.enumCollection.ThirdStatus).values()}"
+                        th:value="${thirds}" th:text="${thirds}"
                 />
 
             </select>
+            </div>
+
+
         </div>
 
 
@@ -105,11 +119,11 @@
             <input th:id="regidx"  type="text"  class="form-control" readonly>
         </div>
 
-        <div class="form-group">
-            <label th:for="VNumber"접종차수</label>
-            <input type="text" th:field="*{VNumber}" class="form-control"
-                   placeholder="Qr코드를 입력하세요".>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label th:for="VNumber"접종차수</label>-->
+<!--            <input type="text" th:field="*{VNumber}" class="form-control"-->
+<!--                   placeholder="접종차수를 입력하세요".>-->
+<!--        </div>-->
 
         <div class="form-group">
             <label th:for="VDate">접종 날짜</label>
@@ -137,9 +151,6 @@
 
 
 <script th:inline="javascript">
-
-
-
     function changeValues() {
 
 
@@ -168,6 +179,41 @@
         document.getElementById('neutralization').value = neutralization;
 
     }
+
+
+
+
+    function itemChange() {
+
+
+        var selectFirst = $("#first").val();
+
+
+        if(selectFirst == "DHPPL"){
+            $('#thirds').show();
+
+
+        } else if (selectFirst == "Rabies") {
+
+
+        } else  {
+            $('#thirds').hide();
+            $('#thirds').val(typeof(null));
+            $('#extra').show();
+
+        }
+        console.log($("#first").val());
+        console.log($("#second").val());
+        console.log($("#third").val());
+        console.log($("#thirds").val());
+
+
+
+
+
+
+    }
+
 
 
 

@@ -24,4 +24,8 @@ public class VaccineVInfoRepository {
     }
 
 
+    public VaccineVinfo findVV(Long vaccineIdx) {
+
+        return em.find(VaccineVinfo.class, vaccineIdx);
+    }
 }

@@ -53,32 +53,42 @@
         </div>
         <div class="form-group">
             <label th:for="register.registerIdx">동물등록번호</label>
-            <input type="text"  th:field="*{registerVaccines.get(0).register.aniId}" class="form-control"
-                   readonly />
+            <input type="text"  th:value="${form.getRegisterVaccines().get(0).register.aniId}"  class="form-control" readonly />
 
         </div>
 
-        <div class="form-group">
-                        <label th:for="first">1차선택</label>
-                        <input id = "first" type="text" th:field="*{vaccineVinfos.get(0).vinfo.first}" class="form-control"  />
-                    </div>
-                    <div class="form-group">
-                        <label th:for="second">2차선택</label>
-                        <input type="text" th:field="*{vaccineVinfos.get(0).vinfo.second}" class="form-control"
-                               />
-                    </div>
-                    <div class="form-group">
-                        <label th:for="third">3차선택</label>
-                        <input type="text" th:field="*{vaccineVinfos.get(0).vinfo.third}" class="form-control"
-                             />
-                    </div>
+        <label for="first">1차 선택</label>
+        <select name="first" id="first" class="form-control"  >
+            <option value="">1차 선택</option>
+            <option th:value="${form.getVaccineVinfos().get(0).vinfo.first}"
+                    th:each="first : ${T(com.likeadog.idea.enumCollection.FirstStatus).values()}"
+                    th:value="${first}" th:text="${first}"
+            />
 
+        </select>
+
+<!--        <div class="form-group">-->
+<!--            <label th:for="first">1차선택</label>-->
+<!--            <input id = "first" type="text" th:value="${form.getVaccineVinfos().get(0).vinfo.first}" class="form-control"  />-->
+
+<!--            </select>-->
+<!--        </div>-->
 
         <div class="form-group">
-            <label th:for="VNumber">접종차수</label>
-            <input type="text" th:field="*{VNumber}" class="form-control"
-                   />
+            <label th:for="second">2차선택</label>
+            <input id = "second" type="text" th:value="${form.getVaccineVinfos().get(0).vinfo.second}" class="form-control"  />
         </div>
+
+        <div class="form-group">
+            <label th:for="third">3차선택</label>
+            <input id = "third" type="text" th:value="${form.getVaccineVinfos().get(0).vinfo.third}" class="form-control"  />
+        </div>
+
+
+<!--        <div class="form-group">-->
+<!--            <label th:for="VNumber">접종차수</label>-->
+<!--            <input type="text" th:field="*{VNumber}" class="form-control"/>-->
+<!--        </div>-->
         <div class="form-group">
             <label th:for="VDatet">접종 날짜</label>
             <input type="text" th:field="*{VDate}" class="form-control"

@@ -39,7 +39,7 @@ public class VaccineService {
 
 
         //vinfo select
-        // vinfo ==dbvinfo 같은지 검사
+        // vinfo == dbvinfo 같은지 검사
         Vinfo vinfo = vinfoService.vInfoMaker(firstStatus,secondStatus,thirdStatus);
         Vinfo dbVinfo = vinfoService.findVInfo(vinfo.getVInfoIdx());
 
@@ -82,9 +82,18 @@ public class VaccineService {
         return vaccineRepository.findAll();
     }
 
+    @Transactional
     public VaccineForm getUpdateVaccine(Long vaccineIdx) {
 
         Vaccine vaccine = findOne(vaccineIdx);
+
+        /* 방금 만든 find 함수
+        RegisterVaccine registerVaccine = findOneRV(vaccineIdx);
+        VaccineVinfo vaccineVinfo = findOneVV(vaccineIdx);
+
+        */
+
+
 
         VaccineForm form = VaccineForm.builder()
                 .vNumber(vaccine.getVNumber())
@@ -97,10 +106,8 @@ public class VaccineService {
         return form;
     }
 
-    public Vaccine findOne(Long vaccineIdx) {
-        return vaccineRepository.findOne(vaccineIdx);
-    }
 
+    @Transactional
     public void updateVaccine(String vaccineIdx, VaccineForm form) {
         Vaccine vaccine = Vaccine.builder()
                 .vaccineVinfos(form.getVaccineVinfos())
@@ -124,5 +131,17 @@ public class VaccineService {
         vaccineVInfoService.saveVV(vaccineVinfo);
 
 
+    }
+
+    private VaccineVinfo findOneVV(Long vaccineIdx) {
+        return vaccineVInfoService.findVV(vaccineIdx);
+    }
+
+    private RegisterVaccine findOneRV(Long vaccineIdx) {
+        return registerVaccineService.findRV(vaccineIdx);
+    }
+
+    public Vaccine findOne(Long vaccineIdx) {
+        return vaccineRepository.findOne(vaccineIdx);
     }
 }

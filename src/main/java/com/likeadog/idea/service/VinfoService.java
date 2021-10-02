@@ -59,6 +59,7 @@ public class VinfoService {
                 break;
             case extra:second="3";
                 break;
+
         }
 
         switch (thirdStatus){

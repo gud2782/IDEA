@@ -56,11 +56,21 @@ public class VaccineController {
     @PostMapping("/new")
     public String create(@RequestParam("first") FirstStatus first,
                          @RequestParam("second") SecondStatus second,
-                         @RequestParam("third") ThirdStatus third,
+                         @RequestParam(value = "thirds", required = false) Object thirds,
                          @RequestParam("registerIdx") String registerIdx
                          ,VaccineForm form) {
 
+        ThirdStatus third;
 
+        if (thirds == null) {
+            third = ThirdStatus.none;
+
+        } else {
+
+            third = (ThirdStatus) thirds;
+        }
+        System.out.println(first);
+        System.out.println(third);
 
        // vaccineService.saveVc(vaccine);
 

@@ -19,4 +19,10 @@ public class VaccineVInfoService {
     public void saveVV(VaccineVinfo vaccineVinfo){
         vaccineVInfoRepository.regVV(vaccineVinfo);
     }
+
+    public VaccineVinfo findVV(Long vaccineIdx) {
+        return vaccineVInfoRepository.findVV(vaccineIdx);
+    }
+
+
 }

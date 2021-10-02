@@ -3,11 +3,13 @@ package com.likeadog.idea.controller;
 
 import com.google.zxing.WriterException;
 import com.likeadog.idea.service.QrcodeService;
+import io.gsonfire.util.JsonUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import java.lang.String;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,12 @@ public class QrcodeController {
 
     private final QrcodeService qrcodeService;
 
+    //        172.30.1.16 집
+    //        192.168.0.28 가산
+    //        172.30.1.33 구로
+    private static String address = "172.30.1.33";
+
+
 
     //등록된 동물 정보 qr코드
     @GetMapping("qr/r{registerIdx}")
@@ -28,9 +36,10 @@ public class QrcodeController {
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.60:8080/ani/"+registerIdx+"/detail";
-//        172.30.1.60 집
-//        192.168.0.28 가산
+        String text = "http://" + address + ":8080/ani/"+registerIdx+"/detail";
+        System.out.println(address);
+        System.out.println(text);
+
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
@@ -45,9 +54,9 @@ public class QrcodeController {
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.60:8080/donation/"+donationIdx+"/detail";
-//        172.30.1.16 집
-//        192.168.0.28 가산
+        String text = "http://" + address + ":8080/donation/"+donationIdx+"/detail";
+        System.out.println(text);
+
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
@@ -61,9 +70,9 @@ public class QrcodeController {
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.60:8080/transfusion/"+transfusionIdx+"/detail";
-//        172.30.1.16 집
-//        192.168.0.28 가산
+        String text = "http://" + address + ":8080/transfusion/"+transfusionIdx+"/detail";
+        System.out.println(text);
+
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
@@ -78,9 +87,9 @@ public class QrcodeController {
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.60:8080/vc/"+vaccineIdx+"/detail";
-//        172.30.1.16 집
-//        192.168.0.28 가산
+        String text = "http://" + address + ":8080/vc/"+vaccineIdx+"/detail";
+        System.out.println(text);
+
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
@@ -95,9 +104,9 @@ public class QrcodeController {
             throws IOException, WriterException {
         int width = 200;
         int height = 200;
-        String text = "http://172.30.1.60:8080/transfusion/new";
-//        172.30.1.16 집
-//        192.168.0.28 가산
+        String text = "http://" + address + ":8080/transfusion/new";
+        System.out.println(text);
+
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();

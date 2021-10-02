@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<body>
+
+<td>
+    <a href="#" th:href="@{/vc/{idx}/update (idx=${vc.vaccineIdx})}"
+       class="btn btn-primary" role="button">수정</a>
+</td>
+<td>
+    <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
+       class="btn btn-primary" role="button">자세히</a>
+</td>
+<td>
+    <a href="#" th:href="@{/qr/v{idx} (idx=${vc.vaccineIdx})}"
+       class="btn btn-primary" role="button">QR CODE</a>
+</td>
+
+</body>
+</html>
