@@ -14,16 +14,13 @@
 <body>
 
 <td>
-    <a href="#" th:href="@{/vc/{idx}/update (idx=${vc.vaccineIdx})}"
-       class="btn btn-primary" role="button">수정</a>
+    <input type="button" onclick="location.href='/qr/donation';" value="헌혈견 정보입력"></body>
 </td>
 <td>
-    <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
-       class="btn btn-primary" role="button">자세히</a>
+    <input type="button" onclick="location.href='/qr/transfusion';" value="수혈견 정보입력"></body>
 </td>
 <td>
-    <a href="#" th:href="@{/qr/v{idx} (idx=${vc.vaccineIdx})}"
-       class="btn btn-primary" role="button">QR CODE</a>
+    <input type="button" onclick="location.href='/qr/list';" value="조회"></body>
 </td>
 
 </body>

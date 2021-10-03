@@ -3,12 +3,12 @@ package com.likeadog.idea.controller;
 
 import com.google.zxing.WriterException;
 import com.likeadog.idea.service.QrcodeService;
-import io.gsonfire.util.JsonUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.lang.String;
 
 import javax.servlet.ServletOutputStream;
@@ -30,7 +30,7 @@ public class QrcodeController {
 
 
     //등록된 동물 정보 qr코드
-    @GetMapping("qr/r{registerIdx}")
+    @GetMapping("ani/qr/r{registerIdx}")
     public void registerQrcod(@PathVariable("registerIdx") String registerIdx,
                               HttpServletResponse response)
             throws IOException, WriterException {
@@ -39,7 +39,6 @@ public class QrcodeController {
         String text = "http://" + address + ":8080/ani/"+registerIdx+"/detail";
         System.out.println(address);
         System.out.println(text);
-
         ServletOutputStream sos = response.getOutputStream();
         QrcodeService.text2QRCode(text, width, height, sos);
         sos.flush();
@@ -48,7 +47,7 @@ public class QrcodeController {
 
     }
 
-    @GetMapping("qr/d{donationIdx}")
+    @GetMapping("donation/qr/d{donationIdx}")
     public void donationQrcod(@PathVariable("donationIdx") String donationIdx,
                               HttpServletResponse response)
             throws IOException, WriterException {
@@ -64,7 +63,7 @@ public class QrcodeController {
 
 
     }
-    @GetMapping("qr/t{transfusionIdx}")
+    @GetMapping("transfusion/qr/t{transfusionIdx}")
     public void transfusionQrcod(@PathVariable("transfusionIdx") String transfusionIdx,
                               HttpServletResponse response)
             throws IOException, WriterException {
@@ -81,7 +80,7 @@ public class QrcodeController {
 
     }
 
-    @GetMapping("qr/v{vaccineIdx}")
+    @GetMapping("vc/qr/v{vaccineIdx}")
     public void vaccineQrcod(@PathVariable("vaccineIdx") String vaccineIdx,
                                  HttpServletResponse response)
             throws IOException, WriterException {
@@ -98,7 +97,7 @@ public class QrcodeController {
 
     }
 
-    @GetMapping("qr/b{bNumber}")
+    @GetMapping("blood/qr/b{bNumber}")
     public void bNumberQrcod(@PathVariable("bNumber") String bNumber,
                              HttpServletResponse response)
             throws IOException, WriterException {
@@ -114,6 +113,39 @@ public class QrcodeController {
 
 
     }
+
+    @GetMapping("qr/main")
+    public String main() {
+        return "qr/main";
+    }
+
+    @GetMapping("qr/donation")
+    public String qrDonation() {
+        return "qr/createDonationForm";
+    }
+
+    @PostMapping("qr/donation")
+    public String qrDonationForm() {
+        return "qr/list";
+    }
+
+    @GetMapping("qr/transfusion")
+    public String qrTransfusion() {
+        return "qr/createTransfusionForm";
+    }
+
+    @PostMapping("qr/transfusion")
+    public String qrTansfusionForm() {
+        return "qr/list";
+    }
+
+    @GetMapping("qr/list")
+    public String qrList() {
+        return "qr/list";
+    }
+
+
+
 
 
 
