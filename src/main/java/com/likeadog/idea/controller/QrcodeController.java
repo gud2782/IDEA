@@ -149,6 +149,8 @@ public class QrcodeController {
 
 
 
+
+
     public void runGenLoop(){
         qrcodeService.makeBnumbers();
     }

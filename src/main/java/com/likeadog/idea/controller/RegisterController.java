@@ -27,6 +27,8 @@ public class RegisterController {
     }
 
 
+
+
     @PostMapping("/new")
     public String create(@Valid RegisterForm form, BindingResult result) {
         if (result.hasErrors()) {
