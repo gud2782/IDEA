@@ -462,19 +462,19 @@ overlay-light .YTPOverlay:before {
 }
 .btn-main.btn-transparent-light {
   background-color: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  box-shadow: inset 0 0 0 0 #fff;
-  -webkit-box-shadow: inset 0 0 0 0 #fff;
+  border: 1px solid #03619A;
+  color: #FAB838;
+  box-shadow: inset 0 0 0 0 #03619A;
+  -webkit-box-shadow: inset 0 0 0 0 #03619A;
 }
 .btn-main.btn-transparent-light:hover,
 .btn-main.btn-transparent-light:focus,
 .btn-main.btn-transparent-light:active,
 .btn-main.btn-transparent-light .active {
-  border-color: #fff;
-  box-shadow: inset 0 100px 0 0 #fff;
-  -webkit-box-shadow: inset 0 100px 0 0 #fff;
-  color: #000;
+  border-color: #03619A;
+  box-shadow: inset 0 100px 0 0 #03619A;
+  -webkit-box-shadow: inset 0 100px 0 0 #03619A;
+  color: #FAB838;
 }
 /*--------------------------------------------------
     03. Typography 
@@ -2223,7 +2223,7 @@ blockquote {
     **. Responsive {should come last}
 ---------------------------------------------------*/
 @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 991px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 991px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 991px), only screen and (min-device-pixel-ratio: 2) and (max-width: 991px), only screen and (min-resolution: 192dpi) and (max-width: 991px), only screen and (min-resolution: 2dppx) and (max-width: 991px) {
-  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing:subpixel-antialiased;
   .btn-main {
     font-size: 8px;
   }
@@ -2236,6 +2236,10 @@ blockquote {
   height: 100%;
   background: linear-gradient(to left, rgb(113, 113, 255), rgb(138, 255, 146));
   mix-blend-mode: overlay;
+
+}
+#slider-video1 {
+  width : 100%;
 
 }
 #slider-video2,

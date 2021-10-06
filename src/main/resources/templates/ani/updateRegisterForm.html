@@ -6,6 +6,10 @@
         border-color: #bd2130;
     }
 </style>
+<!--navbar-->
+<div th:replace="fragments/navbar :: navbar"/>
+<!--navbar end-->
+
 <body>
 <div class="container">
     <form th:object="${form}" method="post">
@@ -48,7 +52,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <div th:replace="fragments/footer :: footer" />
+
 </div> <!-- /container -->
 </body>
+<!--footer -->
+<div th:replace="fragments/footer :: footer" />
+<!--footer-end -->
 </html>

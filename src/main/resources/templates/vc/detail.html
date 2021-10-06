@@ -1,10 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header" />
-
+<!--navbar-->
+<div th:replace="fragments/navbar :: navbar"/>
+<!--navbar end-->
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
     <div>
         <table class="table table-striped" action="/vc/detail" th:object="${vaccine}" method="GET">
             <thead>

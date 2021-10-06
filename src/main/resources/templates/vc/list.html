@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header" />
+<!--navbar-->
+<div th:replace="fragments/navbar :: navbar"/>
+<!--navbar end-->
 <body>
 <div class="container">
     <div>
@@ -60,9 +63,11 @@
             </tbody>
         </table>
     </div>
-    <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
+<!--footer -->
+<div th:replace="fragments/footer :: footer" />
+<!--footer-end -->
 <script>
     function cancel(id) {
         var form = document.createElement("form");

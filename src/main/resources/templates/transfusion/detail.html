@@ -1,10 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header" />
-
+<!--navbar-->
+<div th:replace="fragments/navbar :: navbar"/>
+<!--navbar end-->
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
     <div>
         <table class="table table-striped" action="/transfusion/detail" th:object="${transfusion}" method="GET">
             <thead>
@@ -54,7 +56,11 @@
             </tbody>
         </table>
     </div>
-    <div th:replace="fragments/footer :: footer" />
+
 </div> <!-- /container -->
 </body>
+
+<!--footer -->
+<div th:replace="fragments/footer :: footer" />
+<!--footer-end -->
 </html>

@@ -1,9 +1,16 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org",lang="en">
-<head>
-    <meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<meta charset="UTF-8">
     <title>IDEA</title>
 </head>
+<!--navbar-->
+<div th:replace="fragments/navbar :: navbar"/>
+<!--navbar end-->
+
 <body>
 <div class="container">
     <form role="form" action="/user/register" th:object="${userForm}"
@@ -39,4 +46,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </body>
+<!--footer -->
+<div th:replace="fragments/footer :: footer" />
+<!--footer-end -->
 </html>
