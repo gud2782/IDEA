@@ -1,12 +1,27 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>$Title$</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>메인페이지입니다.</h1>-->
-<!--<input type="button" onclick="location.href='user/login'" value='로그인'>-->
-<!--<input type="button" onclick="location.href='user/register'" value='회원가입'>-->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5 ">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<h1>Welcome!</h1>
+
+<div sec:authorize="isAuthenticated()"> <span sec:authentication="name"></span>님 환영합니다. </div>
+
+<a sec:authorize="hasRole('ROLE_USER')" th:href="@{/user/info}">내정보</a>
+<!--이 부분은 유저(USER)에게만 나타남-->
+​
+<p>Click <a th:href="@{/user}">user</a> to see a greeting.</p>
+<p>Click <a th:href="@{/manager}">manager</a> to see a greeting.</p>
+<p>Click <a th:href="@{/admin}">admin</a> to see a greeting.</p>
+<p sec:authorize="isAnonymous()">Click <a th:href="@{/user/register}">회원가입</a> to see a greeting.</p>
+<p sec:authorize="isAnonymous()">Click <a th:href="@{/login}">로그인</a> to see a greeting.</p>
+<p sec:authorize="isAuthenticated()">Click <a th:href="@{/logout}">로그아웃</a> to see a greeting.</p>
+
+<!--<p sec:authorize="isAuthenticated()">[이 부분은 로그인한 사용자(isAuthenticated) 모두에게 나타남]<p>-->
+</body>
+</html>

@@ -1,40 +1,57 @@
 package com.likeadog.idea.service;
 
-import com.likeadog.idea.domain.User;
-import com.likeadog.idea.repository.UserRepository;
 
+import com.likeadog.idea.config.UserContext;
+import com.likeadog.idea.domain.UserEntity;
+import com.likeadog.idea.dto.UserDto;
+import com.likeadog.idea.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-
-    //회원가입
     @Transactional
-    public Long join(User user) {
-
-        validateDuplicateUser(user); //중복 회원 검증
-        userRepository.save(user);
-        return user.getUserIdx();
-
+    public Long createUser(UserDto form) {
+        //비밀번호 암호화
+        form.setPw(passwordEncoder.encode(form.getPw()));
+        UserEntity userEntity = form.toEntity();
+        userRepository.save(userEntity);
+        return userEntity.getUserIdx();
     }
 
-    //중복 회원 검사
-    private void validateDuplicateUser(User user) {
-        List<User> findMembers =
-                userRepository.findByUserId(user.getUserId());
-        if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+
+    @Override
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if (userEntity == null) {
+            throw new UsernameNotFoundException("UsernameNotFoundException");
         }
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(userEntity.getRole()));
+
+        UserContext userContext = new UserContext(userEntity, roles);
+        return userContext;
     }
+
+
 
 }

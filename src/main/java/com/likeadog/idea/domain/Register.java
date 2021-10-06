@@ -22,7 +22,7 @@ public class Register extends BaseEntity{
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name ="userIdx")
-    private User user;
+    private UserEntity user;
 
     private String aniId; //동물등록번호
     private String aniName; //동물이름
