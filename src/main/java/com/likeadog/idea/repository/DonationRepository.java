@@ -1,6 +1,7 @@
 package com.likeadog.idea.repository;
 
 import com.likeadog.idea.domain.Donation;
+import com.likeadog.idea.domain.Register;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +49,15 @@ public class DonationRepository {
         return listall;
 
 
+    }
+
+
+
+    public List<Donation> findDosByUserIDX(Long userIdx) {
+        return em.createQuery("select d from Donation d where d.register.user.userIdx = :userIdx",
+                Donation.class)
+                .setParameter("userIdx", userIdx)
+                .getResultList();
     }
 
 

@@ -79,7 +79,7 @@ public class UserController {
 
     //회원가입 페이지 입력
     @PostMapping("/register")
-    public String createUser(@Valid UserDto form, BindingResult result){
+    public String createUser(@Valid UserDto form, BindingResult result) throws Exception {
         form.setRole("ROLE_USER");
         if(result.hasErrors()){
             return "user/signUp";
@@ -105,6 +105,6 @@ public class UserController {
 
     @GetMapping("/delete")
     public void userDelete() {
-
+//        userService.delUser();
     }
 }

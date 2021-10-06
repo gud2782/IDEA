@@ -3,6 +3,8 @@ package com.likeadog.idea.service;
 import com.likeadog.idea.controller.form.DonationForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
+import com.likeadog.idea.domain.UserEntity;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,12 @@ public class DonationService {
 
     private final DonationRepository donationRepository;
     private final RegisterService registerService;
+    private final UserService userService;
 
 
     @Transactional
     public Donation saveDonation(String registerIdx, DonationForm form) {
+
 
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
@@ -90,7 +94,9 @@ public class DonationService {
 
 
     public List<Donation> findDos() {
-        return donationRepository.findAll();
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
+        return donationRepository.findDosByUserIDX(userEntity.getUserIdx());
     }
 
     public Donation findOne(Long donationIdx) {
@@ -104,6 +110,8 @@ public class DonationService {
     public Register findRegister(Long registerIdx) {
         return registerService.findOne(registerIdx);
     }
+
+
 
 
 

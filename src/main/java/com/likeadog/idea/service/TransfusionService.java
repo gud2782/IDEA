@@ -3,6 +3,8 @@ package com.likeadog.idea.service;
 import com.likeadog.idea.controller.form.TransfusionForm;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
+import com.likeadog.idea.domain.UserEntity;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.TransfusionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ public class TransfusionService {
 
     private final TransfusionRepository transfusionRepository;
     private final RegisterService registerService;
+    private final UserService userService;
 
     @Transactional
     public Transfusion saveTransfusion(String registerIdx, TransfusionForm form) {
@@ -89,7 +92,10 @@ public class TransfusionService {
     }
 
     public List<Transfusion> findTrans() {
-        return transfusionRepository.findAll();
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
+        return transfusionRepository.findTransByUserIDX(userEntity.getUserIdx());
+        //return transfusionRepository.findAll();
     }
 
     public Transfusion findOne(Long transfusionIdx) {

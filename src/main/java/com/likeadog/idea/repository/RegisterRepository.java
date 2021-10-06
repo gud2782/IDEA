@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
+import static com.likeadog.idea.enumCollection.DeleteStatus.NO;
+
 @Repository
 @RequiredArgsConstructor
 public class RegisterRepository {
@@ -39,12 +41,15 @@ public class RegisterRepository {
 
     }
 
-    public List<Register> findByAniId(String aniId) {
-        return em.createQuery("select r from Register r where r.aniId = :aniId",
+    public List<Register> findAniByUserIDX(Long userIdx) {
+        return em.createQuery("select r from Register r where r.del='NO' and r.user.userIdx = :userIdx",
                         Register.class)
-                .setParameter("aniId", aniId)
+                .setParameter("userIdx", userIdx)
                 .getResultList();
     }
+
+
+
 //    public Register deleteOne(Long registerIdx) {
 //        return "";
 //    }

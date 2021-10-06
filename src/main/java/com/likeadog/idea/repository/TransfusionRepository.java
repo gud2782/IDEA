@@ -26,15 +26,16 @@ public class TransfusionRepository {
         }
     }
 
-    public List<Transfusion> findAll() {
-        Query query = em.createQuery("select t from Transfusion t", Transfusion.class);
-        List<Transfusion> listall = query.getResultList();
+    public List<Transfusion> findTransByUserIDX(Long userIdx) {
+        return em.createQuery("select t from Transfusion t where t.register.user.userIdx = :userIdx", Transfusion.class)
+                .setParameter("userIdx", userIdx)
+                .getResultList();
 
-        System.out.println("transfusion List");
-        return listall;
     }
 
     public Transfusion findOne(Long transfusionIdx) {
         return em.find(Transfusion.class, transfusionIdx);
     }
+
+
 }

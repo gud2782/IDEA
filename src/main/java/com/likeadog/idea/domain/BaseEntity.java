@@ -1,9 +1,9 @@
 package com.likeadog.idea.domain;
 
 import com.likeadog.idea.enumCollection.DeleteStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 @Setter
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class    BaseEntity {
 
     private String creater; //생성자

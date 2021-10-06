@@ -2,8 +2,12 @@ package com.likeadog.idea.service;
 
 import com.likeadog.idea.controller.form.RegisterForm;
 import com.likeadog.idea.domain.Register;
+import com.likeadog.idea.domain.UserEntity;
+import com.likeadog.idea.enumCollection.DeleteStatus;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.RegisterRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,14 +19,20 @@ import java.util.List;
 public class RegisterService {
 
     private final RegisterRepository registerRepository;
+    private final UserService userService;
+
+
 
     @Transactional
     public void saveAni(RegisterForm form) {
 
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
 
-
+        //UserEntity userEntity = SecurityInfoProvider.getUserEntity();
 
         Register register = Register.builder()
+                .user(userEntity)
                 .aniId(form.getAniId())
                 .aniName(form.getAniName())
                 .weight(form.getWeight())
@@ -32,6 +42,7 @@ public class RegisterService {
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
                 .build();
+        register.setDel(DeleteStatus.NO);
 
         registerRepository.regSave(register);
     }
@@ -52,16 +63,19 @@ public class RegisterService {
                 .neutralization(register.getNeutralization())
                 .build();
 
+
         return form;
     }
 
 
     public  List<Register> findAnis() {
-        return registerRepository.findAll();
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
+        return registerRepository.findAniByUserIDX(userEntity.getUserIdx());
+        //return registerRepository.findAll();
     }
 
     public Register findOne(Long registerIdx) {
-        System.out.println("222222222222");
         return registerRepository.findOne(registerIdx);
     }
 
@@ -80,6 +94,13 @@ public class RegisterService {
                 .neutralization(form.getNeutralization())
                 .build();
 
+        registerRepository.regSave(register);
+
+    }
+    @Transactional
+    public void deleteAni(Long registerIdx) {
+        Register register = registerRepository.findOne(registerIdx);
+        register.setDel(DeleteStatus.YES);
         registerRepository.regSave(register);
 
     }

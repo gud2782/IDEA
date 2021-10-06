@@ -45,6 +45,12 @@
                     <a href="#" th:href="@{/ani/{idx}/update (idx=${registerIdx})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
+                <td class="">
+                    <form action="/ani/delete" method="post">
+                        <input type="submit" id="registerIdx" name="registerIdx" class="form-control" th:value="*{registerIdx}" th:text="삭제">
+
+                    </form>
+                </td>
                 <td>
                     <a href="/ani/list"
                        class="btn btn-primary" role="button">돌아가기</a>
