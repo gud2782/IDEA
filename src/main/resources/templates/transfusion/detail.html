@@ -48,6 +48,12 @@
                     <a href="#" th:href="@{/transfusion/{idx}/update (idx=${transfusionIdx})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
+                <td class="">
+                    <form action="/transfusion/delete" method="post">
+                        <input type="submit" id="transfusionIdx" name="transfusionIdx" class="form-control" th:value="*{transfusionIdx}" th:text="삭제">
+
+                    </form>
+                </td>
                 <td>
                     <a href="/transfusion/list"
                        class="btn btn-primary" role="button">돌아가기</a>

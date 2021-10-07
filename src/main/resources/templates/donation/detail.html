@@ -49,6 +49,12 @@
                     <a href="#" th:href="@{/donation/{idx}/update (idx=${donationIdx})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
+                <td class="">
+                    <form action="/donation/delete" method="post">
+                        <input type="submit" id="donationIdx" name="donationIdx" class="form-control" th:value="*{donationIdx}" th:text="삭제">
+
+                    </form>
+                </td>
                 <td>
                     <a href="/donation/list"
                        class="btn btn-primary" role="button">돌아가기</a>

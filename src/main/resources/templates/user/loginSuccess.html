@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header_content :: header_content" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+
 <html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>로그인 성공</title>
-</head>
+
 <body>
 <h1>로그인 성공!!</h1>
 <hr>
@@ -12,4 +15,8 @@
 </p>
 <a th:href="@{'/home'}">메인으로 이동</a>
 </body>
+
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
 </html>

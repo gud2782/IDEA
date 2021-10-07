@@ -32,12 +32,6 @@ public class DonationRepository {
         return  em.find(Donation.class, donationIdx);
     }
 
-    public Donation find1(Long donationIdx) {
-
-        Query query = em.createQuery("select d, r.aniName from Donation d, Register r where d.register.registerIdx = r.registerIdx");
-        Donation listDonation = (Donation) query.getResultList();
-        return listDonation;
-    }
 
 
 
@@ -45,7 +39,7 @@ public class DonationRepository {
         Query query = em.createQuery("select d from Donation d", Donation.class);
         List<Donation> listall = query.getResultList();
 
-        System.out.println("listtttttt");
+
         return listall;
 
 
@@ -54,7 +48,7 @@ public class DonationRepository {
 
 
     public List<Donation> findDosByUserIDX(Long userIdx) {
-        return em.createQuery("select d from Donation d where d.register.user.userIdx = :userIdx",
+        return em.createQuery("select d from Donation d where d.del='NO' and d.register.user.userIdx = :userIdx",
                 Donation.class)
                 .setParameter("userIdx", userIdx)
                 .getResultList();

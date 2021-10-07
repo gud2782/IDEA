@@ -799,7 +799,7 @@ blockquote {
   transition: all 0.3s ease-in-out;
   z-index: 999;
 }
-.navbar .navigation {
+.navbar {
   background-color: #fff;
 }
 .navbar .container-fluid {
@@ -820,13 +820,13 @@ blockquote {
 .navbar-header .logo-container .logo-wrap a {
   display: table-cell;
   vertical-align: middle;
-  height: 70px;
+  height: 50px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .navbar-header .logo-container .logo-wrap.shrink a {
-  height: 70px;
+  height: 50px;
 }
 .navbar-header .logo-container .logo-wrap img {
   -webkit-transition: all 0.3s ease-in-out;
@@ -842,7 +842,7 @@ blockquote {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   padding: 0 17px;
-  line-height: 70px;
+  line-height: 50px;
   color: #fff;
   font-size: 13px;
   text-transform: uppercase;
@@ -855,7 +855,7 @@ blockquote {
 }
 .navbar .nav-wrap {
   width: auto;
-  float: right;
+  float:right ;
 }
 .navbar-collapse {
   padding: 0;
@@ -865,7 +865,7 @@ blockquote {
   overflow-x: hidden;
 }
 .nav-solid {
-  height: 70px;
+  height: 50px;
   -webkit-transition: height 0.3s ease-in-out;
   -o-transition: height 0.3s ease-in-out;
   transition: height 0.3s ease-in-out;
@@ -874,6 +874,7 @@ blockquote {
   color: #03619A;
 }
 .nav-solid .navigation {
+  background: white;
   position: fixed;
   width: 100%;
   -webkit-transition: height 0.3s ease-in-out;
@@ -904,7 +905,7 @@ blockquote {
   color: #fff;
 }
 .navigation.sticky .navbar-nav > li > a {
-  line-height: 70px;
+  line-height: 50px;
 }
 .navbar-nav > li > a:hover,
 .nav-transparent .navbar-default .navbar-nav > li > a:hover,
@@ -935,7 +936,7 @@ blockquote {
     float: none;
   }
   .navbar-header .logo-container .logo-wrap a {
-    height: 70px;
+    height: 60px;
   }
   .navbar-header .navbar-toggle {
     display: block;
@@ -975,7 +976,7 @@ blockquote {
     border-width: 0 0 1px;
   }
   .nav-transparent {
-    height: 70px;
+    height: 50px;
   }
   .nav-transparent .navbar .navigation {
     background-color: #2a2a2a;
@@ -1038,6 +1039,81 @@ blockquote {
 .navbar-default .navbar-toggle:hover {
   background-color: transparent;
 }
+
+/* Navigation box3
+-------------------------------------------------------*/
+
+.menu1 {
+  list-style: none;
+  border-bottom: 1px solid #FFCD4A;
+  display: flex;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #FFCD4A;
+  font-size: 15px;
+
+}
+
+.menu1 li a {
+  display: block;
+  padding: 10px 4vw 10px;
+  position: relative;
+}
+.menu1 li a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+}
+.menu1 li a::after {
+  width: 0;
+  height: 1vw;
+  background: #FFCD4A;
+  left: 50%;
+}
+.menu1 li a:hover::after {
+  width: 100%;
+  left: 0;
+  transition: all .3s;
+}
+/*.box3_1 {*/
+/*  font-family: 'Montserrat', sans-serif;*/
+/*  color: #FFCD4A;*/
+/*  font-size: 13px;*/
+/*  text-transform: uppercase;*/
+/*  -webkit-transition: all 0.3s ease-in-out;*/
+/*  -o-transition: all 0.3s ease-in-out;*/
+/*  transition: all 0.3s ease-in-out;*/
+/*  background: transparent;*/
+/*  border-bottom: 1px solid;*/
+/*  border-bottom-color: #03619A;*/
+/*  float: left;*/
+/*  width: 33.33%;*/
+/*  padding: 10px;*/
+
+/*}*/
+/*.box3_1::after {*/
+/*  content: '';*/
+/*  display: block;*/
+/*  position: absolute;*/
+/*  bottom: 0;*/
+/*  z-index: -1;*/
+/*  width: 0;*/
+/*  height: 1vw;*/
+/*  background: #03619A;*/
+/*  left: 50%;*/
+/*}*/
+/*.box3_1:hover::after {*/
+/*  width: 100%;*/
+/*  left: 50%;*/
+/*  transition: all .3s;*/
+/*}*/
+
+
+
+
+
 /*--------------------------------------------------
     08. Intro Section
 ---------------------------------------------------*/

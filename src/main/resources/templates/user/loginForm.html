@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>IDEA</title>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-</head>
+<head th:replace="fragments/header_content :: header_content" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 
 <body>
-안녕하세요 아이디어 입니다 로그인을 해주세요:)
-<hr>
+<!--안녕하세요 아이디어 입니다 로그인을 해주세요:)-->
+<!--<hr>-->
 
 <div class="container">
     <!--    <div th:replace="fragments/bodyHeader :: bodyHeader"/>-->
@@ -27,14 +28,17 @@
         <button type="submit" class="btn btn-primary">로그인</button>
     </form>
     <br/>
-    <!--    <div th:replace="fragments/footer :: footer"></div>-->
 </div>
 
 <div>
-<p>처음이신가요? 회원가입은 여기서 해주세요!</p>
+<!--<p>처음이신가요? 회원가입은 여기서 해주세요!</p>-->
 <input type="button" onclick="location.href='/user/register';" value="회원가입하기">
 </div>
 </body>
+
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
 </html>
 
 <!--<ul>-->
@@ -116,5 +120,7 @@
 <!--    </form>-->
 <!--</div>-->
 <!--</body>-->
+
+
 <!--</html>-->
 

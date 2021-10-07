@@ -44,6 +44,7 @@ public class RegisterService {
                 .build();
         register.setDel(DeleteStatus.NO);
 
+
         registerRepository.regSave(register);
     }
 
@@ -52,6 +53,7 @@ public class RegisterService {
         Register register = findOne(registerIdx);
 
         RegisterForm form = RegisterForm.builder()
+                .user(register.getUser())
                 .registerIdx(register.getRegisterIdx())
                 .aniId(register.getAniId())
                 .aniName(register.getAniName())
@@ -62,23 +64,12 @@ public class RegisterService {
                 .birth(register.getBirth())
                 .neutralization(register.getNeutralization())
                 .build();
+        form.setDel(register.getDel());
+
 
 
         return form;
     }
-
-
-    public  List<Register> findAnis() {
-        String userId = SecurityInfoProvider.getCurrentMemberId();
-        UserEntity userEntity = userService.findByUserID(userId);
-        return registerRepository.findAniByUserIDX(userEntity.getUserIdx());
-        //return registerRepository.findAll();
-    }
-
-    public Register findOne(Long registerIdx) {
-        return registerRepository.findOne(registerIdx);
-    }
-
 
     @Transactional
     public void updateAni(String registerIdx, RegisterForm form) {
@@ -92,11 +83,26 @@ public class RegisterService {
                 .gender(form.getGender())
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
+                .user(form.getUser())
                 .build();
+        register.setDel(form.getDel());
 
         registerRepository.regSave(register);
+        System.out.println("4 : " + form.getDel());
+        System.out.println("5 : " + register.getDel());
 
     }
+
+
+    public  List<Register> findAnis() {
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
+        return registerRepository.findAniByUserIDX(userEntity.getUserIdx());
+    }
+
+
+
+
     @Transactional
     public void deleteAni(Long registerIdx) {
         Register register = registerRepository.findOne(registerIdx);
@@ -104,4 +110,9 @@ public class RegisterService {
         registerRepository.regSave(register);
 
     }
+
+    public Register findOne(Long registerIdx) {
+        return registerRepository.findOne(registerIdx);
+    }
+
 }

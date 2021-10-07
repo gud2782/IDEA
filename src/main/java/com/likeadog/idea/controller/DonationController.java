@@ -85,6 +85,14 @@ public class DonationController {
 
     }
 
+    //등록한 헌혈견 삭제
+    @PostMapping("/delete")
+    public String deleteDo(@RequestParam("donationIdx") Long donationIdx ) {
+        donationService.deleteDo(donationIdx);
+        return "redirect:/donation/list";
+    }
+
+
 
 
 }

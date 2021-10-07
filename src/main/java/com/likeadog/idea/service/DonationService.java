@@ -4,6 +4,7 @@ import com.likeadog.idea.controller.form.DonationForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.UserEntity;
+import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,12 +44,11 @@ public class DonationService {
                 .type(form.getType())
                 .dPack(form.getDPack())
                 .build();
+        donation.setDel(DeleteStatus.NO);
 
         //System.out.println("서비스: "+ donation.getKind());
 
         donationRepository.regDo(donation);
-
-
         return donation;
     }
 
@@ -68,6 +68,7 @@ public class DonationService {
                 .neutralization(donation.getRegister().getNeutralization())
                 .register(donation.getRegister())
                 .build();
+        form.setDel(donation.getDel());
 
         return form;
 
@@ -87,9 +88,17 @@ public class DonationService {
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
                 .build();
+        donation.setDel(form.getDel());
 
         donationRepository.regDo(donation);
 
+    }
+
+    @Transactional
+    public void deleteDo(Long donationIdx) {
+        Donation donation = donationRepository.findOne(donationIdx);
+        donation.setDel(DeleteStatus.YES);
+        donationRepository.regDo(donation);
     }
 
 
@@ -98,6 +107,8 @@ public class DonationService {
         UserEntity userEntity = userService.findByUserID(userId);
         return donationRepository.findDosByUserIDX(userEntity.getUserIdx());
     }
+
+
 
     public Donation findOne(Long donationIdx) {
         return donationRepository.findOne(donationIdx);
@@ -110,8 +121,6 @@ public class DonationService {
     public Register findRegister(Long registerIdx) {
         return registerService.findOne(registerIdx);
     }
-
-
 
 
 

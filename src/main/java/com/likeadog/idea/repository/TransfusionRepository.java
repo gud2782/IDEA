@@ -27,7 +27,7 @@ public class TransfusionRepository {
     }
 
     public List<Transfusion> findTransByUserIDX(Long userIdx) {
-        return em.createQuery("select t from Transfusion t where t.register.user.userIdx = :userIdx", Transfusion.class)
+        return em.createQuery("select t from Transfusion t where t.del='NO' and t.register.user.userIdx = :userIdx", Transfusion.class)
                 .setParameter("userIdx", userIdx)
                 .getResultList();
 

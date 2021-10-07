@@ -15,6 +15,7 @@
 <div class="container">
     <form th:object="${form}" method="post">
         <!-- id -->
+        <input type="hidden" th:field="*{del}" />
         <div class="form-group">
             <label th:for="donationIdx">헌혈번호</label>
             <input type="text" th:field="*{donationIdx}" class="form-control"
@@ -74,7 +75,7 @@
 <!--footer -->
 <div th:replace="fragments/footer :: footer" />
 <!--footer-end -->
-
+<!-- calendar -->
 <script type="text/javascript">
     $(document).ready(function () {
         $.datepicker.regional['ko'] = {
@@ -105,9 +106,7 @@
 
         $('#DDate').datepicker();
         $('#DDate').datepicker("option", "maxDate", $("#DDate").val());
-        $('#DDate').datepicker("option", "onClose", function ( selectedDate ) {
-            $("#DDate").datepicker( "option", "minDate", selectedDate );
-        });
+
 
     });
 </script>

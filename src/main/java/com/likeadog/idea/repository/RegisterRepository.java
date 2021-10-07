@@ -49,9 +49,6 @@ public class RegisterRepository {
 
 
 
-//    public Register deleteOne(Long registerIdx) {
-//        return "";
-//    }
 
 
 

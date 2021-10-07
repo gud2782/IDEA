@@ -4,6 +4,7 @@ import com.likeadog.idea.controller.form.TransfusionForm;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
 import com.likeadog.idea.domain.UserEntity;
+import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.TransfusionRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,7 @@ public class TransfusionService {
                 .kind(form.getKind())
                 .tWeight(form.getTWeight())
                 .build();
+        transfusion.setDel(DeleteStatus.NO);
 
 
         transfusionRepository.regTrans(transfusion);
@@ -64,6 +66,8 @@ public class TransfusionService {
                 .neutralization(transfusion.getRegister().getNeutralization())
                 .register(transfusion.getRegister())
                 .build();
+        form.setDel(transfusion.getDel());
+
         return form;
     }
 
@@ -81,7 +85,15 @@ public class TransfusionService {
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
                 .build();
+        transfusion.setDel(form.getDel());
 
+        transfusionRepository.regTrans(transfusion);
+    }
+
+    @Transactional
+    public void deleteTrans(Long transfusionIdx) {
+        Transfusion transfusion = transfusionRepository.findOne(transfusionIdx);
+        transfusion.setDel(DeleteStatus.YES);
         transfusionRepository.regTrans(transfusion);
     }
 
@@ -106,4 +118,6 @@ public class TransfusionService {
     public List<Register> findAnis() {
         return  registerService.findAnis();
     }
+
+
 }

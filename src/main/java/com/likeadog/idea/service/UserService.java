@@ -4,8 +4,11 @@ package com.likeadog.idea.service;
 import com.likeadog.idea.config.UserContext;
 import com.likeadog.idea.domain.UserEntity;
 import com.likeadog.idea.dto.UserDto;
+import com.likeadog.idea.enumCollection.DeleteStatus;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.Delete;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,6 +36,9 @@ public class UserService implements UserDetailsService {
             //비밀번호 암호화
             form.setPw(passwordEncoder.encode(form.getPw()));
             UserEntity userEntity = form.toEntity();
+
+            userEntity.setDel(DeleteStatus.NO);
+
             userRepository.save(userEntity);
             return userEntity.getUserIdx();
         } else{
@@ -45,7 +51,9 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
-        UserEntity userEntity = userRepository.findByUserId(userId);
+        //UserEntity userEntity = userRepository.findByUserId(userId);
+        //리포지토리에 추가한 메소드로 대체 -> 탈퇴한 회원들 제외하고 db 검색
+        UserEntity userEntity = userRepository.findByUserIdWhereDelIsNo(userId);
 
         if (userEntity == null) {
             throw new UsernameNotFoundException("UsernameNotFoundException");
@@ -69,5 +77,14 @@ public class UserService implements UserDetailsService {
     }
 
 
+    //회원탈퇴
+    @Transactional
+    public void delUser() {
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = findByUserID(userId);
 
+        userEntity.setDel(DeleteStatus.YES);
+        userRepository.save(userEntity);
+
+    }
 }

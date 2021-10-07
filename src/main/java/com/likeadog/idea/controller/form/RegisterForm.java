@@ -1,6 +1,7 @@
 package com.likeadog.idea.controller.form;
 
 
+import com.likeadog.idea.domain.UserEntity;
 import com.likeadog.idea.enumCollection.DeleteStatus;
 import lombok.*;
 
@@ -20,6 +21,8 @@ public class RegisterForm {
 
     @NotEmpty(message = "동물등록번호는 필수입니다.")
     private String aniId; //동물등록번호
+
+    private UserEntity user;
 
 
     private String aniName; //동물이름

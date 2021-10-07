@@ -12,6 +12,7 @@
 <div class="container">
     <form th:object="${form}" method="post">
         <!-- id -->
+        <input type="hidden" th:field="*{del}" />
         <div class="form-group">
             <label th:for="donationIdx">헌혈번호</label>
             <input type="text" th:field="*{transfusionIdx}" class="form-control"
@@ -101,9 +102,7 @@
 
         $('#TDate').datepicker();
         $('#TDate').datepicker("option", "maxDate", $("#TDate").val());
-        $('#TDate').datepicker("option", "onClose", function ( selectedDate ) {
-            $("#TDate").datepicker( "option", "minDate", selectedDate );
-        });
+
 
     });
 </script>

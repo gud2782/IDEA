@@ -78,15 +78,8 @@ public class RegisterController {
 
     }
 
-//    //등록한 동물정보 수정
-//    @GetMapping("/{registerIdx}/delete")
-//    public String aniDel(@PathVariable("registerIdx") Long registerIdx) {
-//        RegisterForm form = registerService.getUpdateAni(registerIdx);
-//        return "ani/list";
-//
-//    }
 
-
+    //등록한 동물정보 삭제
     @PostMapping("/delete")
     public String deleteAni(@RequestParam("registerIdx") Long registerIdx ) {
         registerService.deleteAni(registerIdx);

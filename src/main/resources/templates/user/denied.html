@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>접근 거부</title>
-</head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header_content :: header_content" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
 <body>
 <h1>접근 불가 페이지입니다</h1>
 
 </body>
+
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
 </html>

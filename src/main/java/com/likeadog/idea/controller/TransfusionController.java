@@ -89,6 +89,13 @@ public class TransfusionController {
 
     }
 
+    //등록한 수혈견 삭제
+    @PostMapping("/delete")
+    public String deleteTran(@RequestParam("transfusionIdx") Long transfusionIdx ) {
+        transfusionService.deleteTrans(transfusionIdx);
+        return "redirect:/transfusion/list";
+    }
+
 
 }
 

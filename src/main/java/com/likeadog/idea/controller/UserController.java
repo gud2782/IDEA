@@ -103,8 +103,18 @@ public class UserController {
 
     }
 
+    //회원탈퇴 후 로그아웃 처리 복붙
     @GetMapping("/delete")
-    public void userDelete() {
-//        userService.delUser();
+    public String userDelete(HttpServletRequest request, HttpServletResponse response) {
+        userService.delUser();
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null){
+            new SecurityContextLogoutHandler().logout(request,response,authentication);
+        }
+        return "user/logout";
+
     }
 }

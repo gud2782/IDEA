@@ -147,9 +147,7 @@
 
         $('#DDate').datepicker();
         $('#DDate').datepicker("option", "maxDate", $("#DDate").val());
-        $('#DDate').datepicker("option", "onClose", function ( selectedDate ) {
-            $("#DDate").datepicker( "option", "minDate", selectedDate );
-        });
+
 
     });
 </script>
