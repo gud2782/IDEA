@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header_content :: header_content" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+
+<body>
+<div class="container">
+    <!-- Start Portfolio -->
+    <section id="portfolio" class="p-top-40 p-bottom-80">
+        <div class="container">
+
+            <div class="portfolio portfolio-isotope col-2 gutter">
+
+                <!-- Portfolio Item -->
+                <div class="pf-item branding">
+                    <a href="/img/portfolio/1.jpg" class="pf-style lightbox-image mfp-image">
+                        <div class="pf-image">
+                            <img src="/img/portfolio/1.jpg" alt="">
+                            <div class="overlay">
+                                <div class="overlay-caption">
+                                    <div class="overlay-content">
+                                        <div class="pf-info white-color">
+                                            <h4 class="pf-title">Project Name</h4>
+                                            <p>Branding</p>
+                                        </div> <!-- .pf-info -->
+                                    </div> <!-- .overlay-content -->
+                                </div> <!-- .overlay-caption -->
+                            </div> <!-- .overlay -->
+                        </div> <!-- .pf-image -->
+                    </a> <!-- .pf-style -->
+                </div>
+
+                <!-- Portfolio Item -->
+                <div class="pf-item graphic webdesign">
+                    <a href="/img/portfolio/2.jpg" class="pf-style lightbox-image mfp-image">
+                        <div class="pf-image">
+                            <img src="/img/portfolio/2.jpg" alt="">
+                            <div class="overlay">
+                                <div class="overlay-caption">
+                                    <div class="overlay-content">
+                                        <div class="pf-info white-color">
+                                            <h4 class="pf-title">Project Name</h4>
+                                            <p>Graphic, Web Design</p>
+                                        </div> <!-- .pf-info -->
+                                    </div> <!-- .overlay-content -->
+                                </div> <!-- .overlay-caption -->
+                            </div> <!-- .overlay -->
+                        </div> <!-- .pf-image -->
+                    </a> <!-- .pf-style -->
+                </div>
+
+
+
+            </div> <!-- Portfolio -->
+
+        </div> <!-- /.container -->
+    </section>
+    <!-- End Portfolio -->
+
+    <!-- Start Call to Action -->
+    <section class="light-bg p-top-60 p-bottom-60">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 c2a-content text-center">
+                    <!-- Text -->
+                    <h2 class="wow fadeInDown" data-wow-delay="0.3s">Like Our Works?</h2>
+                    <p class="m-bottom-30 wow fadeInDown" data-wow-delay="0.4s">Check out our Price list & lets start soemthing new. We are affordable & flexible.</p>
+                    <!-- Button -->
+                    <a data-scroll href="index_02.html#price" class="btn btn-main btn-theme wow fadeInUp" data-wow-delay="0.5s">See Pricing</a>
+                </div> <!-- /.col -->
+
+            </div>  <!-- /.row -->
+        </div> <!-- /.container -->
+    </section>
+    <!-- End Call to Action -->
+
+</div> <!-- /container -->
+</body>
+
+
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
+
+</html>

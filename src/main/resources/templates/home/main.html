@@ -13,7 +13,7 @@
 
 
 <!--navbar-->
-<div th:replace="fragments/navbar :: navbar"/>
+<div th:replace="fragments/navbar_scroll :: navbar_scroll"/>
 <!--navbar end-->
 
 <!-- Start Intro -->
@@ -262,15 +262,15 @@
 <!-- End Intro -->
 
 
-<!-- Start Service -->
-<section id="service" class="p-top-80 p-bottom-80">
+<!-- Start about -->
+<section id="about" class="p-top-80 p-bottom-80">
     <div class="container">
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <!-- Section Title -->
                 <div class="section-title text-center m-bottom-40">
-                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s"><strong>Service</strong></h2>
+                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s"><strong>About "IDEA"</strong></h2>
                     <div class="divider-center-small wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s"></div>
                     <p class="section-subtitle wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s"><em>Cordially convinced did incommode existence put out suffering certainly. Besides another and saw ferrars limited ten say unknown. So mainly it was not that difficult to understand.</em></p>
                 </div>
@@ -280,7 +280,7 @@
 
         <div class="row">
 
-            <!-- Service Item 1 -->
+            <!-- about Item 1 -->
             <div class="col-md-3 col-sm-6 m-bottom-20">
                 <div class="service wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
                     <div class="service-icon">
@@ -293,7 +293,7 @@
                 </div>
             </div> <!-- /.col -->
 
-            <!-- Service Item 2 -->
+            <!-- about Item 2 -->
             <div class="col-md-3 col-sm-6 m-bottom-20">
                 <div class="service wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
                     <div class="service-icon">
@@ -306,7 +306,7 @@
                 </div>
             </div> <!-- /.col -->
 
-            <!-- Service Item 3 -->
+            <!-- about Item 3 -->
             <div class="col-md-3 col-sm-6 m-bottom-20">
                 <div class="service wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
                     <div class="service-icon">
@@ -319,7 +319,7 @@
                 </div>
             </div> <!-- /.col -->
 
-            <!-- Service Item 4 -->
+            <!-- about Item 4 -->
             <div class="col-md-3 col-sm-6">
                 <div class="service wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
                     <div class="service-icon">
@@ -336,32 +336,32 @@
 
     </div> <!-- /.container -->
 </section>
-<!-- End Service -->
+<!-- End about -->
 
 
-<!-- Start Portfolio -->
-<section id="portfolio" class="light-bg p-top-80 p-bottom-80">
+<!-- Start news_camp -->
+<section id="news_camp" class="light-bg p-top-80 p-bottom-80">
     <div class="container">
 
-        <!-- Section Title -->
+        <!-- news_camp Title -->
         <div class="section-title text-center m-bottom-30">
-            <h2><strong>Portfolio</strong></h2>
+            <h2><strong>소식 & 캠페인</strong></h2>
             <div class="divider-center-small"></div>
         </div>
 
-        <!-- Portfolio-filter -->
+        <!-- news_camp-filter -->
         <ul class="pf-filter text-center list-inline">
             <li><a href="#" data-filter="*" class="iso-active iso-button">All</a></li>
-            <li><a href="#" data-filter=".graphic" class="iso-button">Graphic</a></li>
-            <li><a href="#" data-filter=".webdesign" class="iso-button">Web Design</a></li>
-            <li><a href="#" data-filter=".branding" class="iso-button">Branding</a></li>
-            <li><a href="#" data-filter=".video" class="iso-button">Video</a></li>
+            <li><a href="#" data-filter=".graphic" class="iso-button">소식</a></li>
+            <li><a href="#" data-filter=".webdesign" class="iso-button">캠페인</a></li>
+            <li><a href="#" data-filter=".branding" class="iso-button">반려견 헌혈</a></li>
+            <li><a href="#" data-filter=".video" class="iso-button">반려견 수혈</a></li>
         </ul>
 
-        <!-- Portfolio -->
+        <!-- news_camp -->
         <div class="portfolio portfolio-isotope col-3 gutter">
 
-            <!-- Portfolio Item -->
+            <!-- news_camp Item -->
             <div class="pf-item branding">
                 <a href="img/portfolio/1.jpg" class="pf-style lightbox-image mfp-image">
                     <div class="pf-image">
@@ -380,7 +380,7 @@
                 </a> <!-- .pf-style -->
             </div>
 
-            <!-- Portfolio Item -->
+            <!-- news_camp Item -->
             <div class="pf-item graphic webdesign">
                 <a href="img/portfolio/2.jpg" class="pf-style lightbox-image mfp-image">
                     <div class="pf-image">
@@ -399,7 +399,7 @@
                 </a> <!-- .pf-style -->
             </div>
 
-            <!-- Portfolio Item -->
+            <!-- news_camp Item -->
             <div class="pf-item video webdesign">
                 <a href="https://www.youtube.com/watch?v=6D-A6CL3Pv8" class="pf-style lightbox-video mfp-iframe">
                     <div class="pf-image">
@@ -418,7 +418,7 @@
                 </a> <!-- .pf-style -->
             </div>
 
-            <!-- Portfolio Item -->
+            <!-- news_camp Item -->
             <div class="pf-item video webdesign">
                 <a href="https://www.youtube.com/watch?v=6D-A6CL3Pv8" class="pf-style lightbox-video mfp-iframe">
                     <div class="pf-image">
@@ -437,7 +437,7 @@
                 </a> <!-- .pf-style -->
             </div>
 
-            <!-- Portfolio Item -->
+            <!-- news_camp Item -->
             <div class="pf-item branding graphic">
                 <a href="img/portfolio/5.jpg" class="pf-style lightbox-image mfp-image">
                     <div class="pf-image">
@@ -456,7 +456,7 @@
                 </a> <!-- .pf-style -->
             </div>
 
-            <!-- Portfolio Item -->
+            <!-- news_camp Item -->
             <div class="pf-item branding graphic">
                 <a href="img/portfolio/6.jpg" class="pf-style lightbox-image mfp-image">
                     <div class="pf-image">
@@ -475,11 +475,11 @@
                 </a> <!-- .pf-style -->
             </div>
 
-        </div> <!-- Portfolio -->
+        </div> <!-- news_camp -->
 
     </div> <!-- /.container -->
 </section>
-<!-- End Portfolio -->
+<!-- End news_camp -->
 
 
 <!-- Start Regular Section -->
@@ -490,7 +490,7 @@
             <div class="col-md-6">
                 <!-- Section Title -->
                 <div class="m-bottom-30">
-                    <h2 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.6s">We Help Grow Your Business</h2>
+                    <h2 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.6s">반려견 헌혈캠페인에 동참하세요</h2>
                     <div class="divider-small wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.7s"></div>
                 </div>
 
@@ -538,15 +538,15 @@
 <!-- End Video Section -->
 
 
-<!-- Start Team -->
-<section id="team" class="p-top-80 p-bottom-50">
+<!-- Start service -->
+<section id="service" class="p-top-80 p-bottom-50">
     <div class="container">
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <!-- Section Title -->
                 <div class="section-title text-center m-bottom-40">
-                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">Team Members</h2>
+                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">Service</h2>
                     <div class="divider-center-small wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s"></div>
                     <p class="section-subtitle wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s"><em>Resolution possession discovered surrounded advantages has but few add. Yet walls times spoil put. Be it reserved contempt rendered smallest. Studied to passage it mention calling believe an.</em></p>
                 </div>
@@ -555,7 +555,7 @@
 
         <div class="row">
 
-            <!-- === Team Item 1 === -->
+            <!-- === service Item 1 === -->
             <div class="col-md-3 col-sm-6 col-xs-6 p-bottom-30">
                 <div class="team-item wow zoomIn" data-wow-duration="1s" data-wow-delay="0.9s">
                     <div class="team-item-image">
@@ -570,16 +570,16 @@
                     </div>
                     <div class="team-item-info">
                         <div class="team-item-name">
-                            Stephen Joe
+                            백신접종
                         </div>
                         <div class="team-item-position">
-                            Director
+                            Vaccine
                         </div>
                     </div>
                 </div>
             </div> <!-- /.col -->
 
-            <!-- === Team Item 2 === -->
+            <!-- === service Item 2 === -->
             <div class="col-md-3 col-sm-6 col-xs-6 p-bottom-30">
                 <div class="team-item wow zoomIn" data-wow-duration="1s" data-wow-delay="0.9s">
                     <div class="team-item-image">
@@ -594,16 +594,16 @@
                     </div>
                     <div class="team-item-info">
                         <div class="team-item-name">
-                            Laura Doe
+                            반려견 헌혈
                         </div>
                         <div class="team-item-position">
-                            Creative Director
+                            Donation
                         </div>
                     </div>
                 </div>
             </div> <!-- /.col -->
 
-            <!-- === Team Item 3 === -->
+            <!-- === service Item 3 === -->
             <div class="col-md-3 col-sm-6 col-xs-6 p-bottom-30">
                 <div class="team-item wow zoomIn" data-wow-duration="1s" data-wow-delay="0.9s">
                     <div class="team-item-image">
@@ -618,16 +618,16 @@
                     </div>
                     <div class="team-item-info">
                         <div class="team-item-name">
-                            Andy Doe
+                            반려견 수혈
                         </div>
                         <div class="team-item-position">
-                            Marketing
+                            Transfusion
                         </div>
                     </div>
                 </div>
             </div> <!-- /.col -->
 
-            <!-- === Team Item 4 === -->
+            <!-- === service Item 4 === -->
             <div class="col-md-3 col-sm-6 col-xs-6 p-bottom-30">
                 <div class="team-item wow zoomIn" data-wow-duration="1s" data-wow-delay="0.9s">
                     <div class="team-item-image">
@@ -642,10 +642,10 @@
                     </div> <!-- /.team-item-image -->
                     <div class="team-item-info">
                         <div class="team-item-name">
-                            Inani Joe
+                            혈액 관리
                         </div>
                         <div class="team-item-position">
-                            Sales
+                            Blood
                         </div>
                     </div> <!-- /.team-item-info -->
                 </div> <!-- /.team-item -->
@@ -655,7 +655,7 @@
 
     </div> <!-- /.container -->
 </section>
-<!-- End Team -->
+<!-- End service -->
 
 
 <!-- Start Skill/Why Choose Us -->
@@ -666,13 +666,13 @@
             <div class="col-md-6 p-bottom-40">
                 <!-- Section Title -->
                 <div class="m-bottom-30">
-                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">Our Skills</h2>
+                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">헌혈참여 혈액형</h2>
                     <div class="divider-small wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s"></div>
                 </div>
 
                 <!-- === Progress item 1 === -->
                 <div class="progress-heading clearfix wow fadeIn">
-                    <h6 class="pull-left">Coding</h6>
+                    <h6 class="pull-left">DEA 1.1</h6>
                     <p class="pull-right">80%</p>
                 </div>
                 <div class="progress progress-thin">
@@ -681,7 +681,7 @@
 
                 <!-- === Progress item 2 === -->
                 <div class="progress-heading clearfix wow fadeIn">
-                    <h6 class="pull-left">Design</h6>
+                    <h6 class="pull-left">DEA 1.2</h6>
                     <p class="pull-right">90%</p>
                 </div>
                 <div class="progress progress-thin">
@@ -690,7 +690,7 @@
 
                 <!-- === Progress item 3 === -->
                 <div class="progress-heading clearfix wow fadeIn">
-                    <h6 class="pull-left">Branding</h6>
+                    <h6 class="pull-left">DEA 4</h6>
                     <p class="pull-right">60%</p>
                 </div>
                 <div class="progress progress-thin">
@@ -699,22 +699,14 @@
 
                 <!-- === Progress item 4 === -->
                 <div class="progress-heading clearfix wow fadeIn">
-                    <h6 class="pull-left">Marketing</h6>
+                    <h6 class="pull-left">DEA 7</h6>
                     <p class="pull-right">73%</p>
                 </div>
                 <div class="progress progress-thin">
                     <div class="progress-bar wow zoomIn" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 73%;" data-wow-delay="0.3s"></div>
                 </div>
 
-                <!-- === Progress item 5 === -->
-                <div class="progress-heading clearfix wow fadeIn">
-                    <h6 class="pull-left">Consultancy</h6>
-                    <p class="pull-right">75%</p>
-                </div>
-                <div class="progress progress-thin">
-                    <div class="progress-bar wow zoomIn" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;" data-wow-delay="0.3s">
-                    </div>
-                </div>
+
 
             </div> <!-- /.col -->
 
@@ -722,7 +714,7 @@
 
                 <!-- Section Title Right -->
                 <div class="m-bottom-30">
-                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">Why Choose Us</h2>
+                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">강아지 혈액형이란?</h2>
                     <div class="divider-small wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s"></div>
                 </div>
 
@@ -852,19 +844,19 @@
 <!-- End Stat -->
 
 
-<!-- Start Testimonial -->
-<section id="testimonials" class="parallax-bg overlay-dark p-top-80 p-bottom-80" style="background-image:url(img/testimonial-bg.jpg)" data-stellar-background-ratio="0.5">
+<!-- Start promotion -->
+<section id="promotion" class="parallax-bg overlay-dark p-top-80 p-bottom-80" style="background-image:url(img/testimonial-bg.jpg)" data-stellar-background-ratio="0.5">
 
     <!-- Section Title -->
     <div class="section-title text-center white-color m-bottom-40">
-        <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">Testimonials</h2>
+        <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">홍보관</h2>
         <div class="divider-center-small divider-white wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s"></div>
     </div>
 
-    <!-- === Testimonials === -->
+    <!-- === promotion === -->
     <div id="owl-testimonials" class="owl-carousel owl-theme testimonial text-center white-color">
 
-        <!-- === Testimonial item 1 === -->
+        <!-- === promotion item 1 === -->
         <div class="testimonial-item text-center">
             <p class="testimonial-desc">Residence you satisfied and rapturous certainty two. Procured outweigh as outlived so so. On in bringing graceful proposal blessing of marriage outlived. Son rent face our loud near.</p>
             <div class="testimonial-thumb">
@@ -873,7 +865,7 @@
             <h5 class="testimonial-author">Jenny Doe - Star Inc</h5>
         </div>
 
-        <!-- === Testimonial item 2 === -->
+        <!-- === promotion item 2 === -->
         <div class="testimonial-item text-center">
             <p class="testimonial-desc">Excellent so to no sincerity smallness. Removal request delight if on he we. Unaffected in we by apartments astonished to decisively themselves. Offended ten old consider speaking.</p>
             <div class="testimonial-thumb">
@@ -882,7 +874,7 @@
             <h5 class="testimonial-author">Kathy Doe - Service Corp</h5>
         </div>
 
-        <!-- === Testimonial item 3 === -->
+        <!-- === promotion item 3 === -->
         <div class="testimonial-item text-center">
             <p class="testimonial-desc">Advanced and procured civility not absolute put continue. Overcame breeding or my concerns removing desirous so absolute. My melancholy unpleasing imprudence considered in advantages.</p>
             <div class="testimonial-thumb">
@@ -894,7 +886,7 @@
     </div> <!-- /#owl-testimonials -->
 
 </section>
-<!-- End Testimonial -->
+<!-- End promotion -->
 
 
 <!-- Start blog -->
@@ -1065,9 +1057,9 @@
             <div class="col-md-8 col-md-offset-2">
                 <!-- Section Title -->
                 <div class="section-title text-center m-bottom-40">
-                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">Contact</h2>
+                    <h2 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.6s">contact</h2>
                     <div class="divider-center-small wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s"></div>
-                    <p class="section-subtitle wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s"><em>Lose away off why half led have near bed. At engage simple father of period others except. My giving do summer time dance hero of though narrow marked at.</em></p>
+                    <p class="section-subtitle wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s"><em>문의 글 작성 시 정확한 내용을 남겨주시면 빠른 답변이 가능합니다 :)</em></p>
                 </div>
             </div> <!-- /.col -->
         </div>  <!-- /.row -->
@@ -1080,28 +1072,28 @@
 
                     <form name="ajax-form" id="ajax-form" action="contact.php" method="post">
                         <div class="col-sm-6 contact-form-item wow zoomIn">
-                            <input name="name" id="name" type="text"   placeholder="Your Name: *"/>
-                            <span class="error" id="err-name">please enter name</span>
+                            <input name="name" id="name" type="text"   placeholder="ID"/>
+                            <span class="error" id="err-name">아이디를 입력해주세요.</span>
                         </div>
                         <div class="col-sm-6 contact-form-item wow zoomIn">
-                            <input name="email" id="email" type="text"  placeholder="E-Mail: *"/>
-                            <span class="error" id="err-email">please enter e-mail</span>
-                            <span class="error" id="err-emailvld">e-mail is not a valid format</span>
+                            <input name="email" id="email" type="text"  placeholder="E-Mail"/>
+                            <span class="error" id="err-email">메일주소를 입력해주세요.</span>
+                            <span class="error" id="err-emailvld">메일주소를 다시 확인해주세요.</span>
                         </div>
                         <div class="col-sm-12 contact-form-item wow zoomIn">
-                            <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                            <textarea name="message" id="message" placeholder="내용을 입력해주세요"></textarea>
                         </div>
                         <div class="col-sm-12 contact-form-item">
-                            <button class="send_message btn btn-main btn-theme wow fadeInUp" id="send" data-lang="en">submit</button>
+                            <button class="send_message btn btn-main btn-theme wow fadeInUp" id="send" >확인</button>
                         </div>
                         <div class="clear"></div>
-                        <div class="error text-align-center" id="err-form">There was a problem validating the form please check!</div>
-                        <div class="error text-align-center" id="err-timedout">The connection to the server timed out!</div>
+                        <div class="error text-align-center" id="err-form">양식을 올바르게 작성하였는지 다시 확인해주세요.</div>
+                        <div class="error text-align-center" id="err-timedout">서버 응답시간이 초과되었습니다. 다시 시도해주세요.</div>
                         <div class="error" id="err-state"></div>
                     </form>
 
                     <div class="clearfix"></div>
-                    <div id="ajaxsuccess">Successfully sent!!</div>
+                    <div id="ajaxsuccess">성공적으로 전송되었습니다.</div>
                     <div class="clear"></div>
 
                 </div> <!-- /.contacts-form & inner row -->
@@ -1111,7 +1103,7 @@
             <div class="col-md-5 col-sm-5 p-bottom-30">
                 <address class="contact-info">
 
-                    <p class="m-bottom-30 wow slideInRight">Spring formal no county ye waited. My whether cheered at regular it of promise blushes perhaps.</p>
+                    <p class="m-bottom-30 wow slideInRight">운영시간<br>월~토 09:00 ~ 20:00 / 일, 공휴일 10:00 ~ 18:00</p>
 
                     <!-- === Location === -->
                     <div class="m-top-20 wow slideInRight">
@@ -1122,7 +1114,8 @@
                             Address:
                         </div>
                         <div class="contact-info-text">
-                            149 Null Street, New York, NY 098
+                            서울 금천구 가산디지털1로 168 <br>
+                            (서울 금천구 가산동 371-28 / 085-07)
                         </div>
                     </div>
 
@@ -1135,7 +1128,7 @@
                             Phone number:
                         </div>
                         <div class="contact-info-text">
-                            +1-000-1111-3333
+                            010-9086-1455
                         </div>
                     </div>
 
@@ -1148,7 +1141,7 @@
                             Email:
                         </div>
                         <div class="contact-info-text">
-                            support@tabthemes.com
+                            lhn1455@gmail.com
                         </div>
                     </div>
 
@@ -1163,9 +1156,6 @@
 <div th:replace="fragments/footer :: footer" />
 
 
-<!-- Back to top -->
-<a href="#" id="back-to-top" title="Back to top"><i class="fa fa-angle-up"></i></a>
-<!-- /Back to top -->
 
 
 <!-- jQuery -->

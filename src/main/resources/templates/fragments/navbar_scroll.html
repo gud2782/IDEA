@@ -4,7 +4,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5 ">
-<div class="header" th:fragment="navbar">
+<div class="header" th:fragment="navbar_scroll">
   <header class="nav-solid" id="home">
 
     <nav class="navbar navbar-fixed-top">
@@ -35,12 +35,12 @@
 
                 <ul class="nav navbar-nav navbar-right">
                   <li><a data-scroll href="#home">Home</a></li>
-                  <li><a data-scroll href="#service">About</a></li>
-                  <li><a data-scroll href="#portfolio">Portfolio</a>
-                  <li><a data-scroll href="#team">Team</a></li>
-                  <li><a data-scroll href="#testimonials">Testimonials</a></li>
-                  <li><a data-scroll href="#blog">blog</a></li>
-                  <li><a data-scroll href="#contact">Contact</a></li>
+                  <li><a data-scroll href="#about">About</a></li>
+                  <li><a data-scroll href="#news_camp">소식&캠페인</a>
+                  <li><a data-scroll href="#service">서비스</a></li>
+                  <li><a data-scroll href="#promotion">홍보관</a></li>
+                  <li><a data-scroll href="#blog">커뮤니티</a></li>
+                  <li><a data-scroll href="#contact">contact</a></li>
                   <li><a sec:authorize="isAnonymous()" th:href="@{/user/register}">회원가입</a></li>
                   <li><a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a></li>
                   <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a></li>

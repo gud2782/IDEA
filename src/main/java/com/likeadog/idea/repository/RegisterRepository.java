@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-import static com.likeadog.idea.enumCollection.DeleteStatus.NO;
 
 @Repository
 @RequiredArgsConstructor

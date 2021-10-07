@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header" />
 <!--navbar-->
-<div th:replace="fragments/navbar :: navbar"/>
+<div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 <body>
 <div class="container">
@@ -67,13 +67,4 @@
 <div th:replace="fragments/footer :: footer" />
 <!--footer-end -->
 
-<script>
-    function cancel(id) {
-        var form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "/orders/" + id + "/cancel");
-        document.body.appendChild(form);
-        form.submit();
-    }
-</script>
 </html>

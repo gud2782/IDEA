@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5 ">
+<div class="header" th:fragment="navbar_content">
+  <header class="nav-solid" id="home">
+
+    <nav class="navbar navbar-fixed-top">
+      <div class="navigation">
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <!-- Logo -->
+              <div class="logo-container">
+                <div class="logo-wrap local-scroll">
+                  <a href="#home">
+                    <img class="logo" th:src="@{/img/logo2_170x60.png}" alt="logo" data-rjs="2">
+                  </a>
+                </div>
+              </div>
+            </div> <!-- end navbar-header -->
+
+            <div class="col-md-8 col-xs-12 nav-wrap">
+              <div class="collapse navbar-collapse" id="navbar-collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/home">Home</a></li>
+                  <li><a href="/home/animals">백신</a></li>
+                  <li><a href="/home/donation">헌혈</a></li>
+                  <li><a href="/home/transfusion">수혈</a></li>
+                  <li><a href="/home/blood">혈액</a></li>
+<!--                  <li><a href="#blog">blog</a></li> -->
+<!--                  <li><a href="#contact">Contact</a></li>-->
+                  <li><a sec:authorize="isAnonymous()" th:href="@{/user/register}">회원가입</a></li>
+                  <li><a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a></li>
+                  <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a></li>
+                  <li><a sec:authorize="isAuthenticated()" th:href="@{/user/info}">마이페이지</a></li>
+                </ul>
+
+              </div>
+            </div> <!-- /.col -->
+
+          </div> <!-- /.row -->
+        </div> <!--/.container -->
+      </div> <!-- /.navigation-overlay -->
+    </nav> <!-- /.navbar -->
+
+  </header>
+</div>
