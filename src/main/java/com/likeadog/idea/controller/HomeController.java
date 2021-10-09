@@ -19,7 +19,7 @@ public class HomeController {
 
         @GetMapping("/layout")
     public String layout() {
-        return "html/portfolio_2column";
+        return "loginForm";
     }
 
 

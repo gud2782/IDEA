@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
@@ -15,7 +14,7 @@
 <div class="container">
 
 
-    <form role="form" action="/transfusion/new" th:object="${transfusionForm}" method="post">
+    <form role="form" action="/donation/new" th:object="${donationForm}" method="post">
 
 
         <div class="form-group">
@@ -37,8 +36,8 @@
 
 
         <div class="form-group">
-            <label th:for="TWeight">수혈당시 몸무게</label>
-            <input type="text" th:field="*{TWeight}" class="form-control"
+            <label th:for="DWeight">헌혈당시 몸무게</label>
+            <input type="text" th:field="*{DWeight}" class="form-control"
                    placeholder="몸무게를 입력하세요".>
         </div>
         <div class="form-group">
@@ -47,13 +46,13 @@
                    readonly>
         </div>
         <div class="form-group">
-            <label th:for="TDate">수혈일시</label>
-            <input id="TDate" type="text" th:field="*{TDate}" class="form-control"
+            <label th:for="DDate">헌혈일시</label>
+            <input id="DDate" type="text" th:field="*{DDate}" class="form-control"
                    placeholder="헌혈일시를 입력하세요" autocomplete="off">
         </div>
         <div class="form-group">
-            <label th:for="THos">수혈병원</label>
-            <input type="text" th:field="*{THos}" class="form-control"
+            <label th:for="DHos">헌혈병원</label>
+            <input type="text" th:field="*{DHos}" class="form-control"
                    placeholder="헌혈병원을 입력하세요">
         </div>
         <div class="form-group">
@@ -62,8 +61,8 @@
                    placeholder="혈액형을 입력하세요">
         </div>
         <div class="form-group">
-            <label th:for="TPack">혈액양</label>
-            <input type="text" th:field="*{TPack}" class="form-control"
+            <label th:for="DPack">혈액양</label>
+            <input type="text" th:field="*{DPack}" class="form-control"
                    placeholder="혈액양을 입력하세요">
         </div>
         <div class="form-group">
@@ -115,6 +114,8 @@
 
     }
 
+
+
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -144,13 +145,11 @@
         };
         $.datepicker.setDefaults($.datepicker.regional['ko']);
 
-        $('#TDate').datepicker();
-        $('#TDate').datepicker("option", "maxDate", $("#TDate").val());
+        $('#DDate').datepicker();
+        $('#DDate').datepicker("option", "maxDate", $("#DDate").val());
 
 
     });
 </script>
-
-
 
 </html>

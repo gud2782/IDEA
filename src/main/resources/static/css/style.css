@@ -1185,7 +1185,7 @@ blockquote {
 .service.service-type-2 .service-header .service-icon {
   background-color: transparent;
   margin-right: 25px;
-  color: #03619A;
+  color: #fff;
   border: 1px solid #03619A;
   width: 36px;
   height: 36px;
@@ -1357,7 +1357,9 @@ blockquote {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #03619A;
+  /*background-color: rgba(117, 190, 218, 0.7);*/
+  background: #03619A;
+  border: #03619A ;
   top: -100%;
   left: 0;
   -webkit-transition: all 300ms;
@@ -1377,13 +1379,13 @@ blockquote {
   font-size: 15px;
 }
 .team-item-icons a {
-  color: #fff;
+  color: #FAB319;
   margin: 0 10px;
 }
 .team-item-icons a i {
   width: 30px;
   height: 30px;
-  border: 1px solid #fff;
+  border: 1px solid #FAB319;
   font-size: 15px;
   line-height: 30px;
   -webkit-transition: all 0.3s ease-in-out;
@@ -1391,7 +1393,7 @@ blockquote {
   transition: all 0.3s ease-in-out;
 }
 .team-item-icons a i:hover {
-  background: #fff;
+  background: #FAB319;
   color: #03619A;
 }
 .team-item-info {
@@ -2159,66 +2161,7 @@ blockquote {
   color: #fff;
   cursor: default;
 }
-/*--------------------------------------------------
-    23. Price
----------------------------------------------------*/
-.price-item {
-  background-color: #f8f8f8;
-  padding-bottom: 30px;
-  -webkit-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-.price-item:hover {
-  -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-.price-item-header {
-  background-color: #2a2a2a;
-  padding: 5px 20px;
-}
-.price-item-header h4 {
-  color: #fff;
-  font-weight: 600;
-}
-.price-item-header-alt {
-  background-color: #03619A;
-}
-.price-item-price {
-  padding: 30px 20px 20px;
-}
-.price-item-price .big {
-  font-size: 56px;
-  line-height: 1em;
-  font-family: 'Montserrat', sans-serif;
-  margin-bottom: 0;
-  color: #03619A;
-}
-.price-item-price .big .currency {
-  font-size: 40%;
-  line-height: 1.7em;
-  vertical-align: top;
-}
-.price-item-price .small {
-  color: #000;
-  font-weight: 600;
-}
-.price-item-features {
-  padding: 20px 20px 0;
-  text-transform: uppercase;
-}
-.price-item-features li {
-  border-bottom: 1px dotted #dcdcdc;
-  padding: 12px 0;
-}
-@media screen and (max-width: 768px) {
-  .price-item:hover {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-}
+
 /*--------------------------------------------------
     *. Owl Carousel
 ---------------------------------------------------*/
@@ -2324,5 +2267,6 @@ blockquote {
   height: 100vh;
   object-fit: cover;
 }
+
 
 

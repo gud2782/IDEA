@@ -23,7 +23,7 @@
               <!-- Logo -->
               <div class="logo-container">
                 <div class="logo-wrap local-scroll">
-                  <a href="#home">
+                  <a href="/home">
                     <img class="logo" th:src="@{/img/log_100x50.png}" alt="logo" data-rjs="2">
                   </a>
                 </div>
@@ -53,9 +53,11 @@
         </div> <!--/.container -->
         <div class="box3">
           <ul class="menu1">
-            <li><a href="#">백 신</a></li>
-            <li><a href="#">헌 혈</a></li>
-            <li><a href="#">수 혈</a></li>
+            <li><a sec:authorize="isAuthenticated()" th:href="@{/ani/new}">등 록</a></li>
+            <li><a th:href="@{/vc/new}">백 신</a></li>
+            <li><a th:href="@{/donation/new}">헌 혈</a></li>
+            <li><a th:href="@{/transfusion/new}">수 혈</a></li>
+            <li><a sec:authorize="isAuthenticated()" th:href="@{/qr/main}">혈 액</a></li>
           </ul>
         </div>
 

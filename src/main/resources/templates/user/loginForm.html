@@ -1,45 +1,108 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header_content :: header_content" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
+    <link rel="stylesheet" href="/css/style_form.css">
+
+
 
 
 <body>
-<!--안녕하세요 아이디어 입니다 로그인을 해주세요:)-->
-<!--<hr>-->
-
-<div class="container">
-    <!--    <div th:replace="fragments/bodyHeader :: bodyHeader"/>-->
-    <h1>로그인</h1>
-    <form th:action="@{/user/loginProcess}" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <div class="form-group">
-            <label th:for="userId">아이디</label>
-            <input type="text" name="userId" class="form-control" placeholder="아이디를 입력해주세요">
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">
+            IDEA
         </div>
-        <div class="form-group">
-            <label th:for="pw">비밀번호</label>
-            <input type="password" class="form-control" name="pw" placeholder="비밀번호">
+        <div class="title signup">
+            LOGIN
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-    </form>
-    <br/>
+    </div>
+    <div class="form-container">
+        <div class="slide-controls2">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">일반</label>
+            <label for="signup" class="slide signup">병원</label>
+            <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+            <form th:action="@{/user/loginProcess}" method="post" class="login">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <div class="field">
+                    <input type="text" th:for="userId" class="form-control" name="userId" placeholder="아이디" required>
+                </div>
+                <div class="field">
+                    <input type="password" th:for="pw" class="form-control" name="pw"placeholder="비밀번호" required>
+                </div>
+                <div class="pass-link">
+                    <a href="#">비밀번호를 잊으셨나요?</a>
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="로그인">
+                </div>
+                <div class="signup-link">
+                    아직 회원이 아니신가요? <a href="/user/register">회원가입</a>
+                </div>
+                <div class="signup-link">
+                    둘러보기 <a href="/home">IDEA</a>
+                </div>
+            </form>
+            <form action="#" class="signup">
+                <div class="field">
+                    <input type="text" placeholder="아이디" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="비밀번호" required>
+                </div>
+                <div class="pass-link">
+                    <a href="#">비밀번호를 잊으셨나요?</a>
+                </div>
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="로그인">
+                </div>
+                <div class="signup-link">
+                    아직 회원이 아니신가요? <a href="/user/register">회원가입</a>
+                </div>
+                <div class="signup-link">
+                    둘러보기 <a href="/home">IDEA</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-<div>
-<!--<p>처음이신가요? 회원가입은 여기서 해주세요!</p>-->
-<input type="button" onclick="location.href='/user/register';" value="회원가입하기">
-</div>
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const loginBtn = document.querySelector("label.login");
+    const signupBtn = document.querySelector("label.signup");
+    // const signupLink = document.querySelector("form .signup-link a");
+    signupBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+    });
+    loginBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+    });
+    signupLink.onclick = (()=>{
+        signupBtn.click();
+        return false;
+    });
+</script>
 </body>
-
-<!--footer -->
-<div th:replace="fragments/footer_content :: footer_content" />
-<!--footer-end -->
 </html>
+
 
 <!--<ul>-->
 <!--    <li onclick="kakaoLogin();">-->
@@ -123,4 +186,3 @@
 
 
 <!--</html>-->
-

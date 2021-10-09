@@ -1,12 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
-<style>
-    .fieldError {
-        border-color: #bd2130;
-    }
-</style>
-
+<head th:replace="fragments/header_content :: header_content" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -16,92 +10,96 @@
 <!--navbar end-->
 
 
+
+<link rel="stylesheet" href="/css/style_form.css">
+
+
+
+
 <body>
-<div class="container">
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">
+            IDEA
+        </div>
+        <div class="title signup">
+            LOGIN
+        </div>
+    </div>
+    <div class="form-container">
+<!--        <div class="slide-controls2">-->
+<!--            <input type="radio" name="slide" id="login" checked>-->
+<!--            <input type="radio" name="slide" id="signup">-->
+<!--            <label for="login" class="slide login">일반</label>-->
+<!--            <label for="signup" class="slide signup">병원</label>-->
+<!--            <div class="slider-tab"></div>-->
+<!--        </div>-->
+        <div class="form-inner">
+            <form th:action="@{/ani/new}" th:object="${registerForm}" method="post"  autocomplete="off">
+                <!--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+                <div class="field">
+                    <input type="text"th:for="aniId" th:field="*{aniId}" class="form-control"placeholder="이름"
+                           th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'form-control'">
+                    <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
+                </div>
+                <div class="field">
+                    <input type="text"th:for="aniName" th:field="*{aniName}" class="form-control" placeholder="동물이름" required>
+                </div>
+                <div class="field">
+                    <input type="text"th:for="weight" th:field="*{weight}" class="form-control" placeholder="몸무게">
+                </div>
+                <div class="field">
+                    <input type="text" th:for="kind" th:field="*{kind}" class="form-control" placeholder="견종" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{color}" class="form-control" placeholder="모색" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{gender}" class="form-control" placeholder="성별" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{birth}" class="form-control" placeholder="출생년도" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{neutralization}" class="form-control" placeholder="중성화" >
+                </div>
 
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="submit">
+                </div>
+                <!--                <div class="signup-link">-->
+                <!--                    동물등록번호를 잊으셨나요? <a href="/user/login">동물등록번호 조회</a>-->
+                <!--                </div>-->
 
-    <form role="form" action="/ani/new" th:object="${registerForm}" method="post">
-        <div class="form-group">
-            <label th:for="aniId">동물등록번호</label>
-            <input type="text" th:field="*{aniId}" class="form-control" placeholder="이름을 입력하세요"
-                   th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'form-control'">
-            <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label th:for="aniName">동물이름</label>
-            <input type="text" th:field="*{aniName}" class="form-control"
-                   placeholder="동물이름을 입력하세요".>
-        </div>
-        <div class="form-group">
-            <label th:for="weight">몸무게</label>
-            <input type="text" th:field="*{weight}" class="form-control"
-                   placeholder="몸무게를 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="kind">견종</label>
-            <input type="text" th:field="*{kind}" class="form-control"
-                   placeholder="견종을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="color">모색</label>
-            <input type="text" th:field="*{color}" class="form-control"
-                   placeholder="모색 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="gender">성별</label>
-            <input type="text" th:field="*{gender}" class="form-control"
-                   placeholder="성별 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="birth">출생년도</label>
-            <input type="text" th:field="*{birth}" class="form-control"
-                   placeholder="출생년도를 입력하세요" autocomplete="off">
-        </div>
-        <div class="form-group">
-            <label th:for="neutralization">중성화 여부</label>
-            <input type="text" th:field="*{neutralization}" class="form-control"
-                   placeholder="중성화여부를 입력하세요">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
+    </div>
 </div>
 </body>
 
 <!--footer -->
 <div th:replace="fragments/footer :: footer" />
 <!--footer-end -->
-
-
-
-
-<!-- jQuery -->
-<script src="js/jquery.min.js"></script>
-
-<!-- Bootstrap -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Components Plugin -->
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/smooth-scroll.js"></script>
-<script src="js/jquery.appear.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/imagesloaded.pkgd.min.js"></script>
-<script src="js/isotope.pkgd.min.js"></script>
-<script src="js/jquery.mb.YTPlayer.js"></script>
-<script src="js/retina.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="inc/owlcarousel/js/owl.carousel.min.js"></script>
-
-<!-- Custom Plugin -->
-<script src="js/custom.js"></script>
-
-
-
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const loginBtn = document.querySelector("label.login");
+    const signupBtn = document.querySelector("label.signup");
+    // const signupLink = document.querySelector("form .signup-link a");
+    signupBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+    });
+    loginBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+    });
+    signupLink.onclick = (()=>{
+        signupBtn.click();
+        return false;
+    });
+</script>
 <!-- calendar -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -137,4 +135,7 @@
 
     });
 </script>
+
 </html>
+
+

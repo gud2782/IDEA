@@ -47,7 +47,7 @@ public class UserController {
     //로그인 성공화면 페이지
     @RequestMapping("/loginSuccess")
     public String loginMain() throws Exception{
-        return "user/loginSuccess";
+        return "redirect:/home";
     }
 
 
@@ -66,7 +66,7 @@ public class UserController {
         if(authentication != null){
             new SecurityContextLogoutHandler().logout(request,response,authentication);
         }
-        return "user/logout";
+        return "redirect:/home";
     }
 
 
