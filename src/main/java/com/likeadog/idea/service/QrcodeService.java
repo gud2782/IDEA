@@ -27,7 +27,7 @@ import java.util.List;
 public class QrcodeService {
 
     private final QrcodeRepository qrcodeRepository;
-    private static String address = "172.30.1.45";
+    private static String address = "172.30.1.56";
 
     public void registerQrcode(Long registerIdx) {
         try {

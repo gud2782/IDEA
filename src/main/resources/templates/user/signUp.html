@@ -1,18 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>IDEA</title>
-    <link rel="stylesheet" href="/css/style_login_signup.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <link rel="shortcut icon" th:href="@{/img/favicon-32x32.png}">
-    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/img/apple-icon-57x57.png}">
-    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/img/apple-icon-72x72.png}">
-    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/img/apple-icon-114x114.png}">
+<head th:replace="fragments/header_content :: header_content" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-</head>
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
 <body>
 <div class="wrapper">
     <div class="title-text">
@@ -57,9 +52,7 @@
                 <div class="signup-link">
                     이미 회원이신가요? <a href="/user/login">로그인</a>
                 </div>
-                <div class="signup-link">
-                    둘러보기 <a href="/home">IDEA</a>
-                </div>
+
             </form>
             <form th:action="@{/user/register}" th:object="${userForm}" method="post" class="" autocomplete="off">
                 <!--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
@@ -86,9 +79,7 @@
                 <div class="signup-link">
                     이미 회원이신가요? <a href="/user/login">로그인</a>
                 </div>
-                <div class="signup-link">
-                    둘러보기 <a href="/home">IDEA</a>
-                </div>
+
             </form>
 
         </div>
@@ -114,6 +105,10 @@
     // });
 </script>
 </body>
+
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
 </html>
 
 

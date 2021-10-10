@@ -1,151 +1,300 @@
+<!DOCTYPE html>
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header_content :: header_content" />
+
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="/css/opensans-font.css">
+	<link rel="stylesheet" type="text/css" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="/css/style_blood.css"/>
+	<script type="text/javascript" src="/js/jsQR.js"></script>
+</head>
+
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
-
 <body>
-<div class="container">
+	<div class="page-content">
+		<div class="form-v1-content">
+			<div class="wizard-form">
+		        <form class="form-register" action="#" method="post">
+		        	<div id="form-total">
+						<!-- SECTION 1 -->
+						<h2>
+							<p class="step-icon"><span>01</span></p>
+							<span class="step-text">조회</span>
+						</h2>
+						<section>
+							<div class="inner">
+								<div class="wizard-header">
+									<h3 class="heading">동물등록번호 조회</h3>
+									<p>반려견 등록 당시 입력한 전화번호를 입력해주세요.</p>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-1">
+										<input type="text" name="find_bank" id="find_bank" placeholder="'-'없이 입력해주세요." class="form-control">
+									</div>
+									<div class="form-holder form-holder-4">
+										<input type="button" name="find_bank" id="lookup" value="조회" class="form-control" >
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-1">
+										<input type="text" name="find_bank" id="aniId" placeholder="동물등록번호" class="form-control">
+									</div>
+									<div class="form-holder form-holder-4">
+										<input type="button" name="find_bank" id="qrcode" value="QR코드" class="form-control" >
+									</div>
+								</div>
+								<div class="qr">
+									<div class="modal">
+										<div class="modal_content">
+											<div id="frame">
+												<div id="loadingMessage" hidden>
+													🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+												</div>
+												<canvas id="canvas"></canvas>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
 
 
 
+						<!-- SECTION 2 -->
+			            <h2>
+			            	<p class="step-icon"><span>02</span></p>
+			            	<span class="step-text">등록</span>
+			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<div class="wizard-header">
+									<h3 class="heading">헌혈견 정보 등록</h3>
+									<p>Please enter your infomation and proceed to the next step so we can build your accounts.  </p>
+								</div>
+								<div class="form-row">
+									<div class="form-holder">
+										<fieldset>
+											<legend>반려견 이름</legend>
+											<input type="text" class="form-control" id="first-name" name="first-name" placeholder="연이" required>
+										</fieldset>
+									</div>
+									<div class="form-holder">
+										<fieldset>
+											<legend>동물등록번호</legend>
+											<input type="text" class="form-control" id="did" name="last-name" placeholder="410160020250774" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder">
+										<fieldset>
+											<legend>몸무게</legend>
+											<input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="3.0Kg" required>
+										</fieldset>
+									</div>
+									<div class="form-holder">
+										<fieldset>
+											<legend>견종</legend>
+											<input type="text" class="form-control" id="phone" name="phone" placeholder="토이푸들" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>헌혈 기관</legend>
+											<input type="text" class="form-control" id="phone" name="phone" placeholder="건국대학교 수의병원" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row form-row-date">
+									<div class="form-holder form-holder-2">
+<!--										<label class="special-label">혈액형</label>-->
+										<select name="month" id="month">
+											<option value="MM" disabled selected>혈액형</option>
+											<option value="16">DEA 1.1</option>
+											<option value="17">DEA 1.2</option>
+											<option value="18">DEA 4</option>
+											<option value="19">DEA 7</option>
+										</select>
+										<div class="form-row">
+											<div class="form-holder2 form-holder-2">
+												<input type="text" class="form-control input-border" id="ssn" name="ssn" placeholder="헌혈날짜" required>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+			            </section>
+
+			            <!-- SECTION 3 -->
+			            <h2>
+			            	<p class="step-icon"><span>03</span></p>
+			            	<span class="step-text">완료</span>
+			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<div class="wizard-header">
+									<h3 class="heading">THANK YOU!</h3>
+									<p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+								</div>
+								<div class="form-row">
+			                		<div class="form-holder form-holder-2">
+			                			<input type="radio" class="radio" name="radio1" id="plan-1" value="plan-1">
+			                			<label class="plan-icon plan-1-label" for="plan-1">
+		                					<img src="/img/form-v1-icon-2.png" alt="pay-1">
+			                			</label>
+			                			<div class="plan-total">
+		                					<span class="plan-title">접종 정보 등록</span>
+		                					<p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
+		                				</div>
+			                			<input type="radio" class="radio" name="radio1" id="plan-2" value="plan-2">
+			                			<label class="plan-icon plan-2-label" for="plan-2">
+			                					<img src="/img/form-v1-icon-2.png" alt="pay-1">
+			                			</label>
+			                			<div class="plan-total">
+		                					<span class="plan-title">수혈견 정보 등록</span>
+		                					<p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
+		                				</div>
+										<input type="radio" class="radio" name="radio1" id="plan-3" value="plan-3" checked>
+										<label class="plan-icon plan-3-label" for="plan-3">
+		                					<img src="/img/form-v1-icon-3.png" alt="pay-2">
+										</label>
+										<div class="plan-total">
+		                					<span class="plan-title">마이페이지</span>
+		                					<p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
+		                				</div>
+			                		</div>
+			                	</div>
+							</div>
+			            </section>
+		        	</div>
+		        </form>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/jquery.steps.js"></script>
+	<script src="/js/main.js"></script>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#qrcode").click(function() {
+				$(".modal").fadeIn();
+
+				var video = document.createElement("video");
+				var canvasElement = document.getElementById("canvas");
+				var canvas = canvasElement.getContext("2d");
+				var loadingMessage = document.getElementById("loadingMessage");
+				var aniId = document.getElementById("aniId");
+				function drawLine(begin, end, color) {
+					canvas.beginPath();
+					canvas.moveTo(begin.x, begin.y);
+					canvas.lineTo(end.x, end.y);
+					canvas.lineWidth = 4;
+					canvas.strokeStyle = color;
+					canvas.stroke();
+				}
+				// 카메라 사용시
+				navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+					video.srcObject = stream;
+					video.setAttribute("playsinline", true);      // iOS 사용시 전체 화면을 사용하지 않음을 전달
+					video.play();
+					requestAnimationFrame(tick);
+				});
+				async function tick() {
+					loadingMessage.innerText = "⌛ 스캔 기능을 활성화 중입니다."
+					if(video.readyState === video.HAVE_ENOUGH_DATA) {
+						loadingMessage.hidden = true;
+						canvasElement.hidden = false;
+						// outputContainer.hidden = false;
+						// 읽어들이는 비디오 화면의 크기
+						canvasElement.height = video.videoHeight;
+						canvasElement.width = video.videoWidth;
+						canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+						var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+						var code = jsQR(imageData.data, imageData.width, imageData.height, {
+							inversionAttempts : "dontInvert",
+						});
+						// QR코드 인식에 성공한 경우
+						if(code) {
+							// 인식한 QR코드의 영역을 감싸는 사용자에게 보여지는 테두리 생성
+							drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FFCE49");
+							drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FFCE49");
+							drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FFCE49");
+							drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FFCE49");
+
+
+							// QR코드 메시지 출력
+							aniId.innerHTML = code.data;
+
+							const aniId2 = code.data;
+							$('#aniId').val(aniId2);
+							console.log(`aniId:${aniId}`);
+							//카메라 사라지기
+							$(".modal").fadeOut();
 
 
 
+							//세훈:한나 = did:aniId
+							// $.ajax({
+							// 	url:`http://192.168.43.99:3000/api/pet/get/all/petInfos/${did}`,
+							// 	type:"GET",
+							// 	contentType: "application/json",
+							// 	success: function(result) {
+							// 		if (result) {
+							// 			console.log(result.peterpet);
+							// 			// location.href = "/home/blood";
+							// 		}
+							// 		else {
+							// 			alert("잠시 후에 시도해주세요.");
+							// 		}
+							// 	},
+							// 	error: function() {
+							// 		alert("에러 발생");
+							// 	} })
+							// return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
+							return;
+						}
+						// QR코드 인식에 실패한 경우
+						else {
+							// outputMessage.hidden = false;
+							// outputData.parentElement.hidden = true;
+						}
+					}
+					requestAnimationFrame(tick);
 
-</div> <!-- /container -->
-</body>
+
+				}
 
 
+			});
+			$(".modal_content").click(function(){
+				$(".modal").fadeOut();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		// document.addEventListener("DOMContentLoaded",
+	</script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 <!--footer -->
-<div th:replace="fragments/footer :: footer" />
+<div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
-
-<!-- jQuery -->
-<script src="js/jquery.min.js"></script>
-
-<!-- Bootstrap -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Components Plugin -->
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/smooth-scroll.js"></script>
-<script src="js/jquery.appear.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/imagesloaded.pkgd.min.js"></script>
-<script src="js/isotope.pkgd.min.js"></script>
-<script src="js/jquery.mb.YTPlayer.js"></script>
-<script src="js/retina.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="inc/owlcarousel/js/owl.carousel.min.js"></script>
-<script src="inc/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script src="inc/revolution/js/jquery.themepunch.revolution.min.js"></script>
-
-<!-- Contact Form -->
-<script src="js/contact.js"></script>
-
-<!-- Custom Plugin -->
-<script src="js/custom.js"></script>
-
-<!-- RS Plugin Extensions -->
-<script src="inc/revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-
-
-<script>
-    var tpj = jQuery;
-
-    var revapi280;
-    tpj(document).ready(function() {
-        if (tpj("#rev_slider_nagency").revolution == undefined) {
-            revslider_showDoubleJqueryError("#rev_slider_nagency");
-        } else {
-            revapi280 = tpj("#rev_slider_nagency").show().revolution({
-                sliderType: "standard",
-                sliderLayout: "fullscreen",
-                dottedOverlay: "none",
-                delay: 90000,
-                navigation: {
-                    keyboardNavigation:"off",
-                    keyboard_direction: "horizontal",
-                    mouseScrollNavigation:"off",
-                    onHoverStop:"off",
-                    touch:{
-                        touchenabled:"on",
-                        swipe_threshold: 75,
-                        swipe_min_touches: 1,
-                        swipe_direction: "horizontal",
-                        drag_block_vertical: false
-                    }
-                    ,
-                    arrows: {
-                        style: "uranus",
-                        enable: true,
-                        hide_onmobile: true,
-                        hide_under: 496,
-                        hide_onleave: true,
-                        hide_delay: 200,
-                        hide_delay_mobile: 1200,
-                        tmp: '',
-                        left: {
-                            h_align: "left",
-                            v_align: "center",
-                            h_offset: 20,
-                            v_offset: 0
-                        },
-                        right: {
-                            h_align: "right",
-                            v_align: "center",
-                            h_offset: 20,
-                            v_offset: 0
-                        }
-                    }
-                },
-                responsiveLevels: [1200, 991, 767, 480],
-                visibilityLevels: [1200, 991, 767, 480],
-                gridwidth: [1200, 991, 767, 480],
-                gridheight: [868, 768, 960, 720],
-                lazyType: "none",
-                parallax: {
-                    type:"mouse+scroll",
-                    origo:"slidercenter",
-                    speed:2000,
-                    levels:[2,3,4,5,6,7,12,16,10,50],
-                    disable_onmobile:"on"
-                },
-                shadow: 0,
-                spinner: "spinner2",
-                autoHeight: "off",
-                fullScreenAutoWidth: "off",
-                fullScreenAlignForce: "off",
-                fullScreenOffsetContainer: "",
-                fullScreenOffset: "0",
-                disableProgressBar: "on",
-                hideThumbsOnMobile: "off",
-                hideSliderAtLimit: 0,
-                hideCaptionAtLimit: 0,
-                hideAllCaptionAtLilmit: 0,
-                debugMode: false,
-                fallbacks: {
-                    simplifyAll: "off",
-                    disableFocusListener: false,
-                }
-            });
-        }
-    }); /*ready*/
-</script>
-
-</body>
-</html>
-
 </html>

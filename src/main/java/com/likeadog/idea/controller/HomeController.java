@@ -17,9 +17,9 @@ public class HomeController {
 //        return "fragments/layout";
 //    } portfolio_2column_fullwdth
 
-        @GetMapping("/layout")
+        @GetMapping("/qr/read")
     public String layout() {
-        return "loginForm";
+        return "qr/read";
     }
 
 
