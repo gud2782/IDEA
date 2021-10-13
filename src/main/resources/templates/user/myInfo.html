@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="fragments/header_content :: header_content" />
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
@@ -7,9 +8,105 @@
 
 <body>
 <h1>마이페이지입니다</h1>
+
+<div>
+    <ul>
+        <button onclick="sendToGuide();">
+            <a href="javascript:void(0)">
+                <span>카카오 보내기</span>
+            </a>
+        </button>
+        <li><a th:href="@{/user/delete}">회원탈퇴</a></li>
+
+    </ul>
+</div>
 </body>
 
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 </html>
+
+
+
+
+
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+    Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
+    function sendToGuide() {
+        Kakao.Auth.login({
+            //scope: 'PROFILE,TALK_MESSAGE',
+            success: function() {
+                Kakao.API.request({
+                    url: '/v2/api/talk/memo/default/send',
+                    data: {
+                        template_object: {
+                            object_type: 'feed',
+                            content: {
+                                title: '카카오톡 링크 4.0',
+                                description: '디폴트 템플릿 FEED',
+                                image_url:
+                                    '‪C:\\qrtest\\animals\\47qrcode.png',
+                                link: {
+                                    web_url: 'https://developers.kakao.com',
+                                    mobile_web_url: 'https://developers.kakao.com',
+                                },
+                            },
+                            item_content: {
+                                profile_text: 'Kakao',
+                                profile_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                                title_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                                title_image_text: 'Cheese cake',
+                                title_image_category: 'Cake',
+                                items: [
+                                    {
+                                        item: 'Cake1',
+                                        item_op: '1000원',
+                                    },
+                                    {
+                                        item: 'Cake2',
+                                        item_op: '2000원',
+                                    },
+                                    {
+                                        item: 'Cake3',
+                                        item_op: '3000원',
+                                    },
+                                    {
+                                        item: 'Cake4',
+                                        item_op: '4000원',
+                                    },
+                                    {
+                                        item: 'Cake5',
+                                        item_op: '5000원',
+                                    },
+                                ],
+                                sum: 'Total',
+                                sum_op: '15000원',
+                            },
+                            social: {
+                                like_count: 100,
+                                comment_count: 200,
+                            },
+                            button_title: '바로 확인',
+                        },
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    fail: function(error) {
+                        console.log(error);
+                    },
+                })
+            },
+            fail: function(err) {
+                alert('failed to login: ' + JSON.stringify(err))
+            },
+        })
+    }
+
+</script>
+

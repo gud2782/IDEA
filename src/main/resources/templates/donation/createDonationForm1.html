@@ -159,6 +159,8 @@
 									</div>
 									<div class="form-holder form-holder-4">
 										<input type="submit" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
+										<input type="submit" name="find_bank"  value="이미지" class="form-control" onclick="imgfileUpload()">
+										<input type="submit" id="upimg" value="/img/logo2_200x60.png" onclick="readTextFile('file:///C:/Users/lhn14/Desktop/idea_img/logo2_200x60.png')" alt="pay-1">
 									</div>
 								</div>
 
@@ -216,8 +218,9 @@
 	<script src="/js/jquery.steps.js"></script>
 	<script src="/js/main.js"></script>
 
-
+<!--메타데이터 업로드-->
 	<script type="text/javascript" th:inline="javascript">
+
 		function toAjax() {
 
 			// console.log("1");
@@ -264,33 +267,19 @@
 				}
 			}
 
-			let aJson = new Object();
-			aJson.metadata = {
-				"name": "형우테스트",
-				"description": "description example for kip17 token",
-				"image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
-				// "aniName": aniName,
-				"aniId" : aniId,
-				"kind" : kind,
-				"DWeight" : DWeight,
-				"DDate" : DDate,
-				"DHos" : DHos,
-				"type" : type,
-				"DPack" : DPack
-			}
-			console.log("aJson.metadata >>> "+aJson.metadata.aniId)
-			console.log("aJson.metadata >>> "+aJson.metadata.kind)
-			console.log("aJson.metadata >>> "+aJson.metadata.DWeight)
-			console.log("aJson.metadata >>> "+aJson.metadata.DDate)
-			console.log("aJson.metadata >>> "+aJson.metadata.DHos)
-			console.log("aJson.metadata >>> "+aJson.metadata.type)
-			console.log("aJson.metadata >>> "+aJson.metadata.DPack)
+			// console.log("aJson.metadata >>> "+aJson.metadata.aniId)
+			// console.log("aJson.metadata >>> "+aJson.metadata.kind)
+			// console.log("aJson.metadata >>> "+aJson.metadata.DWeight)
+			// console.log("aJson.metadata >>> "+aJson.metadata.DDate)
+			// console.log("aJson.metadata >>> "+aJson.metadata.DHos)
+			// console.log("aJson.metadata >>> "+aJson.metadata.type)
+			// console.log("aJson.metadata >>> "+aJson.metadata.DPack)
 
 			http.open('POST', url, true);
 
 
 
-//Send the proper header information along with the request
+			//Send the proper header information along with the request
 			http.setRequestHeader('Content-type', 'application/json');
 			http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
 			http.setRequestHeader('x-chain-id', '1001');
@@ -305,7 +294,71 @@
 			http.send(JSON.stringify(data));
 
 		};
+//이미지 파일 변환
+		function readTextFile(file)
+		{
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function ()
+			{
+				if(rawFile.readyState === 4)
+				{
+					if(rawFile.status === 200 || rawFile.status == 0)
+					{
+						var allText = rawFile.responseText;
+						alert(allText);
+					}
+				}
+			}
+			rawFile.send(null);
+		}
+
+		// readTextFile("file:///C:/Users/lhn14/Desktop/idea_img/logo2_200x60.png");
+
+	//	메타데이터 에셋 업로드
+
+		function imgfileUpload() {
+
+
+			let http = new XMLHttpRequest();
+			var uploadImg = new FormData();
+			uploadImg.append('img',document.getElementById('upimg').files[0]);
+			let url = 'https://metadata-api.klaytnapi.com/v1/metadata/asset';
+			let data= {
+				"file" : img
+			};
+			let file = img;
+
+
+			console.log("file >>> "+file)
+			// console.log("data.asset >>> "+aJson.metadata.file)
+
+
+			http.open('POST', url, true);
+
+
+
+			//Send the proper header information along with the request
+			http.setRequestHeader('Content-type', 'multipart/form-data');
+			http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+			http.setRequestHeader('x-chain-id', '1001');
+			http.onreadystatechange = function() {//Call a function when the state changes.
+				if(http.readyState == 4 && http.status == 200) {
+
+					alert(http.responseText);
+
+
+				}
+			}
+			// http.send(JSON.stringify(data));
+			http.send(file);
+
+		};
+
+
 	</script>
+
+
 	<script>
 		const loginText = document.querySelector(".title-text .login");
 		const loginForm = document.querySelector("form.login");

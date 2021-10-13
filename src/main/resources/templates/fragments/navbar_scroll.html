@@ -4,6 +4,10 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5 ">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <div class="header" th:fragment="navbar_scroll">
   <header class="nav-solid" id="home">
 
@@ -43,10 +47,11 @@
                   <li><a data-scroll href="#contact">contact</a></li>
                   <li><a sec:authorize="isAnonymous()" th:href="@{/user/register}">회원가입</a></li>
                   <li><a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a></li>
-                  <li onclick="kakaoLogout();"><a sec:authorize="isAuthenticated()" th:href="@{/logout}" >로그아웃</a></li>
+                  <!--<li><a sec:authorize="isAuthenticated()" onclick="kakaoLogout();" th:href="@{/logout}" >로그아웃</a></li>-->
+                  <li><a sec:authorize="isAuthenticated()"   onclick="kakaoLogout();return false;" th:href="@{/logout}" >로그아웃</a></li>
                   <li><a sec:authorize="hasRole('USER')" th:href="@{/user/info}">마이페이지</a></li>
                   <li><a sec:authorize="hasRole('HOS')" th:href="@{/user/admin}">관리페이지</a></li>
-                  <li><a sec:authorize="isAuthenticated()" th:href="@{/user/delete}">회원탈퇴</a></li>
+<!--                  <li><a sec:authorize="isAuthenticated()" th:href="@{/user/delete}">회원탈퇴</a></li>-->
                 </ul>
               </div>
             </div> <!-- /.col -->
@@ -98,19 +103,5 @@
       },
     })
   }
-  //카카오로그아웃
-  function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-          console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }
+
 </script>

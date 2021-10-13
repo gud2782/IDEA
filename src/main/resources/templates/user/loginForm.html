@@ -31,27 +31,34 @@
             <form action="/user/loginProcess" method="post" class="login">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-<!--                일반사용자-->
+                <!--                일반사용자-->
                 <div class="field">
                     <input type="text" id="userId" class="form-control" name="userId" placeholder="아이디" >
                 </div>
                 <div class="field">
                     <input type="password" for="pw" class="form-control" name="pw"placeholder="비밀번호" >
                 </div>
-                <div class="pass-link">
-                    <a href="#">비밀번호를 잊으셨나요?</a>
-                </div>
+
                 <div class="field btn">
                     <div class="btn-layer"></div>
                     <input type="submit" value="로그인">
                 </div>
+                <div class ="Kakao" >
+                    <button class="kakaobtn" type="button" onclick="kakaoLogin();" style="border:none; cursor:pointer;">
+                        <img class="kakaoimg" src="/img/kakaologin.png" style="width:auto;">
+                    </button>
+                </div>
+<!--                <div class="signup-link">-->
+<!--                    <a href="#">비밀번호를 잊으셨나요?</a>-->
+<!--                </div>-->
                 <div class="signup-link">
                     아직 회원이 아니신가요? <a href="/user/register">회원가입</a>
                 </div>
+
             </form>
 
 
-<!--              병원사용자-->
+            <!--              병원사용자-->
             <form action="/user/loginProcess" method="post" class="login">
                 <div class="field">
                     <input type="text" placeholder="아이디" required>
@@ -72,16 +79,18 @@
 
             </form>
         </div>
-  </div>
+    </div>
 </div>
 
 
 
 <!--코드 추가-->
+<!--
+
 <form action="/user/register_kakao" method="get">
     <div>
         <div>아이디</div>
-        <input  type="text" id="userId" name="userId" readonly>
+        <input  type="text" id="kakaoID" name="userId" readonly>
     </div>
     <div>
         <div>이 름</div>
@@ -91,29 +100,23 @@
         <input  type="submit" >
     </div>
 </form>
+-->
 
 
 <div>
     <ul>
-        <li onclick="sendToGuide();">
-            <a href="javascript:void(0)">
-                <span>카카오 보내기</span>
-            </a>
-        </li>
+<!--        <button onclick="sendToGuide();">-->
+<!--            <a href="javascript:void(0)">-->
+<!--                <span>카카오 보내기</span>-->
+<!--            </a>-->
+<!--        </button>-->
 
 
-        <li onclick="kakaoLogin();">
-            <a href="javascript:void(0)">
-                <span>카카오 로그인</span>
-            </a>
-        </li>
-        <li onclick="kakaoLogout();">
-            <a href="javascript:void(0)">
-                <span>카카오 로그아웃</span>
-            </a>
-        </li>
+
+
     </ul>
 </div>
+
 <script>
     const loginText = document.querySelector(".title-text .login");
     const loginForm = document.querySelector("form.login");
@@ -156,10 +159,10 @@
                         //console.log(response)
                         id = response.kakao_account.email;
                         name = response.properties.nickname;
-                        document.getElementById('userId').value = id;
-                        document.getElementById('userId1').value = id;
-                        document.getElementById('kakaoName').value = name;
-                        // window.location.href = 'http://www.abc.com/';
+
+
+                        window.location.href='http://localhost:8080/user/register_kakao?userId='+id+'&kakaoName='+name;
+
                     },
                     fail: function (error) {
                         console.log(error)

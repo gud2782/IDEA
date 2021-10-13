@@ -14,22 +14,69 @@
 
 <!--navbar-->
 <div th:replace="fragments/navbar_scroll :: navbar_scroll"/>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+    Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    //카카오로그인
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        //console.log(response)
+                        id = response.kakao_account.email;
+                        name = response.properties.nickname;
+                        document.getElementById('userId').value = id;
+                        document.getElementById('kakaoName').value = name;
+                        // window.location.href = 'http://www.abc.com/';
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                })
+            },
+            fail: function (error) {
+                console.log(error)
+            },
+        })
+    }
+    //카카오로그아웃
+    function kakaoLogout() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (response) {
+                    console.log(response)
+                    window.location.href='http://localhost:8080/user/logout';
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+            Kakao.Auth.setAccessToken(undefined)
+        }else{
+            window.location.href='http://localhost:8080/user/logout';
+        }
+    }
+</script>
 <!--navbar end-->
 
 <!-- Start Intro -->
 <section id="slider">
-    <div class="rev_slider_wrapper fullscreen-container" data-alias="agency-website" id="rev_slider_280_1_wrapper" style="background-color:#fff;padding:0px;height:1080px;">  
+    <div class="rev_slider_wrapper fullscreen-container" data-alias="agency-website" id="rev_slider_280_1_wrapper" style="background-color:#fff;padding:0px;height:1080px;">
         <!-- START REVOLUTION SLIDER 5.1.4 fullscreen mode -->
         <div class="rev_slider fullscreenbanner" id="rev_slider_nagency" style="display:none;">
             <ul style="display:none;">
 
                 <!-- slider Item 1 -->
                 <li data-index="rs-1" data-transition="fadetotopfadefrombottom" data-slotamount="default" data-easein="Power3.easeInOut" data-easeout="Power3.easeInOut" data-masterspeed="1500" data-rotate="0"  data-saveperformance="off"  data-title="IDEA" data-description="">
-                        <section>
-                            <video id="slider-video1" src="/img/slider/slider-video1.mp4" muted autoplay loop data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                            </video>
-                            <div class="wrap"></div>
-                        </section>
+                    <section>
+                        <video id="slider-video1" src="/img/slider/slider-video1.mp4" muted autoplay loop data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        </video>
+                        <div class="wrap"></div>
+                    </section>
 
                     <!-- LAYER NR. 1 -->
                     <div class="tp-caption NotGeneric-Title tp-resizeme title-color1 rs-parallaxlevel-3"
@@ -103,7 +150,7 @@
 
                 <!-- slider Item 2 -->
                 <li data-index="rs-3" data-transition="slideremoveright" data-slotamount="default" data-easein="Power3.easeInOut" data-easeout="Power3.easeInOut" data-masterspeed="1500" data-rotate="0"  data-saveperformance="off">
-<!--                    <img src="img/slider/picture.ㅡㅔ"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>-->
+                    <!--                    <img src="img/slider/picture.ㅡㅔ"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>-->
                     <div class="">
                         <video id="slider-video2" src="/img/slider/slider-video2.mp4" muted autoplay loop data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                         </video>
@@ -181,9 +228,9 @@
 
                 <!-- slider Item 3 -->
                 <li data-index="rs-2" data-slotamount="default" data-easein="Power3.easeInOut" data-easeout="Power3.easeInOut" data-masterspeed="1500" data-rotate="0"  data-saveperformance="off">
-<!--                    <img alt="" class="rev-slidebg" data-bgparallax="3" data-bgposition="center center" data-duration="5000" data-ease="Linear.easeNone" data-kenburns="on" data-no-retina="" data-offsetend="0 0" data-offsetstart="0 0" data-rotateend="0" data-rotatestart="0" data-scaleend="100" data-scalestart="110" src="img/slider/s2.jpg">-->
-                        <video id="slider-video3" src="/img/slider/slider-video3.mp4" muted autoplay loop data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
-                        </video>
+                    <!--                    <img alt="" class="rev-slidebg" data-bgparallax="3" data-bgposition="center center" data-duration="5000" data-ease="Linear.easeNone" data-kenburns="on" data-no-retina="" data-offsetend="0 0" data-offsetstart="0 0" data-rotateend="0" data-rotatestart="0" data-scaleend="100" data-scalestart="110" src="img/slider/s2.jpg">-->
+                    <video id="slider-video3" src="/img/slider/slider-video3.mp4" muted autoplay loop data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                    </video>
                     <!-- LAYER NR. 1 -->
                     <div class="tp-caption NotGeneric-Title tp-resizeme title-color1 rs-parallaxlevel-3"
                          id="slide-3-layer-1"
@@ -526,7 +573,7 @@
         <div class="vertical-section">
             <div class="vertical-content">
                 <div class="video-caption text-center white-color">
-<!--                    <h2 class="p-top-20"></h2>-->
+                    <!--                    <h2 class="p-top-20"></h2>-->
                     <div class="divider-center-small divider-white"></div>
                     <h2 class="p-bottom-20">IDEA와 함께합니다</h2>
                 </div>

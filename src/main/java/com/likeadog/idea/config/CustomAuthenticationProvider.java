@@ -8,7 +8,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
@@ -17,7 +19,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    
+
     // 검증을 위한 구현
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

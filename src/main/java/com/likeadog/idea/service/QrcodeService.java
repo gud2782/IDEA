@@ -33,6 +33,7 @@ public class QrcodeService {
         try {
             File file = null;
 
+
             // 큐알이미지를 저장할 디렉토리 지정
             file = new File("C:\\qrtest\\animals");
             if(!file.exists()) {
