@@ -1,4 +1,5 @@
 $(function(){
+    var form = document.donationForm;
     $("#form-total").steps({
         headerTag: "h2",
         bodyTag: "section",
@@ -14,5 +15,7 @@ $(function(){
             finish : '<i class="zmdi zmdi-check"></i>',
             current : ''
         },
+
     })
+
 });

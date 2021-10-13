@@ -16,9 +16,9 @@ public class UserDto {
 
 
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
-    private String userId; //견주ID
+    private String userId; //견주ID ;이메일
     private String pw; //비밀번호
-    private String name; //이름
+    private String name; //이름 ; 닉네임
     private String address; //주소
     private String phone; //핸드폰번호
 

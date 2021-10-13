@@ -23,26 +23,26 @@
             <input type="radio" name="slide" id="login" checked>
             <input type="radio" name="slide" id="signup">
             <label for="login" class="slide login">일 반</label>
-            <label for="signup" class="slide signup">병 원</label>
-            <div class="slider-tab"></div>
+<!--            <label for="signup" class="slide signup">병 원</label>-->
+<!--            <div class="slider-tab"></div>-->
         </div>
         <div class="form-inner">
-            <form th:action="@{/user/register}" th:object="${userForm}" method="post" class="login" autocomplete="off">
+            <form th:action="@{/user/register_kakao}" th:object="${kakaoForm}" method="post" class="login" autocomplete="off">
 <!--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
                 <div class="field">
-                    <input type="text"th:for="userId" th:field="*{userId}" class="form-control"placeholder="아이디" required>
+                    <input type="text"th:for="userId" th:field="*{userId}" class="form-control" readonly >
                 </div>
                 <div class="field">
-                    <input type="password"th:for="pw" th:field="*{pw}" class="form-control" placeholder="비밀번호" required>
+                    <input type="password" th:for="pw" th:field="*{pw}" class="form-control" placeholder="비밀번호" required>
                 </div>
                 <div class="field">
-                    <input type="text"th:for="name" th:field="*{name}" class="form-control" placeholder="이름">
+                    <input type="text" th:for="name" th:field="*{name}"  class="form-control" readonly >
                 </div>
                 <div class="field">
                     <input type="text" th:for="address" th:field="*{address}" class="form-control" placeholder="주소" >
                 </div>
                 <div class="field">
-                    <input type="text"th:for="phone" th:field="*{phone}" class="form-control" placeholder="전화번호" required>
+                    <input type="text" th:for="phone" th:field="*{phone}" class="form-control" placeholder="전화번호" required>
                 </div>
 
                 <div class="field btn">
@@ -54,33 +54,33 @@
                 </div>
 
             </form>
-            <form th:action="@{/user/register_hos}" th:object="${userForm}" method="post" class="" autocomplete="off">
-                <!--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
-                <div class="field">
-                    <input type="text"th:for="userId" th:field="*{userId}" class="form-control"placeholder="아이디" required>
-                </div>
-                <div class="field">
-                    <input type="password"th:for="pw" th:field="*{pw}" class="form-control" placeholder="비밀번호" required>
-                </div>
-                <div class="field">
-                    <input type="text"th:for="name" th:field="*{name}" class="form-control" placeholder="이름">
-                </div>
-                <div class="field">
-                    <input type="text" th:for="address" th:field="*{address}" class="form-control" placeholder="주소" >
-                </div>
-                <div class="field">
-                    <input type="text"th:for="phone" th:field="*{phone}" class="form-control" placeholder="전화번호" required>
-                </div>
+<!--            <form th:action="@{/user/register}" th:object="${kakaoForm}" method="post" class="" autocomplete="off">-->
+<!--                &lt;!&ndash;                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />&ndash;&gt;-->
+<!--                <div class="field">-->
+<!--                    <input type="text"th:for="userId" th:field="*{userId}" class="form-control"placeholder="아이디" required>-->
+<!--                </div>-->
+<!--                <div class="field">-->
+<!--                    <input type="password"th:for="pw" th:field="*{pw}" class="form-control" placeholder="비밀번호" required>-->
+<!--                </div>-->
+<!--                <div class="field">-->
+<!--                    <input type="text"th:for="name" th:field="*{name}" class="form-control" placeholder="이름">-->
+<!--                </div>-->
+<!--                <div class="field">-->
+<!--                    <input type="text" th:for="address" th:field="*{address}" class="form-control" placeholder="주소" >-->
+<!--                </div>-->
+<!--                <div class="field">-->
+<!--                    <input type="text"th:for="phone" th:field="*{phone}" class="form-control" placeholder="전화번호" required>-->
+<!--                </div>-->
 
-                <div class="field btn">
-                    <div class="btn-layer"></div>
-                    <input type="submit" value="회원가입">
-                </div>
-                <div class="signup-link">
-                    이미 회원이신가요? <a href="/user/login">로그인</a>
-                </div>
+<!--                <div class="field btn">-->
+<!--                    <div class="btn-layer"></div>-->
+<!--                    <input type="submit" value="회원가입">-->
+<!--                </div>-->
+<!--                <div class="signup-link">-->
+<!--                    이미 회원이신가요? <a href="/user/login">로그인</a>-->
+<!--                </div>-->
 
-            </form>
+<!--            </form>-->
 
         </div>
     </div>

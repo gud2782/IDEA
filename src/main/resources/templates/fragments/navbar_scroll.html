@@ -43,8 +43,9 @@
                   <li><a data-scroll href="#contact">contact</a></li>
                   <li><a sec:authorize="isAnonymous()" th:href="@{/user/register}">회원가입</a></li>
                   <li><a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a></li>
-                  <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a></li>
-                  <li><a sec:authorize="isAuthenticated()" th:href="@{/user/info}">마이페이지</a></li>
+                  <li onclick="kakaoLogout();"><a sec:authorize="isAuthenticated()" th:href="@{/logout}" >로그아웃</a></li>
+                  <li><a sec:authorize="hasRole('USER')" th:href="@{/user/info}">마이페이지</a></li>
+                  <li><a sec:authorize="hasRole('HOS')" th:href="@{/user/admin}">관리페이지</a></li>
                   <li><a sec:authorize="isAuthenticated()" th:href="@{/user/delete}">회원탈퇴</a></li>
                 </ul>
               </div>
@@ -57,7 +58,7 @@
             <li><a th:href="@{/vc/new}">백 신</a></li>
             <li><a th:href="@{/donation/new}">헌 혈</a></li>
             <li><a th:href="@{/transfusion/new}">수 혈</a></li>
-            <li><a sec:authorize="isAuthenticated()" th:href="@{/qr/main}">혈 액</a></li>
+            <li><a sec:authorize="hasRole('HOS')" th:href="@{/qr/main}">혈 액</a></li>
           </ul>
         </div>
 
@@ -69,3 +70,47 @@
 
   </header>
 </div>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+  Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
+  console.log(Kakao.isInitialized()); // sdk초기화여부판단
+  //카카오로그인
+  function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+            //console.log(response)
+            id = response.kakao_account.email;
+            name = response.properties.nickname;
+            document.getElementById('userId').value = id;
+            document.getElementById('kakaoName').value = name;
+            // window.location.href = 'http://www.abc.com/';
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+  //카카오로그아웃
+  function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+          console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }
+</script>

@@ -1,6 +1,8 @@
 package com.likeadog.idea.controller;
 
+import com.likeadog.idea.controller.form.DonationForm;
 import com.likeadog.idea.dto.UserDto;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,9 +13,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +41,11 @@ public class UserController {
     //로그인 페이지
     @RequestMapping("/login")
     public String login() throws Exception{
+        System.out.println(SecurityInfoProvider.getCurrentUserType());
         return "user/loginForm";
+
     }
+
 
     //로그인 성공화면 페이지
     @RequestMapping("/loginSuccess")
@@ -85,9 +88,48 @@ public class UserController {
             return "user/signUp";
         }
         userService.createUser(form);
+        System.out.println(form.getUserId());
 
         return "redirect:/home";
     }
+
+
+    //회원가입 페이지 입력
+    @PostMapping("/register_hos")
+    public String createhos(@Valid UserDto form, BindingResult result) throws Exception {
+        form.setRole("ROLE_HOS");
+        if(result.hasErrors()){
+            return "user/signUp";
+        }
+        userService.createUser(form);
+        System.out.println(form.getUserId());
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/register_kakao")
+    public String createUserKakao(@RequestParam("userId") String id,
+                                  @RequestParam("kakaoName") String name, Model model) {
+        System.out.println(id + name);
+        UserDto userDto = UserDto.builder()
+                .userId(id)
+                .name(name)
+                .build();
+
+        model.addAttribute("kakaoForm", userDto);
+        return "user/signUp_kakao";
+    }
+
+    @PostMapping("/register_kakao")
+    public String createKakao(@Valid UserDto form, BindingResult result) throws Exception {
+        System.out.println(11111);
+        form.setRole("ROLE_USER");
+        System.out.println(form.getPw());
+        userService.createUser(form);
+        return "user/loginForm";
+    }
+
+
 
     //접근 거부 페이지 이동
     @GetMapping("/denied")

@@ -23,7 +23,7 @@
     <div class="form-container">
 
         <div class="form-inner">
-            <form th:action="@{/donation/new}" th:object="${donationForm}" method="post" class="login" autocomplete="off">
+            <form id="donationForm" th:action="@{/donation/new}" th:object="${donationForm}" method="post" class="login" autocomplete="off">
                 <div class="field">
                 <select name="registerIdx" id="register" class="form-control"  th:onchange="changeValues()" >
                     <option value="">강아지선택</option>
@@ -34,37 +34,127 @@
                 </select>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="regidx" th:for="register" class="form-control" th:field="*{register.aniId}" placeholder="동물등록번호" required>
+                    <input type="text" id="aniId" th:id="aniId" th:for="register" class="form-control" th:field="*{register.aniId}" placeholder="동물등록번호" required>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="DWeight" th:for="DWeight" class="form-control" th:field="*{DWeight}" placeholder="몸무게" required>
+                    <input type="text" id="DWeight" th:id="DWeight" th:for="DWeight" class="form-control" th:field="*{DWeight}" placeholder="몸무게" required>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="kind" th:for="kind" class="form-control" th:field="*{kind}" placeholder="견종" required>
+                    <input type="text" id="kind" th:id="kind" th:for="kind" class="form-control" th:field="*{kind}" placeholder="견종" required>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="DDate" th:for="DDate" class="form-control" th:field="*{DDate}" placeholder="헌혈 날짜" required>
+                    <input type="text" id="DDate" th:id="DDate" th:for="DDate" class="form-control" th:field="*{DDate}" placeholder="헌혈 날짜" required>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" placeholder="헌혈 기관" required>
+                    <input type="text" id="DHos" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" placeholder="헌혈 기관" required>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="type" th:for="type" class="form-control" th:field="*{type}" placeholder="혈액형" required>
+                    <input type="text" id="type" th:id="type" th:for="type" class="form-control" th:field="*{type}" placeholder="혈액형" required>
                 </div>
                 <div class="field">
-                    <input type="text" th:id="DPack" th:for="DPack" class="form-control" th:field="*{DPack}" placeholder="혈액양" required>
+                    <input type="text" id="DPack" th:id="DPack" th:for="DPack" class="form-control" th:field="*{DPack}" placeholder="혈액양" required>
                 </div>
 
                 <div class="field btn">
                     <div class="btn-layer"></div>
-                    <input type="submit" value="등록">
+                    <input type="submit" value="등록" onclick="toAjax()">
                 </div>
+
 
             </form>
         </div>
     </div>
 </div>
 </body>
+<script type="text/javascript" th:inline="javascript">
+    function toAjax() {
+
+        // console.log("1");
+
+        // var aniName =$("#aniName").val();
+        var aniId =$("#aniId").val();
+        var kind =$("#kind").val();
+        var DWeight =$("#DWeight").val();
+        var DDate =$("#DDate").val();
+        var DHos =$("#DHos").val();
+        var type =$("#type").val();
+        var DPack =$("#DPack").val();
+
+
+
+        // var donationForm = $("#donationForm");
+        // var x = document.getElementById("donationForm");
+        // var text="";
+        // var i;
+        // for (i=0; 1<x.length; i++){
+        //     text += x.elements[i].value + "<br>";
+        //
+        //     }
+        // console.log(text);
+
+
+
+        let http = new XMLHttpRequest();
+        let url = 'https://metadata-api.klaytnapi.com/v1/metadata';
+        let data= {
+            "metadata": {
+                "name": "형우테스트",
+                "description": "description example for kip17 token",
+                "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
+                // "aniName": aniName,
+                "aniId" : aniId,
+                "kind" : kind,
+                "DWeight" : DWeight,
+                "DDate" : DDate,
+                "DHos" : DHos,
+                "type" : type,
+                "DPack" : DPack
+
+            }
+        }
+
+        let aJson = new Object();
+        aJson.metadata = {
+            "name": "형우테스트",
+            "description": "description example for kip17 token",
+            "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
+            // "aniName": aniName,
+            "aniId" : aniId,
+            "kind" : kind,
+            "DWeight" : DWeight,
+            "DDate" : DDate,
+            "DHos" : DHos,
+            "type" : type,
+            "DPack" : DPack
+        }
+        console.log("aJson.metadata >>> "+aJson.metadata.aniId)
+        console.log("aJson.metadata >>> "+aJson.metadata.kind)
+        console.log("aJson.metadata >>> "+aJson.metadata.DWeight)
+        console.log("aJson.metadata >>> "+aJson.metadata.DDate)
+        console.log("aJson.metadata >>> "+aJson.metadata.DHos)
+        console.log("aJson.metadata >>> "+aJson.metadata.type)
+        console.log("aJson.metadata >>> "+aJson.metadata.DPack)
+
+        http.open('POST', url, true);
+
+
+
+//Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/json');
+        http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+        http.setRequestHeader('x-chain-id', '1001');
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if(http.readyState == 4 && http.status == 200) {
+
+                alert(http.responseText);
+
+
+            }
+        }
+        http.send(JSON.stringify(data));
+
+    };
+</script>
 <script>
     const loginText = document.querySelector(".title-text .login");
     const loginForm = document.querySelector("form.login");
@@ -90,9 +180,6 @@
         document.getElementById('result').innerText =
             Event.target.value;
     }
-
-
-
     function changeValues() {
 
 
@@ -116,11 +203,13 @@
 
 
         //input id값으로 저장된 값 설정 및 뿌려주기
-        document.getElementById('regidx').value = aniId;
+
+        document.getElementById('aniId').value = aniId;
         document.getElementById('kind').value = kind;
         document.getElementById('neutralization').value = neutralization;
 
     }
+
 
 
 

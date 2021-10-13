@@ -27,12 +27,10 @@ public class SecurityInfoProvider {
         return userService.findByUserID(userId);
     }
 
-/*
-    public static UserType getCurrentUserType() {
+    public static String  getCurrentUserType() {
         Authentication authentication = getCurrentUserAuthentication();
-        return UserType.valueOf(authentication.getAuthorities().toArray()[0].toString().substring(5));
+        return (authentication.getAuthorities().toArray()[0].toString().substring(5));
     }
-*/
 
 
     // SecurityContext 에 유저 정보가 저장되는 시점

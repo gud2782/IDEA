@@ -9,13 +9,6 @@
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 
-
-
-
-
-
-
-
 <body>
 <div class="wrapper">
     <div class="title-text">
@@ -35,13 +28,15 @@
             <div class="slider-tab"></div>
         </div>
         <div class="form-inner">
-            <form th:action="@{/user/loginProcess}" method="post" class="login">
+            <form action="/user/loginProcess" method="post" class="login">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+<!--                일반사용자-->
                 <div class="field">
-                    <input type="text" th:for="userId" class="form-control" name="userId" placeholder="아이디" required>
+                    <input type="text" id="userId" class="form-control" name="userId" placeholder="아이디" >
                 </div>
                 <div class="field">
-                    <input type="password" th:for="pw" class="form-control" name="pw"placeholder="비밀번호" required>
+                    <input type="password" for="pw" class="form-control" name="pw"placeholder="비밀번호" >
                 </div>
                 <div class="pass-link">
                     <a href="#">비밀번호를 잊으셨나요?</a>
@@ -53,9 +48,11 @@
                 <div class="signup-link">
                     아직 회원이 아니신가요? <a href="/user/register">회원가입</a>
                 </div>
-
             </form>
-            <form action="#" class="signup">
+
+
+<!--              병원사용자-->
+            <form action="/user/loginProcess" method="post" class="login">
                 <div class="field">
                     <input type="text" placeholder="아이디" required>
                 </div>
@@ -75,7 +72,47 @@
 
             </form>
         </div>
+  </div>
+</div>
+
+
+
+<!--코드 추가-->
+<form action="/user/register_kakao" method="get">
+    <div>
+        <div>아이디</div>
+        <input  type="text" id="userId" name="userId" readonly>
     </div>
+    <div>
+        <div>이 름</div>
+        <input  type="text" id="kakaoName" name="kakaoName" readonly>
+    </div>
+    <div>
+        <input  type="submit" >
+    </div>
+</form>
+
+
+<div>
+    <ul>
+        <li onclick="sendToGuide();">
+            <a href="javascript:void(0)">
+                <span>카카오 보내기</span>
+            </a>
+        </li>
+
+
+        <li onclick="kakaoLogin();">
+            <a href="javascript:void(0)">
+                <span>카카오 로그인</span>
+            </a>
+        </li>
+        <li onclick="kakaoLogout();">
+            <a href="javascript:void(0)">
+                <span>카카오 로그아웃</span>
+            </a>
+        </li>
+    </ul>
 </div>
 <script>
     const loginText = document.querySelector(".title-text .login");
@@ -105,85 +142,122 @@
 </html>
 
 
-<!--<ul>-->
-<!--    <li onclick="kakaoLogin();">-->
-<!--        <a href="javascript:void(0)">-->
-<!--            <span>카카오 로그인</span>-->
-<!--        </a>-->
-<!--    </li>-->
-<!--    <li onclick="kakaoLogout();">-->
-<!--        <a href="javascript:void(0)">-->
-<!--            <span>카카오 로그아웃</span>-->
-<!--        </a>-->
-<!--    </li>-->
-<!--</ul>-->
-<!--&lt;!&ndash; 카카오 스크립트 &ndash;&gt;-->
-<!--<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>-->
-<!--<script>-->
-<!--    Kakao.init('d1a6cacadaec20832158d15aa9ad1c41'); //발급받은 키 중 javascript키를 사용해준다.-->
-<!--    console.log(Kakao.isInitialized()); // sdk초기화여부판단-->
-<!--    //카카오로그인-->
-<!--    function kakaoLogin() {-->
-<!--        Kakao.Auth.login({-->
-<!--            success: function (response) {-->
-<!--                Kakao.API.request({-->
-<!--                    url: '/v2/user/me',-->
-<!--                    success: function (response) {-->
-<!--                        console.log(response)-->
-<!--                    },-->
-<!--                    fail: function (error) {-->
-<!--                        console.log(error)-->
-<!--                    },-->
-<!--                })-->
-<!--            },-->
-<!--            fail: function (error) {-->
-<!--                console.log(error)-->
-<!--            },-->
-<!--        })-->
-<!--    }-->
-<!--    //카카오로그아웃-->
-<!--    function kakaoLogout() {-->
-<!--        if (Kakao.Auth.getAccessToken()) {-->
-<!--            Kakao.API.request({-->
-<!--                url: '/v1/user/unlink',-->
-<!--                success: function (response) {-->
-<!--                    console.log(response)-->
-<!--                },-->
-<!--                fail: function (error) {-->
-<!--                    console.log(error)-->
-<!--                },-->
-<!--            })-->
-<!--            Kakao.Auth.setAccessToken(undefined)-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
-
-<!--<html xmlns:th="https://www.thymeleaf.org">-->
-<!--<head >-->
-<!--    <title>Please Login</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:fragment="content">-->
-<!--    <form name="f" th:action="@{/user/login}" method="post">-->
-<!--        <fieldset>-->
-<!--            <legend>Please Login</legend>-->
-<!--            <div th:if="${param.error}" class="alert alert-error">-->
-<!--                Invalid username and password.-->
-<!--            </div>-->
-<!--            <div th:if="${param.logout}" class="alert alert-success">-->
-<!--                You have been logged out.-->
-<!--            </div>-->
-<!--            <label for="username">Username</label>-->
-<!--            <input type="text" id="username" name="userId"/>-->
-<!--            <label for="password">Password</label>-->
-<!--            <input type="password" id="password" name="pw"/>-->
-<!--            <div class="form-actions">-->
-<!--                <button type="submit" class="btn">로그인</button>-->
-<!--            </div>-->
-<!--        </fieldset>-->
-<!--    </form>-->
-<!--</div>-->
-<!--</body>-->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+    Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    //카카오로그인
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        //console.log(response)
+                        id = response.kakao_account.email;
+                        name = response.properties.nickname;
+                        document.getElementById('userId').value = id;
+                        document.getElementById('userId1').value = id;
+                        document.getElementById('kakaoName').value = name;
+                        // window.location.href = 'http://www.abc.com/';
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                })
+            },
+            fail: function (error) {
+                console.log(error)
+            },
+        })
+    }
+    //카카오로그아웃
+    function kakaoLogout() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (response) {
+                    console.log(response)
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+            Kakao.Auth.setAccessToken(undefined)
+        }
+    }
 
 
-<!--</html>-->
+    function sendToGuide() {
+        Kakao.Auth.login({
+            //scope: 'PROFILE,TALK_MESSAGE',
+            success: function() {
+                Kakao.API.request({
+                    url: '/v2/api/talk/memo/default/send',
+                    data: {
+                        template_object: {
+                            object_type: 'feed',
+                            content: {
+                                title: '카카오톡 링크 4.0',
+                                description: '디폴트 템플릿 FEED',
+                                image_url:
+                                    '‪C:\\qrtest\\animals\\47qrcode.png',
+                                link: {
+                                    web_url: 'https://developers.kakao.com',
+                                    mobile_web_url: 'https://developers.kakao.com',
+                                },
+                            },
+                            item_content: {
+                                profile_text: 'Kakao',
+                                profile_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                                title_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                                title_image_text: 'Cheese cake',
+                                title_image_category: 'Cake',
+                                items: [
+                                    {
+                                        item: 'Cake1',
+                                        item_op: '1000원',
+                                    },
+                                    {
+                                        item: 'Cake2',
+                                        item_op: '2000원',
+                                    },
+                                    {
+                                        item: 'Cake3',
+                                        item_op: '3000원',
+                                    },
+                                    {
+                                        item: 'Cake4',
+                                        item_op: '4000원',
+                                    },
+                                    {
+                                        item: 'Cake5',
+                                        item_op: '5000원',
+                                    },
+                                ],
+                                sum: 'Total',
+                                sum_op: '15000원',
+                            },
+                            social: {
+                                like_count: 100,
+                                comment_count: 200,
+                            },
+                            button_title: '바로 확인',
+                        },
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    fail: function(error) {
+                        console.log(error);
+                    },
+                })
+            },
+            fail: function(err) {
+                alert('failed to login: ' + JSON.stringify(err))
+            },
+        })
+    }
+
+</script>
+
