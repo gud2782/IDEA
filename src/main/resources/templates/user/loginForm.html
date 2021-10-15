@@ -28,7 +28,7 @@
             <div class="slider-tab"></div>
         </div>
         <div class="form-inner">
-            <form action="/user/loginProcess" method="post" class="login">
+            <form action="/user/loginProcess" method="post" class="login" autocomplete="off">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
                 <!--                일반사용자-->
@@ -59,7 +59,7 @@
 
 
             <!--              병원사용자-->
-            <form action="/user/loginProcess" method="post" class="login">
+            <form action="/user/loginProcess" method="post" class="login" autocomplete="off">
                 <div class="field">
                     <input type="text" placeholder="아이디" required>
                 </div>

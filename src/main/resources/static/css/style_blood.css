@@ -635,7 +635,7 @@ color: #666;
     width: 400px;
     height: 300px;
 }
-.modalQRcode{
+.modalQRcode .modal_content #frame{
     position:absolute;
     width:100%;
     height:100%;
@@ -647,10 +647,11 @@ color: #666;
     border: 1px solid #03619A;
 }
 
-canvas {
+#canvas {
     width: 400px;
     height: 300px;
     text-align: center;
+    aspect-ratio: unset ;
 }
 
 

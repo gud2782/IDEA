@@ -13,7 +13,7 @@
     <ul>
         <button onclick="sendToGuide();">
             <a href="javascript:void(0)">
-                <span>카카오 보내기</span>
+                <span>나한테 메세지 보내기</span>
             </a>
         </button>
         <li><a th:href="@{/user/delete}">회원탈퇴</a></li>
@@ -37,6 +37,7 @@
     Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
     console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
+    //나에게 메세지 보내기
     function sendToGuide() {
         Kakao.Auth.login({
             //scope: 'PROFILE,TALK_MESSAGE',
@@ -47,45 +48,53 @@
                         template_object: {
                             object_type: 'feed',
                             content: {
-                                title: '카카오톡 링크 4.0',
-                                description: '디폴트 템플릿 FEED',
+                                title: 'IDEA',
+                                description: 'IDEA와 함께 슬기로운 반려문화에 동참하세요',
                                 image_url:
-                                    '‪C:\\qrtest\\animals\\47qrcode.png',
+                                    'http://localhost:8080/img/logo2_170x60.png',
                                 link: {
-                                    web_url: 'https://developers.kakao.com',
-                                    mobile_web_url: 'https://developers.kakao.com',
+                                    web_url: 'http://localhost:8080/home',
+                                    mobile_web_url: 'http://localhost:8080/home',
                                 },
                             },
                             item_content: {
-                                profile_text: 'Kakao',
+                                profile_text: '연이',
                                 profile_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
                                 title_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-                                title_image_text: 'Cheese cake',
-                                title_image_category: 'Cake',
+                                title_image_text: 'IDEA등록정보',
+                                title_image_category: '동물등록정보',
                                 items: [
                                     {
-                                        item: 'Cake1',
-                                        item_op: '1000원',
+                                        item: '이름',
+                                        item_op: '연이',
                                     },
                                     {
-                                        item: 'Cake2',
-                                        item_op: '2000원',
+                                        item: '몸무게',
+                                        item_op: '3.3kg',
                                     },
                                     {
-                                        item: 'Cake3',
-                                        item_op: '3000원',
+                                        item: '견종',
+                                        item_op: '토이푸들',
                                     },
                                     {
-                                        item: 'Cake4',
-                                        item_op: '4000원',
+                                        item: '모색',
+                                        item_op: '검정',
                                     },
                                     {
-                                        item: 'Cake5',
-                                        item_op: '5000원',
+                                        item: '성별',
+                                        item_op: '암컷',
                                     },
+                                    {
+                                        item: '출생년도',
+                                        item_op: '2015',
+                                    },
+                                    {
+                                        item: '중성화',
+                                        item_op: 'Y',
+                                    }
                                 ],
-                                sum: 'Total',
-                                sum_op: '15000원',
+                                sum: '동물등록번호',
+                                sum_op: '410160020250774',
                             },
                             social: {
                                 like_count: 100,
@@ -96,6 +105,7 @@
                     },
                     success: function(response) {
                         console.log(response);
+
                     },
                     fail: function(error) {
                         console.log(error);

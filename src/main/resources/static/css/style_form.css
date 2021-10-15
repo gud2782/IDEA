@@ -134,9 +134,9 @@ html,body{
 }
 
 
-input[type="radio"]{
-    display: none;
-}
+/*input[type="radio"]{*/
+/*    display: none;*/
+/*}*/
 #signup:checked ~ .slider-tab{
     left: 50%;
 }

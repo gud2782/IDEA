@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header_content :: header_content" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+
+
+
+<link rel="stylesheet" href="/css/style_form.css">
+
+
+
+
+<body>
+<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">
+            IDEA
+        </div>
+        <div class="title signup">
+            LOGIN
+        </div>
+    </div>
+    <div class="form-container">
+<!--        <div class="slide-controls2">-->
+<!--            <input type="radio" name="slide" id="login" checked>-->
+<!--            <input type="radio" name="slide" id="signup">-->
+<!--            <label for="login" class="slide login">일반</label>-->
+<!--            <label for="signup" class="slide signup">병원</label>-->
+<!--            <div class="slider-tab"></div>-->
+<!--        </div>-->
+        <div class="form-inner">
+            <form th:action="@{/ani/new}" th:object="${registerForm}" method="post"  autocomplete="off">
+                <!--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+                <div class="field">
+                    <input type="text"th:for="aniId" th:field="*{aniId}" class="form-control"placeholder="이름"
+                           th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'form-control'">
+                    <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
+                </div>
+                <div class="field">
+                    <input type="text"th:for="aniName" th:field="*{aniName}" class="form-control" placeholder="동물이름" required>
+                </div>
+                <div class="field">
+                    <input type="text"th:for="weight" th:field="*{weight}" class="form-control" placeholder="몸무게">
+                </div>
+                <div class="field">
+                    <input type="text" th:for="kind" th:field="*{kind}" class="form-control" placeholder="견종" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{color}" class="form-control" placeholder="모색" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{gender}" class="form-control" placeholder="성별" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{birth}" class="form-control" placeholder="출생년도" >
+                </div>
+                <div class="field">
+                    <input type="text"th:for="color" th:field="*{neutralization}" class="form-control" placeholder="중성화" >
+                </div>
+
+                <div class="field btn">
+                    <div class="btn-layer"></div>
+                    <input type="submit" value="submit">
+                </div>
+                <!--                <div class="signup-link">-->
+                <!--                    동물등록번호를 잊으셨나요? <a href="/user/login">동물등록번호 조회</a>-->
+                <!--                </div>-->
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+<!--footer -->
+<div th:replace="fragments/footer :: footer" />
+<!--footer-end -->
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const loginBtn = document.querySelector("label.login");
+    const signupBtn = document.querySelector("label.signup");
+    // const signupLink = document.querySelector("form .signup-link a");
+    signupBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+    });
+    loginBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+    });
+    signupLink.onclick = (()=>{
+        signupBtn.click();
+        return false;
+    });
+</script>
+<!-- calendar -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.datepicker.regional['ko'] = {
+            closeText: '닫기',
+            prevText: '이전달',
+            nextText: '다음달',
+            currentText: '오늘',
+            monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+            monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+                '7월','8월','9월','10월','11월','12월'],
+            dayNames: ['일','월','화','수','목','금','토'],
+            dayNamesShort: ['일','월','화','수','목','금','토'],
+            dayNamesMin: ['일','월','화','수','목','금','토'],
+            weekHeader: 'Wk',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '',
+            buttonText: "달력",
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: 'c-99:c+99',
+        };
+        $.datepicker.setDefaults($.datepicker.regional['ko']);
+
+        $('#birth').datepicker();
+        $('#birth').datepicker("option", "maxDate", $("#birth").val());
+
+
+    });
+</script>
+
+</html>
+
+

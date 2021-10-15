@@ -53,11 +53,11 @@
 											<div id="frame">
 												<div id="loadingMessage" hidden>
 													🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
-												</div>
-												<canvas id="canvas"></canvas>
-											</div>
-										</div>
-									</div>
+												</div> <!-- loadingMessage-->
+												<canvas id="canvas" style="width: 400px; height: 300px"></canvas>
+											</div> <!-- frame-->
+										</div> <!-- modal_content-->
+									</div><!-- modalQRcode-->
 								</div>
 							</div>
 						</section>
@@ -196,7 +196,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#qrcode").click(function() {
-				$(".modal").fadeIn();
+				$(".modalQRcode").fadeIn();
 
 				var video = document.createElement("video");
 				var canvasElement = document.getElementById("canvas");
@@ -248,7 +248,7 @@
 							$('#aniId').val(aniId2);
 							console.log(`aniId:${aniId}`);
 							//카메라 사라지기
-							$(".modal").fadeOut();
+							$(".modalQRcode").fadeOut();
 
 
 
@@ -285,8 +285,8 @@
 
 
 			});
-			$(".modal_content").click(function(){
-				$(".modal").fadeOut();
+			$("#canvas").click(function(){
+				$(".modalQRcode").fadeOut();
 			});
 		});
 	</script>

@@ -63,7 +63,13 @@
             <li><a th:href="@{/vc/new}">백 신</a></li>
             <li><a th:href="@{/donation/new}">헌 혈</a></li>
             <li><a th:href="@{/transfusion/new}">수 혈</a></li>
-            <li><a sec:authorize="hasRole('HOS')" th:href="@{/qr/main}">혈 액</a></li>
+            <li class="blood"><a sec:authorize="hasRole('HOS')" >혈 액</a>
+            <ul class="submenu">
+              <li><a href="/home/blood">헌혈견 정보 등록</a></li>
+              <li><a href="/qr/transfusion">수혈견 정보 등록</a></li>
+              <li><a href="/qr/list">혈액 관리 & 조회</a></li>
+            </ul>
+            </li>
           </ul>
         </div>
 
