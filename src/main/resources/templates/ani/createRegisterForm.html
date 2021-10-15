@@ -3,14 +3,14 @@
 <head th:replace="fragments/header_content :: header_content" />
 
 
-    <!-- Required meta tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Required meta tags-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <!-- Main CSS-->
-    <link href="/css/main_form.css" rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<!-- Main CSS-->
+<link href="/css/main_form.css" rel="stylesheet" media="all">
 
 
 <!--navbar-->
@@ -18,75 +18,77 @@
 <!--navbar end-->
 
 <body>
-    <div class="page-wrapper bg-navy p-t-100 p-b-50">
-        <div class="wrapper_form wrapper--w900">
-            <div class="card_form card-6">
-                <div class="card-heading">
-                    <h2 class="title_form">반려견 정보 등록</h2>
-                </div>
-                <div class="card-body">
-                    <form th:action="@{/ani/new}" th:object="${registerForm}" method="post"  autocomplete="off">
-                        <div class="form-row">
-                            <div class="name">동물등록번호</div>
-                            <div class="value">
-                                <input class="input--style-6" type="text" name="full_name" th:for="aniId" th:field="*{aniId}"
-                                       th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
-                                <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">동물이름</div>
-                            <div class="value">
-                                <input class="input--style-6" type="text" name="full_name" th:for="aniName" th:field="*{aniName}" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">몸무게</div>
-                            <div class="value">
-                                <input class="input--style-6" type="text" name="full_name" th:for="weight" th:field="*{weight}">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">견종</div>
-                            <div class="value">
-                                <input class="input--style-6" type="text" name="full_name" th:for="kind" th:field="*{kind}">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">모색</div>
-                            <div class="value">
-                                <input class="input--style-6" type="text" name="full_name" th:for="color" th:field="*{color}">
-                            </div>
-                        </div>
-                        <div class="form-row" >
-                            <div class="name">성별</div>
-                            <div class="value">
-                                    <input class="radio_btn" type="radio" name="gender" checked="checked" value="male" /> male
-                                    <input class="radio_btn" type="radio" name="gender" value="female" /> female
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">출생년도</div>
-                            <div class="value">
-                                <input class="input--style-6" type="text" name="full_name" th:for="color" th:field="*{birth}">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">중성화 유무</div>
-                            <div class="value">
-                                    <input class="radio_btn" type="radio" name="neutralization" value="yes" /> yes
-                                    <input class="radio_btn" type="radio" name="neutralization" value="no" checked="checked" /> no
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn--radius-2 btn--blue-2" type="submit">등록</button>
-                        </div>
-                    </form>
-                </div>
-
+<div class="page-wrapper bg-navy p-t-100 p-b-50">
+    <div class="wrapper_form wrapper--w900">
+        <div class="card_form card-6">
+            <div class="card-heading">
+                <h2 class="title_form">반려견 정보 등록</h2>
             </div>
+            <div class="card-body">
+                <form id="registerForm" th:action="@{/ani/new}" th:object="${registerForm}" method="post"  autocomplete="off">
+                    <div class="form-row">
+                        <div class="name">동물등록번호</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="aniId" th:id="aniId" th:for="aniId" th:field="*{aniId}"
+                                   th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
+                            <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
+                            <input type="button" class="btn btn--radius-2 btn--blue-2" id="find" onclick="findByAniId()" value="조회" />
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">동물이름</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="aniName" th:for="aniName" th:field="*{aniName}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">몸무게</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="weight" th:for="weight" th:field="*{weight}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">견종</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="kind" th:for="kind" th:field="*{kind}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">모색</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="color" th:for="color" th:field="*{color}">
+                        </div>
+                    </div>
+                    <div class="form-row" >
+                        <div class="name">성별</div>
+                        <div class="value">
+                            <input class="radio_btn" type="radio" name="gender" checked="checked" value="male" /> male
+                            <input class="radio_btn" type="radio" name="gender" value="female" /> female
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">출생년도</div>
+                        <div class="value">
+                            <input class="input--style-6"  type="text" name="full_name" id="birth" th:for="birth" th:field="*{birth}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">중성화 유무</div>
+                        <div class="value">
+                            <input class="radio_btn" type="radio" name="neutralization" value="yes" /> yes
+                            <input class="radio_btn" type="radio" name="neutralization" value="no" checked="checked" /> no
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit">등록</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
+</div>
 
 
 
@@ -137,6 +139,50 @@
 
 
     });
+</script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    function findByAniId() {
+        var aniId = $("#aniId").val();
+        var sendData = "aniId="+aniId;
+        console.log("sendData : " + sendData)
+
+        $.ajax({
+            url: "/ani/find",
+            type: "post",
+            data: sendData,
+
+            success: function (result) {
+                alert(result);
+
+                let getResult = result.split(",");
+                let aniName, kind, weight, color
+
+                for (let idx=0; idx <  4; idx++){
+                    let value = getResult [idx];
+                    if(idx == 0){
+                        aniName= value;
+                    }else if(idx == 1){
+                        kind= value;
+                    }else if(idx==2){
+                        weight= value;
+                    }else if(idx==3) {
+                        color=value;
+                    }
+                }
+                document.getElementById('aniName').value = aniName;
+                document.getElementById('kind').value = kind;
+                document.getElementById('weight').value = weight;
+                document.getElementById('color').value = color;
+                console.log(aniName + aniId + kind + weight + color);
+
+            },
+            error: function (sendData) {
+                alert("실패 : " + sendData);
+            }
+        });
+    };
+
 </script>
 
 

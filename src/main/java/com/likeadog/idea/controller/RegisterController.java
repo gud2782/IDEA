@@ -86,5 +86,17 @@ public class RegisterController {
         return "redirect:/ani/list";
     }
 
+    @RequestMapping("/find")
+    public @ResponseBody String findByAniId(String aniId) {
+        Register result = registerService.findByAniId(aniId);
+        String resultAniName = result.getAniName();
+        String resultKind = result.getKind();
+        String resultWeight = result.getWeight();
+        String resultColor = result.getColor();
+        String strResult = resultAniName + "," + resultKind +  "," + resultWeight + "," + resultColor;
+        System.out.println(strResult);
+        return strResult;
+    }
+
 
 }

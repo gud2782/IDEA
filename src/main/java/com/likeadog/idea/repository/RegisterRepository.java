@@ -48,8 +48,15 @@ public class RegisterRepository {
     }
 
 
-
-
-
-
+    public Register findByAniId(String aniId) {
+        System.out.println("Repository : " +aniId);
+        Register result = em.createQuery("select r from Register r where r.del='NO' and r.aniId = :aniId", Register.class)
+                .setParameter("aniId",aniId)
+                .getSingleResult();
+        System.out.println(result.getAniName());
+        return result;
+//        return em.createQuery("select r from Register r where r.del='NO' and r.aniId = :aniId", Register.class)
+//                .setParameter("aniId",aniId)
+//                .getSingleResult();
+    }
 }

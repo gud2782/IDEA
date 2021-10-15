@@ -24,12 +24,14 @@ public class RegisterService {
 
 
     @Transactional
-    public void saveAni(RegisterForm form) {
+    public void saveAni( RegisterForm form) {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
 
-        //UserEntity userEntity = SecurityInfoProvider.getUserEntity();
+
+
+//        UserEntity userEntity = SecurityInfoProvider.getUserEntity();
 
         Register register = Register.builder()
                 .user(userEntity)
@@ -115,4 +117,10 @@ public class RegisterService {
         return registerRepository.findOne(registerIdx);
     }
 
+    public Register findByAniId(String aniId) {
+        return registerRepository.findByAniId(aniId);
+
+
+
+    }
 }
