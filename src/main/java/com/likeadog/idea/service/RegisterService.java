@@ -123,4 +123,8 @@ public class RegisterService {
 
 
     }
+
+    public Register findByPhone(String phone) {
+        return registerRepository.findByPhone(phone);
+    }
 }

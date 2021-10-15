@@ -49,7 +49,7 @@ public class RegisterRepository {
 
 
     public Register findByAniId(String aniId) {
-        System.out.println("Repository : " +aniId);
+        System.out.println("Repository_aniId : " +aniId);
         Register result = em.createQuery("select r from Register r where r.del='NO' and r.aniId = :aniId", Register.class)
                 .setParameter("aniId",aniId)
                 .getSingleResult();
@@ -58,5 +58,14 @@ public class RegisterRepository {
 //        return em.createQuery("select r from Register r where r.del='NO' and r.aniId = :aniId", Register.class)
 //                .setParameter("aniId",aniId)
 //                .getSingleResult();
+    }
+
+    public Register findByPhone(String phone) {
+        System.out.println("Repository_phone : " +phone);
+        Register result = em.createQuery("select r from Register r where r.del='NO' and r.user.phone = :phone", Register.class)
+                .setParameter("phone",phone)
+                .getSingleResult();
+        System.out.println(result.getAniName());
+        return result;
     }
 }

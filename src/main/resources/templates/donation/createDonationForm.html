@@ -30,7 +30,7 @@
 						<p class="step-icon"><span>01</span></p>
 						<span class="step-text">조회</span>
 					</h2>
-					<form id="donationForm" th:action="@{/transfusion/new}" th:object="${transfusionForm}" method="post" autocomplete="off">
+					<form id="donationForm" th:action="@{/donation/new}" th:object="${donationForm}" method="post" autocomplete="off">
 						<section>
 							<div class="inner">
 								<div class="wizard-header">
@@ -87,7 +87,7 @@
 						<section>
 							<div class="inner">
 								<div class="wizard-header">
-									<h3 class="heading">수혈견 정보 등록</h3>
+									<h3 class="heading">헌혈견 정보 등록</h3>
 									<p>Please enter your infomation and proceed to the next step so we can build your accounts.  </p>
 								</div>
 								<div class="form-row">
@@ -110,7 +110,7 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>몸무게</legend>
-											<input type="text" id="TWeight" th:id="TWeight" th:for="TWeight" class="form-control" th:field="*{TWeight}" placeholder="몸무게" required>
+											<input type="text" id="DWeight" th:id="DWeight" th:for="DWeight" class="form-control" th:field="*{DWeight}" placeholder="몸무게" required>
 
 											<!--                                 <input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="3.0Kg" required>-->
 										</fieldset>
@@ -138,7 +138,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>헌혈 기관</legend>
-											<input type="text" id="THos" th:id="THos" th:for="THos" class="form-control" th:field="*{THos}" placeholder="헌혈 기관" required>
+											<input type="text" id="DHos" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" placeholder="헌혈 기관" required>
 
 											<!--                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="건국대학교 수의병원" required>-->
 										</fieldset>
@@ -164,6 +164,7 @@
 									</div>
 									<div class="form-holder form-holder-4">
 										<input type="submit" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
+
 									</div>
 								</div>
 
@@ -196,7 +197,7 @@
 											<img src="/img/form-v1-icon-2.png" alt="pay-1">
 										</label>
 										<div class="plan-total">
-											<span class="plan-title">헌혈견 정보 등록</span>
+											<span class="plan-title">수혈견 정보 등록</span>
 											<p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
 										</div>
 										<input type="radio" class="radio" name="radio1" id="plan-3" value="plan-3" checked>

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="/js/bootstrap.min.js"></script>
+
 <head th:replace="fragments/header_content :: header_content" />
+<!-- Bootstrap -->
+
 
 
 <!-- Required meta tags-->
@@ -26,58 +30,68 @@
             </div>
             <div class="card-body">
                 <form id="registerForm" th:action="@{/ani/new}" th:object="${registerForm}" method="post"  autocomplete="off">
-                    <div class="form-row">
+                    <div class="form-row-do" >
+                        <div class="name">번호조회</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="phone" th:id="phone" th:for="phone" th:field="*{user.phone}">
+                            <input type="button" class="btn btn--radius-2 btn--blue-2" id="find" onclick="findByPhone()" value="조회" />
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-row-do" >
                         <div class="name">동물등록번호</div>
                         <div class="value">
                             <input class="input--style-6" type="text" name="full_name" id="aniId" th:id="aniId" th:for="aniId" th:field="*{aniId}"
                                    th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
                             <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
-                            <input type="button" class="btn btn--radius-2 btn--blue-2" id="find" onclick="findByAniId()" value="조회" />
+                            <input type="button" class="btn btn--radius-2 btn--blue-2" onclick="findByAniId()" value="조회" />
 
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row-do">
                         <div class="name">동물이름</div>
                         <div class="value">
                             <input class="input--style-6" type="text" name="full_name" id="aniName" th:for="aniName" th:field="*{aniName}" required>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row-do">
                         <div class="name">몸무게</div>
                         <div class="value">
                             <input class="input--style-6" type="text" name="full_name" id="weight" th:for="weight" th:field="*{weight}">
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row-do">
                         <div class="name">견종</div>
                         <div class="value">
                             <input class="input--style-6" type="text" name="full_name" id="kind" th:for="kind" th:field="*{kind}">
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row-do">
                         <div class="name">모색</div>
                         <div class="value">
                             <input class="input--style-6" type="text" name="full_name" id="color" th:for="color" th:field="*{color}">
                         </div>
                     </div>
-                    <div class="form-row" >
+                    <div class="form-row-do" >
                         <div class="name">성별</div>
                         <div class="value">
-                            <input class="radio_btn" type="radio" name="gender" checked="checked" value="male" /> male
+                            <input class="radio_btn" type="radio" name="gender"  value="male" required /> male
                             <input class="radio_btn" type="radio" name="gender" value="female" /> female
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row-do">
                         <div class="name">출생년도</div>
                         <div class="value">
                             <input class="input--style-6"  type="text" name="full_name" id="birth" th:for="birth" th:field="*{birth}">
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row-do">
                         <div class="name">중성화 유무</div>
                         <div class="value">
-                            <input class="radio_btn" type="radio" name="neutralization" value="yes" /> yes
-                            <input class="radio_btn" type="radio" name="neutralization" value="no" checked="checked" /> no
+                            <input class="radio_btn" type="radio" name="neutralization" value="yes" required /> yes
+                            <input class="radio_btn" type="radio" name="neutralization" value="no"  /> no
                         </div>
                     </div>
                     <div class="card-footer">
@@ -93,19 +107,21 @@
 
 
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+</body>
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 
-<!-- Jquery JS-->
-<script src="/vendor/jquery/jquery.min.js"></script>
+
+
 
 
 <!-- Main JS-->
 <script src="/js/global.js"></script>
 <!-- calendar -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $.datepicker.regional['ko'] = {
@@ -144,22 +160,22 @@
 <script type="text/javascript" th:inline="javascript">
     function findByAniId() {
         var aniId = $("#aniId").val();
-        var sendData = "aniId="+aniId;
-        console.log("sendData : " + sendData)
+        var sendDataById = "aniId="+aniId;
+        console.log("sendDataById : " + sendDataById)
 
         $.ajax({
             url: "/ani/find",
             type: "post",
-            data: sendData,
+            data: sendDataById,
 
             success: function (result) {
                 alert(result);
 
-                let getResult = result.split(",");
+                let getResultById = result.split(",");
                 let aniName, kind, weight, color
 
                 for (let idx=0; idx <  4; idx++){
-                    let value = getResult [idx];
+                    let value = getResultById [idx];
                     if(idx == 0){
                         aniName= value;
                     }else if(idx == 1){
@@ -177,8 +193,56 @@
                 console.log(aniName + aniId + kind + weight + color);
 
             },
-            error: function (sendData) {
-                alert("실패 : " + sendData);
+            error: function (sendDataById) {
+                alert("실패 : " + sendDataById);
+            }
+        });
+    };
+</script>
+<script type="text/javascript" th:inline="javascript">
+    function findByPhone() {
+        var phone = $("#phone").val();
+        var sendDataByPhone = "phone="+phone;
+        console.log("sendDataByPhone : " + sendDataByPhone)
+
+        $.ajax({
+            url: "/ani/findByPhone",
+            type: "post",
+            data: sendDataByPhone,
+
+            success: function (result) {
+                alert(result);
+
+                let getResultByPhone = result.split(",");
+                let aniId, aniName, kind, weight, color, birth
+
+                for (let idx=0; idx <  6; idx++){
+                    let value = getResultByPhone [idx];
+                    if(idx == 0){
+                        aniId= value;
+                    }else if(idx == 1){
+                        aniName= value;
+                    }else if(idx==2){
+                        kind= value;
+                    }else if(idx==3) {
+                        weight= value;
+                    }else if(idx==4) {
+                        color=value;
+                    }else if(idx==5) {
+                        birth=value;
+                    }
+                }
+                document.getElementById('aniId').value = aniId;
+                document.getElementById('aniName').value = aniName;
+                document.getElementById('kind').value = kind;
+                document.getElementById('weight').value = weight;
+                document.getElementById('color').value = color;
+                document.getElementById('birth').value = birth;
+                console.log(aniName + aniId + kind + weight + color + birth);
+
+            },
+            error: function (sendDataByPhone) {
+                alert("실패 : " + sendDataByPhone);
             }
         });
     };
@@ -186,5 +250,8 @@
 </script>
 
 
+
+
+
+
 </html>
-<!-- end document-->

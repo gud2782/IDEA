@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header_content :: header_content" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
@@ -21,8 +19,8 @@
     </div>
     <div class="form-container">
         <div class="slide-controls2">
-            <input type="radio" name="slide" id="login" checked>
-            <input type="radio" name="slide" id="signup">
+            <input type="radio" style="display: none" name="slide" id="login" checked>
+            <input type="radio" style="display: none" name="slide" id="signup">
             <label for="login" class="slide login">일반</label>
             <label for="signup" class="slide signup">병원</label>
             <div class="slider-tab"></div>
@@ -31,7 +29,7 @@
             <form action="/user/loginProcess" method="post" class="login" autocomplete="off">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-                <!--                일반사용자-->
+                <!-- 일반사용자-->
                 <div class="field">
                     <input type="text" id="userId" class="form-control" name="userId" placeholder="아이디" >
                 </div>
@@ -58,7 +56,7 @@
             </form>
 
 
-            <!--              병원사용자-->
+            <!-- 병원사용자-->
             <form action="/user/loginProcess" method="post" class="login" autocomplete="off">
                 <div class="field">
                     <input type="text" placeholder="아이디" required>
@@ -66,9 +64,9 @@
                 <div class="field">
                     <input type="password" placeholder="비밀번호" required>
                 </div>
-                <div class="pass-link">
-                    <a href="#">비밀번호를 잊으셨나요?</a>
-                </div>
+<!--                <div class="pass-link">-->
+<!--                    <a href="#">비밀번호를 잊으셨나요?</a>-->
+<!--                </div>-->
                 <div class="field btn">
                     <div class="btn-layer"></div>
                     <input type="submit" value="로그인">
@@ -84,38 +82,8 @@
 
 
 
-<!--코드 추가-->
-<!--
-
-<form action="/user/register_kakao" method="get">
-    <div>
-        <div>아이디</div>
-        <input  type="text" id="kakaoID" name="userId" readonly>
-    </div>
-    <div>
-        <div>이 름</div>
-        <input  type="text" id="kakaoName" name="kakaoName" readonly>
-    </div>
-    <div>
-        <input  type="submit" >
-    </div>
-</form>
--->
 
 
-<div>
-    <ul>
-<!--        <button onclick="sendToGuide();">-->
-<!--            <a href="javascript:void(0)">-->
-<!--                <span>카카오 보내기</span>-->
-<!--            </a>-->
-<!--        </button>-->
-
-
-
-
-    </ul>
-</div>
 
 <script>
     const loginText = document.querySelector(".title-text .login");
@@ -131,10 +99,7 @@
         loginForm.style.marginLeft = "0%";
         loginText.style.marginLeft = "0%";
     });
-    signupLink.onclick = (()=>{
-        signupBtn.click();
-        return false;
-    });
+
 </script>
 </body>
 <!--footer -->
@@ -142,7 +107,7 @@
 <!--footer-end -->
 
 
-</html>
+
 
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -191,76 +156,10 @@
     }
 
 
-    function sendToGuide() {
-        Kakao.Auth.login({
-            //scope: 'PROFILE,TALK_MESSAGE',
-            success: function() {
-                Kakao.API.request({
-                    url: '/v2/api/talk/memo/default/send',
-                    data: {
-                        template_object: {
-                            object_type: 'feed',
-                            content: {
-                                title: '카카오톡 링크 4.0',
-                                description: '디폴트 템플릿 FEED',
-                                image_url:
-                                    '‪C:\\qrtest\\animals\\47qrcode.png',
-                                link: {
-                                    web_url: 'https://developers.kakao.com',
-                                    mobile_web_url: 'https://developers.kakao.com',
-                                },
-                            },
-                            item_content: {
-                                profile_text: 'Kakao',
-                                profile_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-                                title_image_url: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-                                title_image_text: 'Cheese cake',
-                                title_image_category: 'Cake',
-                                items: [
-                                    {
-                                        item: 'Cake1',
-                                        item_op: '1000원',
-                                    },
-                                    {
-                                        item: 'Cake2',
-                                        item_op: '2000원',
-                                    },
-                                    {
-                                        item: 'Cake3',
-                                        item_op: '3000원',
-                                    },
-                                    {
-                                        item: 'Cake4',
-                                        item_op: '4000원',
-                                    },
-                                    {
-                                        item: 'Cake5',
-                                        item_op: '5000원',
-                                    },
-                                ],
-                                sum: 'Total',
-                                sum_op: '15000원',
-                            },
-                            social: {
-                                like_count: 100,
-                                comment_count: 200,
-                            },
-                            button_title: '바로 확인',
-                        },
-                    },
-                    success: function(response) {
-                        console.log(response);
-                    },
-                    fail: function(error) {
-                        console.log(error);
-                    },
-                })
-            },
-            fail: function(err) {
-                alert('failed to login: ' + JSON.stringify(err))
-            },
-        })
-    }
-
 </script>
+
+<!-- Bootstrap -->
+<script src="/js/bootstrap.min.js"></script>
+
+</html>
 

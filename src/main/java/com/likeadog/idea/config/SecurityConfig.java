@@ -54,8 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/home", "/user/register", "/user/register_hos","/user/main", "/layout",
-                        "/admin","/manager","/user", "/home/animals","/ani/**","/donation/**",
-                        "/vc/**","/transfusion/**", "qr/read", "/user/register_kakao",
+                        "/admin","/manager","/user", "/home/animals", "qr/read", "/user/register_kakao",
                         "home/blood").permitAll() // 누구나 접근 허용
                // .antMatchers("/user").hasRole("USER") // USER만 접근 가능
                // .antMatchers("/manager").hasRole("MANAGER") // MANAGER만 접근 가능

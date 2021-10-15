@@ -93,7 +93,22 @@ public class RegisterController {
         String resultKind = result.getKind();
         String resultWeight = result.getWeight();
         String resultColor = result.getColor();
-        String strResult = resultAniName + "," + resultKind +  "," + resultWeight + "," + resultColor;
+        String resultBirth = result.getBirth();
+        String strResult = resultAniName + "," + resultKind +  "," + resultWeight + "," + resultColor + "," + resultBirth;
+        System.out.println(strResult);
+        return strResult;
+    }
+    @RequestMapping("/findByPhone")
+    public @ResponseBody String findByPhone(String phone) {
+        Register result = registerService.findByPhone(phone);
+        String resultAniId = result.getAniId();
+        String resultAniName = result.getAniName();
+        String resultKind = result.getKind();
+        String resultWeight = result.getWeight();
+        String resultColor = result.getColor();
+        String resultBirth = result.getBirth();
+        String strResult = resultAniId + "," + resultAniName + "," + resultKind +  "," + resultWeight + "," + resultColor
+                + "," + resultBirth;
         System.out.println(strResult);
         return strResult;
     }

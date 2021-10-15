@@ -28,7 +28,7 @@ public class DonationController {
         model.addAttribute("donationForm", new DonationForm());
         model.addAttribute("registers", registers );
 
-        return "donation/createDonationForm1";
+        return "donation/createDonationForm";
     }
 
 

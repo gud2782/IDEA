@@ -18,11 +18,11 @@
    #GRID
    ========================================================================== */
 .row {
-  display: -webkit-box;
-  display: -webkit-flex;
+  /*display: -webkit-box;*/
+  /*display: -webkit-flex;*/
   display: -moz-box;
   display: -ms-flexbox;
-  display: flex;
+  /*display: flex;*/
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -61,7 +61,7 @@
   }
 }
 
-.form-row {
+.form-row-do {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -79,7 +79,7 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.form-row .name {
+.form-row-do .name {
   width: 188px;
   color: #00619B;
   font-size: 15px;
@@ -87,23 +87,23 @@
   margin-top: 11px;
 }
 
-.form-row .value {
+.form-row-do .value {
   width: -webkit-calc(100% - 188px);
   width: -moz-calc(100% - 188px);
   width: calc(100% - 188px);
 }
 
 @media (max-width: 767px) {
-  .form-row {
+  .form-row-do {
     display: block;
     padding: 24px 30px;
   }
-  .form-row .name,
-  .form-row .value {
+  .form-row-do .name,
+  .form-row-do .value {
     display: block;
     width: 100%;
   }
-  .form-row .name {
+  .form-row-do .name {
     margin-top: 0;
     margin-bottom: 12px;
   }

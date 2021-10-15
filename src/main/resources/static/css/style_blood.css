@@ -546,6 +546,7 @@ color: #666;
     .actions {
         float: none;
         width: 100%;
+    }
 
     .form-register .content,
     .inner .form-row-total {
