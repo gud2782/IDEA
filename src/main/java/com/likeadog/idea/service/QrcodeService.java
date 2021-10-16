@@ -35,7 +35,8 @@ public class QrcodeService {
 
 
             // 큐알이미지를 저장할 디렉토리 지정
-            file = new File("C:\\qrtest\\animals");
+            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\animals";
+            file = new File(root);
             if(!file.exists()) {
                 file.mkdirs();
             }
@@ -55,7 +56,7 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File("C:\\qrtest\\animals\\"+ registerIdx+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ registerIdx+ "qrcode.png"));
 
         } catch (Exception e) {
             e.printStackTrace();

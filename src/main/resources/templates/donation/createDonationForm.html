@@ -100,9 +100,7 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>동물등록번호</legend>
-											<input type="text" id="aniId" th:id="aniId" th:for="register" class="form-control" th:field="*{register.aniId}" placeholder="동물등록번호" readonly>
-
-											<!--                                 <input type="text" class="form-control" id="aniId" name="last-name" placeholder="410160020250774" required>-->
+											<input type="text" id="aniId" th:id="aniId" th:for="register" class="form-control" th:field="*{register.aniId}" readonly>
 										</fieldset>
 									</div>
 								</div>
@@ -110,17 +108,13 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>몸무게</legend>
-											<input type="text" id="DWeight" th:id="DWeight" th:for="DWeight" class="form-control" th:field="*{DWeight}" placeholder="몸무게" required>
-
-											<!--                                 <input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="3.0Kg" required>-->
+											<input type="text" id="DWeight" th:id="DWeight" th:for="DWeight" class="form-control" th:field="*{DWeight}"  required>
 										</fieldset>
 									</div>
 									<div class="form-holder">
 										<fieldset>
 											<legend>견종</legend>
-											<input type="text" id="kind" th:id="kind" th:for="kind" class="form-control" th:field="*{kind}" placeholder="견종" required>
-
-											<!--                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="토이푸들" required>-->
+											<input type="text" id="kind" th:id="kind" th:for="kind" class="form-control" th:field="*{kind}" required>
 										</fieldset>
 									</div>
 								</div>
@@ -139,14 +133,12 @@
 										<fieldset>
 											<legend>헌혈 기관</legend>
 											<input type="text" id="DHos" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" placeholder="헌혈 기관" required>
-
-											<!--                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="건국대학교 수의병원" required>-->
 										</fieldset>
 									</div>
 								</div>
 								<div class="form-row form-row-date">
 									<div class="form-holder form-holder-2">
-										<!--                              <label class="special-label">혈액형</label>-->
+										<label class="special-label">혈액형</label>
 										<select name="month" id="month" class="form-control">
 											<option value="TYPE" disabled selected>혈액형</option>
 											<option value="DEA 1.1">DEA 1.1</option>
@@ -156,15 +148,12 @@
 										</select>
 										<div class="form-row">
 											<div class="form-holder2 form-holder-2">
-												<!--                                    <input type="text" class="form-control input-border" id="ssn" name="ssn" placeholder="헌혈날짜" required>-->
 											</div>
-
 										</div>
 
 									</div>
 									<div class="form-holder form-holder-4">
 										<input type="submit" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
-
 									</div>
 								</div>
 
