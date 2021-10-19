@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header_content :: header_content" />
+<link rel="stylesheet" th:href="@{/css/style_form.css}">
 <style>
     .fieldError {
         border-color: #bd2130;
@@ -58,7 +59,7 @@
 </div> <!-- /container -->
 </body>
 <!--footer -->
-<div th:replace="fragments/footer :: footer" />
+<div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 
 <!-- calendar -->

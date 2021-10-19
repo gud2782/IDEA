@@ -27,6 +27,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String pw; //비밀번호
     private String name; //이름
     private String address; //주소
+    private String detailAddress; //상세주소
     private String phone; //핸드폰번호
 
 
@@ -38,12 +39,13 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
 
     @Builder //생성자에 Builder를 부여하면 생성자에 필요한 파라미터들을 포함하는 빌더를 자동으로 생성해줌
-    public UserEntity(Long userIdx, String userId, String pw, String name , String address, String phone, String role) {
+    public UserEntity(Long userIdx, String userId, String pw, String name , String address, String detailAddress, String phone, String role) {
         this.userIdx = userIdx;
         this.userId = userId;
         this.pw = pw;
         this.name = name;
         this.address = address;
+        this.detailAddress = detailAddress;
         this.phone = phone;
         this.role = role;
     }

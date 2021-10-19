@@ -20,6 +20,7 @@ public class UserDto {
     private String pw; //비밀번호
     private String name; //이름 ; 닉네임
     private String address; //주소
+    private String detailAddress; //상세주소
     private String phone; //핸드폰번호
 
     private String role;
@@ -31,18 +32,20 @@ public class UserDto {
                 .pw(pw)
                 .name(name)
                 .address(address)
+                .detailAddress(detailAddress)
                 .phone(phone)
                 .role(role)
                 .build();
     }
 
     @Builder
-    public UserDto(Long userIdx, String userId, String pw, String name, String address, String phone, String role) {
+    public UserDto(Long userIdx, String userId, String pw, String name, String address,String detailAddress, String phone, String role) {
         this.userIdx = userIdx;
         this.userId = userId;
         this.pw = pw;
         this.name = name;
         this.address = address;
+        this.detailAddress = detailAddress;
         this.phone = phone;
         this.role = role;
     }

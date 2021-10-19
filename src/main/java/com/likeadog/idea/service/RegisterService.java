@@ -14,24 +14,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class RegisterService {
 
     private final RegisterRepository registerRepository;
     private final UserService userService;
+    private final QrcodeService qrcodeService;
 
 
-
-    @Transactional
-    public void saveAni( RegisterForm form) {
+    public void saveAni(String aniId, RegisterForm form) {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
+        qrcodeService.registerQrcode(aniId);
 
-
-
-//        UserEntity userEntity = SecurityInfoProvider.getUserEntity();
 
         Register register = Register.builder()
                 .user(userEntity)
@@ -73,7 +70,6 @@ public class RegisterService {
         return form;
     }
 
-    @Transactional
     public void updateAni(String registerIdx, RegisterForm form) {
         Register register = Register.builder()
                 .registerIdx(form.getRegisterIdx())
@@ -105,7 +101,6 @@ public class RegisterService {
 
 
 
-    @Transactional
     public void deleteAni(Long registerIdx) {
         Register register = registerRepository.findOne(registerIdx);
         register.setDel(DeleteStatus.YES);
@@ -124,7 +119,7 @@ public class RegisterService {
 
     }
 
-    public Register findByPhone(String phone) {
+    public List<Register> findByPhone(String phone) {
         return registerRepository.findByPhone(phone);
     }
 }

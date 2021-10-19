@@ -60,12 +60,12 @@ public class RegisterRepository {
 //                .getSingleResult();
     }
 
-    public Register findByPhone(String phone) {
+    public List<Register> findByPhone(String phone) {
         System.out.println("Repository_phone : " +phone);
-        Register result = em.createQuery("select r from Register r where r.del='NO' and r.user.phone = :phone", Register.class)
+        List<Register> result = em.createQuery("select r from Register r where r.del='NO' and r.user.phone = :phone", Register.class)
                 .setParameter("phone",phone)
-                .getSingleResult();
-        System.out.println(result.getAniName());
+                .getResultList();
+        System.out.println(result.get(0).getAniName());
         return result;
     }
 }

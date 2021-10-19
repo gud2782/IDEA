@@ -11,7 +11,7 @@ html,body{
     width: 100%;
     place-items: center;
     background: #fff;
-    /*background: -webkit-linear-gradient(left, #a445b2, #fa4299);*/
+
 }
 ::selection{
     background: #FAB935;
@@ -629,6 +629,40 @@ form .btn input[type="submit"]{
         width: 100%;
     }
 }
+/*--------------------------------------------------
+    22. Tabs
+---------------------------------------------------*/
+/*
+ * Tabs
+ */
+.nav-tabs {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    border: none;
+}
+.nav-tabs li {
+    padding: 0 3px;
+}
+.nav-tabs li a {
+    padding: 6px 20px 5px;
+    text-decoration: none;
+    background-color: #f8f8f8;
+    color: #434343;
+    border-radius: 0;
+}
+.nav-tabs li.active a,
+.nav-tabs li.active a:hover,
+.nav-tabs li.active a:focus {
+    background: #03619A;
+    color: #fff;
+    cursor: default;
+}
+
+
 body {
     margin:  0;
 }
@@ -648,9 +682,7 @@ body {
     -moz-align-items: center;
     -webkit-align-items: center;
     background: white;
-    /*background-image: -moz-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);*/
-    /*background-image: -webkit-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);*/
-    /*background-image: -ms-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);*/
+
 }
 .form-v1-content   {
     background: #fff;
@@ -660,11 +692,7 @@ body {
     -ms-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    /*border-radius: 10px;*/
-    /*-o-border-radius: 10px;*/
-    /*-ms-border-radius: 10px;*/
-    /*-moz-border-radius: 10px;*/
-    /*-webkit-border-radius: 10px;*/
+
     margin: auto;
     font-family: 'Open Sans', sans-serif;
     position: relative;
@@ -680,11 +708,7 @@ body {
     width: 100%;
     overflow: hidden;
     background: #FFCE49;
-    /*border-radius: 10px;*/
-    /*-o-border-radius: 10px;*/
-    /*-ms-border-radius: 10px;*/
-    /*-moz-border-radius: 10px;*/
-    /*-webkit-border-radius: 10px;*/
+
 }
 .form-register .steps {
     float: left;
@@ -1285,4 +1309,6 @@ color: #666;
     text-align: center;
     aspect-ratio: unset ;
 }
+
+
 

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments/header_content :: header_content" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+<link rel="stylesheet" th:href="@{/css/style_list.css}">
+
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <h2 class="my-5 text-center">Carousel #8</h2>
+
+      <div class="d-flex carousel-nav">
+        <a href="#" class="col active">First Tab</a>
+        <a href="#" class="col">Second Tab</a>
+        <a href="#" class="col">Third Tab</a>
+      </div>
+
+
+      <div class="owl-carousel owl-1">
+
+        <div class="media-29101 d-md-flex w-100">
+          <div class="img">
+            <img src="/img/hero_1.jpg" alt="Image" class="img-fluid">
+          </div>
+          <div class="text">
+            <a class="category d-block mb-4" href="#">Travel &mdash; First Tab</a>
+            <h2><a href="#">Take your mobile photography to the next level</a></h2>
+            <p id="list">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+          </div>
+        </div> <!-- .item -->
+
+        <div class="media-29101 d-md-flex w-100">
+          <div class="img">
+            <img src="/img/hero_2.jpg" alt="Image" class="img-fluid">
+          </div>
+          <div class="text">
+            <a class="category d-block mb-4" href="#">Travel &mdash; Second Tab</a>
+            <h2><a href="#">Take your mobile photography to the next level</a></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+          </div>
+        </div> <!-- .item -->
+
+        <div class="media-29101 d-md-flex w-100">
+          <div class="img">
+            <img src="/img/hero_3.jpg" alt="Image" class="img-fluid">
+          </div>
+          <div class="text">
+            <a class="category d-block mb-4" href="#">Travel &mdash; Third Tab</a>
+            <h2><a href="#">Take your mobile photography to the next level</a></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+          </div>
+        </div> <!-- .item -->
+
+        
+
+      </div>
+    </div>
+  </div>
+
+
+  <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+  <script th:src="@{/js/popper.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script th:src="@{js/jquery.validate.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+  <script src="/js/owl.carousel_.min.js"></script>
+
+  </body>
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
+</html>

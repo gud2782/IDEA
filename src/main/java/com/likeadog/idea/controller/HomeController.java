@@ -12,10 +12,10 @@ public class HomeController {
         return "home/main";
     }
 
-//    @GetMapping("/layout")
-//    public String layout() {
-//        return "fragments/layout";
-//    } portfolio_2column_fullwdth
+    @GetMapping("/layout")
+    public String index() {
+        return "user/index";
+    }
 
         @GetMapping("/qr/read")
     public String layout() {

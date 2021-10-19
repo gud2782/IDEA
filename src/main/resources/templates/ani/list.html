@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header_content :: header_content" />
+<link rel="stylesheet" th:href="@{/css/style_form.css}">
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
@@ -43,11 +44,21 @@
                     <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"
                        class="btn btn-primary" role="button">자세히</a>
                 </td>
-                    <a href="#" th:href="@{/ani/qr/r{idx} (idx=${ani.registerIdx})}"
+                <td>
+                    <a href="#" th:href="@{/ani/qr/r{idx} (idx=${ani.aniId})}"
                     class="btn btn-primary" role="button"  >QR CODE</a>
-                    <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()" src="/qrcode/animals/86qrcode.png">
-<
-                </tr>
+<!--                    <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()" -->
+<!--                         src="/qrcode/animals/86qrcode.png">-->
+                    <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()"
+                     th:src="@{/qrcode/animals/{idx}qrcode.png (idx=${ani.aniId})}">
+
+
+                </td>
+                <td>
+
+                </td>
+            </tr>
+
             <tr>
                 <td>
                     <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
@@ -62,14 +73,14 @@
 </div> <!-- /container -->
 </body>
 <!--footer -->
-<div th:replace="fragments/footer :: footer" />
+<div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 
 <!-- Bootstrap -->
 <script src="/js/bootstrap.min.js"></script>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
+<script type="text/javascript" th:inline="javascript">
     Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
     console.log(Kakao.isInitialized()); // sdk초기화여부판단
    // var file_path = document.getElementById('file').src;
@@ -111,9 +122,6 @@
                     console.log(res.infos.original.url)
                 });
             })
-
-
-
 
     }
 

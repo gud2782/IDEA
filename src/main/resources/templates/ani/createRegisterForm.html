@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<!-- Main JS-->
+<script src="/js/global.js"></script>
 <head th:replace="fragments/header_content :: header_content" />
 <!-- Bootstrap -->
 
@@ -119,8 +121,7 @@
 
 
 
-<!-- Main JS-->
-<script src="/js/global.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -198,6 +199,7 @@
         });
     };
 </script>
+
 <script type="text/javascript" th:inline="javascript">
     function findByPhone() {
         var phone = $("#phone").val();
@@ -212,34 +214,13 @@
             success: function (result) {
                 alert(result);
 
-                let getResultByPhone = result.split(",");
-                let aniId, aniName, kind, weight, color, birth
-
-                for (let idx=0; idx <  6; idx++){
-                    let value = getResultByPhone [idx];
-                    if(idx == 0){
-                        aniId= value;
-                    }else if(idx == 1){
-                        aniName= value;
-                    }else if(idx==2){
-                        kind= value;
-                    }else if(idx==3) {
-                        weight= value;
-                    }else if(idx==4) {
-                        color=value;
-                    }else if(idx==5) {
-                        birth=value;
-                    }
-                }
-                document.getElementById('aniId').value = aniId;
-                document.getElementById('aniName').value = aniName;
-                document.getElementById('kind').value = kind;
-                document.getElementById('weight').value = weight;
-                document.getElementById('color').value = color;
-                document.getElementById('birth').value = birth;
-                console.log(aniName + aniId + kind + weight + color + birth);
-
+                let aniIdList =[];
+                aniIdList = result;
+                $.each(aniIdList, function(index, value) {
+                console.log(index + " : " + value.aniId);
+                });
             },
+
             error: function (sendDataByPhone) {
                 alert("실패 : " + sendDataByPhone);
             }

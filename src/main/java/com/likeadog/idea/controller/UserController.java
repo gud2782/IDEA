@@ -49,7 +49,7 @@ public class UserController {
     @GetMapping("/info")
     public String dispMyInfo() {
 
-        return "user/myInfo";
+        return "user/myInfo1";
     }
 
     //로그인 페이지

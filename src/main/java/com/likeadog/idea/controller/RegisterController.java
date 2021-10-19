@@ -30,12 +30,13 @@ public class RegisterController {
 
 
     @PostMapping("/new")
-    public String create(@Valid RegisterForm form, BindingResult result) {
+    public String create(@RequestParam("aniId") String aniId,
+                         @Valid RegisterForm form, BindingResult result) {
         if (result.hasErrors()) {
             return "ani/createRegisterForm";
         }
         System.out.println("get:" + form.getAniId() + form.getBirth());
-        registerService.saveAni(form);
+        registerService.saveAni(aniId, form);
 
         return "redirect:/ani/list";
     }
@@ -99,18 +100,16 @@ public class RegisterController {
         return strResult;
     }
     @RequestMapping("/findByPhone")
-    public @ResponseBody String findByPhone(String phone) {
-        Register result = registerService.findByPhone(phone);
-        String resultAniId = result.getAniId();
-        String resultAniName = result.getAniName();
-        String resultKind = result.getKind();
-        String resultWeight = result.getWeight();
-        String resultColor = result.getColor();
-        String resultBirth = result.getBirth();
-        String strResult = resultAniId + "," + resultAniName + "," + resultKind +  "," + resultWeight + "," + resultColor
-                + "," + resultBirth;
-        System.out.println(strResult);
-        return strResult;
+    public @ResponseBody List<Register> findByPhone(String phone) {
+        List<Register> result = registerService.findByPhone(phone);
+
+        for (int i = 0; i <result.size() ; i++) {
+            String resultAniId = result.get(i).getAniId();
+
+            System.out.println(resultAniId);
+            return result;
+        }
+        return result;
     }
 
 
