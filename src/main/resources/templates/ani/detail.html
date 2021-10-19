@@ -45,7 +45,7 @@
                           <div class="to-contents">
                                 <div class="top">
                                   <div class="avatar-large me"></div>
-                                  <div class="name-large" th:text="*{aniName}"></div>
+                                  <div class="name-large" ></div>
                                   <div class="x-touch" onclick="document.querySelector('.email').classList.remove('expand');event.stopPropagation();">
                                     <div class="x">
                                       <div class="line1"></div>
@@ -56,10 +56,10 @@
                                 <div class="bottom">
                                   <div class="row">
                                       <g transform="translate(-539.17946,-568.85777)" id="layer1">
-                                        <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()"
+                                        <img id="file" style="width: 200px; height:200px"
                                         th:src="@{/qrcode/animals/{idx}qrcode.png (idx=*{aniId})}">
                                       </g>
-                                  </div><!--row -->
+                                  </div><!--row     onclick="qrcodeSave()"-->
                                 </div><!--bottom -->
                           </div><!-- to-contents-->
                         </div><!--to -->
@@ -78,7 +78,7 @@
                           <div class="to-contents">
                             <div class="top">
                               <div class="avatar-large kakao"></div>
-                              <div class="name-large" th:text="*{aniName}"></div>
+                              <div class="name-large"></div>
                               <div class="x-touch" onclick="document.querySelector('.email2').classList.remove('expand');event.stopPropagation();">
                                 <div class="x">
                                   <div class="line1"></div>
@@ -108,7 +108,7 @@
         <div class="col-md-6">
           <div class="box">
             <form class="mb-5" action="/ani/detail" th:object="${register}" method="GET" id="contactForm2" name="contactForm2">
-              <h3 class="heading" th:text="*{aniName}"></h3>
+              <h3 class="heading" th:text="*{aniName}" name="aniName" id="aniName"></h3>
               <div class="row">
                 <div class="col-md-6">
                   <label class="col-form-label">동물등록번호</label>
@@ -167,11 +167,11 @@
       </div>
 
   </div>
-    
 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
 
   </body>
@@ -183,142 +183,138 @@
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" th:inline="javascript">
-  Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
-  console.log(Kakao.isInitialized()); // sdk초기화여부판단
-  // var file_path = document.getElementById('file').src;
-  const toDataURL = url => fetch(url)
-          .then(response => response.blob())
-          .then(blob => new Promise((resolve, reject) => {
-            const reader = new FileReader()
-            reader.onloadend = () => resolve(reader.result)
-            reader.onerror = reject
-            reader.readAsDataURL(blob)
-          }))
 
-  function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
+    Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    // var file_path = document.getElementById('file').src;
+    const toDataURL = url => fetch(url)
+            .then(response => response.blob())
+            .then(blob => new Promise((resolve, reject) => {
+              const reader = new FileReader()
+              reader.onloadend = () => resolve(reader.result)
+              reader.onerror = reject
+              reader.readAsDataURL(blob)
+            }))
+
+    function dataURLtoFile(dataurl, filename) {
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+              bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, {type: mime});
     }
-    return new File([u8arr], filename, {type:mime});
-  }
 
 
-  function qrcodeSave() {
-    var file_path = document.getElementById('file').src;
-    console.log(file_path);
-    var filetmp
-    toDataURL(file_path)
-            .then(dataUrl => {
-              console.log('RESULT 1 :', dataUrl)
-              filetmp = dataURLtoFile(dataUrl, 'filetest.png');
-              console.log('RESULT 2:', filetmp);
-              var arrTmp = new Array();
-              arrTmp.push(filetmp)
-              Kakao.Link.uploadImage({
-                file: arrTmp
-              }).then(function(res){
+    var aniId = $("#aniId").text();
+    var aniName = $("#aniName").text();
+    var weight = $("#weight").text();
+    var kind = $("#kind").text();
+    var color = $("#color").text();
+    var neutralization = $("#neutralization").text();
+    console.log(aniId, aniName, weight, kind, color, neutralization)
 
-                alert(res.infos.original.url)
-                console.log(res.infos.original.url)
-              });
-            })
 
-  }
+    //나에게 메세지 보내기
+    function sendToKakao() {
+      var file_path = document.getElementById('file').src;
+      console.log(file_path);
+      var filetmp
+      toDataURL(file_path)
+              .then(dataUrl => {
+                console.log('RESULT 1 :', dataUrl)
+                filetmp = dataURLtoFile(dataUrl, 'filetest.png');
+                console.log('RESULT 2:', filetmp);
+                var arrTmp = new Array();
+                arrTmp.push(filetmp)
+                Kakao.Link.uploadImage({
+                  file: arrTmp
+                }).then(function (res) {
+
+                  // alert(res.infos.original.url)
+                  console.log(res.infos.original.url)
+                  var imgPath = res.infos.original.url;
+
+                  Kakao.Auth.login({
+                    //scope: 'PROFILE,TALK_MESSAGE',
+                    success: function () {
+
+                      Kakao.API.request({
+                        url: '/v2/api/talk/memo/default/send',
+                        data: {
+                          template_object: {
+                            object_type: 'feed',
+                            content: {
+                              title: 'IDEA',
+                              description: 'IDEA와 함께 슬기로운 반려문화에 동참하세요',
+                              image_url: imgPath,
+                              link: {
+                                web_url: 'http://localhost:8080/home',
+                                mobile_web_url: 'http://localhost:8080/home',
+                              },
+                            },
+                            item_content: {
+                              profile_text: aniName,
+                              profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
+                              title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
+                              title_image_text: 'IDEA',
+                              title_image_category: '동물등록정보',
+                              items: [
+                                {
+                                  item: '이름',
+                                  item_op: aniName,
+                                },
+                                {
+                                  item: '몸무게',
+                                  item_op: weight,
+                                },
+                                {
+                                  item: '견종',
+                                  item_op: kind,
+                                },
+                                {
+                                  item: '모색',
+                                  item_op: color,
+                                },
+
+                                {
+                                  item: '중성화',
+                                  item_op: neutralization,
+                                }
+                              ],
+                              sum: '동물등록번호',
+                              sum_op: aniId,
+                            },
+
+                            button_title: 'GO TO IDEA',
+                          },
+                        },
+                        success: function (response) {
+                          console.log(response);
+                          alert("전송되었습니다.")
+
+                        },
+                        fail: function (error) {
+                          console.log(error);
+                          alert("전송에 실패하였습니다.")
+                        },
+                      })
+                    },
+                    fail: function (err) {
+                      alert('failed to login: ' + JSON.stringify(err))
+                    },
+                  })
+
+                });
+              })
+
+
+
+
+    }
+
 
 </script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript" th:inline="javascript">
-  Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
-  console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
-
-
-
-  //나에게 메세지 보내기
-  function sendToKakao() {
-
-
-    // var qrcodeImg = document.getElementById()
-    Kakao.Auth.login({
-      //scope: 'PROFILE,TALK_MESSAGE',
-      success: function() {
-        var aniId = $("#aniId").text();
-        var aniName = $("#aniName").text();
-        var weight = $("#weight").text();
-        var kind = $("#kind").text();
-        var color = $("#color").text();
-        var neutralization = $("#neutralization").text();
-        console.log(aniId, aniName, weight, kind, color, neutralization)
-        Kakao.API.request({
-          url: '/v2/api/talk/memo/default/send',
-          data: {
-            template_object: {
-              object_type: 'feed',
-              content: {
-                title: 'IDEA',
-                description: 'IDEA와 함께 슬기로운 반려문화에 동참하세요',
-                image_url:
-                        'http://k.kakaocdn.net/dn/5Celd/bl3hveK10SB/y5JSQRM8qu1iA4EFkL19C1/kakaolink40_original.png',
-                link: {
-                  web_url: 'http://localhost:8080/home',
-                  mobile_web_url: 'http://localhost:8080/home',
-                },
-              },
-              item_content: {
-                profile_text: aniName,
-                profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
-                title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
-                title_image_text: 'IDEA',
-                title_image_category: '동물등록정보',
-                items: [
-                  {
-                    item: '이름',
-                    item_op: aniName,
-                  },
-                  {
-                    item: '몸무게',
-                    item_op: weight,
-                  },
-                  {
-                    item: '견종',
-                    item_op: kind,
-                  },
-                  {
-                    item: '모색',
-                    item_op: color,
-                  },
-
-                  {
-                    item: '중성화',
-                    item_op: neutralization,
-                  }
-                ],
-                sum: '동물등록번호',
-                sum_op: aniId,
-              },
-
-              button_title: 'GO TO IDEA',
-            },
-          },
-          success: function(response) {
-            console.log(response);
-            alert("전송되었습니다.")
-
-          },
-          fail: function(error) {
-            console.log(error);
-            alert("전송에 실패하였습니다.")
-          },
-        })
-      },
-      fail: function(err) {
-        alert('failed to login: ' + JSON.stringify(err))
-      },
-    })
-  }
-
-</script>
 
 </html>
