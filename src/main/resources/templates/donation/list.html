@@ -1,77 +1,139 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header_content :: header_content" />
+<head>
+    <title>Carousel 03</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/css/style2.css">
+
+
+</head>
 <link rel="stylesheet" th:href="@{/css/style_form.css}">
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 
+
 <body>
-<div class="container">
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>동물등록번호</th>
-                <th>동물이름</th>
-                <th>헌혈당시 몸무게</th>
-                <th>견종</th>
-                <th>혈액형</th>
-                <th>중성화여부</th>
-                <th>헌혈병원</th>
-                <th>혈액양<th>
-
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="doss : ${dos}">
-                <td th:text="${doss.donationIdx}"></td>
-                <td th:text="${doss.register.aniId}"></td>
-                <td th:text="${doss.register.aniName}"></td>
-                <td th:text="${doss.DWeight}"></td>
-                <td th:text="${doss.kind}"></td>
-                <td th:text="${doss.type}"></td>
-                <td th:text="${doss.neutralization}"></td>
-                <td th:text="${doss.DHos}"></td>
-                <td th:text="${doss.DPack}"></td>
-                <td>
-                    <a href="#" th:href="@{/donation/{idx}/update (idx=${doss.donationIdx})}"
-                       class="btn btn-primary" role="button">수정</a>
-                </td>
-                <td>
-                    <a href="#" th:href="@{/donation/{idx}/detail (idx=${doss.donationIdx})}"
-                       class="btn btn-primary" role="button">자세히</a>
-                </td>
-                <td>
-                    <a href="#" th:href="@{/donation/qr/d{idx} (idx=${doss.donationIdx})}"
-                       class="btn btn-primary" role="button">QR CODE</a>
-                </td>
-                <!--                <td>-->
-                <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
-                <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
-                <!--                       class="btn btn-danger">CANCEL</a>-->
-                <!--                </td>-->
-            </tr>
-            <tr>
-                <td>
-                    <a href="/donation/new" class="btn btn-primary" role="button">추가</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="featured-carousel owl-carousel">
+                    <div class="item">
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
+                                <div class="text w-100">
+                                    <span class="cat">동물등록번호</span>
+                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
+                                <div class="text w-100">
+                                    <span class="cat">동물등록번호</span>
+                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
+                                <div class="text w-100">
+                                    <span class="cat">동물등록번호</span>
+                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
+                                <div class="text w-100">
+                                    <span class="cat">동물등록번호</span>
+                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(images/work-5.jpg);">
+                                <div class="text w-100">
+                                    <span class="cat">동물등록번호</span>
+                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-</div> <!-- /container -->
+
+
+
+<tbody>
+<tr th:each="doss : ${dos}">
+    <td th:text="${doss.donationIdx}"></td>
+    <td th:text="${doss.register.aniId}"></td>
+    <td th:text="${doss.register.aniName}"></td>
+    <td th:text="${doss.DWeight}"></td>
+    <td th:text="${doss.kind}"></td>
+    <td th:text="${doss.type}"></td>
+    <td th:text="${doss.neutralization}"></td>
+    <td th:text="${doss.DHos}"></td>
+    <td th:text="${doss.DPack}"></td>
+    <td>
+        <a href="#" th:href="@{/donation/{idx}/update (idx=${doss.donationIdx})}"
+           class="btn btn-primary" role="button">수정</a>
+    </td>
+    <td>
+        <a href="#" th:href="@{/donation/{idx}/detail (idx=${doss.donationIdx})}"
+           class="btn btn-primary" role="button">자세히</a>
+    </td>
+    <td>
+        <a href="#" th:href="@{/donation/qr/d{idx} (idx=${doss.donationIdx})}"
+           class="btn btn-primary" role="button">QR CODE</a>
+    </td>
+    <!--                <td>-->
+    <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
+    <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
+    <!--                       class="btn btn-danger">CANCEL</a>-->
+    <!--                </td>-->
+</tr>
+<tr>
+    <td>
+        <a href="/donation/new" class="btn btn-primary" role="button">추가</a>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
 </body>
 
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 
-<!-- Bootstrap -->
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/jquery.min2.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap2.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 </html>

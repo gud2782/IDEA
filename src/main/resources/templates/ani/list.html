@@ -1,89 +1,156 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header_content :: header_content" />
+<head>
+    <title>Carousel 03</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/css/style2.css">
+
+
+</head>
 <link rel="stylesheet" th:href="@{/css/style_form.css}">
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 
+
+
 <body>
-<div class="container">
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>동물등록번호</th>
-                <th>동물이름</th>
-                <th>몸무게</th>
-                <th>견종</th>
-                <th>모색</th>
-                <th>성별</th>
-                <th>출생년도</th>
-                <th>중성화여부</th>
 
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="ani : ${anis}">
-                <td th:text="${ani.registerIdx}"></td>
-                <td th:text="${ani.aniId}"></td>
-                <td th:text="${ani.aniName}"></td>
-                <td th:text="${ani.weight}"></td>
-                <td th:text="${ani.kind}"></td>
-                <td th:text="${ani.color}"></td>
-                <td th:text="${ani.gender}"></td>
-                <td th:text="${ani.birth}"></td>
-                <td th:text="${ani.neutralization}"></td>
-                <td>
-                    <a href="#" th:href="@{/ani/{idx}/update (idx=${ani.registerIdx})}"
-                       class="btn btn-primary" role="button">수정</a>
-                </td>
-                <td>
-                    <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"
-                       class="btn btn-primary" role="button">자세히</a>
-                </td>
-                <td>
-                    <a href="#" th:href="@{/ani/qr/r{idx} (idx=${ani.aniId})}"
-                    class="btn btn-primary" role="button"  >QR CODE</a>
-<!--                    <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()" -->
-<!--                         src="/qrcode/animals/86qrcode.png">-->
-                    <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()"
-                     th:src="@{/qrcode/animals/{idx}qrcode.png (idx=${ani.aniId})}">
-
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
-                </td>
-
-
-            </tr>
-            </tbody>
-        </table>
+<section class="ftco-section" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div >
+                    <div class="item" style="float: left; margin-right: 30px" th:each="ani : ${anis}" >
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/lovely.jpg);">
+                                <div class="text w-100">
+                                    <span class="cat" th:text="*{ani.aniName}" >동물이름</span>
+                                    <h3><a href="/ani/detail" th:text="*{ani.aniId}" >동물등록번호</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="item">-->
+<!--                        <div class="work">-->
+<!--                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">-->
+<!--                                <div class="text w-100">-->
+<!--                                    <span class="cat">동물이름</span>-->
+<!--                                    <h3><a href="#">동물등록번호</a></h3>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="item">-->
+<!--                        <div class="work">-->
+<!--                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">-->
+<!--                                <div class="text w-100">-->
+<!--                                    <span class="cat">동물이름</span>-->
+<!--                                    <h3><a href="#">동물등록번호</a></h3>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="item">-->
+<!--                        <div class="work">-->
+<!--                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">-->
+<!--                                <div class="text w-100">-->
+<!--                                    <span class="cat">동물이름</span>-->
+<!--                                    <h3><a href="#">동물등록번호</a></h3>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="item">-->
+<!--                        <div class="work">-->
+<!--                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(images/work-5.jpg);">-->
+<!--                                <div class="text w-100">-->
+<!--                                    <span class="cat">동물이름</span>-->
+<!--                                    <h3><a href="#">동물등록번호</a></h3>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-</div> <!-- /container -->
+
+
+
+
+
+
+<tbody>
+<tr >
+<!--    <td th:text="${ani.registerIdx}"></td>-->
+<!--    <td th:text="${ani.aniId}"></td>-->
+<!--    <td th:text="${ani.aniName}"></td>-->
+<!--    <td th:text="${ani.weight}"></td>-->
+<!--    <td th:text="${ani.kind}"></td>-->
+<!--    <td th:text="${ani.color}"></td>-->
+<!--    <td th:text="${ani.gender}"></td>-->
+<!--    <td th:text="${ani.birth}"></td>-->
+<!--    <td th:text="${ani.neutralization}"></td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/ani/{idx}/update (idx=${ani.registerIdx})}"-->
+<!--           class="btn btn-primary" role="button">수정</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"-->
+<!--           class="btn btn-primary" role="button">자세히</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/ani/qr/r{idx} (idx=${ani.aniId})}"-->
+<!--           class="btn btn-primary" role="button"  >QR CODE</a>-->
+<!--        &lt;!&ndash;                    <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()" &ndash;&gt;-->
+<!--        &lt;!&ndash;                         src="/qrcode/animals/86qrcode.png">&ndash;&gt;-->
+<!--        <img id="file" style="width: 200px; height:200px" onclick="qrcodeSave()"-->
+<!--             th:src="@{/qrcode/animals/{idx}qrcode.png (idx=${ani.aniId})}">-->
+
+
+<!--    </td>-->
+    <td>
+
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
+    </td>
+
+
+</tr>
+</tbody>
+</table>
+</div>
 </body>
+
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 
-<!-- Bootstrap -->
-<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/jquery.min2.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min2.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" th:inline="javascript">
     Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
     console.log(Kakao.isInitialized()); // sdk초기화여부판단
-   // var file_path = document.getElementById('file').src;
+    // var file_path = document.getElementById('file').src;
     const toDataURL = url => fetch(url)
         .then(response => response.blob())
         .then(blob => new Promise((resolve, reject) => {
@@ -93,14 +160,14 @@
             reader.readAsDataURL(blob)
         }))
 
-      function dataURLtoFile(dataurl, filename) {
-          var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-              bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-          while(n--){
-              u8arr[n] = bstr.charCodeAt(n);
-          }
-          return new File([u8arr], filename, {type:mime});
-      }
+    function dataURLtoFile(dataurl, filename) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type:mime});
+    }
 
 
     function qrcodeSave() {
