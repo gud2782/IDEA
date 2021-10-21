@@ -1,5 +1,6 @@
 package com.likeadog.idea.repository;
 
+import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Transfusion;
 import org.springframework.stereotype.Repository;
 
@@ -38,4 +39,11 @@ public class TransfusionRepository {
     }
 
 
+    public Transfusion findTransfusionByAniId(String aniId) {
+        System.out.println(aniId);
+        return em.createQuery("select t from Transfusion t where  t.register.aniId = :aniId",
+                Transfusion.class)
+                .setParameter("aniId", aniId)
+                .getResultList().get(0);
+    }
 }

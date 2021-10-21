@@ -18,12 +18,12 @@ public class Qrcode extends BaseEntity{
     private Long qrcodeIdx;
 
     private String bNumber; //혈액번호
-    private String url; //url
+    private String url; //qr코드 url
 
 
-//    @OneToOne(mappedBy = "qrcode")
-//    private Transfusion transfusion;
-//
-//    @OneToOne(mappedBy = "qrcode")
-//    private Donation donation;
+    @OneToOne(mappedBy = "qrcode")
+    private Transfusion transfusion;
+
+    @OneToOne(mappedBy = "qrcode")
+    private Donation donation;
 }

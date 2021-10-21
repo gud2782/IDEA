@@ -56,23 +56,19 @@ public class VaccineController {
     @PostMapping("/new")
     public String create(@RequestParam("first") FirstStatus first,
                          @RequestParam("second") SecondStatus second,
-                         @RequestParam(value = "thirds", required = false) Object thirds,
+                         @RequestParam(value = "third",required = false) ThirdStatus third,
                          @RequestParam("registerIdx") String registerIdx
-                         ,VaccineForm form) {
+            ,VaccineForm form) {
 
-        ThirdStatus third;
+        //ThirdStatus third;
 
-        if (thirds == null) {
+        if (third == null) {
             third = ThirdStatus.none;
-
-        } else {
-
-            third = (ThirdStatus) thirds;
         }
         System.out.println(first);
         System.out.println(third);
 
-       // vaccineService.saveVc(vaccine);
+        // vaccineService.saveVc(vaccine);
 
         vaccineService.saveVc(first,second,third,registerIdx,form);
         return "redirect:/vc/list";
@@ -82,7 +78,7 @@ public class VaccineController {
     @GetMapping("/list")
     public String vaccineList(Model model) {
         List<Vaccine> vcs = vaccineService.findVC();
-       // System.out.println("vccon:"+vcs.get(1).getNDate());
+        // System.out.println("vccon:"+vcs.get(1).getNDate());
         model.addAttribute("vcs", vcs);
         return "vc/list";
 
@@ -91,10 +87,10 @@ public class VaccineController {
 
     @GetMapping("/{vaccineIdx}/update")
     public String vcNew(@PathVariable("vaccineIdx") Long vaccineIdx, Model model) {
-    VaccineForm form = vaccineService.getUpdateVaccine(vaccineIdx);
+        VaccineForm form = vaccineService.getUpdateVaccine(vaccineIdx);
 
-    model.addAttribute("form", form);
-    return "vc/updateVaccineForm";
+        model.addAttribute("form", form);
+        return "vc/updateVaccineForm";
 
     }
 

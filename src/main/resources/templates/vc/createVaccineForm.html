@@ -47,7 +47,7 @@
                     <div class="form-row-do">
                         <div class="name">1차 선택</div>
                         <div class="value">
-                            <select name="first" id="first" class="input--style-6"  >
+                            <select name="first" id="first" class="input--style-6" th:onchange="itemChange()"  >
                                 <option value="">1차 선택</option>
                                 <option th:each="first : ${T(com.likeadog.idea.enumCollection.FirstStatus).values()}"
                                         th:value="${first}" th:text="${first.name}"
@@ -79,14 +79,6 @@
                         </div>
                     </div>
 
-
-
-
-                    <!--        <div class="form-group">-->
-                    <!--            <label th:for="VNumber"접종차수</label>-->
-                    <!--            <input type="text" th:field="*{VNumber}" class="form-control"-->
-                    <!--                   placeholder="접종차수를 입력하세요".>-->
-                    <!--        </div>-->
 
                     <div class="form-row-do">
                         <div class="name">접종 날짜</div>
@@ -164,15 +156,15 @@
 
 
         if(selectFirst == "DHPPL"){
-            $('#thirds').show();
+            $('#third').show();
 
 
         } else if (selectFirst == "Rabies") {
 
 
         } else  {
-            $('#thirds').hide();
-            $('#thirds').val(typeof(null));
+            $('#third').hide();
+            $('#third').val(typeof(null));
             $('#extra').show();
 
         }

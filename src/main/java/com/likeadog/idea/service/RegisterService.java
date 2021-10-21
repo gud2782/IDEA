@@ -1,12 +1,16 @@
 package com.likeadog.idea.service;
 
 import com.likeadog.idea.controller.form.RegisterForm;
+import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
+import com.likeadog.idea.domain.Transfusion;
 import com.likeadog.idea.domain.UserEntity;
 import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.RegisterRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +24,16 @@ public class RegisterService {
 
     private final RegisterRepository registerRepository;
     private final UserService userService;
-    private final QrcodeService qrcodeService;
+
+    @Autowired
+    QrcodeService qrcodeService;
 
 
     public void saveAni(String aniId, RegisterForm form) {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
-        qrcodeService.registerQrcode(aniId);
+        // qrcodeService.registerQrcode(aniId);
 
 
         Register register = Register.builder()
@@ -115,11 +121,12 @@ public class RegisterService {
     public Register findByAniId(String aniId) {
         return registerRepository.findByAniId(aniId);
 
-
-
     }
+
+
 
     public List<Register> findByPhone(String phone) {
         return registerRepository.findByPhone(phone);
     }
+
 }

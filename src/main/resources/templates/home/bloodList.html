@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+<body>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>혈액넘버</th>
+                <th>헌혈견 동물등록번호</th>
+                <th>헌혈견 이름</th>
+                <th>헌혈 날짜</th>
+                <th>헌혈양</th>
+                <th>헌혈견 혈액형</th>
+                <th>수혈견 동물등록번호</th>
+                <th>수혈견 이름</th>
+                <th>수혈 날짜</th>
+                <th>수혈양</th>
+                <th>수혈견 혈액형</th>
+
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="qrcode : ${qrcodes}">
+                <td th:text="${qrcode.BNumber}"></td>
+                <td th:text="${qrcode.donation.register.registerIdx}"></td>
+<!--                <td th:text="${qrcode.donation.register.aniName}"></td>-->
+<!--                <td th:text="${qrcode.donation.DDate}"></td>-->
+<!--                <td th:text="${qrcode.donation.DPack}"></td>-->
+<!--                <td th:text="${qrcode.donation.type}"></td>-->
+<!--                <td th:text="${qrcode.transfusion.register.aniId}"></td>-->
+<!--                <td th:text="${qrcode.transfusion.register.aniName}"></td>-->
+<!--                <td th:text="${qrcode.transfusion.TDate}"></td>-->
+<!--                <td th:text="${qrcode.transfusion.TPack}"></td>-->
+<!--                <td th:text="${qrcode.transfusion.type}"></td>-->
+
+                <td>
+                    <a href="#"
+                       class="btn btn-primary" role="button">자세히</a>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
+
+<!-- jQuery -->
+<!--<script src="js/jquery.min.js"></script>-->
+
+<!-- Bootstrap -->
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+</html>

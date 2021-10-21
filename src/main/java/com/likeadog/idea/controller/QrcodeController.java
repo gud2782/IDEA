@@ -1,32 +1,16 @@
 package com.likeadog.idea.controller;
 
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageConfig;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
+import com.likeadog.idea.controller.form.QrcodeForm;
+import com.likeadog.idea.domain.Qrcode;
 import com.likeadog.idea.service.QrcodeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.lang.String;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -43,7 +27,7 @@ public class QrcodeController {
     //등록된 동물 정보 qr코드
     @GetMapping("ani/qr/r{registerIdx}")
     public void registerQrcode(@PathVariable("registerIdx") String registerIdx)
-            {
+    {
         qrcodeService.registerQrcode(registerIdx);
 
 
@@ -52,7 +36,7 @@ public class QrcodeController {
     @GetMapping("donation/qr/d{donationIdx}")
     public void donationQrcod(@PathVariable("donationIdx") Long donationIdx){
 
-            qrcodeService.donationQrcode(donationIdx);
+        qrcodeService.donationQrcode(donationIdx);
 
 
     }
@@ -65,67 +49,77 @@ public class QrcodeController {
     }
 
     @GetMapping("vc/qr/v{vaccineIdx}")
-    public void vaccineQrcode(@PathVariable("vaccineIdx") Long vaccineIdx){
+    public void vaccineQrcode(@PathVariable("vaccineIdx") Long vaccineIdx) {
 
         qrcodeService.vaccineQrcode(vaccineIdx);
 
 
     }
 
-    @GetMapping("blood/qr/b{bNumber}")
-    public void bNumberQrcod(@PathVariable("bNumber") Long bNumber){
-
-
-        qrcodeService.bNumberQrcode(bNumber);
-
-
-
-
-    }
-
-    @GetMapping("qr/donation")
-    public String qrDonation() {
-        return "qr/createDonationForm";
-    }
-
-    @PostMapping("qr/donation")
-    public String qrDonationForm() {
-        return "qr/list";
-    }
-
-    @GetMapping("qr/transfusion")
-    public String qrTransfusion() {
-        return "qr/createTransfusionForm";
-    }
-
-    @PostMapping("qr/transfusion")
-    public String qrTansfusionForm() {
-        return "qr/list";
-    }
-
-    @GetMapping("qr/main")
-    public String qrMain() {
-        return "qr/main";
-    }
-
-    @GetMapping("qr/list")
-    public String qrList() {
-        return "qr/list";
+    @GetMapping("/bNumber/new/donation")
+    public String donationForm(Model model){
+        model.addAttribute("qrcodeForm", new QrcodeForm());
+        return "home/bloodDonation";
     }
 
 
 
 
+    @PostMapping("/bNumber/new/donation")
+    public String donationFormCreate(@RequestParam("bNumber") String bNumber,@RequestParam("dosId") String dosId , QrcodeForm form) {
+
+
+        //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
+        qrcodeService.saveDonation(bNumber,dosId, form);
+
+        return "home/bloodList";
+    }
+
+    @GetMapping("/bNumber/new/transfusion")
+    public String transfusionForm(Model model){
+        model.addAttribute("qrcodeForm", new QrcodeForm());
+        return "home/bloodTransfusion";
+    }
 
 
 
 
-    public void runGenLoop(){
+    @PostMapping("/bNumber/new/transfusion")
+    public String transfusionFormCreate(@RequestParam("bNumber") String bNumber,@RequestParam("transId") String transId , QrcodeForm form) {
+
+
+        //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
+        qrcodeService.saveTransfusion(bNumber,transId, form);
+
+        return "/home/bloodList";
+    }
+
+
+
+    //혈액번호 생성
+    @GetMapping("qr/blood")
+    public String genBnumber() {
         qrcodeService.makeBnumbers();
-    }
+        return "qr/create";
 
     }
 
+    @GetMapping("blood/list")
+    public String bloodList(Model model) {
+        List<Qrcode> qrcodes = qrcodeService.findQR();
+
+        // System.out.println("vccon:"+vcs.get(1).getNDate());
+        model.addAttribute("qrcodes", qrcodes);
+        return "home/bloodList";
+
+    }
+
+
+
+
+
+
+}
 
 
 

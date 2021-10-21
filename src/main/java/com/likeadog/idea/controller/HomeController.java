@@ -50,12 +50,12 @@ public class HomeController {
 
     @GetMapping("/home/transfusion")
     public String transfusion() {
-        return "home/transfusion";
+        return "bloodList";
     }
 
     @GetMapping("/home/blood")
     public String blood() {
-        return "home/blood";
+        return "bloodDonation";
     }
 
 

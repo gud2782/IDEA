@@ -1,7 +1,10 @@
 package com.likeadog.idea.controller;
 
 import com.likeadog.idea.controller.form.RegisterForm;
+import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
+import com.likeadog.idea.domain.Transfusion;
+import com.likeadog.idea.service.DonationService;
 import com.likeadog.idea.service.RegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -90,12 +93,15 @@ public class RegisterController {
     @RequestMapping("/find")
     public @ResponseBody String findByAniId(String aniId) {
         Register result = registerService.findByAniId(aniId);
+
         String resultAniName = result.getAniName();
         String resultKind = result.getKind();
         String resultWeight = result.getWeight();
         String resultColor = result.getColor();
         String resultBirth = result.getBirth();
+
         String strResult = resultAniName + "," + resultKind +  "," + resultWeight + "," + resultColor + "," + resultBirth;
+
         System.out.println(strResult);
         return strResult;
     }

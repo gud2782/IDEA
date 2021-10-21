@@ -120,4 +120,11 @@ public class TransfusionService {
     }
 
 
+    public Transfusion findTransfusionByAniId(String aniId) {
+        return transfusionRepository.findTransfusionByAniId(aniId);
+    }
+
+    public void saveTransfusion(Transfusion transfusion) {
+        transfusionRepository.regTrans(transfusion);
+    }
 }

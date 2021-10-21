@@ -1,6 +1,7 @@
 package com.likeadog.idea.controller;
 
 import com.likeadog.idea.controller.form.TransfusionForm;
+import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
 import com.likeadog.idea.service.RegisterService;
@@ -96,6 +97,24 @@ public class TransfusionController {
         return "redirect:/transfusion/list";
     }
 
+    @RequestMapping("/find")
+    public @ResponseBody String findByTransId(String transId) {
+        Transfusion result = transfusionService.findTransfusionByAniId(transId);
+
+
+        String resultTransName = result.getRegister().getAniName();
+        String resultKind = result.getKind();
+        String resultTDate = result.getTDate();
+        String resultTHos = result.getTHos();
+        String resultTPack = result.getTPack();
+        String resultType = result.getType();
+        String resultTWeight = result.getTWeight();
+
+        String strResult = resultTransName + "," + resultKind +  "," + resultTDate + "," + resultTHos + "," + resultTPack
+                + "," + resultType + "," + resultTWeight;
+        System.out.println(strResult);
+        return strResult;
+    }
 
 }
 

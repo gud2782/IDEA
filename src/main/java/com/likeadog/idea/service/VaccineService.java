@@ -42,6 +42,7 @@ public class VaccineService {
         // vinfo == dbvinfo 같은지 검사
         Vinfo vinfo = vinfoService.vInfoMaker(firstStatus,secondStatus,thirdStatus);
         Vinfo dbVinfo = vinfoService.findVInfo(vinfo.getVInfoIdx());
+        System.out.println(vinfo.getVInfoIdx());
 
 
         //vaccine insert
@@ -87,11 +88,6 @@ public class VaccineService {
 
         Vaccine vaccine = findOne(vaccineIdx);
 
-        /* 방금 만든 find 함수
-        RegisterVaccine registerVaccine = findOneRV(vaccineIdx);
-        VaccineVinfo vaccineVinfo = findOneVV(vaccineIdx);
-
-        */
 
 
 

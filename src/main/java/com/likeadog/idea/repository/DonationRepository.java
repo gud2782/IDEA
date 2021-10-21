@@ -55,6 +55,17 @@ public class DonationRepository {
     }
 
 
+    //추가
+    public Donation findDonationByAniId(String aniId) {
+        System.out.println(aniId);
+        return em.createQuery("select d from Donation d where  d.register.aniId = :aniId",
+                Donation.class)
+                .setParameter("aniId", aniId)
+                .getResultList().get(0);
+
+    }
+
+
 
 
 

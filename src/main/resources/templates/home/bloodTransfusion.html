@@ -31,7 +31,7 @@
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
-			<form class="form-register" action="#" method="post">
+			<form id="qrcodeForm" th:action="@{/bNumber/new/transfusion}"  th:object="${qrcodeForm}" class="form-register" method="post" autocomplete="off">
 				<div id="form-total">
 					<!-- SECTION 1 -->
 					<h2>
@@ -46,15 +46,16 @@
 							</div>
 							<div class="form-row">
 								<div class="form-holder form-holder-1">
-									<input type="text" name="find_bank" id="find_bank" placeholder="'-'없이 입력해주세요." class="form-control">
+									<input type="text" name="bNumber" id="bNumber"  class="form-control" placeholder="혈액번호" th:id="bNumber" th:for="bNumber" >
 								</div>
 								<div class="form-holder form-holder-4">
-									<input type="button" name="find_bank" id="lookup" value="조회" class="form-control" >
+									<input type="button" name="find_bank" id="find_bNumber" value="조회" class="form-control" >
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder form-holder-1">
-									<input type="text" name="find_bank" id="aniId" placeholder="동물등록번호" class="form-control">
+									<input type="text"  name="transId" id="transId" placeholder="동물등록번호" class="form-control"
+										   th:id="transId" th:for="transId" >
 								</div>
 								<div class="form-holder form-holder-4">
 									<input type="button" name="find_bank" id="qrcode" value="QR코드" class="form-control" >
@@ -68,6 +69,18 @@
 												🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
 											</div> <!-- loadingMessage-->
 											<canvas id="canvas" style="width: 400px; height: 300px"></canvas>
+										</div> <!-- frame-->
+									</div> <!-- modal_content-->
+								</div><!-- modalQRcode-->
+							</div>
+							<div class="qrBox2" >
+								<div class="modalQRcode2">
+									<div class="modal_content2">
+										<div id="frame2">
+											<div id="loadingMessage2" hidden>
+												🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+											</div> <!-- loadingMessage-->
+											<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
 										</div> <!-- frame-->
 									</div> <!-- modal_content-->
 								</div><!-- modalQRcode-->
@@ -92,97 +105,61 @@
 								<div class="form-holder">
 									<fieldset>
 										<legend>반려견 이름</legend>
-										<input type="text" class="form-control" id="first-name" name="first-name" placeholder="연이" required>
+										<input type="text" class="form-control" id="transName" name="transName" th:for="transName"  required>
 									</fieldset>
 								</div>
 								<div class="form-holder">
 									<fieldset>
 										<legend>동물등록번호</legend>
-										<input type="text" class="form-control" id="did" name="last-name" placeholder="410160020250774" required>
+										<input type="text" class="form-control" id="transId2" name="transId2" th:for="transId"  required>
 									</fieldset>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
 									<fieldset>
-										<legend>몸무게</legend>
-										<input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="3.0Kg" required>
+										<legend>수혈양</legend>
+										<input type="text" name="tPack" id="tPack" class="form-control" th:for="tPack"   required>
 									</fieldset>
 								</div>
 								<div class="form-holder">
 									<fieldset>
 										<legend>견종</legend>
-										<input type="text" class="form-control" id="phone" name="phone" placeholder="토이푸들" required>
+										<input type="text" class="form-control" id="kind" name="kind" th:for="kind"  required>
 									</fieldset>
 								</div>
 							</div>
 							<div class="form-row">
-								<div class="form-holder form-holder-2">
-
+								<div class="form-holder">
+									<fieldset>
+										<legend>수혈날짜</legend>
+										<input type="text" name="tDate" id="tDate" class="form-control" th:for="tDate"   required>
+									</fieldset>
 								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-holder form-holder-2">
-
+								<div class="form-holder">
+									<fieldset>
+										<legend>혈액형</legend>
+										<input type="text" class="form-control" id="type" name="type" th:for="type"  required>
+									</fieldset>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder form-holder-2">
 									<fieldset>
-										<legend>헌혈 기관</legend>
-										<input type="text" class="form-control" id="OrgName" name="phone" placeholder="건국대학교 수의병원" required>
+										<legend>수혈 기관</legend>
+										<input type="text" class="form-control" id="tHos" name="tHos" th:for="tHos"  placeholder="건국대학교 수의병원" required>
 									</fieldset>
 								</div>
 							</div>
-
-							<div class="qrBox" >
-								<div class=" mapShow">
-									<div class="modal_content">
-										<div class="map_wrap">
-											<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
-											<div id="menu_wrap" class="bg_white">
-												<div class="option">
-													<div>
-														<form id="formSearch" onsubmit="searchPlaces()">
-															키워드 :
-															<input type="text" name="searchKeyword" value="동물병원" id="keyword" size="15">
-															<button onclick="searchPlaces()">검색하기</button>
-														</form>
-													</div>
-												</div>
-												<hr>
-												<ul id="placesList"></ul>
-												<div id="pagination"></div>
-											</div>
-										</div>
-									</div> <!-- modal_content-->
-								</div><!-- modalQRcode-->
+						</div>
+						<!--추가-->
+						<div class="form-row">
+							<div class="form-holder form-holder-2">
+								<fieldset>
+									<legend>확인</legend>
+									<input type="submit">
+								</fieldset>
 							</div>
-
-
-
-
-
-							<div class="form-row form-row-date">
-								<div class="form-holder form-holder-2">
-									<!--                              <label class="special-label">혈액형</label>-->
-									<select name="month" id="month">
-										<option value="MM" disabled selected>혈액형</option>
-										<option value="16">DEA 1.1</option>
-										<option value="17">DEA 1.2</option>
-										<option value="18">DEA 4</option>
-										<option value="19">DEA 7</option>
-									</select>
-									<!--                              <div class="form-row">-->
-									<!--                                 <div class="form-holder2 form-holder-2">-->
-									<!--                                    <input type="text" class="form-control input-border" id="ssn" name="ssn" placeholder="헌혈날짜" required>-->
-									<!--                                 </div>-->
-									<!--                              </div>-->
-
-								</div>
-							</div>
-
 						</div>
 					</section>
 
@@ -238,6 +215,10 @@
 <script src="/js/jquery.steps.js"></script>
 <script src="/js/main.js"></script>
 
+
+
+
+
 <script type="text/javascript">
 	$(function(){
 		$("#qrcode").click(function() {
@@ -247,7 +228,7 @@
 			var canvasElement = document.getElementById("canvas");
 			var canvas = canvasElement.getContext("2d");
 			var loadingMessage = document.getElementById("loadingMessage");
-			var aniId = document.getElementById("aniId");
+			var transId = document.getElementById("transId");
 			function drawLine(begin, end, color) {
 				canvas.beginPath();
 				canvas.moveTo(begin.x, begin.y);
@@ -287,14 +268,66 @@
 
 
 						// QR코드 메시지 출력
-						aniId.innerHTML = code.data;
+						transId.innerHTML = code.data;
 
-						const aniId2 = code.data;
-						$('#aniId').val(aniId2);
-						console.log(`aniId:${aniId}`);
+						const transId2 = code.data;
+						$('#transId2').val(transId2);
+						$('#transId').val(transId2);
+						//console.log(`dosId:${dosId}`);
+						console.log(`transId:`+transId2);
 						//카메라 사라지기
 						$(".modalQRcode").fadeOut();
 
+
+						//추가
+						var sendDataById = "transId="+transId2;
+
+						$.ajax({
+							url: "/transfusion/find",
+							type: "post",
+							data: sendDataById,
+
+							success: function (result) {
+								alert(result);
+
+								let getResultById = result.split(",");
+								let transName, kind, tDate, tHos, tPack, type, tWeight
+
+								for (let idx=0; idx < 7; idx++){
+									let value = getResultById [idx];
+									if(idx == 0){
+										transName= value;
+									}else if(idx == 1){
+										kind= value;
+									}else if(idx==2){
+										tDate= value;
+									}else if(idx==3) {
+										tHos=value;
+									}else if(idx==4) {
+										tPack=value;
+									}else if(idx==5) {
+										type=value;
+									}else if(idx==6) {
+										tWeight=value;
+									}
+
+								}
+								document.getElementById('transName').value = transName;
+								document.getElementById('kind').value = kind;
+								document.getElementById('tDate').value = tDate;
+								document.getElementById('tHos').value = tHos;
+								document.getElementById('tPack').value = tPack;
+								document.getElementById('type').value = type;
+								document.getElementById('tWeight').value = tWeight;
+
+
+								//console.log(aniName + aniId + kind + weight + color);
+
+							},
+							error: function (sendDataById) {
+								alert("실패 : " + sendDataById);
+							}
+						});
 
 
 						//세훈:한나 = did:aniId
@@ -332,6 +365,101 @@
 		});
 		$("#canvas").click(function(){
 			$(".modalQRcode").fadeOut();
+		});
+	});
+	$(function(){
+		$("#find_bNumber").click(function() {
+			$(".modalQRcode2").fadeIn();
+
+			var video = document.createElement("video");
+			var canvasElement = document.getElementById("canvas2");
+			var canvas = canvasElement.getContext("2d");
+			var loadingMessage2 = document.getElementById("loadingMessage2");
+			var bNumber = document.getElementById("bNumber");
+			function drawLine(begin, end, color) {
+				canvas.beginPath();
+				canvas.moveTo(begin.x, begin.y);
+				canvas.lineTo(end.x, end.y);
+				canvas.lineWidth = 4;
+				canvas.strokeStyle = color;
+				canvas.stroke();
+			}
+			// 카메라 사용시
+			navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+				video.srcObject = stream;
+				video.setAttribute("playsinline", true);      // iOS 사용시 전체 화면을 사용하지 않음을 전달
+				video.play();
+				requestAnimationFrame(tick);
+			});
+			async function tick() {
+				loadingMessage2.innerText = "⌛ 스캔 기능을 활성화 중입니다."
+				if(video.readyState === video.HAVE_ENOUGH_DATA) {
+					loadingMessage2.hidden = true;
+					canvasElement.hidden = false;
+					// outputContainer.hidden = false;
+					// 읽어들이는 비디오 화면의 크기
+					canvasElement.height = video.videoHeight;
+					canvasElement.width = video.videoWidth;
+					canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+					var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+					var code = jsQR(imageData.data, imageData.width, imageData.height, {
+						inversionAttempts : "dontInvert",
+					});
+					// QR코드 인식에 성공한 경우
+					if(code) {
+						// 인식한 QR코드의 영역을 감싸는 사용자에게 보여지는 테두리 생성
+						drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FFCE49");
+						drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FFCE49");
+						drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FFCE49");
+						drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FFCE49");
+
+
+						// QR코드 메시지 출력
+						bNumber.innerHTML = code.data;
+
+						const bNumber2 = code.data;
+						$('#bNumber').val(bNumber2);
+						console.log(`bNumber:${bNumber}`);
+						//카메라 사라지기
+						$(".modalQRcode2").fadeOut();
+
+
+
+						//세훈:한나 = did:aniId
+						// $.ajax({
+						//    url:`http://192.168.43.99:3000/api/pet/get/all/petInfos/${did}`,
+						//    type:"GET",
+						//    contentType: "application/json",
+						//    success: function(result) {
+						//       if (result) {
+						//          console.log(result.peterpet);
+						//          // location.href = "/home/blood";
+						//       }
+						//       else {
+						//          alert("잠시 후에 시도해주세요.");
+						//       }
+						//    },
+						//    error: function() {
+						//       alert("에러 발생");
+						//    } })
+						// return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
+						return;
+					}
+					// QR코드 인식에 실패한 경우
+					else {
+						// outputMessage.hidden = false;
+						// outputData.parentElement.hidden = true;
+					}
+				}
+				requestAnimationFrame(tick);
+
+
+			}
+
+
+		});
+		$("#canvas2").click(function(){
+			$(".modalQRcode2").fadeOut();
 		});
 	});
 </script>
@@ -567,7 +695,7 @@
 	}
 
 	function setOrg(name){
-		$("#OrgName")[0].value = name
+		$("#dHos")[0].value = name
 	}
 	$(function(){
 		$("#map2").click(function() {

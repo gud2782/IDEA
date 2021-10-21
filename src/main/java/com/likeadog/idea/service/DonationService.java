@@ -8,6 +8,7 @@ import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DonationService {
 
+    @Autowired RegisterService registerService;
+
     private final DonationRepository donationRepository;
-    private final RegisterService registerService;
     private final UserService userService;
 
 
@@ -39,6 +41,7 @@ public class DonationService {
         Donation donation = Donation.builder()
                 .donationIdx(form.getDonationIdx())
                 .register(register)
+                .kind(register.getKind())
                 .dDate(form.getDDate())
                 .dHos(form.getDHos())
                 .type(form.getType())
@@ -120,6 +123,15 @@ public class DonationService {
 
     public Register findRegister(Long registerIdx) {
         return registerService.findOne(registerIdx);
+    }
+
+    //추가
+    public Donation findDonationByAniId(String aniId){
+        return  donationRepository.findDonationByAniId(aniId);
+    }
+
+    public void saveDonation(Donation donation){
+        donationRepository.regDo(donation);
     }
 
 

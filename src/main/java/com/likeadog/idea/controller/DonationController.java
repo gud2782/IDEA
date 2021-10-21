@@ -92,6 +92,24 @@ public class DonationController {
         return "redirect:/donation/list";
     }
 
+    @RequestMapping("/find")
+    public @ResponseBody String findByDosId(String dosId) {
+        Donation result = donationService.findDonationByAniId(dosId);
+
+
+        String resultDosName = result.getRegister().getAniName();
+        String resultKind = result.getKind();
+        String resultDDate = result.getDDate();
+        String resultDHos = result.getDHos();
+        String resultDPack = result.getDPack();
+        String resultType = result.getType();
+        String resultDWeight = result.getDWeight();
+
+        String strResult = resultDosName + "," + resultKind +  "," + resultDDate + "," + resultDHos + "," + resultDPack
+                + "," + resultType + "," + resultDWeight;
+        System.out.println(strResult);
+        return strResult;
+    }
 
 
 
