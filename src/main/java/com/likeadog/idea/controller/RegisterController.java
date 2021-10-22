@@ -7,6 +7,7 @@ import com.likeadog.idea.domain.Transfusion;
 import com.likeadog.idea.service.DonationService;
 import com.likeadog.idea.service.RegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -90,8 +91,8 @@ public class RegisterController {
         return "redirect:/ani/list";
     }
 
-    @RequestMapping("/find")
-    public @ResponseBody String findByAniId(String aniId) {
+    @PostMapping("/find")
+    public @ResponseBody String findByAniId( String aniId) {
         Register result = registerService.findByAniId(aniId);
 
         String resultAniName = result.getAniName();
@@ -105,18 +106,29 @@ public class RegisterController {
         System.out.println(strResult);
         return strResult;
     }
-    @RequestMapping("/findByPhone")
-    public @ResponseBody List<Register> findByPhone(String phone) {
+//    @RequestMapping("/findByPhone")
+//    public @ResponseBody List<Register> findByPhone(String phone) {
+//        List<Register> result = registerService.findByPhone(phone);
+//        System.out.println(phone);
+//
+//
+//        for (int i = 0; i <result.size() ; i++) {
+//            String resultAniId = result.get(i).getAniId();
+//
+//            System.out.println(resultAniId);
+//            return result;
+//        }
+//        return result;
+//    }
+
+        @RequestMapping(value ="/findByPhone", produces = "application/json; charset=utf8")
+        public @ResponseBody ResponseEntity findByPhone(String phone) {
         List<Register> result = registerService.findByPhone(phone);
+        System.out.println(phone);
 
-        for (int i = 0; i <result.size() ; i++) {
-            String resultAniId = result.get(i).getAniId();
-
-            System.out.println(resultAniId);
-            return result;
-        }
-        return result;
+        ResponseEntity responseEntity = ResponseEntity.ok(result);
+            System.out.println(responseEntity);
+        return ResponseEntity.ok(result);
     }
-
 
 }

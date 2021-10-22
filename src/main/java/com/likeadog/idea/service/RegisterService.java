@@ -9,12 +9,14 @@ import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.RegisterRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,6 +50,8 @@ public class RegisterService {
                 .neutralization(form.getNeutralization())
                 .build();
         register.setDel(DeleteStatus.NO);
+        register.setCreater(userId);
+        register.setCDate(LocalDateTime.now());
 
 
         registerRepository.regSave(register);
@@ -70,6 +74,8 @@ public class RegisterService {
                 .neutralization(register.getNeutralization())
                 .build();
         form.setDel(register.getDel());
+        form.setCDate(register.getCDate());
+        form.setCreater(register.getCreater());
 
 
 
@@ -77,7 +83,10 @@ public class RegisterService {
     }
 
     public void updateAni(String registerIdx, RegisterForm form) {
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         Register register = Register.builder()
+                .user(userEntity)
                 .registerIdx(form.getRegisterIdx())
                 .aniId(form.getAniId())
                 .aniName(form.getAniName())
@@ -90,6 +99,10 @@ public class RegisterService {
                 .user(form.getUser())
                 .build();
         register.setDel(form.getDel());
+        register.setCreater(form.getCreater());
+        register.setCDate(form.getCDate());
+        register.setModifier(userId);
+        register.setMDate(LocalDateTime.now());
 
         registerRepository.regSave(register);
         System.out.println("4 : " + form.getDel());
