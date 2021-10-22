@@ -78,6 +78,8 @@ public class RegisterController {
 
         Register register = registerService.findOne(registerIdx);
 
+        String aniId = register.getAniId().substring(13,23);
+
         model.addAttribute("register", register);
         return "ani/detail";
 

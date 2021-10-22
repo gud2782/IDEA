@@ -54,10 +54,9 @@
                             <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
                             <input type="button" class="btn btn--radius-2 btn--blue-2" onclick="findByAniId()" value="조회" />
                             <div>
-<!--                                <input type="button" name="find_bank" id="qrcode" value="QR코드" class="form-control" />-->
-                                <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn"/>
-                                <label for="modal-btn">조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
-                                <div class="modal">
+                                <input class="modal-btn" type="checkbox" id="qrcode" name="modal-btn"/>
+                                <label for="qrcode">QRCODE 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
+                                <div class="modal" name="modal" id="modal">
                                     <div class="modal-wrap">
                                         <div class="qrBox" >
                                             <div class="modalQRcode">
@@ -71,8 +70,6 @@
                                                 </div> <!-- modal_content-->
                                             </div><!-- modalQRcode-->
                                         </div>
-                                        <input class="modal-btn" type="button" id="qrcode" name="modal-btn" value="조회"/>
-                                        <label for="qrcode">조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
                                         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
                                     </div>
                                 </div>
@@ -91,7 +88,7 @@
                     <div class="form-row-do">
                         <div class="name">몸무게</div>
                         <div class="value">
-                            <input class="input--style-6" type="text" name="full_name" id="weight" th:for="weight" th:field="*{weight}">
+                            <input class="input--style-6" type="text" name="full_name" id="weight" th:for="weight" th:field="*{weight}" required>
                         </div>
                     </div>
                     <div class="form-row-do">
@@ -204,6 +201,9 @@
                         //console.log(`dosId:${dosId}`);
                         console.log(`dosId:`+aniId2);
 
+                        //카메라 사라지기
+                        $(".modal").fadeOut();
+
 
 
                         //추가
@@ -265,49 +265,7 @@
 
     });
 </script>
-<!--<script type="text/javascript" th:inline="javascript">-->
-<!--    function findByAniId() {-->
-<!--        var aniId = $("#aniId").val();-->
-<!--        var sendDataById = "aniId="+aniId;-->
-<!--        console.log("sendDataById : " + sendDataById)-->
 
-<!--        $.ajax({-->
-<!--            url: "/ani/find",-->
-<!--            type: "post",-->
-<!--            data: aniId,-->
-
-
-<!--            success: function (result) {-->
-<!--                alert(result);-->
-
-<!--                let getResultById = result.split(",");-->
-<!--                let aniName, kind, weight, color-->
-
-<!--                for (let idx=0; idx <  4; idx++){-->
-<!--                    let value = getResultById [idx];-->
-<!--                    if(idx == 0){-->
-<!--                        aniName= value;-->
-<!--                    }else if(idx == 1){-->
-<!--                        kind= value;-->
-<!--                    }else if(idx==2){-->
-<!--                        weight= value;-->
-<!--                    }else if(idx==3) {-->
-<!--                        color=value;-->
-<!--                    }-->
-<!--                }-->
-<!--                document.getElementById('aniName').value = aniName;-->
-<!--                document.getElementById('kind').value = kind;-->
-<!--                document.getElementById('weight').value = weight;-->
-<!--                document.getElementById('color').value = color;-->
-<!--                console.log(aniName + aniId + kind + weight + color);-->
-
-<!--            },-->
-<!--            error: function (sendDataById) {-->
-<!--                alert("실패 : " + sendDataById);-->
-<!--            }-->
-<!--        });-->
-<!--    };-->
-<!--</script>-->
 <script type="text/javascript" th:inline="javascript">
     function findByAniId(aniId) {
         //var did = $("#aniId").val();

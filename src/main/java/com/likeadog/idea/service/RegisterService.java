@@ -35,7 +35,8 @@ public class RegisterService {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
-        // qrcodeService.registerQrcode(aniId);
+        String name = aniId.substring(13,23);
+         qrcodeService.registerQrcode(name);
 
 
         Register register = Register.builder()
@@ -48,10 +49,12 @@ public class RegisterService {
                 .gender(form.getGender())
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
+                .fileName(name)
                 .build();
         register.setDel(DeleteStatus.NO);
         register.setCreater(userId);
         register.setCDate(LocalDateTime.now());
+
 
 
         registerRepository.regSave(register);
@@ -72,6 +75,7 @@ public class RegisterService {
                 .gender(register.getGender())
                 .birth(register.getBirth())
                 .neutralization(register.getNeutralization())
+                .fileName(register.getFileName())
                 .build();
         form.setDel(register.getDel());
         form.setCDate(register.getCDate());
@@ -97,6 +101,7 @@ public class RegisterService {
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
                 .user(form.getUser())
+                .fileName(form.getFileName())
                 .build();
         register.setDel(form.getDel());
         register.setCreater(form.getCreater());

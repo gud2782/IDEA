@@ -40,7 +40,8 @@ public class QrcodeService {
 
     private static String address = "172.30.1.51";
 
-    public void registerQrcode(String aniId) {
+    public void registerQrcode(String text) {
+
         try {
             File file = null;
 
@@ -53,7 +54,8 @@ public class QrcodeService {
             }
             // 코드인식시 링크걸 URL주소
 
-            String text = aniId;
+
+
 
             // 큐알코드 바코드 생상값
             int qrcodeColor =   0xFF766c15;
@@ -67,7 +69,7 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ aniId+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ "peterpet_"+text+ ".png"));
 
         } catch (Exception e) {
             e.printStackTrace();

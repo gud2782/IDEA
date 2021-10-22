@@ -51,6 +51,8 @@
 								<div class="form-holder form-holder-4">
 									<input type="button" name="find_bank" id="find_bNumber" value="조회" class="form-control" >
 								</div>
+								<input class="modal-btn" type="checkbox" id="qrcode2" name="modal-btn"/>
+								<label for="qrcode">혈액번호 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
 							</div>
 							<div class="form-row">
 								<div class="form-holder form-holder-1">
@@ -58,32 +60,44 @@
 										   th:id="dosId" th:for="dosId" >
 								</div>
 								<div class="form-holder form-holder-4">
-									<input type="button" name="find_bank" id="qrcode" value="QR코드" class="form-control" >
+									<input class="modal-btn" type="checkbox" id="qrcode" name="modal-btn"/>
+									<label for="qrcode">QRCODE 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
+									<div class="modal" name="modal" id="modal">
+										<div class="modal-wrap">
+											<div class="qrBox" >
+												<div class="modalQRcode">
+													<div class="modal_content">
+														<div id="frame">
+															<div id="loadingMessage" hidden>
+																🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+															</div> <!-- loadingMessage-->
+															<canvas id="canvas" style="width: 400px; height: 300px"></canvas>
+														</div> <!-- frame-->
+													</div> <!-- modal_content-->
+												</div><!-- modalQRcode-->
+											</div>
+											<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="qrBox" >
-								<div class="modalQRcode">
-									<div class="modal_content">
-										<div id="frame">
-											<div id="loadingMessage" hidden>
-												🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
-											</div> <!-- loadingMessage-->
-											<canvas id="canvas" style="width: 400px; height: 300px"></canvas>
-										</div> <!-- frame-->
-									</div> <!-- modal_content-->
-								</div><!-- modalQRcode-->
-							</div>
-							<div class="qrBox2" >
-								<div class="modalQRcode2">
-									<div class="modal_content2">
-										<div id="frame2">
-											<div id="loadingMessage2" hidden>
-												🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
-											</div> <!-- loadingMessage-->
-											<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
-										</div> <!-- frame-->
-									</div> <!-- modal_content-->
-								</div><!-- modalQRcode-->
+
+							<div class="modal2" name="modal2" id="modal2">
+								<div class="modal-wrap">
+									<div class="qrBox2" >
+										<div class="modalQRcode2">
+											<div class="modal_content2">
+												<div id="frame2">
+													<div id="loadingMessage2" hidden>
+														🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+													</div> <!-- loadingMessage-->
+													<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
+												</div> <!-- frame-->
+											</div> <!-- modal_content-->
+										</div><!-- modalQRcode-->
+									</div>
+									<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+								</div>
 							</div>
 						</div>
 					</section>
@@ -275,7 +289,7 @@
 						//console.log(`dosId:${dosId}`);
 						console.log(`dosId:`+dosId2);
 						//카메라 사라지기
-						$(".modalQRcode").fadeOut();
+						$(".modal").fadeOut();
 
 
 						//추가
@@ -328,25 +342,6 @@
 							}
 						});
 
-
-						//세훈:한나 = did:aniId
-						// $.ajax({
-						//    url:`http://192.168.43.99:3000/api/pet/get/all/petInfos/${did}`,
-						//    type:"GET",
-						//    contentType: "application/json",
-						//    success: function(result) {
-						//       if (result) {
-						//          console.log(result.peterpet);
-						//          // location.href = "/home/blood";
-						//       }
-						//       else {
-						//          alert("잠시 후에 시도해주세요.");
-						//       }
-						//    },
-						//    error: function() {
-						//       alert("에러 발생");
-						//    } })
-						// return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
 						return;
 					}
 					// QR코드 인식에 실패한 경우
@@ -362,12 +357,9 @@
 
 
 		});
-		$("#canvas").click(function(){
-			$(".modalQRcode").fadeOut();
-		});
 	});
 	$(function(){
-		$("#find_bNumber").click(function() {
+		$("#qrcode2").click(function() {
 			$(".modalQRcode2").fadeIn();
 
 			var video = document.createElement("video");
@@ -420,45 +412,17 @@
 						$('#bNumber').val(bNumber2);
 						console.log(`bNumber:${bNumber}`);
 						//카메라 사라지기
-						$(".modalQRcode2").fadeOut();
+						$(".modal2").fadeOut();
 
-
-
-						//세훈:한나 = did:aniId
-						// $.ajax({
-						//    url:`http://192.168.43.99:3000/api/pet/get/all/petInfos/${did}`,
-						//    type:"GET",
-						//    contentType: "application/json",
-						//    success: function(result) {
-						//       if (result) {
-						//          console.log(result.peterpet);
-						//          // location.href = "/home/blood";
-						//       }
-						//       else {
-						//          alert("잠시 후에 시도해주세요.");
-						//       }
-						//    },
-						//    error: function() {
-						//       alert("에러 발생");
-						//    } })
-						// return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
 						return;
 					}
 					// QR코드 인식에 실패한 경우
 					else {
-						// outputMessage.hidden = false;
-						// outputData.parentElement.hidden = true;
+
 					}
 				}
 				requestAnimationFrame(tick);
-
-
 			}
-
-
-		});
-		$("#canvas2").click(function(){
-			$(".modalQRcode2").fadeOut();
 		});
 	});
 </script>
