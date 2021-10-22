@@ -88,7 +88,7 @@ public class HelloKAS {
         System.out.println(response.getResult());
 
     }
-
+    
     @GetMapping("/pet/info")
     public static ResponseEntity test(@RequestParam("did") String did) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
 
