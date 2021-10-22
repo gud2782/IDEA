@@ -81,54 +81,54 @@ public class HelloKAS {
 
     }
 
-    public static void test() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-
-        CaverExtKAS caver = new CaverExtKAS(chainId, accessKeyId, secretAccessKey);
-
-        String executor = "0x970B4581F63093aB145B0490914a43E39d979D16";
-
-
-
-        Contract contract = new Contract(caver, ABI, CA);
-        List<Type> result = contract.call("getAllInfoByDid","did:peterpet:c0f7f26d01");
-
-
-        ArrayList<DynamicStruct> peterpet = (ArrayList<DynamicStruct>) result.get(0).getValue();
-        String result1 =  peterpet.get(0).toString();
-
-        String resultset = result + "," +
-
-
-
-
-//        try{
-//            JsonArray jsonArray = new JsonArray();
-//            obj.put("peterpet",peterpet);
-//        }catch (JsonIOException e){
-//            e.printStackTrace();
+//    public static void test() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
+//
+//        CaverExtKAS caver = new CaverExtKAS(chainId, accessKeyId, secretAccessKey);
+//
+//        String executor = "0x970B4581F63093aB145B0490914a43E39d979D16";
+//
+//
+//
+//        Contract contract = new Contract(caver, ABI, CA);
+//        List<Type> result = contract.call("getAllInfoByDid","did:peterpet:c0f7f26d01");
+//
+//
+//        ArrayList<DynamicStruct> peterpet = (ArrayList<DynamicStruct>) result.get(0).getValue();
+//        String result1 =  peterpet.get(0).toString();
+//
+//        String resultset = result + "," +
+//
+//
+//
+//
+////        try{
+////            JsonArray jsonArray = new JsonArray();
+////            obj.put("peterpet",peterpet);
+////        }catch (JsonIOException e){
+////            e.printStackTrace();
+////        }
+//
+//
+//        /*
+//        string imgHash; // img IPFS 값
+//        string name; // 이름
+//        string breedOfDog; // 견종
+//        string gender; //성별
+//        string birth; //생년월일
+//        string adoptionDate; // 입양일
+//        bool isNeutering; // 중성화 여부
+//        string furColor; //모색
+//        string[] vaccinationHistory; //접종내역
+//        string notes; //특이사항
+//        bool missing; //실종상태
+//        string paNftId;
+//         */
+//        for(int i=0; i<peterpet.size(); i++) {
+//            System.out.println("index[" + i + "]" + " : " + peterpet.get(i));
 //        }
-
-
-        /*
-        string imgHash; // img IPFS 값
-        string name; // 이름
-        string breedOfDog; // 견종
-        string gender; //성별
-        string birth; //생년월일
-        string adoptionDate; // 입양일
-        bool isNeutering; // 중성화 여부
-        string furColor; //모색
-        string[] vaccinationHistory; //접종내역
-        string notes; //특이사항
-        bool missing; //실종상태
-        string paNftId;
-         */
-        for(int i=0; i<peterpet.size(); i++) {
-            System.out.println("index[" + i + "]" + " : " + peterpet.get(i));
-        }
-
-    }
-
+//
+//    }
+//
 
 
 

@@ -16,7 +16,7 @@ public class IdeaApplication {
 
 		SpringApplication.run(IdeaApplication.class, args);
 		HelloKAS.getBlockNumber();
-		HelloKAS.test();
+//		HelloKAS.test();
 	}
 
 }

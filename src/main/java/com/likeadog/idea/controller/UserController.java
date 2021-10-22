@@ -45,7 +45,17 @@ public class UserController {
 
 
 
-    // 내 정보 페이지
+    //테스트 컨트롤러
+    @GetMapping("/index")
+    public String index() {
+
+        return "user/index2";
+    }
+
+
+
+
+    // 마이 페이지
     @GetMapping("/info")
     public String dispMyInfo() {
 
