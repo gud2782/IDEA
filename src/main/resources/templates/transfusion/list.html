@@ -19,57 +19,19 @@
 <!--navbar end-->
 
 <body>
-<section class="ftco-section">
+<section class="ftco-section" >
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="featured-carousel owl-carousel">
-                    <div class="item">
+                <div >
+                    <div class="item" style="float: left; margin-right: 30px" th:each="transs : ${trans}" >
                         <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
+                            <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/puppy.png);">
                                 <div class="text w-100">
-                                    <span class="cat">동물등록번호</span>
-                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
-                                <div class="text w-100">
-                                    <span class="cat">동물등록번호</span>
-                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
-                                <div class="text w-100">
-                                    <span class="cat">동물등록번호</span>
-                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(img/favicon.png);">
-                                <div class="text w-100">
-                                    <span class="cat">동물등록번호</span>
-                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(images/work-5.jpg);">
-                                <div class="text w-100">
-                                    <span class="cat">동물등록번호</span>
-                                    <h3><a href="#">Working Spaces for Startups Freelancer</a></h3>
+                                    <span class="cat" th:text="${transs.register.aniId}" >동물등록번호</span>
+                                    <h3><a  th:text="${transs.register.aniName}" >동물이름</a></h3>
+                                    <a href="#" th:href="@{/transs/{idx}/detail (idx=${transs.transfusionIdx})}"
+                                       class="btn btn-primary" role="button">자세히</a>
                                 </div>
                             </div>
                         </div>
@@ -79,41 +41,13 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
 <tbody>
-<tr th:each="transs : ${trans}">
-    <td th:text="${transs.transfusionIdx}"></td>
-    <td th:text="${transs.register.aniId}"></td>
-    <td th:text="${transs.register.aniName}"></td>
-    <td th:text="${transs.TWeight}"></td>
-    <td th:text="${transs.kind}"></td>
-    <td th:text="${transs.type}"></td>
-    <td th:text="${transs.neutralization}"></td>
-    <td th:text="${transs.THos}"></td>
-    <td th:text="${transs.TPack}"></td>
+<tr>
     <td>
-        <a href="#" th:href="@{/transfusion/{idx}/update (idx=${transs.transfusionIdx})}"
-           class="btn btn-primary" role="button">수정</a>
+
     </td>
-    <td>
-        <a href="#" th:href="@{/transfusion/{idx}/detail (idx=${transs.transfusionIdx})}"
-           class="btn btn-primary" role="button">자세히</a>
-    </td>
-    <td>
-        <a href="#" th:href="@{/transfusion/qr/t{idx} (idx=${transs.transfusionIdx})}"
-           class="btn btn-primary" role="button">QR CODE</a>
-    </td>
-    <!--                <td>-->
-    <!--                    <a th:if="${item.status.name() == 'ORDER'}" href="#"-->
-    <!--                       th:href="'javascript:cancel('+${item.id}+')'"-->
-    <!--                       class="btn btn-danger">CANCEL</a>-->
-    <!--                </td>-->
 </tr>
+
 <tr>
     <td>
         <a href="/transfusion/new" class="btn btn-primary" role="button">추가</a>
@@ -122,8 +56,49 @@
 </tbody>
 </table>
 </div>
-</div> <!-- /container -->
 </body>
+
+
+
+<!--<tbody>-->
+<!--<tr th:each="transs : ${trans}">-->
+<!--    <td th:text="${transs.transfusionIdx}"></td>-->
+<!--    <td th:text="${transs.register.aniId}"></td>-->
+<!--    <td th:text="${transs.register.aniName}"></td>-->
+<!--    <td th:text="${transs.TWeight}"></td>-->
+<!--    <td th:text="${transs.kind}"></td>-->
+<!--    <td th:text="${transs.type}"></td>-->
+<!--    <td th:text="${transs.neutralization}"></td>-->
+<!--    <td th:text="${transs.THos}"></td>-->
+<!--    <td th:text="${transs.TPack}"></td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/transfusion/{idx}/update (idx=${transs.transfusionIdx})}"-->
+<!--           class="btn btn-primary" role="button">수정</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/transfusion/{idx}/detail (idx=${transs.transfusionIdx})}"-->
+<!--           class="btn btn-primary" role="button">자세히</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/transfusion/qr/t{idx} (idx=${transs.transfusionIdx})}"-->
+<!--           class="btn btn-primary" role="button">QR CODE</a>-->
+<!--    </td>-->
+<!--    &lt;!&ndash;                <td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                    <a th:if="${item.status.name() == 'ORDER'}" href="#"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       th:href="'javascript:cancel('+${item.id}+')'"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       class="btn btn-danger">CANCEL</a>&ndash;&gt;-->
+<!--    &lt;!&ndash;                </td>&ndash;&gt;-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <a href="/transfusion/new" class="btn btn-primary" role="button">추가</a>-->
+<!--    </td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+<!--</body>-->
 
 
 <!-- jQuery -->
