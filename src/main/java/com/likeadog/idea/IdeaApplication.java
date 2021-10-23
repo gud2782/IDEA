@@ -15,7 +15,7 @@ public class IdeaApplication {
 	public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
 		SpringApplication.run(IdeaApplication.class, args);
-		HelloKAS.getBlockNumber();
+//		HelloKAS.getBlockNumber();
 //		HelloKAS.test();
 	}
 

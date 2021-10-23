@@ -29,10 +29,14 @@
                         <div class="work">
                             <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/puppy.png);">
                                 <div class="text w-100">
+                                    <span class="cat" th:text="${vc.registerVaccines.get(0).register.aniId}" >해시값 들어가는 곳</span>
+<!--                                    <a href="#" th:href="@{https://baobab.scope.klaytn.com/account/{해시값}"-->
+<!--                                       class="btn btn-primary" role="button">해시값을 통해 조회</a>-->
+<!--                                    이 부분은 해시값 변수만 추가해주면 됩니당-->
                                     <span class="cat" th:text="${vc.registerVaccines.get(0).register.aniId}" >동물등록번호</span>
                                     <h3><a  th:text="${vc.registerVaccines.get(0).register.aniName}" >동물이름</a></h3>
-<!--                                    <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.registerIdx})}"-->
-<!--                                       class="btn btn-primary" role="button">자세히</a>-->
+                                    <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
+                                       class="btn btn-primary" role="button">자세히</a>
                                 </div>
                             </div>
                         </div>
@@ -51,52 +55,52 @@
 
 <tr>
     <td>
-        <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
-    </td>
-</tr>
-</tbody>
-</table>
-</div>
-</body>
-
-
-
-<tbody>
-<tr th:each="vc : ${vcs}">
-    <td th:text="${vc.vaccineIdx}"></td>
-    <td th:text="${vc.registerVaccines.get(0).register.aniId}"></td>
-    <td th:text="${vc.registerVaccines.get(0).register.aniName}"></td>
-    <!--                <td th:text="${vc.registerVaccines.get(0).register.kind}"></td>-->
-    <!--                <td th:text="${vc.registerVaccines.get(0).register.neutralization}"></td>-->
-    <!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.first.name}"></td>-->
-    <!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.second.name}"></td>-->
-    <!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.third.name}"></td>-->
-    <!--                <td th:text="${vc.VDate}"></td>-->
-    <!--                <td th:text="${vc.NDate}"></td>-->
-    <td>
-        <a href="#" th:href="@{/vc/{idx}/update (idx=${vc.vaccineIdx})}"
-           class="btn btn-primary" role="button">수정</a>
-    </td>
-    <td>
-        <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
-           class="btn btn-primary" role="button">자세히</a>
-    </td>
-    <td>
-        <a href="#" th:href="@{/vc/qr/v{idx} (idx=${vc.vaccineIdx})}"
-           class="btn btn-primary" role="button">QR CODE</a>
-    </td>
-
-</tr>
-<tr>
-    <td>
         <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
     </td>
 </tr>
 </tbody>
 </table>
 </div>
-</div> <!-- /container -->
 </body>
+
+
+
+<!--<tbody>-->
+<!--<tr th:each="vc : ${vcs}">-->
+<!--    <td th:text="${vc.vaccineIdx}"></td>-->
+<!--    <td th:text="${vc.registerVaccines.get(0).register.aniId}"></td>-->
+<!--    <td th:text="${vc.registerVaccines.get(0).register.aniName}"></td>-->
+<!--    &lt;!&ndash;                <td th:text="${vc.registerVaccines.get(0).register.kind}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${vc.registerVaccines.get(0).register.neutralization}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${vc.vaccineVinfos.get(0).vinfo.first.name}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${vc.vaccineVinfos.get(0).vinfo.second.name}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${vc.vaccineVinfos.get(0).vinfo.third.name}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${vc.VDate}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${vc.NDate}"></td>&ndash;&gt;-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/vc/{idx}/update (idx=${vc.vaccineIdx})}"-->
+<!--           class="btn btn-primary" role="button">수정</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"-->
+<!--           class="btn btn-primary" role="button">자세히</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        <a href="#" th:href="@{/vc/qr/v{idx} (idx=${vc.vaccineIdx})}"-->
+<!--           class="btn btn-primary" role="button">QR CODE</a>-->
+<!--    </td>-->
+
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <a href="/vc/new" class="btn btn-primary" role="button">추가</a>-->
+<!--    </td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+<!--</body>-->
 <!--footer-->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
