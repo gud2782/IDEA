@@ -40,8 +40,8 @@ public class QrcodeService {
 
     private static String address = "172.30.1.51";
 
-    public void registerQrcode(String text) {
-
+    public void registerQrcode(String aniId) {
+        String text = aniId.substring(13,23);
         try {
             File file = null;
 
@@ -64,7 +64,7 @@ public class QrcodeService {
 
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             // 3,4번째 parameter값 : width/height값 지정
-            BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE,200, 200);
+            BitMatrix bitMatrix = qrCodeWriter.encode(aniId, BarcodeFormat.QR_CODE,200, 200);
             //
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);

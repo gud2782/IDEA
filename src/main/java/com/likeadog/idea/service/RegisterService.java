@@ -36,7 +36,7 @@ public class RegisterService {
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
         String name = aniId.substring(13,23);
-         qrcodeService.registerQrcode(name);
+         qrcodeService.registerQrcode(aniId);
 
 
         Register register = Register.builder()
