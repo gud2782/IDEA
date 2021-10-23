@@ -1,70 +1,111 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header_content :: header_content" />
+<head>
+    <title>Carousel 03</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/css/style2.css">
+
+
+</head>
+<link rel="stylesheet" th:href="@{/css/style_form.css}">
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
+
+
 <body>
-<div class="container">
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>동물등록번호</th>
-                <th>동물이름</th>
-                <th>견종</th>
-                <th>중성화여부</th>
-                <th>대분류</th>
-                <th>중분류</th>
-                <th>소분류</th>
-                <th>접종날짜</th>
-                <th>다음 접종날짜</th>
-
-
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="vc : ${vcs}">
-                <td th:text="${vc.vaccineIdx}"></td>
-                <td th:text="${vc.registerVaccines.get(0).register.aniId}"></td>
-                <td th:text="${vc.registerVaccines.get(0).register.aniName}"></td>
-<!--                <td th:text="${vc.registerVaccines.get(0).register.kind}"></td>-->
-<!--                <td th:text="${vc.registerVaccines.get(0).register.neutralization}"></td>-->
-<!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.first.name}"></td>-->
-<!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.second.name}"></td>-->
-<!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.third.name}"></td>-->
-<!--                <td th:text="${vc.VDate}"></td>-->
-<!--                <td th:text="${vc.NDate}"></td>-->
-                <td>
-                    <a href="#" th:href="@{/vc/{idx}/update (idx=${vc.vaccineIdx})}"
-                       class="btn btn-primary" role="button">수정</a>
-                </td>
-                <td>
-                    <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
-                       class="btn btn-primary" role="button">자세히</a>
-                </td>
-                <td>
-                    <a href="#" th:href="@{/vc/qr/v{idx} (idx=${vc.vaccineIdx})}"
-                       class="btn btn-primary" role="button">QR CODE</a>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<section class="ftco-section" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div >
+                    <div class="item" style="float: left; margin-right: 30px" th:each="vc : ${vcs}" >
+                        <div class="work">
+                            <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/puppy.png);">
+                                <div class="text w-100">
+                                    <span class="cat" th:text="${vc.registerVaccines.get(0).register.aniId}" >동물등록번호</span>
+                                    <h3><a  th:text="${vc.registerVaccines.get(0).register.aniName}" >동물이름</a></h3>
+<!--                                    <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.registerIdx})}"-->
+<!--                                       class="btn btn-primary" role="button">자세히</a>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+<tbody>
+<tr>
+    <td>
+
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <a href="/ani/new" class="btn btn-primary" role="button">추가</a>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+
+
+
+<tbody>
+<tr th:each="vc : ${vcs}">
+    <td th:text="${vc.vaccineIdx}"></td>
+    <td th:text="${vc.registerVaccines.get(0).register.aniId}"></td>
+    <td th:text="${vc.registerVaccines.get(0).register.aniName}"></td>
+    <!--                <td th:text="${vc.registerVaccines.get(0).register.kind}"></td>-->
+    <!--                <td th:text="${vc.registerVaccines.get(0).register.neutralization}"></td>-->
+    <!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.first.name}"></td>-->
+    <!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.second.name}"></td>-->
+    <!--                <td th:text="${vc.vaccineVinfos.get(0).vinfo.third.name}"></td>-->
+    <!--                <td th:text="${vc.VDate}"></td>-->
+    <!--                <td th:text="${vc.NDate}"></td>-->
+    <td>
+        <a href="#" th:href="@{/vc/{idx}/update (idx=${vc.vaccineIdx})}"
+           class="btn btn-primary" role="button">수정</a>
+    </td>
+    <td>
+        <a href="#" th:href="@{/vc/{idx}/detail (idx=${vc.vaccineIdx})}"
+           class="btn btn-primary" role="button">자세히</a>
+    </td>
+    <td>
+        <a href="#" th:href="@{/vc/qr/v{idx} (idx=${vc.vaccineIdx})}"
+           class="btn btn-primary" role="button">QR CODE</a>
+    </td>
+
+</tr>
+<tr>
+    <td>
+        <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
 </div> <!-- /container -->
 </body>
-<!--footer -->
+<!--footer-->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 
+<script src="/js/jquery.min2.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min2.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
 <!-- jQuery -->
 <!--<script src="js/jquery.min.js"></script>-->
 

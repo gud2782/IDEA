@@ -30,8 +30,8 @@
                         <div class="work">
                             <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/puppy.png);">
                                 <div class="text w-100">
-                                    <span class="cat" th:text="*{ani.aniId}" >동물이름</span>
-                                    <h3><a  th:text="*{ani.aniName}" >동물등록번호</a></h3>
+                                    <span class="cat" th:text="*{ani.aniId}" >동물등록번호</span>
+                                    <h3><a  th:text="*{ani.aniName}" >동물이름</a></h3>
                                     <a href="#" th:href="@{/ani/{idx}/detail (idx=${ani.registerIdx})}"
                                        class="btn btn-primary" role="button">자세히</a>
                                 </div>
