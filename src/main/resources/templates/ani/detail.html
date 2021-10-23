@@ -24,6 +24,7 @@
               <hr>
               <div class="col-md-6 form-group">
                 <form  action="/ani/detail" th:object="${register}" method="GET" id="contactForm" name="contactForm">
+                  <input type="text" id="fileName" name="fileName" th:field="*{fileName}" hidden>
                 <p>사랑스러운 우리 강아지의 백신접종 내역을 등록하고,
                   <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
                   <br>아래의 QR코드로 우리 강아지의 정보를 손쉽게 열어 볼 수 있어요!</p>
@@ -57,7 +58,7 @@
                                   <div class="row">
                                       <g transform="translate(-539.17946,-568.85777)" id="layer1">
                                         <img id="file" style="width: 200px; height:200px"
-                                        th:src="@{/qrcode/animals/{idx}qrcode.png (idx=*{aniId})}">
+                                        th:src="@{/qrcode/animals/peterpet_{idx}.png (idx=*{fileName})}">
                                       </g>
                                   </div><!--row     onclick="qrcodeSave()"-->
                                 </div><!--bottom -->
@@ -212,7 +213,8 @@
     var kind = $("#kind").text();
     var color = $("#color").text();
     var neutralization = $("#neutralization").text();
-    console.log(aniId, aniName, weight, kind, color, neutralization)
+    var fileName = $("#fileName").text();
+    console.log(aniId, aniName, weight, kind, color, neutralization, fileName)
 
 
     //나에게 메세지 보내기
@@ -258,7 +260,7 @@
                               profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
                               title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
                               title_image_text: 'IDEA',
-                              title_image_category: '동물등록정보',
+                              title_image_category: fileName,
                               items: [
                                 {
                                   item: '이름',
@@ -282,8 +284,8 @@
                                   item_op: neutralization,
                                 }
                               ],
-                              sum: '동물등록번호',
-                              sum_op: aniId,
+                              sum: '대행기관',
+                              sum_op: "PeterPet",
                             },
 
                             button_title: 'GO TO IDEA',

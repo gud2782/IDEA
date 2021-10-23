@@ -8,9 +8,16 @@ import com.klaytn.caver.abi.datatypes.Bool; // 스마트 컨트랙트의 bool �
 
 import com.klaytn.caver.abi.datatypes.Type;
 import com.klaytn.caver.methods.response.Quantity;
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
+import jnr.ffi.Struct;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import xyz.groundx.caver_ext_kas.CaverExtKAS;
 import java.io.IOException;
 
@@ -27,10 +34,11 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
-@Component
+@Controller
 public class HelloKAS {
 
 
@@ -59,7 +67,7 @@ public class HelloKAS {
 
     static {
         try {
-            bytes = Files.readAllBytes(Paths.get("C:\\RealFinalPrj\\IDEA\\src\\main\\java\\com\\likeadog\\idea\\api\\Abi"));
+            bytes = Files.readAllBytes(Paths.get("C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\java\\com\\likeadog\\idea\\api\\Abi"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,55 +88,78 @@ public class HelloKAS {
         System.out.println(response.getResult());
 
     }
+    
+    @GetMapping("/pet/info")
+    public static ResponseEntity test(@RequestParam("did") String did) throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
 
-//    public static void test() throws NoSuchMethodException, IOException, InstantiationException, IllegalAccessException, InvocationTargetException, ClassNotFoundException {
-//
-//        CaverExtKAS caver = new CaverExtKAS(chainId, accessKeyId, secretAccessKey);
-//
-//        String executor = "0x970B4581F63093aB145B0490914a43E39d979D16";
-//
-//
-//
-//        Contract contract = new Contract(caver, ABI, CA);
-//        List<Type> result = contract.call("getAllInfoByDid","did:peterpet:c0f7f26d01");
-//
-//
-//        ArrayList<DynamicStruct> peterpet = (ArrayList<DynamicStruct>) result.get(0).getValue();
-//        String result1 =  peterpet.get(0).toString();
-//
+        System.out.println(did);
+        //did:peterpet:c0f7f26d01
+        CaverExtKAS caver = new CaverExtKAS(chainId, accessKeyId, secretAccessKey);
+
+        String executor = "0x970B4581F63093aB145B0490914a43E39d979D16";
+
+
+
+        Contract contract = new Contract(caver, ABI, CA);
+        List<Type> result = contract.call("getAllInfoByDid",did);
+        List<Type> isNeutering = contract.call("getPetIsNeuteringByDid",did);
+        boolean check = (boolean)isNeutering.get(0).getValue();
+
+        ArrayList<DynamicStruct> peterpet = (ArrayList<DynamicStruct>) result.get(0).getValue();
+//        String result1 =  result.get(0).;
+//        String result1 =  (String.valueOf(peterpet.get(0)));
+//        String name = (String.valueOf(peterpet.get(1)));
+//        String kind = (String.valueOf(peterpet.get(2)));
+//        String gender = (String.valueOf(peterpet.get(3)));
+//        String birth = (String.valueOf(peterpet.get(4)));
+//        String color = (String.valueOf(peterpet.get(7)));
+//        System.out.println(name + "," + kind + "," + gender + "," + birth + "," + color );
+
+
+
+        HashMap<String, Object> peterpetList = new HashMap<String, Object>();
+        peterpetList.put("img", (String.valueOf(peterpet.get(0))));
+        peterpetList.put("name" , (String.valueOf(peterpet.get(1))));
+        peterpetList.put("kind", (String.valueOf(peterpet.get(2))));
+        peterpetList.put("gender", (String.valueOf(peterpet.get(3))));
+        peterpetList.put("birth", (String.valueOf(peterpet.get(4)))); //com.klaytn.caver.abi.datatypes.Bool
+        peterpetList.put("isNeutering", check);
+        peterpetList.put("color", (String.valueOf(peterpet.get(7))));
+
+
+
+        return ResponseEntity.ok(peterpetList);
 //        String resultset = result + "," +
-//
-//
-//
-//
-////        try{
-////            JsonArray jsonArray = new JsonArray();
-////            obj.put("peterpet",peterpet);
-////        }catch (JsonIOException e){
-////            e.printStackTrace();
-////        }
-//
-//
-//        /*
-//        string imgHash; // img IPFS 값
-//        string name; // 이름
-//        string breedOfDog; // 견종
-//        string gender; //성별
-//        string birth; //생년월일
-//        string adoptionDate; // 입양일
-//        bool isNeutering; // 중성화 여부
-//        string furColor; //모색
-//        string[] vaccinationHistory; //접종내역
-//        string notes; //특이사항
-//        bool missing; //실종상태
-//        string paNftId;
-//         */
-//        for(int i=0; i<peterpet.size(); i++) {
-//            System.out.println("index[" + i + "]" + " : " + peterpet.get(i));
+
+
+
+
+//        try{
+//            JsonArray jsonArray = new JsonArray();
+//            obj.put("peterpet",peterpet);
+//        }catch (JsonIOException e){
+//            e.printStackTrace();
 //        }
-//
-//    }
-//
+
+
+        /*
+            0 string imgHash; // img IPFS 값
+        1 string name; // 이름
+        2 string breedOfDog; // 견종
+        3 string gender; //성별
+        4 string birth; //생년월일
+            5 string adoptionDate; // 입양일
+            6 bool isNeutering; // 중성화 여부
+        7 string furColor; //모색
+            8 string[] vaccinationHistory; //접종내역
+            9 string notes; //특이사항
+            10 bool missing; //실종상태
+            11 string paNftId;
+         */
+
+
+    }
+
 
 
 
