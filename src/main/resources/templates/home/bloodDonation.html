@@ -49,10 +49,26 @@
 									<input type="text" name="bNumber" id="bNumber"  class="form-control" placeholder="혈액번호" th:id="bNumber" th:for="bNumber" >
 								</div>
 								<div class="form-holder form-holder-4">
-									<input type="button" name="find_bank" id="find_bNumber" value="조회" class="form-control" >
+								<input class="modal-btn2" type="checkbox" id="qrcode2" name="modal-btn2"/>
+								<label for="qrcode2">혈액번호 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
+									<div class="modal2" name="modal2" id="modal2">
+										<div class="modal-wrap2">
+											<div class="qrBox2" >
+												<div class="modalQRcode2">
+													<div class="modal_content2">
+														<div id="frame2">
+															<div id="loadingMessage2" hidden>
+																🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+															</div> <!-- loadingMessage-->
+															<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
+														</div> <!-- frame-->
+													</div> <!-- modal_content-->
+												</div><!-- modalQRcode-->
+											</div>
+											<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+										</div>
+									</div>
 								</div>
-								<input class="modal-btn" type="checkbox" id="qrcode2" name="modal-btn"/>
-								<label for="qrcode">혈액번호 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
 							</div>
 							<div class="form-row">
 								<div class="form-holder form-holder-1">
@@ -82,23 +98,7 @@
 								</div>
 							</div>
 
-							<div class="modal2" name="modal2" id="modal2">
-								<div class="modal-wrap">
-									<div class="qrBox2" >
-										<div class="modalQRcode2">
-											<div class="modal_content2">
-												<div id="frame2">
-													<div id="loadingMessage2" hidden>
-														🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
-													</div> <!-- loadingMessage-->
-													<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
-												</div> <!-- frame-->
-											</div> <!-- modal_content-->
-										</div><!-- modalQRcode-->
-									</div>
-									<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-								</div>
-							</div>
+
 						</div>
 					</section>
 

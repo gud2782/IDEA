@@ -12,6 +12,7 @@ import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Qrcode;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
+import com.likeadog.idea.dto.QrcodeDto;
 import com.likeadog.idea.repository.QrcodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -254,13 +256,21 @@ public class QrcodeService {
 
         transfusionService.saveTransfusion(transfusion);
 
-
-
-
-
     }
 
     public List<Qrcode> findQR() {
         return qrcodeRepository.findAll();
+    }
+
+
+    public List<QrcodeDto> getqrcodeDtos(){
+
+        List<Qrcode> qrcodes = qrcodeRepository.findAll();
+        List<QrcodeDto> qrcodeDtos = new ArrayList<>();
+        for (int i = 0; i <qrcodes.size() ; i++) {
+            qrcodeDtos.add(qrcodeRepository.getQrcodeDto(qrcodes.get(i).getQrcodeIdx()));
+        }
+        return qrcodeDtos;
+
     }
 }

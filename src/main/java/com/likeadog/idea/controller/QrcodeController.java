@@ -3,6 +3,7 @@ package com.likeadog.idea.controller;
 
 import com.likeadog.idea.controller.form.QrcodeForm;
 import com.likeadog.idea.domain.Qrcode;
+import com.likeadog.idea.dto.QrcodeDto;
 import com.likeadog.idea.service.QrcodeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,7 @@ public class QrcodeController {
         //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
         qrcodeService.saveDonation(bNumber,dosId, form);
 
-        return "home/bloodList";
+        return "redirect:/home";
     }
 
     @GetMapping("/bNumber/new/transfusion")
@@ -91,7 +92,7 @@ public class QrcodeController {
         //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
         qrcodeService.saveTransfusion(bNumber,transId, form);
 
-        return "/home/bloodList";
+        return "redirect:/home";
     }
 
 
@@ -106,10 +107,10 @@ public class QrcodeController {
 
     @GetMapping("blood/list")
     public String bloodList(Model model) {
-        List<Qrcode> qrcodes = qrcodeService.findQR();
 
-        // System.out.println("vccon:"+vcs.get(1).getNDate());
-        model.addAttribute("qrcodes", qrcodes);
+        List<QrcodeDto> qrcodeDtos = qrcodeService.getqrcodeDtos();
+
+        model.addAttribute("qrcodeDtos", qrcodeDtos);
         return "home/bloodList";
 
     }
@@ -120,7 +121,6 @@ public class QrcodeController {
 
 
 }
-
 
 
 

@@ -1,60 +1,86 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header_content :: header_content" />
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/fonts/icomoon/style.css">
+<!-- Style -->
+<link rel="stylesheet" href="/css/style-list.css">
+
+
 <body>
-<div class="container">
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>혈액넘버</th>
-                <th>헌혈견 동물등록번호</th>
-                <th>헌혈견 이름</th>
-                <th>헌혈 날짜</th>
-                <th>헌혈양</th>
-                <th>헌혈견 혈액형</th>
-                <th>수혈견 동물등록번호</th>
-                <th>수혈견 이름</th>
-                <th>수혈 날짜</th>
-                <th>수혈양</th>
-                <th>수혈견 혈액형</th>
+
+<div class="content">
+
+    <div class="container">
+        <h2 class="mb-5">혈액관리 & 조회</h2>
 
 
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="qrcode : ${qrcodes}">
-                <td th:text="${qrcode.BNumber}"></td>
-<!--                <td th:text="${qrcode.donation.register.registerIdx}"></td>-->
-<!--                <td th:text="${qrcode.donation.register.aniName}"></td>-->
-<!--                <td th:text="${qrcode.donation.DDate}"></td>-->
-<!--                <td th:text="${qrcode.donation.DPack}"></td>-->
-<!--                <td th:text="${qrcode.donation.type}"></td>-->
-<!--                <td th:text="${qrcode.transfusion.register.aniId}"></td>-->
-<!--                <td th:text="${qrcode.transfusion.register.aniName}"></td>-->
-<!--                <td th:text="${qrcode.transfusion.TDate}"></td>-->
-<!--                <td th:text="${qrcode.transfusion.TPack}"></td>-->
-<!--                <td th:text="${qrcode.transfusion.type}"></td>-->
+        <div class="table-responsive">
 
-                <td>
-                    <a href="#"
-                       class="btn btn-primary" role="button">자세히</a>
-                </td>
+            <table class="table table-striped custom-table">
+                <thead>
+                <tr>
 
-            </tr>
-            <tr>
+                    <th scope="col">혈액넘버</th>
+                    <th scope="col">헌혈날짜</th>
+                    <th scope="col">헌혈견 이름</th>
+                    <th scope="col">헌혈견 혈액형</th>
+                    <th scope="col">혈액양</th>
+                    <th scope="col">헌혈기관</th>
+
+                    <th scope="col">수혈날짜</th>
+                    <th scope="col">수혈견 이름</th>
+                    <th scope="col">수혈견 혈액형</th>
+                    <th scope="col">수혈양 </th>
+                    <th scope="col">수혈기관</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr scope="row"th:each="qrcodeDto : ${qrcodeDtos}">
+
+
+
+                    <td th:text="${qrcodeDto.BNumber }"></td>
+                    <td th:text="${qrcodeDto.DDate}" ></td>
+                    <td th:text="${qrcodeDto.daniName}">
+                        <small class="d-block" >asd</small>
+                    </td>
+                    <td th:text="${qrcodeDto.DType}"></td>
+                    <td th:text="${qrcodeDto.DPack}"></td>
+                    <td th:text="${qrcodeDto.DHos}"></td>
+
+                    <td th:text="${qrcodeDto.TDate}" ></td>
+                    <td th:text="${qrcodeDto.taniName}"><a href="#"></a>
+                        <small class="d-block" th:text="${qrcodeDto.taniId }"></small>
+                    </td>
+                    <td th:text="${qrcodeDto.TType}"></td>
+                    <td th:text="${qrcodeDto.TPack}"></td>
+                    <td th:text="${qrcodeDto.THos}"></td>
+                    <td><a href="#" class="more">Delete</a></td>
+
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
                 <td>
                     <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
                 </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div> <!-- /container -->
+
 </body>
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />

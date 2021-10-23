@@ -28,7 +28,7 @@
                 <div >
                     <div class="item" style="float: left; margin-right: 30px; width:300px" th:each="ani : ${anis}" >
                         <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/puppy.png);">
+                            <div class="img d-flex align-items-end justify-content-center" href="/home" style="background-image: url(/img/puppy.png);">
                                 <div class="text w-100">
                                     <span class="cat" th:text="*{ani.aniId}" >동물등록번호</span>
                                     <h3><a  th:text="*{ani.aniName}" >동물이름</a></h3>

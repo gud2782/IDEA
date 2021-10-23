@@ -1,10 +1,8 @@
 package com.likeadog.idea.repository;
 
 
-import com.likeadog.idea.domain.Donation;
-import com.likeadog.idea.domain.Qrcode;
-import com.likeadog.idea.domain.Register;
-import com.likeadog.idea.domain.Vaccine;
+import com.likeadog.idea.domain.*;
+import com.likeadog.idea.dto.QrcodeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -36,13 +34,6 @@ public class QrcodeRepository  {
         em.persist(qrcode);
     }
 
-    /*
-    public Qrcode findBnumber(String bNumber) {
-//        if (bNumber == null || bNumber == ) {
-//            return "";
-//        }
-         return  em.find(Qrcode.class, bNumber);
-    }*/
 
     public Qrcode findBybNumber(String bNumber){
         return em.createQuery("select q from Qrcode q where  q.bNumber = :bNumber",
@@ -59,17 +50,76 @@ public class QrcodeRepository  {
         return listall;
 
     }
+
+
+    public QrcodeDto getQrcodeDto(Long qrcodeIdx){
+
+        QrcodeDto qrcodeDto = new QrcodeDto();
+
+        Qrcode qrcode= em.createQuery("select q from Qrcode q where  q.qrcodeIdx = :qrcodeIdx",
+                Qrcode.class)
+                .setParameter("qrcodeIdx", qrcodeIdx)
+                .getResultList().get(0);
+
+        qrcodeDto.setBNumber(qrcode.getBNumber());
+
+
+        try{
+            Donation donation = em.createQuery("select d from Donation d where  d.qrcode.qrcodeIdx = :qrcodeIdx",
+                    Donation.class)
+                    .setParameter("qrcodeIdx", qrcodeIdx)
+                    .getResultList().get(0);
+
+
+            qrcodeDto.setDPack(donation.getDPack());
+            qrcodeDto.setDType(donation.getType());
+            qrcodeDto.setDaniName(donation.getRegister().getAniName());
+            qrcodeDto.setDDate(donation.getDDate());
+            qrcodeDto.setDaniId(donation.getRegister().getAniId());
+            qrcodeDto.setDHos(donation.getDHos());
+
+
+        }catch (IndexOutOfBoundsException e){
+
+            qrcodeDto.setDPack("-");
+            qrcodeDto.setDType("-");
+            qrcodeDto.setDaniName("-");
+            qrcodeDto.setDDate("-");
+            qrcodeDto.setDaniId("-");
+            qrcodeDto.setDHos("-");
+        }
+
+
+
+        try {
+            Transfusion transfusion = em.createQuery("select t from Transfusion t where  t.qrcode.qrcodeIdx = :qrcodeIdx",
+                    Transfusion.class)
+                    .setParameter("qrcodeIdx", qrcodeIdx)
+                    .getResultList().get(0);
+
+            qrcodeDto.setTPack(transfusion.getTPack());
+            qrcodeDto.setTType(transfusion.getType());
+            qrcodeDto.setTaniName(transfusion.getRegister().getAniName());
+            qrcodeDto.setTDate(transfusion.getTDate());
+            qrcodeDto.setTaniId(transfusion.getRegister().getAniId());
+            qrcodeDto.setTHos(transfusion.getTHos());
+
+        }catch (IndexOutOfBoundsException e){
+
+            qrcodeDto.setTPack("-");
+            qrcodeDto.setTType("-");
+            qrcodeDto.setTaniName("-");
+            qrcodeDto.setTDate("-");
+            qrcodeDto.setTaniId("-");
+            qrcodeDto.setTHos("-");
+        }
+
+
+        return qrcodeDto;
+
+
+    }
 }
 
 
-
-
-    /*
-    public Qrcode find1(Long donationIdx) {
-
-        Query query = em.createQuery("select d, r.aniName from Donation d, Register r where d.register.registerIdx = r.registerIdx");
-        Donation listDonation = (Donation) query.getResultList();
-        return listDonation;
-    }
-    */
 

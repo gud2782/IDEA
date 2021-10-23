@@ -2330,12 +2330,9 @@ blockquote {
 .submenu {
   display: none;
 }
-.box3 ul li:hover ul {
+.box3 ul li:hover .submenu {
   display: block;
 
 }
-
-
-
 
 
