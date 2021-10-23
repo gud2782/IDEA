@@ -67,11 +67,13 @@ public class HelloKAS {
 
     static {
         try {
-            bytes = Files.readAllBytes(Paths.get("C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\java\\com\\likeadog\\idea\\api\\Abi"));
+            bytes = Files.readAllBytes(Paths.get("C:\\RealFinalPrj\\IDEA\\src\\main\\java\\com\\likeadog\\idea\\api/Abi"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+//    Hannah C:\Users\lhn14\Desktop\merge\IDEA\src\main\java\com\likeadog\idea\api\Abi
+//    hw C:\RealFinalPrj\IDEA\src\main\java\com\likeadog\idea\api/Abi
 
 
     static final String ABI = new String(bytes);

@@ -182,7 +182,7 @@ public class QrcodeService {
 
 
             try {
-                String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\bNumber";
+                String root = "C:\\RealFinalPrj\\IDEA\\src\\main\\resources\\static\\qrcode\\bNumber";
                 File file = null;
 
                 // 큐알이미지를 저장할 디렉토리 지정

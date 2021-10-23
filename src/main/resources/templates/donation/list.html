@@ -29,6 +29,10 @@
                         <div class="work">
                             <div class="img d-flex align-items-end justify-content-center"  style="background-image: url(/img/puppy.png);">
                                 <div class="text w-100">
+                                    <span class="cat" th:text="*{donation.register.aniId}" >해시값 들어가는 곳</span>
+                                    <!--                                    <a href="#" th:href="@{https://baobab.scope.klaytn.com/account/{해시값}"-->
+                                    <!--                                       class="btn btn-primary" role="button">해시값을 통해 조회</a>-->
+                                    <!--                                    이 부분은 해시값 변수만 추가해주면 됩니당-->
                                     <span class="cat" th:text="*{donation.register.aniId}" >동물이름</span>
                                     <h3><a th:text="*{donation.register.aniName}">동물등록번호</a></h3>
                                     <a href="#" th:href="@{/donation/{idx}/detail (idx=${donation.donationIdx})}"
@@ -42,65 +46,16 @@
         </div>
     </div>
 </section>
-<tbody>
-<tr>
-    <td>
-
-    </td>
-</tr>
 
 <tr>
     <td>
         <a href="/donation/new" class="btn btn-primary" role="button">추가</a>
     </td>
 </tr>
-</tbody>
-</table>
-</div>
+
 </body>
 
 
-
-<!--<tbody>-->
-<!--<tr th:each="doss : ${dos}">-->
-<!--    <td th:text="${doss.donationIdx}"></td>-->
-<!--    <td th:text="${doss.register.aniId}"></td>-->
-<!--    <td th:text="${doss.register.aniName}"></td>-->
-<!--    <td th:text="${doss.DWeight}"></td>-->
-<!--    <td th:text="${doss.kind}"></td>-->
-<!--    <td th:text="${doss.type}"></td>-->
-<!--    <td th:text="${doss.neutralization}"></td>-->
-<!--    <td th:text="${doss.DHos}"></td>-->
-<!--    <td th:text="${doss.DPack}"></td>-->
-<!--    <td>-->
-<!--        <a href="#" th:href="@{/donation/{idx}/update (idx=${doss.donationIdx})}"-->
-<!--           class="btn btn-primary" role="button">수정</a>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--        <a href="#" th:href="@{/donation/{idx}/detail (idx=${doss.donationIdx})}"-->
-<!--           class="btn btn-primary" role="button">자세히</a>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--        <a href="#" th:href="@{/donation/qr/d{idx} (idx=${doss.donationIdx})}"-->
-<!--           class="btn btn-primary" role="button">QR CODE</a>-->
-<!--    </td>-->
-<!--    &lt;!&ndash;                <td>&ndash;&gt;-->
-<!--    &lt;!&ndash;                    <a th:if="${item.status.name() == 'ORDER'}" href="#"&ndash;&gt;-->
-<!--    &lt;!&ndash;                       th:href="'javascript:cancel('+${item.id}+')'"&ndash;&gt;-->
-<!--    &lt;!&ndash;                       class="btn btn-danger">CANCEL</a>&ndash;&gt;-->
-<!--    &lt;!&ndash;                </td>&ndash;&gt;-->
-<!--</tr>-->
-<!--<tr>-->
-<!--    <td>-->
-<!--        <a href="/donation/new" class="btn btn-primary" role="button">추가</a>-->
-<!--    </td>-->
-<!--</tr>-->
-<!--</tbody>-->
-<!--</table>-->
-<!--</div>-->
-
-
-<!--</body>-->
 
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
