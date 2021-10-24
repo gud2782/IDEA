@@ -34,6 +34,7 @@ public class Register extends BaseEntity{
     private String neutralization; //중성화
     private String fileName;
     private String hash;
+    private String aniImg;
 
 
 

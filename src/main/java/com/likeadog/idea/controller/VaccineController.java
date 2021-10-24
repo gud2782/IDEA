@@ -52,7 +52,7 @@ public class VaccineController {
 
         //ThirdStatus third;
 
-        if (third == null) {
+        if (third == null ) {
             third = ThirdStatus.none;
         }
         System.out.println(first);

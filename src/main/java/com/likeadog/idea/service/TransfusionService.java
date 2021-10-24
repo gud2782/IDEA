@@ -29,7 +29,8 @@ public class TransfusionService {
 
     @Transactional
     public Transfusion saveTransfusion(String registerIdx, TransfusionForm form) {
-
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
         System.out.println(registerIdx);
@@ -50,8 +51,10 @@ public class TransfusionService {
                 .neutralization(form.getNeutralization())
                 .kind(form.getKind())
                 .tWeight(form.getTWeight())
+                .hash(form.getHash())
                 .build();
         transfusion.setDel(DeleteStatus.NO);
+        transfusion.setCreater(userEntity.getUserId());
         transfusion.setCDate(LocalDateTime.now());
 
         transfusionRepository.regTrans(transfusion);
@@ -75,9 +78,11 @@ public class TransfusionService {
                 .tPack(transfusion.getTPack())
                 .neutralization(transfusion.getRegister().getNeutralization())
                 .register(transfusion.getRegister())
+                .hash(transfusion.getHash())
                 .build();
         form.setDel(transfusion.getDel());
         form.setCDate(transfusion.getCDate());
+        form.setCreater(transfusion.getCreater());
 
 
         return form;
@@ -85,7 +90,8 @@ public class TransfusionService {
 
     @Transactional
     public void updateTransfusion(String transfusionIdx, TransfusionForm form) {
-
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         Transfusion transfusion = Transfusion.builder()
                 .transfusionIdx(form.getTransfusionIdx())
                 .tWeight(form.getTWeight())
@@ -96,10 +102,14 @@ public class TransfusionService {
                 .tPack(form.getTPack())
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
+                .hash(form.getHash())
                 .build();
         transfusion.setDel(form.getDel());
         transfusion.setCDate(form.getCDate());
+        transfusion.setCreater(form.getCreater());
         transfusion.setMDate(LocalDateTime.now());
+        transfusion.setModifier(userEntity.getUserId());
+
 
         transfusionRepository.regTrans(transfusion);
     }

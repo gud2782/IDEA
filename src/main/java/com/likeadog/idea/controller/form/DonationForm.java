@@ -32,6 +32,7 @@ public class DonationForm {
     private String type; //혈액형
     private String dPack; //헌혈양
     private String neutralization; //중성화
+    private String hash;
 
     private String creater; //생성자
     private String modifier; //수정자

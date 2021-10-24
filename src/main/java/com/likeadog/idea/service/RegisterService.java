@@ -36,7 +36,9 @@ public class RegisterService {
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
         String name = aniId.substring(13,23);
+        String imgUrl = "";
          qrcodeService.registerQrcode(aniId);
+
 
 
         Register register = Register.builder()
@@ -55,6 +57,16 @@ public class RegisterService {
         register.setDel(DeleteStatus.NO);
         register.setCreater(userId);
         register.setCDate(LocalDateTime.now());
+        System.out.println("ani_img " + form.getAniImg());
+        if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
+            imgUrl = "/img/card.png";
+            register.setAniImg(imgUrl);
+        } else {
+            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            register.setAniImg(imgUrl);
+
+        }
+
 
 
 
@@ -78,6 +90,7 @@ public class RegisterService {
                 .neutralization(register.getNeutralization())
                 .fileName(register.getFileName())
                 .hash(register.getHash())
+                .aniImg(register.getAniImg())
                 .build();
         form.setDel(register.getDel());
         form.setCDate(register.getCDate());
@@ -91,6 +104,7 @@ public class RegisterService {
     public void updateAni(String registerIdx, RegisterForm form) {
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
+
         Register register = Register.builder()
                 .user(userEntity)
                 .registerIdx(form.getRegisterIdx())
@@ -105,11 +119,12 @@ public class RegisterService {
                 .user(form.getUser())
                 .fileName(form.getFileName())
                 .hash(form.getHash())
+                .aniImg(form.getAniImg())
                 .build();
         register.setDel(form.getDel());
         register.setCreater(form.getCreater());
         register.setCDate(form.getCDate());
-        register.setModifier(userId);
+        register.setModifier(userEntity.getUserId());
         register.setMDate(LocalDateTime.now());
 
         registerRepository.regSave(register);

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,6 +32,8 @@ public class DonationService {
     @Transactional
     public Donation saveDonation(String registerIdx, DonationForm form) {
 
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
 
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
@@ -41,6 +44,7 @@ public class DonationService {
         //System.out.println("service GEtDonationIdx"+form.getDonationIdx());
         //System.out.println("service GetType"+form.getType());
 
+
         Donation donation = Donation.builder()
                 .donationIdx(form.getDonationIdx())
                 .register(register)
@@ -49,8 +53,11 @@ public class DonationService {
                 .dHos(form.getDHos())
                 .type(form.getType())
                 .dPack(form.getDPack())
+                .hash(form.getHash())
                 .build();
         donation.setDel(DeleteStatus.NO);
+        donation.setCDate(LocalDateTime.now());
+        donation.setCreater(userEntity.getUserId());
         donationRepository.regDo(donation);
 
         Long donationIdx = donation.getDonationIdx();
@@ -78,8 +85,11 @@ public class DonationService {
                 .dPack(donation.getDPack())
                 .neutralization(donation.getRegister().getNeutralization())
                 .register(donation.getRegister())
+                .hash(donation.getHash())
                 .build();
         form.setDel(donation.getDel());
+        form.setCDate(donation.getCDate());
+        form.setCreater(donation.getCreater());
 
         return form;
 
@@ -87,6 +97,8 @@ public class DonationService {
 
     @Transactional
     public void updateDonation(String donationIdx, DonationForm form) {
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
 
         Donation donation = Donation.builder()
                 .donationIdx(form.getDonationIdx())
@@ -98,8 +110,13 @@ public class DonationService {
                 .dPack(form.getDPack())
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
+                .hash(form.getHash())
                 .build();
         donation.setDel(form.getDel());
+        donation.setCreater(form.getCreater());
+        donation.setCDate(form.getCDate());
+        donation.setModifier(userEntity.getUserId());
+        donation.setMDate(LocalDateTime.now());
 
         donationRepository.regDo(donation);
 
