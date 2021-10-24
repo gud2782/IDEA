@@ -41,17 +41,7 @@ public class VaccineController {
 
 
     }
-/*    @PostMapping("/new")
-    public String create(@RequestParam("registerIdx") String registerIdx, @ModelAttribute("form") VaccineForm form, Model model) {
 
-//        List<Vinfo> vinfos = v_infoService.findVcs();
-        vaccineService.saveVaccine(registerIdx, form);
-        System.out.println("333333");
-
-
-
-        return "redirect:/vc/list";
-    }*/
 
     @PostMapping("/new")
     public String create(@RequestParam("first") FirstStatus first,

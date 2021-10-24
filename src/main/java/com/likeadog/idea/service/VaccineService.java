@@ -7,6 +7,7 @@ import com.likeadog.idea.enumCollection.SecondStatus;
 import com.likeadog.idea.enumCollection.ThirdStatus;
 import com.likeadog.idea.repository.VaccineRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class VaccineService {
+
+    @Autowired QrcodeService qrcodeService;
 
     private final VaccineRepository vaccineRepository;
     private final RegisterService registerService;
@@ -71,6 +74,9 @@ public class VaccineService {
                 .vinfo(dbVinfo)
                 .build();
         vaccineVInfoService.saveVV(vaccineVinfo);
+        Long vaccineIdx = vaccine.getVaccineIdx();
+        System.out.println("vaccineIdx : " + vaccineIdx);
+        qrcodeService.vaccineQrcode(vaccineIdx);
 
 
     }

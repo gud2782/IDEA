@@ -20,9 +20,12 @@ import java.util.List;
 public class DonationService {
 
     @Autowired RegisterService registerService;
+    @Autowired QrcodeService qrcodeService;
 
     private final DonationRepository donationRepository;
     private final UserService userService;
+
+
 
 
     @Transactional
@@ -48,10 +51,15 @@ public class DonationService {
                 .dPack(form.getDPack())
                 .build();
         donation.setDel(DeleteStatus.NO);
-
-        //System.out.println("서비스: "+ donation.getKind());
-
         donationRepository.regDo(donation);
+
+        Long donationIdx = donation.getDonationIdx();
+        System.out.println("donationIDx =" +donation.getDonationIdx());
+
+        qrcodeService.donationQrcode(donationIdx);
+
+
+
         return donation;
     }
 
@@ -125,9 +133,9 @@ public class DonationService {
         return registerService.findOne(registerIdx);
     }
 
-    //추가
-    public Donation findDonationByAniId(String aniId){
-        return  donationRepository.findDonationByAniId(aniId);
+
+    public Donation findDonationByAniId(String donationIdx){
+        return  donationRepository.findDonationByAniId(donationIdx);
     }
 
     public void saveDonation(Donation donation){

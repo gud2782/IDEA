@@ -85,7 +85,7 @@ public class QrcodeService {
 
             // 큐알이미지를 저장할 디렉토리 지정
             String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\donation";
-            file = new File(root;
+            file = new File(root);
             if(!file.exists()) {
                 file.mkdirs();
             }
@@ -140,14 +140,14 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ transfusionIdx+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ transfusionIdx+ ".png"));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void vaccineQrcode(Long vaccineIdx) {
+    public void vaccineQrcode(Long vaccinIdx) {
         try {
             String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\vaccine";
             File file = null;
@@ -159,7 +159,7 @@ public class QrcodeService {
             }
             // 코드인식시 링크걸 URL주소
 
-            String text = String.valueOf(vaccineIdx);
+            String text = String.valueOf(vaccinIdx);
 
             // 큐알코드 바코드 생상값
             int qrcodeColor =   0xFFad1004;
@@ -173,7 +173,7 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ vaccineIdx+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ vaccinIdx+ ".png"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -190,7 +190,7 @@ public class QrcodeService {
 
 
             try {
-                String root = "C:\\RealFinalPrj\\IDEA\\src\\main\\resources\\static\\qrcode\\bNumber";
+                String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\bNumber";
                 File file = null;
 
                 // 큐알이미지를 저장할 디렉토리 지정

@@ -58,5 +58,17 @@ public class HomeController {
         return "home/bloodDonation";
     }
 
+    @GetMapping("/admin/donationlist")
+    public String donationList() {
+        return "admin/donationList";
+    }
+
+    @GetMapping("/admin/transfusionlist")
+    public String transfusionList() {
+        return "admin/transfusionList";
+    }
+
+
+
 
 }

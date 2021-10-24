@@ -56,11 +56,12 @@ public class DonationRepository {
 
 
     //추가
-    public Donation findDonationByAniId(String aniId) {
-        System.out.println(aniId);
-        return em.createQuery("select d from Donation d where  d.register.aniId = :aniId",
+    public Donation findDonationByAniId(String donationIdx) {
+        Long donationIDx = Long.parseLong(donationIdx);
+        System.out.println(donationIDx);
+        return em.createQuery("select d from Donation d where  d.donationIdx = :donationIDx",
                 Donation.class)
-                .setParameter("aniId", aniId)
+                .setParameter("donationIDx", donationIDx)
                 .getResultList().get(0);
 
     }

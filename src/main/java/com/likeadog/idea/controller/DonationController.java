@@ -4,6 +4,7 @@ import com.likeadog.idea.controller.form.DonationForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.service.DonationService;
+import com.likeadog.idea.service.QrcodeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.List;
 public class DonationController {
 
     private final DonationService donationService;
+
 
 
 
@@ -35,7 +37,6 @@ public class DonationController {
     @PostMapping("/new")
     public String create(@RequestParam("registerIdx") String registerIdx, @ModelAttribute("form") DonationForm form) {
 
-        System.out.println("getDonationIdx:" + form.getDonationIdx());
         donationService.saveDonation(registerIdx, form);
 
         return "redirect:/donation/list";

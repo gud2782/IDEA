@@ -8,6 +8,7 @@ import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.TransfusionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransfusionService {
 
+    @Autowired QrcodeService qrcodeService;
+
     private final TransfusionRepository transfusionRepository;
     private final RegisterService registerService;
     private final UserService userService;
+
 
     @Transactional
     public Transfusion saveTransfusion(String registerIdx, TransfusionForm form) {
@@ -48,8 +52,12 @@ public class TransfusionService {
                 .build();
         transfusion.setDel(DeleteStatus.NO);
 
-
         transfusionRepository.regTrans(transfusion);
+
+        Long transfusionIdx = transfusion.getTransfusionIdx();
+        System.out.println("transfusionIdx =" +transfusionIdx);
+
+        qrcodeService.transfusionQrcode(transfusionIdx);
         return transfusion;
     }
     public TransfusionForm getUpdateTransfusion(Long transfusionIdx) {
@@ -120,8 +128,8 @@ public class TransfusionService {
     }
 
 
-    public Transfusion findTransfusionByAniId(String aniId) {
-        return transfusionRepository.findTransfusionByAniId(aniId);
+    public Transfusion findTransfusionByAniId(String transfusionIdx) {
+        return transfusionRepository.findTransfusionByAniId(transfusionIdx);
     }
 
     public void saveTransfusion(Transfusion transfusion) {
