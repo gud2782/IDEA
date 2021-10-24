@@ -230,13 +230,13 @@
 		// console.log("1");
 
 		// var aniName =$("#aniName").val();
-		var aniId =$("#aniId").val();
-		var kind =$("#kind").val();
-		var DWeight =$("#DWeight").val();
-		var DDate =$("#DDate").val();
-		var DHos =$("#DHos").val();
-		var type =$("#type").val();
-		var DPack =$("#DPack").val();
+		var tWeight =$("#tWeight").val();
+		var kind=$("#kind").val();
+		var tDate=$("#tDate").val();
+		var tHos=$("#tHos").val();
+		var type=$("#type").val();
+		var tPack= $("#tPack").val();
+		var neutralization =$("#neutralization").val();
 
 
 		let http = new XMLHttpRequest();
@@ -247,13 +247,13 @@
 				"description": "description example for kip17 token",
 				"image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
 				// "aniName": aniName,
-				"aniId" : aniId,
+				"tWeight" : tWeight,
 				"kind" : kind,
-				"DWeight" : DWeight,
-				"DDate" : DDate,
-				"DHos" : DHos,
+				"tDate" : tDate,
+				"tHos" : tHos,
 				"type" : type,
-				"DPack" : DPack
+				"tPack" : tPack,
+				"neutralization" : neutralization
 
 			}
 		}

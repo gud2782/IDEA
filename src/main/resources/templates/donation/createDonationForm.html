@@ -156,7 +156,7 @@
 
 									</div>
 									<div class="form-holder form-holder-4">
-										<input type="button" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
+										<input type="button" name="find_bank" id="check" value="등록22" class="form-control" onclick="toAjax()">
 										<input type="submit" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
 									</div>
 								</div>
@@ -221,7 +221,7 @@
 
 	function toAjax() {
 
-		// console.log("1");
+		console.log("1");
 
 		// var aniName =$("#aniName").val();
 		var aniId =$("#aniId").val();
@@ -250,87 +250,76 @@
 				"DPack" : DPack
 
 			}
+
 		}
-
 		http.open('POST', url, true);
-
 
 
 		//Send the proper header information along with the request
 		http.setRequestHeader('Content-type', 'application/json');
 		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
 		http.setRequestHeader('x-chain-id', '1001');
+
 		http.onreadystatechange = function() {//Call a function when the state changes.
-			if(http.readyState == 4 && http.status == 200) {
+			//  if(http.readyState == 4 && http.status == 200) {
 
-				alert(http.responseText);
+			//  alert(http.responseText);
+			console.log(http.responseText);
 
+			// mintToken(http.responseText);
+			var jsonArray =http.responseText
+			var jsonParsedArray = JSON.parse(jsonArray);
 
-			}
+			mintToken(jsonParsedArray["uri"]);   //토큰생성
+			console.log("222uri >>> "+jsonParsedArray["uri"]);
+			// for (key in jsonParsedArray) {
+			//     if (jsonParsedArray.hasOwnProperty(key)) {
+			//         console.log("%c "+key + " = " + jsonParsedArray[key],"color:cyan");
+			//     }
+			// }
+
+			// }
 		}
 		http.send(JSON.stringify(data));
 
-	};
-	//이미지 파일 변환
-	function readTextFile(file)
-	{
-		var rawFile = new XMLHttpRequest();
-		rawFile.open("GET", file, false);
-		rawFile.onreadystatechange = function ()
-		{
-			if(rawFile.readyState === 4)
-			{
-				if(rawFile.status === 200 || rawFile.status == 0)
-				{
-					var allText = rawFile.responseText;
-					alert(allText);
-				}
-			}
-		}
-		rawFile.send(null);
 	}
 
-	// readTextFile("file:///C:/Users/lhn14/Desktop/idea_img/logo2_200x60.png");
 
-	//   메타데이터 에셋 업로드
+	//토큰 생성(데이터를 토큰화하여 블록체인에 전송)
 
-	function imgfileUpload() {
+	function mintToken(uri) {
+		let timestamp= Math.floor(new Date().getTime() / 1000);
 
-
+		console.log("=====start mintToken======");
+		console.log("timestamp >>> " +timestamp);
 		let http = new XMLHttpRequest();
-		var uploadImg = new FormData();
-		uploadImg.append('img',document.getElementById('upimg').files[0]);
-		let url = 'https://metadata-api.klaytnapi.com/v1/metadata/asset';
+		let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
 		let data= {
-			"file" : img
-		};
-		let file = img;
-
-
-		console.log("file >>> "+file)
-		// console.log("data.asset >>> "+aJson.metadata.file)
-
-
+			"to": "0x5fbf75a9fdfd1d9180ea8242da08d7f9ae4a772e", //형우님 테스트 주소
+			"id": "0x"+timestamp, //계정 timestamp함수를 통해 생성, 아이디 하나당 한번의 토큰만 생성할 수 있음
+			"uri": uri
+		}
 		http.open('POST', url, true);
 
 
-
 		//Send the proper header information along with the request
-		http.setRequestHeader('Content-type', 'multipart/form-data');
+		http.setRequestHeader('Content-type', 'application/json');
 		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
 		http.setRequestHeader('x-chain-id', '1001');
+
 		http.onreadystatechange = function() {//Call a function when the state changes.
-			if(http.readyState == 4 && http.status == 200) {
+			//  if(http.readyState == 4 && http.status == 200) {
 
-				alert(http.responseText);
+			//  alert(http.responseText);
+			console.log(http.responseText);
+			console.log("222");
 
 
-			}
+			// }
 		}
-		// http.send(JSON.stringify(data));
-		http.send(file);
+		http.send(JSON.stringify(data));
 
-	};
+	}
 
 
 </script>

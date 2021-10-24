@@ -124,7 +124,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="button">등록</button>
+                        <button class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="submit">등록</button>
                     </div>
                 </form>
             </div>
@@ -366,12 +366,13 @@
 
         // var aniName =$("#aniName").val();
         var aniId =$("#aniId").val();
-        var kind =$("#kind").val();
-        var DWeight =$("#DWeight").val();
-        var DDate =$("#DDate").val();
-        var DHos =$("#DHos").val();
-        var type =$("#type").val();
-        var DPack =$("#DPack").val();
+        var aniName=$("#aniName").val();
+        var weight=$("#weight").val();
+        var kind=$("#kind").val();
+        var color=$("#color").val();
+        var gender=$("#gender").val();
+        var birth=$("#birth").val();
+        var neutralization=$("#neutralization").val();
 
 
         let http = new XMLHttpRequest();
@@ -383,12 +384,13 @@
                 "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
                 // "aniName": aniName,
                 "aniId" : aniId,
+                "aniName" : aniName,
+                "weight" : weight,
                 "kind" : kind,
-                "DWeight" : DWeight,
-                "DDate" : DDate,
-                "DHos" : DHos,
-                "type" : type,
-                "DPack" : DPack
+                "color" : color,
+                "gender" : gender,
+                "birth" : birth,
+                "neutralization" : neutralization
 
             }
 
