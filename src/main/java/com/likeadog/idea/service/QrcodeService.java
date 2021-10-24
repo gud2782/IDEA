@@ -42,6 +42,7 @@ public class QrcodeService {
 
     private static String address = "172.30.1.51";
 
+
     public void registerQrcode(String aniId) {
         String text = aniId.substring(13,23);
         try {
@@ -55,7 +56,7 @@ public class QrcodeService {
                 file.mkdirs();
             }
             // 코드인식시 링크걸 URL주소
-
+            String textQrcode = aniId;
 
 
 
@@ -66,7 +67,7 @@ public class QrcodeService {
 
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             // 3,4번째 parameter값 : width/height값 지정
-            BitMatrix bitMatrix = qrCodeWriter.encode(aniId, BarcodeFormat.QR_CODE,200, 200);
+            BitMatrix bitMatrix = qrCodeWriter.encode(textQrcode, BarcodeFormat.QR_CODE,200, 200);
             //
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
@@ -83,13 +84,16 @@ public class QrcodeService {
             File file = null;
 
             // 큐알이미지를 저장할 디렉토리 지정
-            file = new File("C:\\qrtest\\donation");
+            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\donation";
+            file = new File(root;
             if(!file.exists()) {
                 file.mkdirs();
             }
             // 코드인식시 링크걸 URL주소
 
-            String text = "http://" + address + ":8080/donation/"+donationIdx+"/detail";
+            String text = String.valueOf(donationIdx);
+
+
 
             // 큐알코드 바코드 생상값
             int qrcodeColor =   0xFF2e4e96;
@@ -103,7 +107,7 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File("C:\\qrtest\\donation\\"+ donationIdx+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ donationIdx+ ".png"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,16 +116,17 @@ public class QrcodeService {
 
     public void transfusionQrcode(Long transfusionIdx) {
         try {
+            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\transfusion";
             File file = null;
 
             // 큐알이미지를 저장할 디렉토리 지정
-            file = new File("C:\\qrtest\\transfusion");
+            file = new File(root);
             if(!file.exists()) {
                 file.mkdirs();
             }
             // 코드인식시 링크걸 URL주소
 
-            String text = "http://" + address + ":8080/transfusion/"+transfusionIdx+"/detail";
+            String text = String.valueOf(transfusionIdx);
 
             // 큐알코드 바코드 생상값
             int qrcodeColor =   0xFF557615;
@@ -135,7 +140,7 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File("C:\\qrtest\\transfusion\\"+ transfusionIdx+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ transfusionIdx+ "qrcode.png"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,16 +149,17 @@ public class QrcodeService {
 
     public void vaccineQrcode(Long vaccineIdx) {
         try {
+            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\vaccine";
             File file = null;
 
             // 큐알이미지를 저장할 디렉토리 지정
-            file = new File("C:\\qrtest\\vaccine");
+            file = new File(root);
             if(!file.exists()) {
                 file.mkdirs();
             }
             // 코드인식시 링크걸 URL주소
 
-            String text = "http://" + address + ":8080/vc/"+vaccineIdx+"/detail";
+            String text = String.valueOf(vaccineIdx);
 
             // 큐알코드 바코드 생상값
             int qrcodeColor =   0xFFad1004;
@@ -167,7 +173,7 @@ public class QrcodeService {
             MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(qrcodeColor,backgroundColor);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix,matrixToImageConfig);
             // ImageIO를 사용한 바코드 파일쓰기
-            ImageIO.write(bufferedImage, "png", new File("C:\\qrtest\\vaccine\\"+ vaccineIdx+ "qrcode.png"));
+            ImageIO.write(bufferedImage, "png", new File(root+"\\"+ vaccineIdx+ "qrcode.png"));
 
         } catch (Exception e) {
             e.printStackTrace();
