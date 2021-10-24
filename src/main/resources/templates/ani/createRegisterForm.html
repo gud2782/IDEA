@@ -329,29 +329,31 @@
         $.ajax({
             url: "/ani/findByPhone",
             type: "post",
-            data: {
-                "phone" : phone
-            },
-            datatype:"JSON",
-            processData : true,
-            contentType: 'application/json',
+            data: sendDataByPhone,
+
 
 
             success: function (result) {
-                obj = JSON.parse(result)
-                alert(obj);
-                console.log(obj);
+                if(result){
+                    alert(result);
 
+                    for (let i = 0; i < result.length; i++) {
+                        console.log(result[i].aniId);
+                        console.log(result[i].aniName);
+                        console.log(result[i].color);
+                        console.log(result[i].kind);
+                    }
+
+                }else{
+                    alert("전송 에러");
+                }
             },
 
-
-
-
-            error: function (result) {
-                alert("실패 : " + result);
+            error: function (sendDataByPhone) {
+                alert("실패 : " + sendDataByPhone);
             }
         });
-    }
+    };
 
 </script>
 
@@ -378,8 +380,7 @@
         let url = 'https://metadata-api.klaytnapi.com/v1/metadata';
         let data= {
             "metadata": {
-                "name": "형우테스트",
-                "description": "description example for kip17 token",
+                "name": "동물등록정보",
                 "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
                 "aniId" : aniId,
                 "aniName" : aniName,
