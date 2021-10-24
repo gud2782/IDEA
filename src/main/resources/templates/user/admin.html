@@ -1,49 +1,97 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header_content :: header_content" />
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/css_list/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css_list/animate.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="/css/style3.css">
+    <script src="/js_list/jquery-3.3.1.min.js"></script>
+    <script src="/js_list/popper.min.js"></script>
+    <script src="/js_list/bootstrap.min.js"></script>
+    <script src="/js_list/owl.carousel.min.js"></script>
+    <script src="/js_list/main.js"></script>
+    <title>Carousel #8</title>
+</head>
+
+
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 
-<body class="homepage_slider" data-spy="scroll" data-target=".navbar-fixed-top" data-offset="100">
+<body>
 
 
-<div id="preloader">
-    <div id="spinner"></div>
+<div class="content">
+
+    <div class="container">
+      <h2  class="my-5 text-center">관리자페이지</h2>
+
+        <div class="d-flex carousel-nav1">
+            <a href="#" class="col active">헌혈 리스트</a>
+            <a href="#" class="col">수혈  리스트</a>
+            <a href="#" class="col">혈액 관리 리스트 </a>
+        </div>
+
+
+        <div class="owl-carousel owl-1">
+
+            <div class="media-29101 d-md-flex w-100">
+                <div class="img">
+                    <img src="/img/hero_3.jpg" alt="Image" class="img-fluid">
+                </div>
+                <div class="text">
+                    <a class="category d-block mb-4" href="/donation/list">헌혈리스트 바로가기</a>
+                    <h2><a href="#">Take your mobile photography to the next level</a></h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+                </div>
+            </div> <!-- .item -->
+
+            <div class="media-29101 d-md-flex w-100">
+                <div class="img">
+                    <img src="/img/hero_2.jpg" alt="Image" class="img-fluid">
+                </div>
+                <div class="text">
+                    <a class="category d-block mb-4" href="/transfusion/list">수혈리스트 바로가기</a>
+                    <h2><a href="#">Take your mobile photography to the next level</a></h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+                </div>
+            </div> <!-- .item -->
+
+            <div class="media-29101 d-md-flex w-100">
+                <div class="img">
+                    <img src="/img/hero_1.jpg" alt="Image" class="img-fluid">
+                </div>
+                <div class="text">
+                    <a class="category d-block mb-4" href="/blood/list">혈액 관리 리스트 바로가기</a>
+                    <h2><a href="#">Take your mobile photography to the next level</a></h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+                </div>
+            </div> <!-- .item -->
+
+
+
+        </div>
+    </div>
 </div>
-<!-- Back to top -->
-<a href="#" id="back-to-top" title="Back to top"><i class="fa fa-angle-up"></i></a>
-<!-- /Back to top -->
-
-<!--body-->
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1><h1>어드민 페이지입니다</h1>
-
-<h1>어드민 페이지입니다</h1>
-<h1>어드민 페이지입니다</h1>
-
-
-
-
-
-
-
 
 </body>
-
 
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
-
 
 
 </html>

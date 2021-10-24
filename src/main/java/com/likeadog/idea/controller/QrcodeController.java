@@ -73,7 +73,7 @@ public class QrcodeController {
         //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
         qrcodeService.saveDonation(bNumber,dosId, form);
 
-        return "redirect:/home";
+        return "redirect:/blood/list";
     }
 
     @GetMapping("/bNumber/new/transfusion")
@@ -92,7 +92,7 @@ public class QrcodeController {
         //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
         qrcodeService.saveTransfusion(bNumber,transId, form);
 
-        return "redirect:/home";
+        return "blood/list";
     }
 
 
