@@ -143,5 +143,8 @@ public class DonationService {
     }
 
 
+    public List<Donation> findAllDos() {
+        return donationRepository.findAll();
+    }
 
 }

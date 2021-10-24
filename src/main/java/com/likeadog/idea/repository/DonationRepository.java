@@ -36,7 +36,7 @@ public class DonationRepository {
 
 
     public List<Donation> findAll() {
-        Query query = em.createQuery("select d from Donation d", Donation.class);
+        Query query = em.createQuery("select d from Donation d where d.del='NO'", Donation.class);
         List<Donation> listall = query.getResultList();
 
 

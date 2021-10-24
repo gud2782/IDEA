@@ -47,4 +47,13 @@ public class TransfusionRepository {
                 .setParameter("transfusionIDx", transfusionIDx)
                 .getResultList().get(0);
     }
+
+    public List<Transfusion> findAll() {
+        Query query = em.createQuery("select t from Transfusion t where t.del='NO'", Transfusion.class);
+        List<Transfusion> listall = query.getResultList();
+        System.out.println("Repository_listAll : " +listall.get(0).getTransfusionIdx());
+
+
+        return listall;
+    }
 }

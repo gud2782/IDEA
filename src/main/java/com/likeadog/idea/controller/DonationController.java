@@ -3,6 +3,7 @@ package com.likeadog.idea.controller;
 import com.likeadog.idea.controller.form.DonationForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
+import com.likeadog.idea.domain.Transfusion;
 import com.likeadog.idea.service.DonationService;
 import com.likeadog.idea.service.QrcodeService;
 import lombok.AllArgsConstructor;
@@ -110,6 +111,23 @@ public class DonationController {
                 + "," + resultType + "," + resultDWeight;
         System.out.println(strResult);
         return strResult;
+    }
+
+    @GetMapping("/admin")
+    public String donationList(Model model) {
+
+        List<Donation> AllDos = donationService.findAllDos();
+        model.addAttribute("AllDos", AllDos);
+
+
+        return "admin/donationList";
+    }
+
+    //등록한 수혈견 삭제(관리자)
+    @PostMapping("/delete/admin")
+    public String deleteTrans(@RequestParam("donationIdx") Long donationIdx ) {
+        donationService.deleteDo(donationIdx);
+        return "redirect:/donation/admin";
     }
 
 

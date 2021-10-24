@@ -43,27 +43,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr scope="row"th:each="qrcodeDto : ${qrcodeDtos}">
+                <tr scope="row"th:each="allTrans : ${AllTrans}">
 
 
 
-                    <td th:text="${qrcodeDto.BNumber }"></td>
-                    <td th:text="${qrcodeDto.DDate}" ></td>
-                    <td th:text="${qrcodeDto.daniName}">
-                        <small class="d-block" >asd</small>
-                    </td>
-                    <td th:text="${qrcodeDto.DType}"></td>
-                    <td th:text="${qrcodeDto.DPack}"></td>
-                    <td th:text="${qrcodeDto.DHos}"></td>
+                    <td th:text="${allTrans.transfusionIdx}"></td>
+                    <td th:text="${allTrans.register.aniId}" ></td>
+                    <td th:text="${allTrans.register.aniName}"></td>
+                    <td th:text="${allTrans.kind}"></td>
+                    <td th:text="${allTrans.register.birth}"></td>
+                    <td th:text="${allTrans.TDate}"></td>
 
-                    <td th:text="${qrcodeDto.TDate}" ></td>
-                    <td th:text="${qrcodeDto.taniName}"><a href="#"></a>
-                        <small class="d-block" th:text="${qrcodeDto.taniId }"></small>
-                    </td>
-                    <td th:text="${qrcodeDto.TType}"></td>
-                    <td th:text="${qrcodeDto.TPack}"></td>
-                    <td th:text="${qrcodeDto.THos}"></td>
-                    <td><a href="#" class="more">Delete</a></td>
+                    <td th:text="${allTrans.type}" ></td>
+                    <td th:text="${allTrans.TPack}"><a href="#"></a>
+                    <td th:text="${allTrans.THos}" ></td>
+                    <td th:text="${allTrans.creater}" ></td>
+
+                    <td><form action="/transfusion/delete/admin" method="post">
+                        <input type="submit" id="transfusionIdx" name="transfusionIdx" class="form-control" th:value="*{allTrans.transfusionIdx}" >
+                        <label for="transfusionIdx">delete</label>
+
+                    </form></td>
+
+
 
 
 

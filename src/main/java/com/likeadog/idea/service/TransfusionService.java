@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -51,6 +52,7 @@ public class TransfusionService {
                 .tWeight(form.getTWeight())
                 .build();
         transfusion.setDel(DeleteStatus.NO);
+        transfusion.setCDate(LocalDateTime.now());
 
         transfusionRepository.regTrans(transfusion);
 
@@ -75,6 +77,8 @@ public class TransfusionService {
                 .register(transfusion.getRegister())
                 .build();
         form.setDel(transfusion.getDel());
+        form.setCDate(transfusion.getCDate());
+
 
         return form;
     }
@@ -94,6 +98,8 @@ public class TransfusionService {
                 .register(form.getRegister())
                 .build();
         transfusion.setDel(form.getDel());
+        transfusion.setCDate(form.getCDate());
+        transfusion.setMDate(LocalDateTime.now());
 
         transfusionRepository.regTrans(transfusion);
     }
@@ -134,5 +140,9 @@ public class TransfusionService {
 
     public void saveTransfusion(Transfusion transfusion) {
         transfusionRepository.regTrans(transfusion);
+    }
+
+    public List<Transfusion> findAllTrans() {
+        return transfusionRepository.findAll();
     }
 }
