@@ -44,12 +44,11 @@ public class UserController {
     private CustomAuthenticationProvider customAuthenticationProvider;
 
 
-
-    //테스트 컨트롤러
-    @GetMapping("/index")
+    //관리자 페이지
+    @GetMapping("/admin")
     public String index() {
 
-        return "user/index2";
+        return "user/admin";
     }
 
 
