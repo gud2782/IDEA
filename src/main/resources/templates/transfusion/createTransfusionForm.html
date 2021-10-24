@@ -277,67 +277,6 @@
 		http.send(JSON.stringify(data));
 
 	};
-	//이미지 파일 변환
-	function readTextFile(file)
-	{
-		var rawFile = new XMLHttpRequest();
-		rawFile.open("GET", file, false);
-		rawFile.onreadystatechange = function ()
-		{
-			if(rawFile.readyState === 4)
-			{
-				if(rawFile.status === 200 || rawFile.status == 0)
-				{
-					var allText = rawFile.responseText;
-					alert(allText);
-				}
-			}
-		}
-		rawFile.send(null);
-	}
-
-	// readTextFile("file:///C:/Users/lhn14/Desktop/idea_img/logo2_200x60.png");
-
-	//   메타데이터 에셋 업로드
-
-	function imgfileUpload() {
-
-
-		let http = new XMLHttpRequest();
-		var uploadImg = new FormData();
-		uploadImg.append('img',document.getElementById('upimg').files[0]);
-		let url = 'https://metadata-api.klaytnapi.com/v1/metadata/asset';
-		let data= {
-			"file" : img
-		};
-		let file = img;
-
-
-		console.log("file >>> "+file)
-		// console.log("data.asset >>> "+aJson.metadata.file)
-
-
-		http.open('POST', url, true);
-
-
-
-		//Send the proper header information along with the request
-		http.setRequestHeader('Content-type', 'multipart/form-data');
-		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
-		http.setRequestHeader('x-chain-id', '1001');
-		http.onreadystatechange = function() {//Call a function when the state changes.
-			if(http.readyState == 4 && http.status == 200) {
-
-				alert(http.responseText);
-
-
-			}
-		}
-		// http.send(JSON.stringify(data));
-		http.send(file);
-
-	};
-
 
 </script>
 

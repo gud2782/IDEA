@@ -60,23 +60,24 @@
         <div class="box3">
           <ul class="menu1">
             <li><a sec:authorize="isAuthenticated()" th:href="@{/ani/new}">등 록</a></li>
-            <li><a th:href="@{/vc/new}">백 신</a>
+            <ul class="submenu">
+              <li><a href="/ani/new">백신 정보 등록</a></li>
+              <li><a href="/ani/list">백신 정보 조회</a></li>
+            </ul></li>
+            <li><a >백 신</a>
               <ul class="submenu">
-                <li><a href="/bNumber/new/donation">백신 정보 등록</a></li>
-                <li><a href="/bNumber/new/transfusion">백신 정보 조회</a></li>
-                <li><a href="/home/bloodList">백신 정보 수정</a></li>
+                <li><a href="/vc/new">백신 정보 등록</a></li>
+                <li><a href="/vc/list">백신 정보 조회</a></li>
               </ul></li>
-            <li><a th:href="@{/donation/new/}">헌 혈</a>
+            <li><a >헌 혈</a>
               <ul class="submenu">
-                <li><a href="/bNumber/new/donation">헌혈견 정보 등록</a></li>
-                <li><a href="/bNumber/new/transfusion">헌혈견 정보 조회</a></li>
-                <li><a href="/home/bloodList">헌혈견 정보 수정</a></li>
+                <li><a href="/donation/new">헌혈견 정보 등록</a></li>
+                <li><a href="/donation/list">헌혈견 정보 조회</a></li>
               </ul></li>
-            <li><a th:href="@{/transfusion/new}">수 혈</a>
+            <li><a >수 혈</a>
               <ul class="submenu">
-                <li><a href="/bNumber/new/donation">수혈견 정보 등록</a></li>
-                <li><a href="/bNumber/new/transfusion">수혈견 정보 조회</a></li>
-                <li><a href="/home/bloodList">수혈견 정보 수정</a></li>
+                <li><a href="/transfusion/new">수혈견 정보 등록</a></li>
+                <li><a href="/transfusion/list">수혈견 정보 조회</a></li>
               </ul>
             </li>
             <li class="blood"><a sec:authorize="hasRole('HOS')" >혈 액</a>

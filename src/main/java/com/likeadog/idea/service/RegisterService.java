@@ -50,6 +50,7 @@ public class RegisterService {
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
                 .fileName(name)
+                .hash(form.getHash())
                 .build();
         register.setDel(DeleteStatus.NO);
         register.setCreater(userId);
@@ -76,6 +77,7 @@ public class RegisterService {
                 .birth(register.getBirth())
                 .neutralization(register.getNeutralization())
                 .fileName(register.getFileName())
+                .hash(register.getHash())
                 .build();
         form.setDel(register.getDel());
         form.setCDate(register.getCDate());
@@ -102,6 +104,7 @@ public class RegisterService {
                 .neutralization(form.getNeutralization())
                 .user(form.getUser())
                 .fileName(form.getFileName())
+                .hash(form.getHash())
                 .build();
         register.setDel(form.getDel());
         register.setCreater(form.getCreater());

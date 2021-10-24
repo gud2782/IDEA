@@ -33,6 +33,7 @@ public class RegisterForm {
     private String birth; //출생년도
     private String neutralization; //중성화
     private String fileName;
+    private String hash;
 
     private String creater; //생성자
     private String modifier; //수정자

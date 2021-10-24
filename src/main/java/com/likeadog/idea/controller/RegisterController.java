@@ -4,6 +4,7 @@ import com.likeadog.idea.controller.form.RegisterForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
+import com.likeadog.idea.dto.FindByPhoneResponseDto;
 import com.likeadog.idea.service.DonationService;
 import com.likeadog.idea.service.RegisterService;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,8 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "ani/createRegisterForm";
         }
-        System.out.println("get:" + form.getAniId() + form.getBirth());
+        System.out.println("get Hash : " + form.getHash());
+        System.out.println("get aniName : " + form.getAniName());
         registerService.saveAni(aniId, form);
 
         return "redirect:/ani/list";
@@ -108,29 +111,23 @@ public class RegisterController {
         System.out.println(strResult);
         return strResult;
     }
-//    @RequestMapping("/findByPhone")
-//    public @ResponseBody List<Register> findByPhone(String phone) {
-//        List<Register> result = registerService.findByPhone(phone);
-//        System.out.println(phone);
-//
-//
-//        for (int i = 0; i <result.size() ; i++) {
-//            String resultAniId = result.get(i).getAniId();
-//
-//            System.out.println(resultAniId);
-//            return result;
-//        }
-//        return result;
-//    }
 
-        @RequestMapping(value ="/findByPhone", produces = "application/json; charset=utf8")
-        public @ResponseBody ResponseEntity findByPhone(String phone) {
+    @ResponseBody
+    @RequestMapping("/findByPhone")
+    public List<FindByPhoneResponseDto> findByPhone(String phone) {
         List<Register> result = registerService.findByPhone(phone);
-        System.out.println(phone);
+        List<FindByPhoneResponseDto> findByPhoneResponseDtos = new ArrayList<>();
 
-        ResponseEntity responseEntity = ResponseEntity.ok(result);
-            System.out.println(responseEntity);
-        return ResponseEntity.ok(result);
+        for (int i = 0; i <result.size(); i++) {
+            FindByPhoneResponseDto findByPhoneResponseDto = FindByPhoneResponseDto.builder()
+                    .aniId(result.get(i).getAniId())
+                    .aniName(result.get(i).getAniName())
+                    .color(result.get(i).getColor())
+                    .kind(result.get(i).getKind())
+                    .build();
+            findByPhoneResponseDtos.add(findByPhoneResponseDto);
+        }
+        return findByPhoneResponseDtos;
     }
 
 }

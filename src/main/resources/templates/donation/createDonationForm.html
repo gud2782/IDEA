@@ -313,6 +313,15 @@
 			//  alert(http.responseText);
 			console.log(http.responseText);
 			console.log("222");
+			let jsonResult = JSON.parse(http.responseText);
+			let hash = jsonResult.transactionHash;
+
+
+			$('#hash').val(hash);
+			alert(hash);
+			var form = document.registerForm;
+			form.action="/ani/new";
+			form.submit();
 
 
 			// }

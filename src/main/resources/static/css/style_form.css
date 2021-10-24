@@ -1695,10 +1695,3 @@ p{
     text-align: center;
     aspect-ratio: unset ;
 }
-.submenu {
-    display: none;
-}
-.collapse navbar-collapse > ul li:hover .submenu {
-    display: block;
-
-}

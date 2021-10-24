@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -35,7 +35,8 @@
                 <h2 class="title_form">반려견 정보 등록</h2>
             </div>
             <div class="card-body">
-                <form id="registerForm" th:action="@{/ani/new}" th:object="${registerForm}" method="post"  autocomplete="off">
+                <form id="registerForm" name="registerForm"  th:object="${registerForm}" method="post"  autocomplete="off">
+                    <input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
                     <div class="form-row-do" >
                         <div class="name">번호조회</div>
                         <div class="value">
@@ -124,7 +125,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="submit">등록</button>
+                        <input class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="button">등록</input>
                     </div>
                 </form>
             </div>
@@ -271,7 +272,6 @@
 
 <script type="text/javascript" th:inline="javascript">
     function findByAniId(aniId) {
-        //var did = $("#aniId").val();
         var sendDataById = "did="+aniId;
         console.log("sendDataById : " + sendDataById)
 
@@ -364,7 +364,6 @@
 
          console.log("1");
 
-        // var aniName =$("#aniName").val();
         var aniId =$("#aniId").val();
         var aniName=$("#aniName").val();
         var weight=$("#weight").val();
@@ -382,7 +381,6 @@
                 "name": "형우테스트",
                 "description": "description example for kip17 token",
                 "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
-                // "aniName": aniName,
                 "aniId" : aniId,
                 "aniName" : aniName,
                 "weight" : weight,
@@ -404,26 +402,30 @@
         http.setRequestHeader('x-chain-id', '1001');
 
         http.onreadystatechange = function() {//Call a function when the state changes.
-          //  if(http.readyState == 4 && http.status == 200) {
 
-              //  alert(http.responseText);
-            console.log(http.responseText);
 
            // mintToken(http.responseText);
             var jsonArray =http.responseText
             var jsonParsedArray = JSON.parse(jsonArray);
 
             mintToken(jsonParsedArray["uri"]);   //토큰생성
-            console.log("222uri >>> "+jsonParsedArray["uri"]);
-            // for (key in jsonParsedArray) {
-            //     if (jsonParsedArray.hasOwnProperty(key)) {
-            //         console.log("%c "+key + " = " + jsonParsedArray[key],"color:cyan");
-            //     }
-            // }
 
-           // }
+
+
+
+
+            console.log("8")
+
+
+
+
         }
         http.send(JSON.stringify(data));
+        console.log("7")
+
+
+
+
 
     }
 
@@ -433,8 +435,8 @@
     function mintToken(uri) {
         let timestamp= Math.floor(new Date().getTime() / 1000);
 
-        console.log("=====start mintToken======");
-        console.log("timestamp >>> " +timestamp);
+        // console.log("=====start mintToken======");
+        // console.log("timestamp >>> " +timestamp);
         let http = new XMLHttpRequest();
         let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
         let data= {
@@ -451,16 +453,25 @@
         http.setRequestHeader('x-chain-id', '1001');
 
         http.onreadystatechange = function() {//Call a function when the state changes.
-            //  if(http.readyState == 4 && http.status == 200) {
-
-            //  alert(http.responseText);
-            console.log(http.responseText);
-            console.log("222");
 
 
-            // }
+            let jsonResult = JSON.parse(http.responseText);
+            let hash = jsonResult.transactionHash;
+
+
+            $('#hash').val(hash);
+            alert(hash);
+            var form = document.registerForm;
+            form.action="/ani/new";
+            form.submit();
+
+
         }
         http.send(JSON.stringify(data));
+        alert("6")
+
+
+
 
     }
 

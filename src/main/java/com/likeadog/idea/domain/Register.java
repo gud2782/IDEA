@@ -33,6 +33,7 @@ public class Register extends BaseEntity{
     private String birth; //출생년도
     private String neutralization; //중성화
     private String fileName;
+    private String hash;
 
 
 
