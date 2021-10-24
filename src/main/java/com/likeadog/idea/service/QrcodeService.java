@@ -85,7 +85,7 @@ public class QrcodeService {
 
             // 큐알이미지를 저장할 디렉토리 지정
             String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\donation";
-            file = new File(root;
+//            file = new File(root;
             if(!file.exists()) {
                 file.mkdirs();
             }
