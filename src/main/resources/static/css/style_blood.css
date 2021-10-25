@@ -44,7 +44,7 @@ body {
 .form-v1-content .wizard-form {
     width: 100%;
 }
-.form-register .vertical {
+.formRegister .vertical {
     display: block;
     width: 100%;
     overflow: hidden;
@@ -55,18 +55,18 @@ body {
     /*-moz-border-radius: 10px;*/
     /*-webkit-border-radius: 10px;*/
 }
-.form-register .steps {
+.formRegister .steps {
     float: left;
     width: 280px;
     background: #FFCE49;
 }
-.form-register .steps ul {
+.formRegister .steps ul {
     list-style: none;
     padding-left: 0;
     margin: 0;
 }
-.form-register .steps li,
-.form-register .steps li.current {
+.formRegister .steps li,
+.formRegister .steps li.current {
     outline: none;
     -o-outline: none;
     -ms-outline: none;
@@ -74,7 +74,7 @@ body {
     -webkit-outline: none;
     position: relative;
 }
-.form-register .steps li::after {
+.formRegister .steps li::after {
     width: 280px;
     height: 1px;
     content: "";
@@ -82,10 +82,10 @@ body {
     position: absolute;
     top: 100%;
 }
-.form-register .steps li .current-info {
+.formRegister .steps li .current-info {
     display: none;
 }
-.form-register .steps li a {
+.formRegister .steps li a {
     text-decoration: none;
     outline: none;
     -o-outline: none;
@@ -93,11 +93,11 @@ body {
     -moz-outline: none;
     -webkit-outline: none;
 }
-.form-register .steps li a .title {
+.formRegister .steps li a .title {
     display: flex;
     padding: 15px 25px 15px 35px;
 }
-.form-register .steps li a .title .step-icon {
+.formRegister .steps li a .title .step-icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -116,7 +116,7 @@ body {
     font-size: 16px;
     margin-right: 15px;
 }
-.form-register .steps li a .step-icon span {
+.formRegister .steps li a .step-icon span {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -127,10 +127,10 @@ body {
     -webkit-transform: translate(-50%, -50%);
 }
 
-.form-register .steps li.current a .step-icon,
-.form-register .steps li.current a:active .step-icon,
-.form-register .steps li.done a .step-icon,
-.form-register .steps li.done a:active .step-icon {
+.formRegister .steps li.current a .step-icon,
+.formRegister .steps li.current a:active .step-icon,
+.formRegister .steps li.done a .step-icon,
+.formRegister .steps li.done a:active .step-icon {
     background: #03619A;
     color: #FFCE49;
     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
@@ -139,17 +139,17 @@ body {
     -moz-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
 }
-.form-register .steps li a .step-text {
+.formRegister .steps li a .step-text {
     color: #fff;
     font-weight: 600;
     font-size: 15px;
     padding: 25px 0 8px;
 }
-.form-register .steps .current .step-text,
-.form-register .steps .done .step-text {
+.formRegister .steps .current .step-text,
+.formRegister .steps .done .step-text {
     color: #03619A;
 }
-.form-register .content {
+.formRegister .content {
     box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
     -o-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
     -ms-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
@@ -159,27 +159,27 @@ body {
     width: 540px;
     background: #fff;
 }
-.form-register .content h2 {
+.formRegister .content h2 {
     display: none;
 }
-.form-register .content .inner {
+.formRegister .content .inner {
     padding: 0 50px;
 }
-.form-register .content .wizard-header {
+.formRegister .content .wizard-header {
     text-align: center;
     padding: 37px 30px 13px;
 }
-.form-register .content #form-total-p-2 .wizard-header {
+.formRegister .content #form-total-p-2 .wizard-header {
     text-align: center;
     padding: 37px 30px 30px;
 }
-.form-register .content .inner h3 {
+.formRegister .content .inner h3 {
     font-size: 22px;
     color: #00619B;
     font-weight: 700;
     margin: 0;
 }
-.form-register .content .inner p {
+.formRegister .content .inner p {
     color: #666;
     font-size: 14px;
     font-weight: 600;
@@ -330,7 +330,7 @@ legend {
     box-shadow:none;
     border-radius: 0;
 }
-.inner .form-row .form-holder input#aniId {
+.inner .form-row .form-holder input {
     border:  1px solid #FFCE49;
     padding: 11px 20px;
     -webkit-box-shadow:none;
@@ -538,17 +538,17 @@ color: #666;
     }
 }
 @media screen and (max-width: 991px) {
-    .form-register .vertical {
+    .formRegister .vertical {
         background: #fff;
     }
-    .form-register .steps,
-    .form-register .content,
+    .formRegister .steps,
+    .formRegister .content,
     .actions {
         float: none;
         width: 100%;
     }
 
-    .form-register .content,
+    .formRegister .content,
     .inner .form-row-total {
         box-shadow: none;
         -o-box-shadow: none;
@@ -556,14 +556,14 @@ color: #666;
         -moz-box-shadow: none;
         -webkit-box-shadow: none;
     }
-    .form-register .steps li a .title {
+    .formRegister .steps li a .title {
         justify-content: space-between;
         -o-justify-content: space-between;
         -ms-justify-content: space-between;
         -moz-justify-content: space-between;
         -webkit-justify-content: space-between;
     }
-    .form-register .steps li::after {
+    .formRegister .steps li::after {
         width: 100%;
     }
     .inner .form-row .form-holder.form-holder-3 {
@@ -586,11 +586,11 @@ color: #666;
     }
 }
 @media screen and (max-width: 575px) {
-    .form-register .content .inner {
+    .formRegister .content .inner {
         padding: 0 30px;
     }
-    .form-register .content .wizard-header,
-    .form-register .content #form-total-p-2 .wizard-header {
+    .formRegister .content .wizard-header,
+    .formRegister .content #form-total-p-2 .wizard-header {
         padding: 37px 0px 13px;
     }
     .inner .form-row {

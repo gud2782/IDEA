@@ -44,7 +44,7 @@ public class QrcodeRepository  {
 
 
     public List<Qrcode> findAll() {
-        Query query = em.createQuery("select q from Qrcode q", Qrcode.class);
+        Query query = em.createQuery("select q from Qrcode q order by q.bloodStatus desc ", Qrcode.class);
         List<Qrcode> listall = query.getResultList();
 
         return listall;
@@ -56,7 +56,7 @@ public class QrcodeRepository  {
 
         QrcodeDto qrcodeDto = new QrcodeDto();
 
-        Qrcode qrcode= em.createQuery("select q from Qrcode q where  q.qrcodeIdx = :qrcodeIdx",
+        Qrcode qrcode= em.createQuery("select q from Qrcode q where  q.qrcodeIdx = :qrcodeIdx ",
                 Qrcode.class)
                 .setParameter("qrcodeIdx", qrcodeIdx)
                 .getResultList().get(0);
@@ -77,6 +77,9 @@ public class QrcodeRepository  {
             qrcodeDto.setDDate(donation.getDDate());
             qrcodeDto.setDaniId(donation.getRegister().getAniId());
             qrcodeDto.setDHos(donation.getDHos());
+            qrcodeDto.setBloodStatus(qrcode.getBloodStatus());
+            qrcodeDto.setDhash(qrcode.getDhash());
+
 
 
         }catch (IndexOutOfBoundsException e){
@@ -87,6 +90,7 @@ public class QrcodeRepository  {
             qrcodeDto.setDDate("-");
             qrcodeDto.setDaniId("-");
             qrcodeDto.setDHos("-");
+            qrcodeDto.setDhash("-");
         }
 
 
@@ -103,6 +107,8 @@ public class QrcodeRepository  {
             qrcodeDto.setTDate(transfusion.getTDate());
             qrcodeDto.setTaniId(transfusion.getRegister().getAniId());
             qrcodeDto.setTHos(transfusion.getTHos());
+            qrcodeDto.setBloodStatus(qrcode.getBloodStatus());
+            qrcodeDto.setThash(qrcode.getThash());
 
         }catch (IndexOutOfBoundsException e){
 
@@ -112,6 +118,7 @@ public class QrcodeRepository  {
             qrcodeDto.setTDate("-");
             qrcodeDto.setTaniId("-");
             qrcodeDto.setTHos("-");
+            qrcodeDto.setThash("-");
         }
 
 

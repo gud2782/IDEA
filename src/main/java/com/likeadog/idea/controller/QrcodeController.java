@@ -21,41 +21,6 @@ public class QrcodeController {
     private final QrcodeService qrcodeService;
 
 
-    private static String address = "172.30.1.33";
-
-
-
-    //등록된 동물 정보 qr코드
-    @GetMapping("ani/qr/r{registerIdx}")
-    public void registerQrcode(@PathVariable("registerIdx") String registerIdx)
-    {
-        qrcodeService.registerQrcode(registerIdx);
-
-
-    }
-
-    @GetMapping("donation/qr/d{donationIdx}")
-    public void donationQrcod(@PathVariable("donationIdx") Long donationIdx){
-
-        qrcodeService.donationQrcode(donationIdx);
-
-
-    }
-    @GetMapping("transfusion/qr/t{transfusionIdx}")
-    public void transfusionQrcode(@PathVariable("transfusionIdx") Long transfusionIdx){
-
-        qrcodeService.transfusionQrcode(transfusionIdx);
-
-
-    }
-
-    @GetMapping("vc/qr/v{vaccineIdx}")
-    public void vaccineQrcode(@PathVariable("vaccineIdx") Long vaccineIdx) {
-
-        qrcodeService.vaccineQrcode(vaccineIdx);
-
-
-    }
 
     @GetMapping("/bNumber/new/donation")
     public String donationForm(Model model){
@@ -70,7 +35,6 @@ public class QrcodeController {
     public String donationFormCreate(@RequestParam("bNumber") String bNumber,@RequestParam("dosId") String dosId , QrcodeForm form) {
 
 
-        //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
         qrcodeService.saveDonation(bNumber,dosId, form);
 
         return "redirect:/blood/list";
@@ -92,7 +56,7 @@ public class QrcodeController {
         //  System.out.println("get:" + form.getBNumber() + form.getDonation().getRegister().getAniName());
         qrcodeService.saveTransfusion(bNumber,transId, form);
 
-        return "blood/list";
+        return "redirect:/blood/list";
     }
 
 

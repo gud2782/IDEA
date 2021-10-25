@@ -967,6 +967,7 @@ legend {
     /*-ms-border-radius: 4px;*/
 }
 .inner .form-row .form-holder input {
+
     color: #00619B;
     -webkit-box-shadow:none;
     box-shadow:none;
@@ -985,14 +986,18 @@ legend {
     box-shadow:none;
     border-radius: 0;
 }
-.inner .form-row .form-holder input#aniId {
-    border:  1px solid #FFCE49;
+.inner .form-row .form-holder input {
+
     padding: 11px 20px;
     -webkit-box-shadow:none;
     box-shadow:none;
     border-radius: 0;
 }
 .inner .form-row .form-holder input#lookup, #qrcode, #check {
+    height: auto;
+    width: 150px;
+    float: right;
+    margin-right: 20px;
     color: #FFCE49;
     background: #00619B;
     text-align: center;
@@ -1106,8 +1111,9 @@ legend {
 }
 
 .inner .form-row.form-row-date .form-holder select {
+    height: 55.2px;
     float: left;
-    width: 20.6%;
+    width: 50%;
     margin-right: 15px;
 }
 .inner .form-row.form-row-date .form-holder select#year {

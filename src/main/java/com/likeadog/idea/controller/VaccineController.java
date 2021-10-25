@@ -35,7 +35,6 @@ public class VaccineController {
         model.addAttribute("registers", registers );
         model.addAttribute("vinfos", vinfos );
         System.out.println(model.getAttribute("vinfos"));
-        System.out.println("1111111");
 
         return "vc/createVaccineForm";
 

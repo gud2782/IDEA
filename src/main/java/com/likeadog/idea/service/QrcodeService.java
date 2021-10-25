@@ -13,8 +13,10 @@ import com.likeadog.idea.domain.Qrcode;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
 import com.likeadog.idea.dto.QrcodeDto;
+import com.likeadog.idea.enumCollection.BloodStatus;
 import com.likeadog.idea.repository.QrcodeRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -245,6 +248,10 @@ public class QrcodeService {
         donation.setDPack(form.getDPack());
         donation.setDHos(form.getDHos());
         donation.setQrcode(qrcode);
+        qrcode.setBloodStatus("수혈대기");
+        qrcode.setDhash(form.getDhash());
+        qrcode.setCDate(LocalDateTime.now());
+
 
         donationService.saveDonation(donation);
 
@@ -260,9 +267,13 @@ public class QrcodeService {
         transfusion.setTPack(form.getTPack());
         transfusion.setTHos(form.getTHos());
         transfusion.setQrcode(qrcode);
+        qrcode.setBloodStatus("완료");
+        qrcode.setThash(form.getThash());
+        qrcode.setMDate(LocalDateTime.now());
 
 
         transfusionService.saveTransfusion(transfusion);
+
 
     }
 

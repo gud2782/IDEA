@@ -31,7 +31,9 @@
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
-			<form id="qrcodeForm" th:action="@{/bNumber/new/transfusion}"  th:object="${qrcodeForm}" class="form-register" method="post" autocomplete="off">
+			<form id="qrcodeForm"  name="qrcodeForm" th:object="${qrcodeForm}" class="form-register" method="post" autocomplete="off">
+				<input type="text" id="thash" name="thash" value="thash" th:id="thash" th:for="thash" th:field="*{thash}" hidden>
+
 				<div id="form-total">
 					<!-- SECTION 1 -->
 					<h2>
@@ -49,7 +51,25 @@
 									<input type="text" name="bNumber" id="bNumber"  class="form-control" placeholder="혈액번호" th:id="bNumber" th:for="bNumber" >
 								</div>
 								<div class="form-holder form-holder-4">
-									<input type="button" name="find_bank" id="find_bNumber" value="조회" class="form-control" >
+									<input class="modal-btn2" type="checkbox" id="qrcode2" name="modal-btn2"/>
+									<label for="qrcode2">혈액번호 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
+									<div class="modal2" name="modal2" id="modal2">
+										<div class="modal-wrap2">
+											<div class="qrBox2" >
+												<div class="modalQRcode2">
+													<div class="modal_content2">
+														<div id="frame2">
+															<div id="loadingMessage2" hidden>
+																🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+															</div> <!-- loadingMessage-->
+															<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
+														</div> <!-- frame-->
+													</div> <!-- modal_content-->
+												</div><!-- modalQRcode-->
+											</div>
+											<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="form-row">
@@ -58,33 +78,29 @@
 										   th:id="transId" th:for="transId" >
 								</div>
 								<div class="form-holder form-holder-4">
-									<input type="button" name="find_bank" id="qrcode" value="QR코드" class="form-control" >
+									<input class="modal-btn" type="checkbox" id="qrcode" name="modal-btn"/>
+									<label for="qrcode">QRCODE 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
+									<div class="modal" name="modal" id="modal">
+										<div class="modal-wrap">
+											<div class="qrBox" >
+												<div class="modalQRcode">
+													<div class="modal_content">
+														<div id="frame">
+															<div id="loadingMessage" hidden>
+																🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+															</div> <!-- loadingMessage-->
+															<canvas id="canvas" style="width: 400px; height: 300px"></canvas>
+														</div> <!-- frame-->
+													</div> <!-- modal_content-->
+												</div><!-- modalQRcode-->
+											</div>
+											<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="qrBox" >
-								<div class="modalQRcode">
-									<div class="modal_content">
-										<div id="frame">
-											<div id="loadingMessage" hidden>
-												🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
-											</div> <!-- loadingMessage-->
-											<canvas id="canvas" style="width: 400px; height: 300px"></canvas>
-										</div> <!-- frame-->
-									</div> <!-- modal_content-->
-								</div><!-- modalQRcode-->
-							</div>
-							<div class="qrBox2" >
-								<div class="modalQRcode2">
-									<div class="modal_content2">
-										<div id="frame2">
-											<div id="loadingMessage2" hidden>
-												🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
-											</div> <!-- loadingMessage-->
-											<canvas id="canvas2" style="width: 400px; height: 300px"></canvas>
-										</div> <!-- frame-->
-									</div> <!-- modal_content-->
-								</div><!-- modalQRcode-->
-							</div>
+
+
 						</div>
 					</section>
 
@@ -156,8 +172,7 @@
 						<div class="form-row">
 							<div class="form-holder form-holder-2">
 								<fieldset>
-									<legend>확인</legend>
-									<input type="submit">
+									<input type="button" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
 								</fieldset>
 							</div>
 						</div>
@@ -218,8 +233,7 @@
 
 
 
-
-<script type="text/javascript">
+<script type="text/javascript" >
 	$(function(){
 		$("#qrcode").click(function() {
 			$(".modalQRcode").fadeIn();
@@ -276,7 +290,7 @@
 						//console.log(`dosId:${dosId}`);
 						console.log(`transId:`+transId2);
 						//카메라 사라지기
-						$(".modalQRcode").fadeOut();
+						$(".modal").fadeOut();
 
 
 						//추가
@@ -329,25 +343,6 @@
 							}
 						});
 
-
-						//세훈:한나 = did:aniId
-						// $.ajax({
-						//    url:`http://192.168.43.99:3000/api/pet/get/all/petInfos/${did}`,
-						//    type:"GET",
-						//    contentType: "application/json",
-						//    success: function(result) {
-						//       if (result) {
-						//          console.log(result.peterpet);
-						//          // location.href = "/home/blood";
-						//       }
-						//       else {
-						//          alert("잠시 후에 시도해주세요.");
-						//       }
-						//    },
-						//    error: function() {
-						//       alert("에러 발생");
-						//    } })
-						// return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
 						return;
 					}
 					// QR코드 인식에 실패한 경우
@@ -363,12 +358,9 @@
 
 
 		});
-		$("#canvas").click(function(){
-			$(".modalQRcode").fadeOut();
-		});
 	});
 	$(function(){
-		$("#find_bNumber").click(function() {
+		$("#qrcode2").click(function() {
 			$(".modalQRcode2").fadeIn();
 
 			var video = document.createElement("video");
@@ -421,45 +413,17 @@
 						$('#bNumber').val(bNumber2);
 						console.log(`bNumber:${bNumber}`);
 						//카메라 사라지기
-						$(".modalQRcode2").fadeOut();
+						$(".modal2").fadeOut();
 
-
-
-						//세훈:한나 = did:aniId
-						// $.ajax({
-						//    url:`http://192.168.43.99:3000/api/pet/get/all/petInfos/${did}`,
-						//    type:"GET",
-						//    contentType: "application/json",
-						//    success: function(result) {
-						//       if (result) {
-						//          console.log(result.peterpet);
-						//          // location.href = "/home/blood";
-						//       }
-						//       else {
-						//          alert("잠시 후에 시도해주세요.");
-						//       }
-						//    },
-						//    error: function() {
-						//       alert("에러 발생");
-						//    } })
-						// return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
 						return;
 					}
 					// QR코드 인식에 실패한 경우
 					else {
-						// outputMessage.hidden = false;
-						// outputData.parentElement.hidden = true;
+
 					}
 				}
 				requestAnimationFrame(tick);
-
-
 			}
-
-
-		});
-		$("#canvas2").click(function(){
-			$(".modalQRcode2").fadeOut();
 		});
 	});
 </script>
@@ -470,10 +434,121 @@
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
-
-
-<!-- Bootstrap -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<!--메타데이터 업로드-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/1.6.5-rc.2/caver.min.js" integrity="sha512-2PMOAlTrOMvxwtl+AB67naKpUtzNVdwRmychnd2lIuaRg1HlqAiJ0qd4miDWKKfcHZi6gX5NKAfeb+wfD3094w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" th:inline="javascript">
+
+	function toAjax() {
+
+		console.log("1");
+
+		var transId2 =$("#transId2").val();
+		var transName=$("#transName").val();
+		var tPack=$("#tPack").val();
+		var kind=$("#kind").val();
+		var tDate=$("#tDate").val();
+		var type=$("#type").val();
+		var tHos=$("#tHos").val();
+
+
+		let http = new XMLHttpRequest();
+		let url = 'https://metadata-api.klaytnapi.com/v1/metadata';
+		let data= {
+			"metadata": {
+				"name": "혈액-수혈견등록정보",
+				"image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
+				"transId" : transId2,
+				"transName" : transName,
+				"tPack" : tPack,
+				"kind" : kind,
+				"tDate" : tDate,
+				"type" : type,
+				"tHos" : tHos
+
+			}
+
+		}
+		http.open('POST', url, true);
+
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/json');
+		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+		http.setRequestHeader('x-chain-id', '1001');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			// mintToken(http.responseText);
+			console.log('META-STATE', http.readyState)
+			if(http.readyState !=4) return;
+			console.log(http.response)
+			var jsonArray =http.responseText
+			var jsonParsedArray = JSON.parse(jsonArray);
+
+			mintToken(jsonParsedArray["uri"]);   //토큰생성
+
+
+			console.log("8")
+
+
+
+
+		}
+		http.send(JSON.stringify(data));
+		console.log("7")
+
+
+
+
+
+	}
+
+
+	//토큰 생성(데이터를 토큰화하여 블록체인에 전송)
+
+	function mintToken(uri) {
+		let timestamp= Math.floor(new Date().getTime() / 1000);
+
+		// console.log("=====start mintToken======");
+		// console.log("timestamp >>> " +timestamp);
+		let http = new XMLHttpRequest();
+		let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
+		let data= {
+			"to": "0x5fbf75a9fdfd1d9180ea8242da08d7f9ae4a772e", //형우님 테스트 주소
+			"id": "0x"+timestamp, //계정 timestamp함수를 통해 생성, 아이디 하나당 한번의 토큰만 생성할 수 있음
+			"uri": uri
+		}
+		http.open('POST', url, true);
+
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/json');
+		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+		http.setRequestHeader('x-chain-id', '1001');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			console.log('TOKEN-STATE', http.readyState)
+			if(http.readyState !=4) return;
+
+			let jsonResult = JSON.parse(http.responseText);
+			let thash = jsonResult.transactionHash;
+
+
+			$('#thash').val(thash);
+			alert(thash);
+			var form = document.qrcodeForm;
+			form.action="/bNumber/new/transfusion";
+			form.submit();
+
+
+		}
+		http.send(JSON.stringify(data));
+
+	}
+
+
+</script>
 
 
 

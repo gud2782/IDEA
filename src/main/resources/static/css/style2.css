@@ -920,6 +920,7 @@ pre code {
     flex: 0 0 91.66667%;
     max-width: 91.66667%; }
   .col-md-12 {
+    margin-left: 50px;
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;

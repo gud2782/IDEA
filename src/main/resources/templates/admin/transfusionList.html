@@ -37,6 +37,7 @@
                     <th scope="col">수혈양</th>
                     <th scope="col">수혈기관</th>
                     <th scope="col">등록자</th>
+                    <th scope="col">조회</th>
 
 
 
@@ -58,6 +59,8 @@
                     <td th:text="${allTrans.TPack}"><a href="#"></a>
                     <td th:text="${allTrans.THos}" ></td>
                     <td th:text="${allTrans.creater}" ></td>
+                    <td><a class="more" th:href="@{https://baobab.scope.klaytn.com/tx/{hash} (hash=${allTrans.hash})}"
+                           role="button">NFT</a></td>
 
                     <td><form action="/transfusion/delete/admin" method="post">
                         <input type="submit" id="transfusionIdx" name="transfusionIdx" class="form-control" th:value="*{allTrans.transfusionIdx}" >

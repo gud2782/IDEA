@@ -26,6 +26,10 @@ public class QrcodeDto {
     String tType;
     String tHos;
 
+    String bloodStatus;
+    String dhash;
+    String thash;
+
 
 
 }

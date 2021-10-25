@@ -1,5 +1,7 @@
 package com.likeadog.idea.domain;
 
+import com.likeadog.idea.enumCollection.BloodStatus;
+import com.likeadog.idea.enumCollection.DeleteStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,4 +28,10 @@ public class Qrcode extends BaseEntity{
 
     @OneToOne(mappedBy = "qrcode")
     private Donation donation;
+
+
+    private String bloodStatus; //혈액상태
+    private String dhash;
+    private String thash;
+
 }

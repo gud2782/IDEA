@@ -31,7 +31,8 @@
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
-			<form id="qrcodeForm" th:action="@{/bNumber/new/donation}"  th:object="${qrcodeForm}" class="form-register" method="post" autocomplete="off">
+			<form id="qrcodeForm" name="qrcodeForm" th:object="${qrcodeForm}" class="form-register" method="post" autocomplete="off">
+				<input type="text" id="dhash" name="dhash" value="dhash" th:id="dhash" th:for="dhash" th:field="*{dhash}" hidden>
 				<div id="form-total">
 					<!-- SECTION 1 -->
 					<h2>
@@ -170,8 +171,7 @@
 						<div class="form-row">
 							<div class="form-holder form-holder-2">
 								<fieldset>
-									<legend>확인</legend>
-									<input type="submit">
+									<input type="button" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
 								</fieldset>
 							</div>
 						</div>
@@ -434,6 +434,120 @@
 <div th:replace="fragments/footer_content :: footer_content" />
 <!--footer-end -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<!--메타데이터 업로드-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/1.6.5-rc.2/caver.min.js" integrity="sha512-2PMOAlTrOMvxwtl+AB67naKpUtzNVdwRmychnd2lIuaRg1HlqAiJ0qd4miDWKKfcHZi6gX5NKAfeb+wfD3094w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" th:inline="javascript">
+
+	function toAjax() {
+
+		console.log("1");
+
+		var dosId2 =$("#dosId2").val();
+		var dosName=$("#dosName").val();
+		var dPack=$("#dPack").val();
+		var kind=$("#kind").val();
+		var dDate=$("#dDate").val();
+		var type=$("#type").val();
+		var dHos=$("#dHos").val();
+		var neutralization=$("#neutralization").val();
+
+
+		let http = new XMLHttpRequest();
+		let url = 'https://metadata-api.klaytnapi.com/v1/metadata';
+		let data= {
+			"metadata": {
+				"name": "혈액-헌혈견등록정보",
+				"image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
+				"dosId" : dosId2,
+				"dosName" : dosName,
+				"dPack" : dPack,
+				"kind" : kind,
+				"dDate" : dDate,
+				"type" : type,
+				"dHos" : dHos
+
+			}
+
+		}
+		http.open('POST', url, true);
+
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/json');
+		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+		http.setRequestHeader('x-chain-id', '1001');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			// mintToken(http.responseText);
+			console.log('META-STATE', http.readyState)
+			if(http.readyState !=4) return;
+			console.log(http.response)
+			var jsonArray =http.responseText
+			var jsonParsedArray = JSON.parse(jsonArray);
+
+			mintToken(jsonParsedArray["uri"]);   //토큰생성
+
+
+			console.log("8")
+
+
+
+
+		}
+		http.send(JSON.stringify(data));
+		console.log("7")
+
+
+
+
+
+	}
+
+
+	//토큰 생성(데이터를 토큰화하여 블록체인에 전송)
+
+	function mintToken(uri) {
+		let timestamp= Math.floor(new Date().getTime() / 1000);
+
+		// console.log("=====start mintToken======");
+		// console.log("timestamp >>> " +timestamp);
+		let http = new XMLHttpRequest();
+		let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
+		let data= {
+			"to": "0x5fbf75a9fdfd1d9180ea8242da08d7f9ae4a772e", //형우님 테스트 주소
+			"id": "0x"+timestamp, //계정 timestamp함수를 통해 생성, 아이디 하나당 한번의 토큰만 생성할 수 있음
+			"uri": uri
+		}
+		http.open('POST', url, true);
+
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/json');
+		http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+		http.setRequestHeader('x-chain-id', '1001');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			console.log('TOKEN-STATE', http.readyState)
+			if(http.readyState !=4) return;
+
+			let jsonResult = JSON.parse(http.responseText);
+			let dhash = jsonResult.transactionHash;
+
+
+			$('#dhash').val(dhash);
+			alert(dhash);
+			var form = document.qrcodeForm;
+			form.action="/bNumber/new/donation";
+			form.submit();
+
+
+		}
+		http.send(JSON.stringify(data));
+
+	}
+
+
+</script>
 
 
 </html>
