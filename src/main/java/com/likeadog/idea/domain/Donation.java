@@ -36,6 +36,7 @@ public class Donation extends BaseEntity {
     private String dPack; //헌혈양
     private String neutralization; //중성화
     private String hash;
+    private String aniImg;
 
 
 }

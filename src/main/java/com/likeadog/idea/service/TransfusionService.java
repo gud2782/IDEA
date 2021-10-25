@@ -31,6 +31,7 @@ public class TransfusionService {
     public Transfusion saveTransfusion(String registerIdx, TransfusionForm form) {
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
+        String imgUrl = "";
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
         System.out.println(registerIdx);
@@ -52,10 +53,19 @@ public class TransfusionService {
                 .kind(form.getKind())
                 .tWeight(form.getTWeight())
                 .hash(form.getHash())
+                .aniImg(form.getAniImg())
                 .build();
         transfusion.setDel(DeleteStatus.NO);
         transfusion.setCreater(userEntity.getUserId());
         transfusion.setCDate(LocalDateTime.now());
+        if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
+            imgUrl = "/img/card.png";
+            transfusion.setAniImg(imgUrl);
+        } else {
+            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            transfusion.setAniImg(imgUrl);
+
+        }
 
         transfusionRepository.regTrans(transfusion);
 
@@ -79,6 +89,7 @@ public class TransfusionService {
                 .neutralization(transfusion.getRegister().getNeutralization())
                 .register(transfusion.getRegister())
                 .hash(transfusion.getHash())
+                .aniImg(transfusion.getAniImg())
                 .build();
         form.setDel(transfusion.getDel());
         form.setCDate(transfusion.getCDate());
@@ -103,6 +114,7 @@ public class TransfusionService {
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
                 .hash(form.getHash())
+                .aniImg(form.getAniImg())
                 .build();
         transfusion.setDel(form.getDel());
         transfusion.setCDate(form.getCDate());

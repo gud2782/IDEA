@@ -36,7 +36,7 @@
 					</h2>
 
 						<input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
-
+						<input type="text" id="aniImg" name="aniImg" value="aniImg" hidden>
 						<section>
 							<div class="inner">
 								<div class="wizard-header">
@@ -44,7 +44,6 @@
 									<p>반려견 등록 당시 입력한 전화번호를 입력해주세요.</p>
 								</div>
 								<div class="form-row">
-									<!--                           <div class="form-holder form-holder-1">-->
 									<div class="form-holder form-holder-4">
 										<input type="text" name="find_bank" id="lookup" value="이름" class="form-control" >
 									</div>
@@ -52,12 +51,11 @@
 										<select name="registerIdx" id="register" class="form-control"  th:onchange="changeValues()" >
 											<option value="">강아지선택</option>
 											<option th:each="register : ${registers}"
-													th:value="|${register.registerIdx},${register.aniId},${register.kind},${register.neutralization},${register.aniName}|"
+													th:value="|${register.registerIdx},${register.aniId},${register.kind},${register.neutralization},${register.aniName},${register.aniImg}|"
 													th:text="${register.aniName}"
 											/>
 										</select>
 									</div>
-									<!--                           </div>-->
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-4">
@@ -82,7 +80,7 @@
 							<div class="inner">
 								<div class="wizard-header">
 									<h3 class="heading">헌혈견 정보 등록</h3>
-									<p>Please enter your infomation and proceed to the next step so we can build your accounts.  </p>
+									<p>Please enter your pet-infomation and proceed to the next step so we can build your NFT.  </p>
 								</div>
 								<div class="form-row">
 									<div class="form-holder">
@@ -116,7 +114,7 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>헌혈양</legend>
-											<input type="text" id="dPack" th:id="dPack" th:for="dPack" class="form-control" th:field="*{DPack}"  required>
+											<input type="text" id="DPack" th:id="DPack" th:for="DPack" class="form-control" th:field="*{DPack}"  required>
 										</fieldset>
 									</div>
 									<div class="form-holder">
@@ -128,19 +126,9 @@
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
-
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="form-holder form-holder-2">
-
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>헌혈 기관</legend>
-											<input type="text" id="DHos" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" placeholder="헌혈 기관" required>
+											<input type="text" id="DHos" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" required>
 										</fieldset>
 									</div>
 								</div>
@@ -385,10 +373,10 @@
 		let selectOption = document.getElementById("register").value.split(",");
 
 		//변수 선언
-		let aniId,kind,neutralization,aniName;
+		let aniId,kind,neutralization,aniName, aniImg;
 
 		//각각 파싱된 변수들 저장
-		for (let idx=0; idx <  5; idx++){
+		for (let idx=0; idx <  6; idx++){
 			let value = selectOption [idx];
 			if(idx == 1){
 				aniId= value;
@@ -398,6 +386,8 @@
 				neutralization= value;
 			}else if(idx==4){
 				aniName=value;
+			}else if(idx==5){
+				aniImg=value;
 			}
 		}
 
@@ -412,6 +402,8 @@
 
 		//2. 코드를 여기까지 읽지않고 끝내버림
 		document.getElementById('aniName').value=aniName;
+		document.getElementById('aniImg').value=aniImg;
+		console.log(aniImg)
 
 	}
 

@@ -34,6 +34,7 @@ public class DonationService {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
+        String imgUrl = "";
 
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
@@ -58,11 +59,20 @@ public class DonationService {
         donation.setDel(DeleteStatus.NO);
         donation.setCDate(LocalDateTime.now());
         donation.setCreater(userEntity.getUserId());
-        donationRepository.regDo(donation);
 
+        System.out.println("IMG : " + form.getAniImg());
         Long donationIdx = donation.getDonationIdx();
-        System.out.println("donationIDx =" +donation.getDonationIdx());
 
+        if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
+            imgUrl = "/img/card.png";
+            donation.setAniImg(imgUrl);
+        } else {
+            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            donation.setAniImg(imgUrl);
+
+        }
+
+        donationRepository.regDo(donation);
         qrcodeService.donationQrcode(donationIdx);
 
 
@@ -86,6 +96,7 @@ public class DonationService {
                 .neutralization(donation.getRegister().getNeutralization())
                 .register(donation.getRegister())
                 .hash(donation.getHash())
+                .aniImg(donation.getAniImg())
                 .build();
         form.setDel(donation.getDel());
         form.setCDate(donation.getCDate());
@@ -111,6 +122,7 @@ public class DonationService {
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
                 .hash(form.getHash())
+                .aniImg(form.getAniImg())
                 .build();
         donation.setDel(form.getDel());
         donation.setCreater(form.getCreater());

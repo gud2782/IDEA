@@ -68,7 +68,13 @@ transition: .3s all ease; }
 .custom-table tbody th a, .custom-table tbody td a {
   color: rgba(255, 255, 255, 0.3); }
 .custom-table tbody th .more, .custom-table tbody td .more {
-  color: rgba(255, 255, 255, 0.3);
+  margin-right: 5px;
+  margin-left: 5px;
+  display: block;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid;
+  color: #607d8b;
   font-size: 15px;
   font-weight: 900;
   text-transform: uppercase;

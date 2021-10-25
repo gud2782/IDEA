@@ -38,6 +38,8 @@
                     <th scope="col">헌혈기관</th>
                     <th scope="col">등록자</th>
                     <th scope="col">조회</th>
+                    <th scope="col">삭제</th>
+
 
 
 
@@ -64,10 +66,9 @@
 
 
                     <td><form action="/donation/delete/admin" method="post">
-                        <input type="submit" id="donationIdx" name="donationIdx" class="form-control" th:value="*{allDos.donationIdx}" >
-                        <label for="donationIdx">delete</label>
-
+                        <input class="more" type="submit" id="donationIdx" name="donationIdx"th:value="*{allDos.donationIdx}" >
                     </form></td>
+
 
 
 

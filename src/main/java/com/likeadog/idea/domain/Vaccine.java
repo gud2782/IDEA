@@ -28,6 +28,7 @@ public class Vaccine extends BaseEntity{
     private String vDate; //접종일
     private String nDate; //다음 접종일
     private String hash;
+    private String aniImg;
 
 
 }

@@ -26,12 +26,13 @@
                 <div >
                     <div class="item" style="float: left; margin-right: 30px; width:300px" th:each="transs : ${trans}" >
                         <div class="work">
-                            <div class="img d-flex align-items-end justify-content-center" style="background-image: url(/img/puppy.png);">
+                                <div class="img d-flex align-items-end justify-content-center" th:style="'background-image:url('+${transs.aniImg}+');'">
                                 <div class="text w-100">
-                                    <span class="cat" th:text="${transs.register.aniName}" >해시값 들어가는 곳</span>
-                                    <!--                                    <a href="#" th:href="@{https://baobab.scope.klaytn.com/account/{해시값}"-->
-                                    <!--                                       class="btn btn-primary" role="button">해시값을 통해 조회</a>-->
-                                    <!--                                    이 부분은 해시값 변수만 추가해주면 됩니당-->
+                                    <span class="cat" th:text="*{transs.hash}" ></span>
+                                    <a href="#" th:href="@{https://baobab.scope.klaytn.com/tx/{hash} (hash=${transs.hash})}"
+                                       class="btn btn-primary" role="button">NFT 조회</a>
+
+
                                     <h3><a  th:text="${transs.register.aniName}" >동물이름</a></h3>
                                     <a href="#" th:href="@{/transfusion/{idx}/detail (idx=${transs.transfusionIdx})}"
                                        class="btn btn-primary" role="button">자세히</a>

@@ -22,6 +22,7 @@ public class VaccineForm {
     private String vDate; //접종일
     private String nDate; //다음 접종일
     private String hash;
+    private String aniImg;
 
     private List<RegisterVaccine> registerVaccines;
     private List<VaccineVinfo> vaccineVinfos;

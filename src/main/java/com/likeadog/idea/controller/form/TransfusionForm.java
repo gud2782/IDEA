@@ -32,6 +32,7 @@ public class TransfusionForm {
     private String tPack; //수혈양
     private String neutralization; //중성화
     private String hash;
+    private String aniImg;
 
     private String creater; //생성자
     private String modifier; //수정자

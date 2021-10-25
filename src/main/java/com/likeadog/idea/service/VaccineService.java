@@ -37,6 +37,7 @@ public class VaccineService {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
+        String imgUrl = "";
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
         //파싱한 결과들 중 registerIdx에 해당하는 부분 Long으로 캐스팅
@@ -58,9 +59,19 @@ public class VaccineService {
                 .vDate(form.getVDate())
                 .vNumber(form.getVNumber())
                 .hash(form.getHash())
+                .aniImg(form.getAniImg())
                 .build();
         vaccine.setCreater(userEntity.getUserId());
         vaccine.setCDate(LocalDateTime.now());
+
+        if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
+            imgUrl = "/img/card.png";
+            vaccine.setAniImg(imgUrl);
+        } else {
+            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            vaccine.setAniImg(imgUrl);
+
+        }
         vaccineRepository.regVc(vaccine);
 
 
@@ -112,6 +123,7 @@ public class VaccineService {
                 .vaccineIdx(vaccine.getVaccineIdx())
                 .vDate(vaccine.getVDate())
                 .hash(vaccine.getHash())
+                .aniImg(vaccine.getAniImg())
                 .build();
         form.setCDate(vaccine.getCDate());
         form.setCreater(vaccine.getCreater());
@@ -132,6 +144,7 @@ public class VaccineService {
                 .registerVaccines(form.getRegisterVaccines())
                 .vaccineIdx(form.getVaccineIdx())
                 .hash(form.getHash())
+                .aniImg(form.getAniImg())
                 .build();
         vaccine.setCDate(form.getCDate());
         vaccine.setCreater(form.getCreater());
