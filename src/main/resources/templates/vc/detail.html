@@ -1,101 +1,333 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header_content :: header_content" />
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
-<!--navbar end-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+<!-- Style -->
+<link rel="stylesheet" th:href="@{/css/style_form.css}">
+<link rel="stylesheet" th:href="@{/css/style_detail.css}">
+<style>.fieldError { border-color: #bd2130;}</style>
+
 <body>
-<div class="container">
-
-    <div>
-        <table class="table table-striped" action="/vc/detail" th:object="${vaccine}" method="GET">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>동물등록번호</th>
-                <th>동물이름</th>
-                <th>견종</th>
-                <th>중성화여부</th>
-                <th>백신번호</th>
-                <th>대분류</th>
-                <th>중분류</th>
-                <th>소분류</th>
-                <th>접종날짜</th>
-                <th>다음접종날짜</th>
 
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="*{vaccineIdx}"></td>
-                <td th:text="*{registerVaccines.get(0).register.aniId}"></td>
-                <td th:text="*{registerVaccines.get(0).register.aniName}"></td>
-                <td th:text="*{registerVaccines.get(0).register.kind}"></td>
-                <td th:text="*{registerVaccines.get(0).register.neutralization}"></td>
-                <td th:text="*{vaccineVinfos.get(0).vinfo.VInfoIdx}"></td>
-                <td th:text="*{vaccineVinfos.get(0).vinfo.first.name}"></td>
-                <td th:text="*{vaccineVinfos.get(0).vinfo.second.name}"></td>
-                <td th:text="*{vaccineVinfos.get(0).vinfo.third.name}"></td>
-                <td th:text="*{VDate}"></td>
-                <td th:text="*{NDate}"></td>
+<div class="content">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5m mr-auto">
+                <h3 class="mb-3">Introduce my lovely Dog!</h3>
+                <hr>
+                <div class="col-md-6 form-group">
+                    <form  action="/vc/detail" th:object="${vaccine}" method="GET" id="contactForm" name="contactForm">
+                        <input type="text" id="vaccineIdx" name="vaccineIdx" th:field="*{vaccineIdx}" hidden>
+                        <p>사랑스러운 우리 강아지의 백신접종 내역을 등록하고,
+                            <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
+                            <br>아래의 QR코드로 우리 강아지의 정보를 손쉽게 열어 볼 수 있어요!</p>
+                        <div class="img-box">
+                            <img  style="width: 250px; height:300px" onclick="qrcodeSave()"
+                                  src="/img/lovely.jpg">
+                        </div> <!-- img-box  -->
+                        <hr>
+
+                        <div class="col-md-3">
+                            <div class="email" onclick="this.classList.add('expand')">
+                                <div class="from">
+                                    <div class="from-contents">
+                                        <div class="avatar me"></div>
+                                        <div class="name">QR코드</div>
+                                    </div> <!--from-contents -->
+                                </div><!--from -->
+                                <div class="to">
+                                    <div class="to-contents">
+                                        <div class="top">
+                                            <div class="avatar-large me"></div>
+                                            <div class="name-large" ></div>
+                                            <div class="x-touch" onclick="document.querySelector('.email').classList.remove('expand');event.stopPropagation();">
+                                                <div class="x">
+                                                    <div class="line1"></div>
+                                                    <div class="line2"></div>
+                                                </div><!-- x -->
+                                            </div><!-- x-touch -->
+                                        </div><!--top -->
+                                        <div class="bottom">
+                                            <div class="row">
+                                                <g transform="translate(-539.17946,-568.85777)" id="layer1">
+                                                    <img id="file" style="width: 200px; height:200px"
+                                                         th:src="@{/qrcode/animals/peterpet_{idx}.png (idx=*{vaccineIdx})}">
+                                                </g>
+                                            </div><!--row     onclick="qrcodeSave()"-->
+                                        </div><!--bottom -->
+                                    </div><!-- to-contents-->
+                                </div><!--to -->
+                            </div><!--email -->
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="email2" onclick="this.classList.add('expand')">
+                                <div class="from">
+                                    <div class="from-contents">
+                                        <div class="avatar kakao"></div>
+                                        <div class="name">전송하기</div>
+                                    </div> <!--from-contents -->
+                                </div><!--from -->
+                                <div class="to">
+                                    <div class="to-contents">
+                                        <div class="top">
+                                            <div class="avatar-large kakao"></div>
+                                            <div class="name-large"></div>
+                                            <div class="x-touch" onclick="document.querySelector('.email2').classList.remove('expand');event.stopPropagation();">
+                                                <div class="x">
+                                                    <div class="line1"></div>
+                                                    <div class="line2"></div>
+                                                </div><!-- x -->
+                                            </div><!-- x-touch -->
+                                        </div><!--top -->
+                                        <div class="bottom">
+                                            <div class="row">
+                                                <g transform="translate(-539.17946,-568.85777)" id="layer1">
+                                                    <img  style="width: 200px; height:200px" onclick="sendToKakao()"
+                                                          src="/img/kakaosend.png">
+                                                </g>
+                                            </div><!--row -->
+                                        </div><!--bottom -->
+                                    </div><!-- to-contents-->
+                                </div><!--to -->
+                            </div><!--email -->
+                        </div><!-- "col-md-6 -->
 
 
+                    </form><!--  -->
+                </div> <!--col-md-6 form-group -->
 
+            </div>
 
+            <div class="col-md-6">
+                <div class="box">
+                    <form class="mb-5" action="/vc/detail" th:object="${vaccine}" method="GET" id="contactForm2" name="contactForm2">
+                        <h3 class="heading" th:text="*{registerVaccines.get(0).register.aniName}" name="registerVaccines.get(0).register.aniName" id="registerVaccines.get(0).register.aniName"></h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="col-form-label">동물등록번호</label>
+                                <div class="text-box">
+                                    <h2 th:text="*{registerVaccines.get(0).register.aniId}" class="form-control" name="registerVaccines.get(0).register.aniId" id="registerVaccines.get(0).register.aniId" ></h2>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="registerVaccines.get(0).register.kind" class="col-form-label">견종</label>
+                                <h2 th:text="*{registerVaccines.get(0).register.kind}" class="form-control" name="registerVaccines.get(0).register.kind" id="registerVaccines.get(0).register.kind" ></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="vaccineVinfos.get(0).vinfo.first.name" class="col-form-label">대분류</label>
+                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.first.name}" class="form-control" name="vaccineVinfos.get(0).vinfo.first.name" id="vaccineVinfos.get(0).vinfo.first.name" ></h2>
+                            </div>
 
-                <td>
-                    <a href="#" th:href="@{/vc/{idx}/update (idx=${vaccineIdx})}"
-                       class="btn btn-primary" role="button">수정</a>
-                </td>
-                <td>
-                    <a href="/transfusion/list"
-                       class="btn btn-primary" role="button">돌아가기</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                            <div class="col-md-6">
+                                <label for="vaccineVinfos.get(0).vinfo.second.name" class="col-form-label">중분류</label>
+                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.second.name}" class="form-control" name="vaccineVinfos.get(0).vinfo.second.name" id="vaccineVinfos.get(0).vinfo.second.name" ></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="vaccineVinfos.get(0).vinfo.third.name" class="col-form-label">소분류</label>
+                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.third.name}" class="form-control" name="vaccineVinfos.get(0).vinfo.third.name" id="vaccineVinfos.get(0).vinfo.third.name"></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="VDate" class="col-form-label">접종날짜</label>
+                                <h2 th:text="*{VDate}" class="form-control" name="VDate" id="VDate" ></h2>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="NDate" class="col-form-label">다음접종날짜</label>
+                                <h2 th:text="*{NDate}" class="form-control" name="NDate" id="NDate"></h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12" style="float: right">
+                                <input id="btn-detail1" type="submit" value="수정하기" >
+                                <input id="btn-detail2" type="submit" value="삭제하기" >
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div th:replace="fragments/footer :: footer" />
-</div> <!-- /container -->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
 </body>
-<!-- jQuery -->
-<!--<script src="js/jquery.min.js"></script>-->
-
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
 <!-- Bootstrap -->
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<!--<script src="/js/bootstrap.min.js"></script>-->
 
-<!-- Components Plugin -->
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/smooth-scroll.js"></script>
-<script src="js/jquery.appear.js"></script>
-<script src="js/jquery.countTo.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/imagesloaded.pkgd.min.js"></script>
-<script src="js/isotope.pkgd.min.js"></script>
-<script src="js/jquery.mb.YTPlayer.js"></script>
-<script src="js/retina.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="inc/owlcarousel/js/owl.carousel.min.js"></script>
-<script src="inc/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script src="inc/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" th:inline="javascript">
 
-<!-- Contact Form -->
-<script src="js/contact.js"></script>
+    Kakao.init('fcbac05f33f0c412744d496da6d59d87'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    // var file_path = document.getElementById('file').src;
+    const toDataURL = url => fetch(url)
+        .then(response => response.blob())
+        .then(blob => new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onloadend = () => resolve(reader.result)
+            reader.onerror = reject
+            reader.readAsDataURL(blob)
+        }))
 
-<!--  &lt;!&ndash; Custom Plugin &ndash;&gt;-->
-<!--  <script src="/js/custom.js"></script>-->
+    function dataURLtoFile(dataurl, filename) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type: mime});
+    }
 
-<!-- RS Plugin Extensions -->
-<script src="inc/revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script src="inc/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+
+    var vaccineIdx = $("#aniId").text();
+    var registerVaccines.get(0).register.aniId = $("#registerVaccines.get(0).register.aniId").text();
+    var registerVaccines.get(0).register.aniName = $("#registerVaccines.get(0).register.aniName").text();
+    var registerVaccines.get(0).register.kind = $("#registerVaccines.get(0).register.kind").text();
+    var registerVaccines.get(0).register.neutralization = $("#registerVaccines.get(0).register.neutralization").text();
+    var vaccineVinfos.get(0).vinfo.VInfoIdx = $("#vaccineVinfos.get(0).vinfo.VInfoIdx").text();
+    var vaccineVinfos.get(0).vinfo.first.name = $("#vaccineVinfos.get(0).vinfo.first.name").text();
+    var vaccineVinfos.get(0).vinfo.second.name = $("#vaccineVinfos.get(0).vinfo.second.name").text();
+    var vaccineVinfos.get(0).vinfo.third.name = $("#vaccineVinfos.get(0).vinfo.third.name").text();
+    var VDate = $("#VDate").text();
+    var NDate = $("#NDate").text();
+    var fileName = $("#fileName").text(); //??
+    console.log(vaccineIdx, registerVaccines.get(0).register.aniId
+        , registerVaccines.get(0).register.aniName
+        , registerVaccines.get(0).register.kind
+        , registerVaccines.get(0).register.neutralization
+        , vaccineVinfos.get(0).vinfo.VInfoIdx
+        ,vaccineVinfos.get(0).vinfo.first.name
+        ,vaccineVinfos.get(0).vinfo.second.name
+        ,vaccineVinfos.get(0).vinfo.third.name
+        ,VDate
+        ,NDate
+        , fileName)
+
+
+    //나에게 메세지 보내기
+    function sendToKakao() {
+        var file_path = document.getElementById('file').src;
+        console.log(file_path);
+        var filetmp
+        toDataURL(file_path)
+            .then(dataUrl => {
+                console.log('RESULT 1 :', dataUrl)
+                filetmp = dataURLtoFile(dataUrl, 'filetest.png');
+                console.log('RESULT 2:', filetmp);
+                var arrTmp = new Array();
+                arrTmp.push(filetmp)
+                Kakao.Link.uploadImage({
+                    file: arrTmp
+                }).then(function (res) {
+
+                    // alert(res.infos.original.url)
+                    console.log(res.infos.original.url)
+                    var imgPath = res.infos.original.url;
+
+                    Kakao.Auth.login({
+                        //scope: 'PROFILE,TALK_MESSAGE',
+                        success: function () {
+
+                            Kakao.API.request({
+                                url: '/v2/api/talk/memo/default/send',
+                                data: {
+                                    template_object: {
+                                        object_type: 'feed',
+                                        content: {
+                                            title: 'IDEA',
+                                            description: 'IDEA와 함께 슬기로운 반려문화에 동참하세요',
+                                            image_url: imgPath,
+                                            link: {
+                                                web_url: 'http://localhost:8080/home',
+                                                mobile_web_url: 'http://localhost:8080/home',
+                                            },
+                                        },
+                                        item_content: {
+                                            profile_text: aniName,
+                                            profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
+                                            title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
+                                            title_image_text: 'IDEA',
+                                            title_image_category: fileName,
+                                            items: [
+                                                {
+                                                    item: '이름',
+                                                    item_op: aniName,
+                                                },
+                                                {
+                                                    item: '몸무게',
+                                                    item_op: weight,
+                                                },
+                                                {
+                                                    item: '견종',
+                                                    item_op: kind,
+                                                },
+                                                {
+                                                    item: '모색',
+                                                    item_op: color,
+                                                },
+
+                                                {
+                                                    item: '중성화',
+                                                    item_op: neutralization,
+                                                }
+                                            ],
+                                            sum: '대행기관',
+                                            sum_op: "PeterPet",
+                                        },
+
+                                        button_title: 'GO TO IDEA',
+                                    },
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                    alert("전송되었습니다.")
+
+                                },
+                                fail: function (error) {
+                                    console.log(error);
+                                    alert("전송에 실패하였습니다.")
+                                },
+                            })
+                        },
+                        fail: function (err) {
+                            alert('failed to login: ' + JSON.stringify(err))
+                        },
+                    })
+
+                });
+            })
+
+
+
+
+    }
+
+
+</script>
+
 
 </html>

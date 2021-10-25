@@ -156,11 +156,16 @@
 
               <div class="row">
                 <div class="col-md-12" style="float: right">
-                  <input id="btn-detail1" type="submit" value="수정하기" >
-                  <input id="btn-detail2" type="submit" value="삭제하기" >
+                  <a href="#" th:href="@{/ani/{idx}/update (idx=${registerIdx})}"
+                     class="btn btn-primary" role="button">수정</a>
+
                 </div>
 
               </div>
+            </form>
+            <form action="/ani/delete" method="post">
+              <input type="submit" id="registerIdx" name="registerIdx" class="form-control" th:value="*{registerIdx}" th:text="삭제">
+
             </form>
 
           </div>
