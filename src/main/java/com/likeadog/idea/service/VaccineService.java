@@ -63,7 +63,7 @@ public class VaccineService {
                 .build();
         vaccine.setCreater(userEntity.getUserId());
         vaccine.setCDate(LocalDateTime.now());
-
+        System.out.println("get : " +form.getAniImg());
         if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
             imgUrl = "/img/card.png";
             vaccine.setAniImg(imgUrl);
