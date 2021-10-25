@@ -8,9 +8,11 @@ import com.likeadog.idea.enumCollection.DeleteStatus;
 import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.TransfusionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,13 +20,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransfusionService {
 
+    @Autowired QrcodeService qrcodeService;
+
     private final TransfusionRepository transfusionRepository;
     private final RegisterService registerService;
     private final UserService userService;
 
+
     @Transactional
     public Transfusion saveTransfusion(String registerIdx, TransfusionForm form) {
-
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
         System.out.println(registerIdx);
@@ -45,11 +51,18 @@ public class TransfusionService {
                 .neutralization(form.getNeutralization())
                 .kind(form.getKind())
                 .tWeight(form.getTWeight())
+                .hash(form.getHash())
                 .build();
         transfusion.setDel(DeleteStatus.NO);
-
+        transfusion.setCreater(userEntity.getUserId());
+        transfusion.setCDate(LocalDateTime.now());
 
         transfusionRepository.regTrans(transfusion);
+
+        Long transfusionIdx = transfusion.getTransfusionIdx();
+        System.out.println("transfusionIdx =" +transfusionIdx);
+
+        qrcodeService.transfusionQrcode(transfusionIdx);
         return transfusion;
     }
     public TransfusionForm getUpdateTransfusion(Long transfusionIdx) {
@@ -65,15 +78,20 @@ public class TransfusionService {
                 .tPack(transfusion.getTPack())
                 .neutralization(transfusion.getRegister().getNeutralization())
                 .register(transfusion.getRegister())
+                .hash(transfusion.getHash())
                 .build();
         form.setDel(transfusion.getDel());
+        form.setCDate(transfusion.getCDate());
+        form.setCreater(transfusion.getCreater());
+
 
         return form;
     }
 
     @Transactional
     public void updateTransfusion(String transfusionIdx, TransfusionForm form) {
-
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         Transfusion transfusion = Transfusion.builder()
                 .transfusionIdx(form.getTransfusionIdx())
                 .tWeight(form.getTWeight())
@@ -84,8 +102,14 @@ public class TransfusionService {
                 .tPack(form.getTPack())
                 .neutralization(form.getNeutralization())
                 .register(form.getRegister())
+                .hash(form.getHash())
                 .build();
         transfusion.setDel(form.getDel());
+        transfusion.setCDate(form.getCDate());
+        transfusion.setCreater(form.getCreater());
+        transfusion.setMDate(LocalDateTime.now());
+        transfusion.setModifier(userEntity.getUserId());
+
 
         transfusionRepository.regTrans(transfusion);
     }
@@ -120,11 +144,15 @@ public class TransfusionService {
     }
 
 
-    public Transfusion findTransfusionByAniId(String aniId) {
-        return transfusionRepository.findTransfusionByAniId(aniId);
+    public Transfusion findTransfusionByAniId(String transfusionIdx) {
+        return transfusionRepository.findTransfusionByAniId(transfusionIdx);
     }
 
     public void saveTransfusion(Transfusion transfusion) {
         transfusionRepository.regTrans(transfusion);
+    }
+
+    public List<Transfusion> findAllTrans() {
+        return transfusionRepository.findAll();
     }
 }

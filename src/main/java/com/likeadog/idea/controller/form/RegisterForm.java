@@ -34,6 +34,7 @@ public class RegisterForm {
     private String neutralization; //중성화
     private String fileName;
     private String hash;
+    private String aniImg;
 
     private String creater; //생성자
     private String modifier; //수정자

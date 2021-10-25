@@ -19,12 +19,12 @@ public class TransfusionRepository {
         this.em = em;
     }
 
-    public void regTrans(Transfusion transfusion) {
-        if(transfusion.getTransfusionIdx() == null) {
-            em.persist(transfusion); //신규생성 개념
-        } else {
-            em.merge(transfusion); //업데이트 개념
-        }
+    public Long regTrans(Transfusion transfusion) {
+        em.persist(transfusion);
+
+        Long transfusionIdx = transfusion.getTransfusionIdx();
+        System.out.println("get transfusionIdx:" + transfusionIdx);
+        return transfusionIdx;
     }
 
     public List<Transfusion> findTransByUserIDX(Long userIdx) {
@@ -39,11 +39,21 @@ public class TransfusionRepository {
     }
 
 
-    public Transfusion findTransfusionByAniId(String aniId) {
-        System.out.println(aniId);
-        return em.createQuery("select t from Transfusion t where  t.register.aniId = :aniId",
+    public Transfusion findTransfusionByAniId(String transfusionIdx) {
+        Long transfusionIDx = Long.parseLong(transfusionIdx);
+        System.out.println(transfusionIDx);
+        return em.createQuery("select t from Transfusion t where  t.transfusionIdx = :transfusionIDx",
                 Transfusion.class)
-                .setParameter("aniId", aniId)
+                .setParameter("transfusionIDx", transfusionIDx)
                 .getResultList().get(0);
+    }
+
+    public List<Transfusion> findAll() {
+        Query query = em.createQuery("select t from Transfusion t where t.del='NO'", Transfusion.class);
+        List<Transfusion> listall = query.getResultList();
+        System.out.println("Repository_listAll : " +listall.get(0).getTransfusionIdx());
+
+
+        return listall;
     }
 }

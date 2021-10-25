@@ -37,14 +37,15 @@
             <div class="card-body">
                 <form id="registerForm" name="registerForm"  th:object="${registerForm}" method="post"  autocomplete="off">
                     <input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
-                    <div class="form-row-do" >
-                        <div class="name">번호조회</div>
-                        <div class="value">
-                            <input class="input--style-6" type="text" name="full_name" id="phone" th:id="phone" th:for="phone" th:field="*{user.phone}">
-                            <input type="button" class="btn btn--radius-2 btn--blue-2" id="find" onclick="findByPhone()" value="조회" />
+                    <input type="text" id="aniImg" name="aniImg" value="aniImg" th:id="aniImg" th:for="aniImg" th:field="*{aniImg}" hidden>
+<!--                    <div class="form-row-do" >-->
+<!--                        <div class="name">번호조회</div>-->
+<!--                        <div class="value">-->
+<!--                            <input class="input&#45;&#45;style-6" type="text" name="full_name" id="phone" th:id="phone" th:for="phone" th:field="*{user.phone}">-->
+<!--                            <input type="button" class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue-2" id="find" onclick="findByPhone()" value="조회" />-->
 
-                        </div>
-                    </div>
+<!--                        </div>-->
+<!--                    </div>-->
 
 
                     <div class="form-row-do" >
@@ -53,7 +54,7 @@
                             <input class="input--style-6" type="text" name="full_name" id="aniId" th:id="aniId" th:for="aniId" th:field="*{aniId}"
                                    th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
                             <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
-                            <input type="button" class="btn btn--radius-2 btn--blue-2" onclick="findByAniId()" value="조회" />
+<!--                            <input type="button" class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue-2" onclick="findByAniId()" value="조회" />-->
                             <div>
                                 <input class="modal-btn" type="checkbox" id="qrcode" name="modal-btn"/>
                                 <label for="qrcode">QRCODE 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
@@ -125,7 +126,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <input class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="button">등록</input>
+                        <input class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="button" value="등록"></input>
                     </div>
                 </form>
             </div>
@@ -288,7 +289,9 @@
                 document.getElementById('kind').value = result.kind;
                 document.getElementById('birth').value = result.birth;
                 document.getElementById('color').value = result.color;
-                console.log(result.name + result.kind + result.birth  + result.color +result.gender);
+                document.getElementById('aniImg').value = result.img;
+                console.log(result.name + result.kind + result.birth  + result.color +result.gender );
+                console.log(result.img);
 
 
                 if (result.gender === "male") {

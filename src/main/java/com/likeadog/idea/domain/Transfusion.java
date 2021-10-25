@@ -33,6 +33,7 @@ public class Transfusion extends BaseEntity{
     private String type; //혈액형
     private String tPack; //수혈양
     private String neutralization; //중성화
+    private String hash;
 
 
 }

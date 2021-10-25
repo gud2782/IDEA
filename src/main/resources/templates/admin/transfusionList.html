@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header_content :: header_content" />
+<!--navbar-->
+<div th:replace="fragments/navbar_content :: navbar_content"/>
+<!--navbar end-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/fonts/icomoon/style.css">
+<!-- Style -->
+<link rel="stylesheet" href="/css/style-list.css">
+
+
+<body>
+
+<div class="content">
+
+    <div class="container">
+        <h2 class="mb-5">수혈견관리 & 조회</h2>
+
+
+        <div class="table-responsive">
+
+            <table class="table table-striped custom-table">
+                <thead>
+                <tr>
+
+                    <th scope="col">수혈견번호</th>
+                    <th scope="col">동물등록번호</th>
+                    <th scope="col">수혈견 이름</th>
+                    <th scope="col">견종</th>
+                    <th scope="col">출생년도</th>
+                    <th scope="col">수혈날짜</th>
+                    <th scope="col">혈액형</th>
+                    <th scope="col">수혈양</th>
+                    <th scope="col">수혈기관</th>
+                    <th scope="col">등록자</th>
+
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr scope="row"th:each="allTrans : ${AllTrans}">
+
+
+
+                    <td th:text="${allTrans.transfusionIdx}"></td>
+                    <td th:text="${allTrans.register.aniId}" ></td>
+                    <td th:text="${allTrans.register.aniName}"></td>
+                    <td th:text="${allTrans.kind}"></td>
+                    <td th:text="${allTrans.register.birth}"></td>
+                    <td th:text="${allTrans.TDate}"></td>
+
+                    <td th:text="${allTrans.type}" ></td>
+                    <td th:text="${allTrans.TPack}"><a href="#"></a>
+                    <td th:text="${allTrans.THos}" ></td>
+                    <td th:text="${allTrans.creater}" ></td>
+
+                    <td><form action="/transfusion/delete/admin" method="post">
+                        <input type="submit" id="transfusionIdx" name="transfusionIdx" class="form-control" th:value="*{allTrans.transfusionIdx}" >
+                        <label for="transfusionIdx">delete</label>
+
+                    </form></td>
+
+
+
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
+<td>
+    <a href="/vc/new" class="btn btn-primary" role="button">추가</a>
+</td>
+
+</body>
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
+
+<!-- jQuery -->
+<!--<script src="js/jquery.min.js"></script>-->
+
+<!-- Bootstrap -->
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+</html>

@@ -5,11 +5,14 @@ import com.likeadog.idea.domain.*;
 import com.likeadog.idea.enumCollection.FirstStatus;
 import com.likeadog.idea.enumCollection.SecondStatus;
 import com.likeadog.idea.enumCollection.ThirdStatus;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.repository.VaccineRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,11 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VaccineService {
 
+    @Autowired QrcodeService qrcodeService;
+
     private final VaccineRepository vaccineRepository;
     private final RegisterService registerService;
     private final VinfoService vinfoService;
     private final RegisterVaccineService registerVaccineService;
     private final VaccineVInfoService vaccineVInfoService;
+    private final UserService userService;
 
 
     @Transactional
@@ -29,7 +35,8 @@ public class VaccineService {
             , ThirdStatus thirdStatus
             , String registerIdx, VaccineForm form) {
 
-
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         //넘어오는 registerIdx , 기준 파싱
         String[] parsedRegId = registerIdx.split(",");
         //파싱한 결과들 중 registerIdx에 해당하는 부분 Long으로 캐스팅
@@ -50,7 +57,10 @@ public class VaccineService {
                 .nDate(form.getNDate())
                 .vDate(form.getVDate())
                 .vNumber(form.getVNumber())
+                .hash(form.getHash())
                 .build();
+        vaccine.setCreater(userEntity.getUserId());
+        vaccine.setCDate(LocalDateTime.now());
         vaccineRepository.regVc(vaccine);
 
 
@@ -60,6 +70,7 @@ public class VaccineService {
                 .register(register)
                 .vaccine(vaccine)
                 .build();
+
 
         registerVaccineService.saveRV(registerVaccine);
 
@@ -71,6 +82,9 @@ public class VaccineService {
                 .vinfo(dbVinfo)
                 .build();
         vaccineVInfoService.saveVV(vaccineVinfo);
+        Long vaccineIdx = vaccine.getVaccineIdx();
+        System.out.println("vaccineIdx : " + vaccineIdx);
+        qrcodeService.vaccineQrcode(vaccineIdx);
 
 
     }
@@ -86,10 +100,9 @@ public class VaccineService {
     @Transactional
     public VaccineForm getUpdateVaccine(Long vaccineIdx) {
 
+
+
         Vaccine vaccine = findOne(vaccineIdx);
-
-
-
 
         VaccineForm form = VaccineForm.builder()
                 .vNumber(vaccine.getVNumber())
@@ -98,13 +111,19 @@ public class VaccineService {
                 .nDate(vaccine.getNDate())
                 .vaccineIdx(vaccine.getVaccineIdx())
                 .vDate(vaccine.getVDate())
+                .hash(vaccine.getHash())
                 .build();
+        form.setCDate(vaccine.getCDate());
+        form.setCreater(vaccine.getCreater());
+
         return form;
     }
 
 
     @Transactional
     public void updateVaccine(String vaccineIdx, VaccineForm form) {
+        String userId = SecurityInfoProvider.getCurrentMemberId();
+        UserEntity userEntity = userService.findByUserID(userId);
         Vaccine vaccine = Vaccine.builder()
                 .vaccineVinfos(form.getVaccineVinfos())
                 .vNumber(form.getVNumber())
@@ -112,7 +131,14 @@ public class VaccineService {
                 .nDate(form.getNDate())
                 .registerVaccines(form.getRegisterVaccines())
                 .vaccineIdx(form.getVaccineIdx())
+                .hash(form.getHash())
                 .build();
+        vaccine.setCDate(form.getCDate());
+        vaccine.setCreater(form.getCreater());
+        vaccine.setMDate(LocalDateTime.now());
+        vaccine.setModifier(userEntity.getUserId());
+
+
         vaccineRepository.regVc(vaccine);
 
 

@@ -116,6 +116,22 @@ public class TransfusionController {
         return strResult;
     }
 
+    @GetMapping("/admin")
+    public String transfusionList(Model model) {
+
+        List<Transfusion> AllTrans = transfusionService.findAllTrans();
+        model.addAttribute("AllTrans", AllTrans);
+
+
+        return "admin/transfusionList";
+    }
+
+    //등록한 수혈견 삭제(관리자)
+    @PostMapping("/delete/admin")
+    public String deleteTrans(@RequestParam("transfusionIdx") Long transfusionIdx ) {
+        transfusionService.deleteTrans(transfusionIdx);
+        return "redirect:/transfusion/admin";
+    }
 }
 
 
