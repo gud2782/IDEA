@@ -403,16 +403,14 @@
         http.setRequestHeader('x-chain-id', '1001');
 
         http.onreadystatechange = function() {//Call a function when the state changes.
-
-
            // mintToken(http.responseText);
+            console.log('META-STATE', http.readyState)
+            if(http.readyState !=4) return;
+            console.log(http.response)
             var jsonArray =http.responseText
             var jsonParsedArray = JSON.parse(jsonArray);
 
             mintToken(jsonParsedArray["uri"]);   //토큰생성
-
-
-
 
 
             console.log("8")
@@ -454,7 +452,8 @@
         http.setRequestHeader('x-chain-id', '1001');
 
         http.onreadystatechange = function() {//Call a function when the state changes.
-
+            console.log('TOKEN-STATE', http.readyState)
+            if(http.readyState !=4) return;
 
             let jsonResult = JSON.parse(http.responseText);
             let hash = jsonResult.transactionHash;
@@ -469,10 +468,6 @@
 
         }
         http.send(JSON.stringify(data));
-        alert("6")
-
-
-
 
     }
 

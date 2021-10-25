@@ -1,13 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
 <link rel="stylesheet" href="/css/style_blood.css"/>
 <script type="text/javascript" src="/js/jsQR.js"></script>
 <head th:replace="fragments/header_content :: header_content" />
+<script src="/js/global.js"></script>
+
 <link rel="stylesheet" th:href="@{/css/style_form.css}">
 
 <!-- Font-->
@@ -117,7 +120,7 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>헌혈일시</legend>
-											<input type="text" id="kind" th:id="dDate" th:for="dDate" class="form-control" th:field="*{dDate}" required>
+											<input type="text" id="dDate" th:id="dDate" th:for="dDate" class="form-control" th:field="*{dDate}" required>
 										</fieldset>
 									</div>
 								</div>
@@ -400,6 +403,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+		console.log("datePicker-create")
 		$.datepicker.regional['ko'] = {
 			closeText: '닫기',
 			prevText: '이전달',
@@ -426,8 +430,10 @@
 		};
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
 
+		console.log($.datepicker)
 		$('#dDate').datepicker();
 		$('#dDate').datepicker("option", "maxDate", $("#dDate").val());
+		console.log("datePicker-fin")
 
 
 	});
