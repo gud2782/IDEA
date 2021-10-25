@@ -67,7 +67,7 @@ public class DonationService {
             imgUrl = "/img/card.png";
             donation.setAniImg(imgUrl);
         } else {
-            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            imgUrl = form.getAniImg();
             donation.setAniImg(imgUrl);
 
         }

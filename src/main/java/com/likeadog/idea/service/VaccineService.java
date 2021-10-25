@@ -68,7 +68,7 @@ public class VaccineService {
             imgUrl = "/img/card.png";
             vaccine.setAniImg(imgUrl);
         } else {
-            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            imgUrl = form.getAniImg();
             vaccine.setAniImg(imgUrl);
 
         }

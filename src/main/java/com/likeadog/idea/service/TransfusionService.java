@@ -62,7 +62,7 @@ public class TransfusionService {
             imgUrl = "/img/card.png";
             transfusion.setAniImg(imgUrl);
         } else {
-            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            imgUrl = form.getAniImg();
             transfusion.setAniImg(imgUrl);
 
         }
