@@ -1695,3 +1695,28 @@ p{
     text-align: center;
     aspect-ratio: unset ;
 }
+
+.btn-add {
+    display: block;
+    padding-top: 7px;
+    font-size: 15px;
+    width: 100px;
+    color: #03619A;
+    background-color: #ffc107;
+    height: 40px;
+    font-weight: 900;
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+
+}
+
+.btn-add:hover {
+    color: #ffc107 ;
+    background : #03619A;
+    cursor: pointer;
+}
+
+/*.btn-addbox {*/
+/*    width: 100px;*/
+/*}*/

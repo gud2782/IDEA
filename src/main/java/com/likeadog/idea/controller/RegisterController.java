@@ -25,6 +25,10 @@ public class RegisterController {
 
     private final RegisterService registerService;
 
+
+
+
+
     //동물정보 등록
     @GetMapping("/new")
     public String createForm(Model model){

@@ -1,17 +1,34 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jsQR.js"></script>
+<!-- Main JS-->
+<script src="/js/global.js"></script>
 <head th:replace="fragments/header_content :: header_content" />
-<link rel="stylesheet" th:href="@{/css/style_form.css}">
-<style>
-    .fieldError {
-        border-color: #bd2130;
-    }
-</style>
+<!-- Bootstrap -->
+
+
+
+<!-- Required meta tags-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<!-- Main CSS-->
+<link href="/css/main_form.css" rel="stylesheet" media="all">
+
+
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
 
 <body>
+<<<<<<< HEAD
 <div class="container">
     <form th:object="${form}" method="post">
         <!-- id -->
@@ -55,17 +72,116 @@
             <label th:for="neutralization">중성화</label>
             <input type="text" th:field="*{neutralization}" class="form-control"
                    placeholder="중성화여부를 입력하세요" />
+=======
+<div class="page-wrapper bg-navy p-t-100 p-b-50">
+    <div class="wrapper_form wrapper--w900">
+        <div class="card_form card-6">
+            <div class="card-heading">
+                <h2 class="title_form">반려견 정보 수정</h2>
+            </div>
+            <div class="card-body">
+                <form   th:object="${form}" method="post"  autocomplete="off">
+                    <input type="hidden" th:field="*{registerIdx}" />
+                    <input type="hidden" th:field="*{aniId}" />
+                    <input type="hidden" th:field="*{user.userIdx}" />
+                    <input type="hidden" th:field="*{del}" />
+                    <input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
+
+
+                    <div class="form-row-do" >
+                        <div class="name">동물등록번호</div>
+                        <div class="value">
+                            <input  readonly class="input--style-6" type="text" name="full_name" id="aniId" th:id="aniId" th:for="aniId" th:field="*{aniId}"
+                                    th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
+                            <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
+                            <input type="button" class="btn btn--radius-2 btn--blue-2" onclick="findByAniId()" value="조회" />
+                            <div>
+                                <input class="modal-btn" type="checkbox" id="qrcode" name="modal-btn"/>
+                                <label for="qrcode">QRCODE 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
+                                <div class="modal" name="modal" id="modal">
+                                    <div class="modal-wrap">
+                                        <div class="qrBox" >
+                                            <div class="modalQRcode">
+                                                <div class="modal_content">
+                                                    <div id="frame">
+                                                        <div id="loadingMessage" hidden>
+                                                            🎥 비디오 스트림에 액세스 할 수 없습니다<br/>웹캠이 활성화되어 있는지 확인하십시오
+                                                        </div> <!-- loadingMessage-->
+                                                        <canvas id="canvas" style="width: 400px; height: 300px"></canvas>
+                                                    </div> <!-- frame-->
+                                                </div> <!-- modal_content-->
+                                            </div><!-- modalQRcode-->
+                                        </div>
+                                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row-do">
+                        <div class="name">동물이름</div>
+                        <div class="value">
+                            <input readonly class="input--style-6" type="text" name="full_name" id="aniName" th:for="aniName" th:field="*{aniName}" required>
+                        </div>
+                    </div>
+                    <div class="form-row-do">
+                        <div class="name">몸무게</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="weight" th:for="weight" th:field="*{weight}" required>
+                        </div>
+                    </div>
+                    <div class="form-row-do">
+                        <div class="name">견종</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="kind" th:for="kind" th:field="*{kind}">
+                        </div>
+                    </div>
+                    <div class="form-row-do">
+                        <div class="name">모색</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="color" th:for="color" th:field="*{color}">
+                        </div>
+                    </div>
+                    <div class="form-row-do" >
+                        <div class="name">성별</div>
+                        <div class="value">
+                            <input class="radio_btn" id="male" type="radio" name="gender"  value="male" required /> male
+                            <input class="radio_btn" id="female" type="radio" name="gender" value="female" /> female
+                        </div>
+                    </div>
+                    <div class="form-row-do">
+                        <div class="name">출생년도</div>
+                        <div class="value">
+                            <input class="input--style-6"  type="text" name="full_name" id="birth" th:for="birth" th:field="*{birth}">
+                        </div>
+                    </div>
+                    <div class="form-row-do">
+                        <div class="name">중성화 유무</div>
+                        <div class="value">
+                            <input class="radio_btn" id="yes" type="radio" name="neutralization" value="yes" required /> yes
+                            <input class="radio_btn"  id="no" type="radio" name="neutralization" value="no"  /> no
+                        </div>
+                    </div>
+                    <div class="card-footer">
+<!--                        <input class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue-2" onclick="toAjax()" type="submit">등록</input>-->
+                        <button class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="submit" >수정</button>
+                    </div>
+                </form>
+            </div>
+
+>>>>>>> detail
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+</div>
 
-</div> <!-- /container -->
-</body>
-<!--footer -->
-<div th:replace="fragments/footer_content :: footer_content" />
-<!--footer-end -->
 
-<!-- calendar -->
+
+
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         $.datepicker.regional['ko'] = {
@@ -101,7 +217,305 @@
     });
 </script>
 
-<!-- Bootstrap -->
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
+
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        $("#qrcode").click(function() {
+            $(".modalQRcode").fadeIn();
+
+            var video = document.createElement("video");
+            var canvasElement = document.getElementById("canvas");
+            var canvas = canvasElement.getContext("2d");
+            var loadingMessage = document.getElementById("loadingMessage");
+            var aniId = document.getElementById("aniId");
+            function drawLine(begin, end, color) {
+                canvas.beginPath();
+                canvas.moveTo(begin.x, begin.y);
+                canvas.lineTo(end.x, end.y);
+                canvas.lineWidth = 4;
+                canvas.strokeStyle = color;
+                canvas.stroke();
+            }
+            // 카메라 사용시
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+                video.srcObject = stream;
+                video.setAttribute("playsinline", true);      // iOS 사용시 전체 화면을 사용하지 않음을 전달
+                video.play();
+                requestAnimationFrame(tick);
+            });
+            async function tick() {
+                loadingMessage.innerText = "⌛ 스캔 기능을 활성화 중입니다."
+                if(video.readyState === video.HAVE_ENOUGH_DATA) {
+                    loadingMessage.hidden = true;
+                    canvasElement.hidden = false;
+                    // outputContainer.hidden = false;
+                    // 읽어들이는 비디오 화면의 크기
+                    canvasElement.height = video.videoHeight;
+                    canvasElement.width = video.videoWidth;
+                    canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+                    var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+                    var code = jsQR(imageData.data, imageData.width, imageData.height, {
+                        inversionAttempts : "dontInvert",
+                    });
+                    // QR코드 인식에 성공한 경우
+                    if(code) {
+                        // 인식한 QR코드의 영역을 감싸는 사용자에게 보여지는 테두리 생성
+                        drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FFCE49");
+                        drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FFCE49");
+                        drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FFCE49");
+                        drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FFCE49");
+
+
+                        // QR코드 메시지 출력
+                        aniId.innerHTML = code.data;
+
+                        const aniId2 = code.data;
+                        $('#aniId').val(aniId2);
+                        //console.log(`dosId:${dosId}`);
+                        console.log(`dosId:`+aniId2);
+
+                        //카메라 사라지기
+                        $(".modal").fadeOut();
+
+
+
+                        //추가
+
+
+                        findByAniId(aniId2);
+
+
+                        return;
+                    }
+                    // QR코드 인식에 실패한 경우
+                    else {
+                        // outputMessage.hidden = false;
+                        // outputData.parentElement.hidden = true;
+                    }
+                }
+                requestAnimationFrame(tick);
+
+
+            }
+
+
+        });
+
+    });
+</script>
+
+
+<script type="text/javascript" th:inline="javascript">
+    function findByAniId(aniId) {
+        var sendDataById = "did="+aniId;
+        console.log("sendDataById : " + sendDataById)
+
+        $.ajax({
+            url: "/pet/info",
+            type: "get",
+            data: sendDataById,
+
+
+            success: function (result) {
+                alert(result.name);
+
+                document.getElementById('aniName').value = result.name;
+                document.getElementById('kind').value = result.kind;
+                document.getElementById('birth').value = result.birth;
+                document.getElementById('color').value = result.color;
+                console.log(result.name + result.kind + result.birth  + result.color +result.gender);
+
+
+                if (result.gender === "male") {
+                    $('input:radio[id="male"]').attr("checked", true);
+
+                }
+                else  {
+                    $('input:radio[id="female"]').attr("checked", true);
+
+
+                }
+                if (result.isNeutering) {
+                    $('input:radio[id="yes"]').attr("checked", true);
+
+                }
+                else  {
+                    $('input:radio[id="no"]').attr("checked", true);
+
+
+                }
+
+
+
+            },
+            error: function (sendDataById) {
+                alert("실패 : " + sendDataById);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    function findByPhone() {
+        var phone = $("#phone").val();
+        var sendDataByPhone = "phone="+phone;
+        console.log("sendDataByPhone : " + sendDataByPhone)
+
+        $.ajax({
+            url: "/ani/findByPhone",
+            type: "post",
+            data: sendDataByPhone,
+
+
+
+            success: function (result) {
+                if(result){
+                    alert(result);
+
+                    for (let i = 0; i < result.length; i++) {
+                        console.log(result[i].aniId);
+                        console.log(result[i].aniName);
+                        console.log(result[i].color);
+                        console.log(result[i].kind);
+                    }
+
+                }else{
+                    alert("전송 에러");
+                }
+            },
+
+            error: function (sendDataByPhone) {
+                alert("실패 : " + sendDataByPhone);
+            }
+        });
+    };
+
+</script>
+
+
+<!--메타데이터 업로드-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/1.6.5-rc.2/caver.min.js" integrity="sha512-2PMOAlTrOMvxwtl+AB67naKpUtzNVdwRmychnd2lIuaRg1HlqAiJ0qd4miDWKKfcHZi6gX5NKAfeb+wfD3094w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    function toAjax() {
+
+        console.log("1");
+
+        var aniId =$("#aniId").val();
+        var aniName=$("#aniName").val();
+        var weight=$("#weight").val();
+        var kind=$("#kind").val();
+        var color=$("#color").val();
+        var gender=$("#gender").val();
+        var birth=$("#birth").val();
+        var neutralization=$("#neutralization").val();
+
+
+        let http = new XMLHttpRequest();
+        let url = 'https://metadata-api.klaytnapi.com/v1/metadata';
+        let data= {
+            "metadata": {
+                "name": "동물등록정보",
+                "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
+                "aniId" : aniId,
+                "aniName" : aniName,
+                "weight" : weight,
+                "kind" : kind,
+                "color" : color,
+                "gender" : gender,
+                "birth" : birth,
+                "neutralization" : neutralization
+
+            }
+
+        }
+        http.open('POST', url, true);
+
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/json');
+        http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+        http.setRequestHeader('x-chain-id', '1001');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            // mintToken(http.responseText);
+            console.log('META-STATE', http.readyState)
+            if(http.readyState !=4) return;
+            console.log(http.response)
+            var jsonArray =http.responseText
+            var jsonParsedArray = JSON.parse(jsonArray);
+
+            mintToken(jsonParsedArray["uri"]);   //토큰생성
+
+
+            console.log("8")
+
+
+
+
+        }
+        http.send(JSON.stringify(data));
+        console.log("7")
+
+
+
+
+
+    }
+
+
+    //토큰 생성(데이터를 토큰화하여 블록체인에 전송)
+
+    function mintToken(uri) {
+        let timestamp= Math.floor(new Date().getTime() / 1000);
+
+        // console.log("=====start mintToken======");
+        // console.log("timestamp >>> " +timestamp);
+        let http = new XMLHttpRequest();
+        let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
+        let data= {
+            "to": "0x5fbf75a9fdfd1d9180ea8242da08d7f9ae4a772e", //형우님 테스트 주소
+            "id": "0x"+timestamp, //계정 timestamp함수를 통해 생성, 아이디 하나당 한번의 토큰만 생성할 수 있음
+            "uri": uri
+        }
+        http.open('POST', url, true);
+
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/json');
+        http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+        http.setRequestHeader('x-chain-id', '1001');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            console.log('TOKEN-STATE', http.readyState)
+            if(http.readyState !=4) return;
+
+            let jsonResult = JSON.parse(http.responseText);
+            let hash = jsonResult.transactionHash;
+
+
+            $('#hash').val(hash);
+            alert(hash);
+            var form = document.registerForm;
+
+            form.action="@{/ani/{idx}/update (idx=${registerIdx})}";
+            form.submit();
+
+
+        }
+        http.send(JSON.stringify(data));
+
+    }
+
+
+</script>
 
 </html>

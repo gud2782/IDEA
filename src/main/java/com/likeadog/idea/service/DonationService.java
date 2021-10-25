@@ -52,6 +52,7 @@ public class DonationService {
                 .dDate(form.getDDate())
                 .dHos(form.getDHos())
                 .type(form.getType())
+                .dWeight(form.getDWeight())
                 .dPack(form.getDPack())
                 .hash(form.getHash())
                 .build();
