@@ -112,8 +112,21 @@
 									<div class="form-holder">
 										<fieldset>
 											<legend>수혈양</legend>
-											<input type="text" id="TPack" th:id="TPack" th:for="TPack" class="form-control" th:field="*{TPack}"  required>
+
+											<input type="text" id="tPack" th:id="tPack" th:for="tPack" class="form-control" th:field="*{tPack}"  required>
 										</fieldset>
+									</div>
+									<div class="form-holder">
+										<fieldset>
+											<legend>수혈일시</legend>
+											<input type="text" id="tDate" th:id="tDate" th:for="tDate" class="form-control" th:field="*{tDate}" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+
+
 									</div>
 									<div class="form-holder">
 										<fieldset>
@@ -132,7 +145,9 @@
 								</div>
 								<div class="form-row form-row-date">
 									<div class="form-holder form-holder-2">
-										<select name="month" id="month" class="form-control">
+										<!--                              <label class="special-label">혈액형</label>-->
+										<select name="type" id="type" class="form-control">
+
 											<option value="TYPE" disabled selected>혈액형</option>
 											<option value="DEA 1.1">DEA 1.1</option>
 											<option value="DEA 1.2">DEA 1.2</option>

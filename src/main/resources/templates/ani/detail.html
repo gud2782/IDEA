@@ -13,10 +13,10 @@
   <style>.fieldError { border-color: #bd2130;}</style>
 
 <body>
-  
+
 
   <div class="content">
-    
+
     <div class="container">
         <div class="row">
           <div class="col-md-5m mr-auto">
@@ -24,6 +24,10 @@
               <hr>
               <div class="col-md-6 form-group">
                 <form  action="/ani/detail" th:object="${register}" method="GET" id="contactForm" name="contactForm">
+                  <input type="hidden" th:field="*{registerIdx}" />
+                  <input type="hidden" th:field="*{aniId}" />
+                  <input type="hidden" th:field="*{user.userIdx}" />
+                  <input type="hidden" th:field="*{del}" />
                   <input type="text" id="fileName" name="fileName" th:field="*{fileName}" hidden>
                 <p>사랑스러운 우리 강아지의 백신접종 내역을 등록하고,
                   <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
@@ -153,19 +157,16 @@
                   <h2 th:text="*{user.phone}" class="form-control" name="phone" id="phone"></h2>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-12" style="float: right">
                   <a href="#" th:href="@{/ani/{idx}/update (idx=${registerIdx})}"
                      class="btn btn-primary" role="button">수정</a>
 
                 </div>
-
               </div>
             </form>
             <form action="/ani/delete" method="post">
-              <input type="submit" id="registerIdx" name="registerIdx" class="form-control" th:value="*{registerIdx}" th:text="삭제">
-
+              <button type="submit" role="button" id="registerIdx" name="registerIdx"  class="btn btn-primary" th:value="*{registerIdx}" >삭제</button>
             </form>
 
           </div>

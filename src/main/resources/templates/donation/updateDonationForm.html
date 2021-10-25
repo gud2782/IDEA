@@ -1,87 +1,325 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header_content :: header_content" />
-<link rel="stylesheet" th:href="@{/css/style_form.css}">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="/css/style_blood.css"/>
+<script type="text/javascript" src="/js/jsQR.js"></script>
+<head th:replace="fragments/header_content :: header_content" />
+<script src="/js/global.js"></script>
+
+<link rel="stylesheet" th:href="@{/css/style_form.css}">
+
+<!-- Font-->
+<link rel="stylesheet" type="text/css" href="/css/opensans-font.css">
+<link rel="stylesheet" type="text/css" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<!-- Main Style Css -->
+
+</head>
+
 <!--navbar-->
 <div th:replace="fragments/navbar_content :: navbar_content"/>
 <!--navbar end-->
-
-
-
-
 <body>
-<div class="container">
-    <form th:object="${form}" method="post">
-        <!-- id -->
-        <input type="hidden" th:field="*{del}" />
-        <input type="hidden" th:field="*{creater}" />
-        <input type="hidden" th:field="*{CDate}" />
-        <input type="hidden" th:field="*{hash}" />
-        <div class="form-group">
-            <label th:for="donationIdx">헌혈번호</label>
-            <input type="text" th:field="*{donationIdx}" class="form-control"
-                   readonly />
-        </div>
-        <div class="form-group">
-            <label th:for="register.registerIdx">동물등록번호</label>
-            <input type="text" th:field="*{register.registerIdx}" class="form-control"
-                   readonly />
-        </div>
+<div class="page-content">
+    <div class="form-v1-content">
+        <div class="wizard-form">
+            <form class="form-register" action="#" method="post">
+                <div id="form-total">
+                    <form id="donationForm" th:action="@{/donation/new}" th:object="${form}" method="post" autocomplete="off">
+                        <h2>
+                            <span class="step-text">수정하기</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="wizard-header">
+                                    <h3 class="heading">헌혈견 정보 수정</h3>
+                                    <p>Please enter your infomation and proceed to the next step so we can build your accounts.  </p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <fieldset>
+                                            <legend>반려견 이름</legend>
+                                            <input type="text" id="aniName" th:id="aniName" th:for="register" class="form-control" th:field="*{register.aniName}" readonly>
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-holder">
+                                        <fieldset>
+                                            <legend>동물등록번호</legend>
+                                            <input type="text" id="aniId" th:id="aniId" th:for="register" class="form-control" th:field="*{register.aniId}" readonly>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <fieldset>
+                                            <legend>몸무게</legend>
+                                            <input type="text" id="DWeight" th:id="DWeight" th:for="DWeight" class="form-control" th:field="*{DWeight}"  required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-holder">
+                                        <fieldset>
+                                            <legend>견종</legend>
+                                            <input type="text" id="kind" th:id="kind" th:for="kind" class="form-control" th:field="*{kind}" required>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+                                        <fieldset>
+                                            <legend>헌혈양</legend>
+                                            <input type="text" id="dPack" th:id="dPack" th:for="dPack" class="form-control" th:field="*{dPack}"  required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="form-holder">
+                                        <fieldset>
+                                            <legend>헌혈일시</legend>
+                                            <input type="text" id="dDate" th:id="dDate" th:for="dDate" class="form-control" th:field="*{dDate}" required>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
 
-        <div class="form-group">
-            <label th:for="register.aniName">동물이름</label>
-            <input type="text" th:field="*{register.aniName}" class="form-control"
-                   readonly />
-        </div>
-        <div class="form-group">
-            <label th:for="DWeight">헌혈당시 몸무게</label>
-            <input type="text" th:field="*{DWeight}" class="form-control"
-                   placeholder="몸무게를 입력하세요" />
-        </div>
-        <div class="form-group">
-            <label th:for="kind">견종</label>
-            <input type="text" th:field="*{kind}" class="form-control"
-                   placeholder="견종을 입력하세요" />
-        </div>
-        <div class="form-group">
-            <label th:for="DDate">헌혈일시</label>
-            <input id="DDate" type="text" th:field="*{DDate}" class="form-control" placeholder="헌혈일시를 입력하세요" autocomplete="off" />
-        </div>
-        <div class="form-group">
-            <label th:for="DHos">헌혈병원</label>
-            <input type="text" th:field="*{DHos}" class="form-control"
-                   placeholder="헌혈병원을 입력하세요" />
-        </div>
-        <div class="form-group">
-            <label th:for="type">혈액형</label>
-            <input type="text" th:field="*{type}" class="form-control"
-                   placeholder="혈액형을 입력하세요" />
-        </div>
-        <div class="form-group">
-            <label th:for="DPack">혈액양</label>
-            <input type="text" th:field="*{DPack}" class="form-control"
-                   placeholder="혈액양을 입력하세요" />
-        </div>
-        <div class="form-group">
-            <label th:for="neutralization">중성화</label>
-            <input type="text" th:field="*{neutralization}" class="form-control"
-                   placeholder="중성화여부를 입력하세요" />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
 
-</div> <!-- /container -->
-</body>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <fieldset>
+                                            <legend>헌혈 기관</legend>
+                                            <input type="text" id="DHos" th:id="DHos" th:for="DHos" class="form-control" th:field="*{DHos}" placeholder="헌혈 기관" required>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-row form-row-date">
+                                    <div class="form-holder form-holder-2">
+                                        <label class="special-label">혈액형</label>
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="TYPE" disabled selected>혈액형</option>
+                                            <option value="DEA 1.1">DEA 1.1</option>
+                                            <option value="DEA 1.2">DEA 1.2</option>
+                                            <option value="DEA 4">DEA 4</option>
+                                            <option value="DEA 7">DEA 7</option>
+                                        </select>
+                                        <div class="form-row">
+                                            <div class="form-holder2 form-holder-2">
+                                            </div>
+                                        </div>
 
-<!--footer -->
-<div th:replace="fragments/footer_content :: footer_content" />
-<!--footer-end -->
-<!-- calendar -->
+                                    </div>
+                                    <div class="form-holder form-holder-4">
+                                        <input type="submit" name="find_bank" id="check" value="수정" class="form-control" onclick="toAjax()">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery.steps.js"></script>
+<script src="/js/main.js"></script>
+
+<!--메타데이터 업로드-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/1.6.5-rc.2/caver.min.js" integrity="sha512-2PMOAlTrOMvxwtl+AB67naKpUtzNVdwRmychnd2lIuaRg1HlqAiJ0qd4miDWKKfcHZi6gX5NKAfeb+wfD3094w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    function toAjax() {
+
+        console.log("1");
+
+        // var aniName =$("#aniName").val();
+        var aniId =$("#aniId").val();
+        var kind =$("#kind").val();
+        var DWeight =$("#DWeight").val();
+        var DDate =$("#DDate").val();
+        var DHos =$("#DHos").val();
+        var type =$("#type").val();
+        var DPack =$("#DPack").val();
+
+
+        let http = new XMLHttpRequest();
+        let url = 'https://metadata-api.klaytnapi.com/v1/metadata';
+        let data= {
+            "metadata": {
+                "name": "형우테스트",
+                "description": "description example for kip17 token",
+                "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
+                // "aniName": aniName,
+                "aniId" : aniId,
+                "kind" : kind,
+                "DWeight" : DWeight,
+                "DDate" : DDate,
+                "DHos" : DHos,
+                "type" : type,
+                "DPack" : DPack
+
+            }
+
+        }
+        http.open('POST', url, true);
+
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/json');
+        http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+        http.setRequestHeader('x-chain-id', '1001');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            //  if(http.readyState == 4 && http.status == 200) {
+
+            //  alert(http.responseText);
+            console.log(http.responseText);
+
+            // mintToken(http.responseText);
+            var jsonArray =http.responseText
+            var jsonParsedArray = JSON.parse(jsonArray);
+
+            mintToken(jsonParsedArray["uri"]);   //토큰생성
+            console.log("222uri >>> "+jsonParsedArray["uri"]);
+            // for (key in jsonParsedArray) {
+            //     if (jsonParsedArray.hasOwnProperty(key)) {
+            //         console.log("%c "+key + " = " + jsonParsedArray[key],"color:cyan");
+            //     }
+            // }
+
+            // }
+        }
+        http.send(JSON.stringify(data));
+
+    }
+
+
+    //토큰 생성(데이터를 토큰화하여 블록체인에 전송)
+
+    function mintToken(uri) {
+        let timestamp= Math.floor(new Date().getTime() / 1000);
+
+        console.log("=====start mintToken======");
+        console.log("timestamp >>> " +timestamp);
+        let http = new XMLHttpRequest();
+        let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
+        let data= {
+            "to": "0x5fbf75a9fdfd1d9180ea8242da08d7f9ae4a772e", //형우님 테스트 주소
+            "id": "0x"+timestamp, //계정 timestamp함수를 통해 생성, 아이디 하나당 한번의 토큰만 생성할 수 있음
+            "uri": uri
+        }
+        http.open('POST', url, true);
+
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/json');
+        http.setRequestHeader('Authorization', 'Basic S0FTS1IwQTNDMVA4SUNRS0Q5V1dJSThTOmZHeVZodlFieUh1dTdHdWl1TjV2eWdodmdlSU9fcXl5ZlhqYUlUVkc=');
+        http.setRequestHeader('x-chain-id', '1001');
+
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            //  if(http.readyState == 4 && http.status == 200) {
+
+            //  alert(http.responseText);
+            console.log(http.responseText);
+            console.log("222");
+            let jsonResult = JSON.parse(http.responseText);
+            let hash = jsonResult.transactionHash;
+
+
+            $('#hash').val(hash);
+            alert(hash);
+            var form = document.registerForm;
+            form.action="/ani/new";
+            form.submit();
+
+
+            // }
+        }
+        http.send(JSON.stringify(data));
+
+    }
+
+
+</script>
+
+
+<script>
+    const loginText = document.querySelector(".title-text .login");
+    const loginForm = document.querySelector("form.login");
+    const loginBtn = document.querySelector("label.login");
+    const signupBtn = document.querySelector("label.signup");
+    // const signupLink = document.querySelector("form .signup-link a");
+    signupBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "-50%";
+        loginText.style.marginLeft = "-50%";
+    });
+    loginBtn.onclick = (()=>{
+        loginForm.style.marginLeft = "0%";
+        loginText.style.marginLeft = "0%";
+    });
+    signupLink.onclick = (()=>{
+        signupBtn.click();
+        return false;
+    });
+</script>
+<script th:inline="javascript">
+
+    function getType(Event) {
+        document.getElementById('result').innerText =
+            Event.target.value;
+    }
+    function changeValues() {
+
+
+        //select된 값 가져오면서 , 기준 파싱
+        let selectOption = document.getElementById("register").value.split(",");
+
+        //변수 선언
+        let aniId,kind,neutralization,aniName;
+
+        //각각 파싱된 변수들 저장
+        for (let idx=0; idx <  5; idx++){
+            let value = selectOption [idx];
+            if(idx == 1){
+                aniId= value;
+            }else if(idx == 2){
+                kind= value;
+            }else if(idx==3){
+                neutralization= value;
+            }else if(idx==4){
+                aniName=value;
+            }
+        }
+
+
+        //input id값으로 저장된 값 설정 및 뿌려주기
+
+        document.getElementById('aniId').value = aniId;
+        document.getElementById('aniId1').value = aniId;
+        document.getElementById('kind').value = kind;
+        //1. 사용안하는 란이 존재해서 여기에 오류가 걸려서
+        //document.getElementById('neutralization').value = neutralization;
+
+        //2. 코드를 여기까지 읽지않고 끝내버림
+        document.getElementById('aniName').value=aniName;
+
+    }
+
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
+        console.log("datePicker-create")
         $.datepicker.regional['ko'] = {
             closeText: '닫기',
             prevText: '이전달',
@@ -108,14 +346,20 @@
         };
         $.datepicker.setDefaults($.datepicker.regional['ko']);
 
-        $('#DDate').datepicker();
-        $('#DDate').datepicker("option", "maxDate", $("#DDate").val());
+        console.log($.datepicker)
+        $('#dDate').datepicker();
+        $('#dDate').datepicker("option", "maxDate", $("#dDate").val());
+        console.log("datePicker-fin")
 
 
     });
 </script>
+</body>
+<!--footer -->
+<div th:replace="fragments/footer_content :: footer_content" />
+<!--footer-end -->
+<!-- jQuery -->
+<!--<script src="js/jquery.min.js"></script>-->
 
-<!-- Bootstrap -->
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
 
 </html>
