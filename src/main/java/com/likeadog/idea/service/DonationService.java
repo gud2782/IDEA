@@ -63,7 +63,6 @@ public class DonationService {
         donation.setCreater(userEntity.getUserId());
 
         System.out.println("IMG : " + form.getAniImg());
-        Long donationIdx = donation.getDonationIdx();
 
         if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
             imgUrl = "/img/card.png";
@@ -73,8 +72,9 @@ public class DonationService {
             donation.setAniImg(imgUrl);
 
         }
-
         donationRepository.regDo(donation);
+
+        Long donationIdx = donation.getDonationIdx();
         qrcodeService.donationQrcode(donationIdx);
 
 

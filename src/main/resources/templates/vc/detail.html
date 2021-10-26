@@ -29,8 +29,7 @@
                             <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
                             <br>아래의 QR코드로 우리 강아지의 정보를 손쉽게 열어 볼 수 있어요!</p>
                         <div class="img-box">
-                            <img  style="width: 250px; height:300px" onclick="qrcodeSave()"
-                                  src="/img/lovely.jpg">
+                            <img  style="width: 250px; height:300px" th:scr="*{registerVaccines.get(0).register.aniImg}">
                         </div> <!-- img-box  -->
                         <hr>
 
@@ -58,9 +57,9 @@
                                             <div class="row">
                                                 <g transform="translate(-539.17946,-568.85777)" id="layer1">
                                                     <img id="file" style="width: 200px; height:200px"
-                                                         th:src="@{/qrcode/animals/peterpet_{idx}.png (idx=*{vaccineIdx})}">
+                                                         th:src="@{/qrcode/vaccine/{idx}.png (idx=*{vaccineIdx})}">
                                                 </g>
-                                            </div><!--row     onclick="qrcodeSave()"-->
+                                            </div><!--row  -->
                                         </div><!--bottom -->
                                     </div><!-- to-contents-->
                                 </div><!--to -->
@@ -109,34 +108,34 @@
             <div class="col-md-6">
                 <div class="box">
                     <form class="mb-5" action="/vc/detail" th:object="${vaccine}" method="GET" id="contactForm2" name="contactForm2">
-                        <h3 class="heading" th:text="*{registerVaccines.get(0).register.aniName}" name="registerVaccines.get(0).register.aniName" id="registerVaccines.get(0).register.aniName"></h3>
+                        <h3 class="heading" th:text="*{registerVaccines.get(0).register.aniName}" name="aniName" id="aniName"></h3>
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="col-form-label">동물등록번호</label>
                                 <div class="text-box">
-                                    <h2 th:text="*{registerVaccines.get(0).register.aniId}" class="form-control" name="registerVaccines.get(0).register.aniId" id="registerVaccines.get(0).register.aniId" ></h2>
+                                    <h2 th:text="*{registerVaccines.get(0).register.aniId}" class="form-control" name="aniId" id="aniId" ></h2>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="registerVaccines.get(0).register.kind" class="col-form-label">견종</label>
-                                <h2 th:text="*{registerVaccines.get(0).register.kind}" class="form-control" name="registerVaccines.get(0).register.kind" id="registerVaccines.get(0).register.kind" ></h2>
+                                <label for="kind" class="col-form-label">견종</label>
+                                <h2 th:text="*{registerVaccines.get(0).register.kind}" class="form-control" name="kind" id="kind" ></h2>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="vaccineVinfos.get(0).vinfo.first.name" class="col-form-label">대분류</label>
-                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.first.name}" class="form-control" name="vaccineVinfos.get(0).vinfo.first.name" id="vaccineVinfos.get(0).vinfo.first.name" ></h2>
+                                <label for="firstName" class="col-form-label">대분류</label>
+                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.first.name}" class="form-control" name="firstName" id="firstName" ></h2>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="vaccineVinfos.get(0).vinfo.second.name" class="col-form-label">중분류</label>
-                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.second.name}" class="form-control" name="vaccineVinfos.get(0).vinfo.second.name" id="vaccineVinfos.get(0).vinfo.second.name" ></h2>
+                                <label for="secondName" class="col-form-label">중분류</label>
+                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.second.name}" class="form-control" name="secondName" id="secondName" ></h2>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="vaccineVinfos.get(0).vinfo.third.name" class="col-form-label">소분류</label>
-                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.third.name}" class="form-control" name="vaccineVinfos.get(0).vinfo.third.name" id="vaccineVinfos.get(0).vinfo.third.name"></h2>
+                                <label for="thirdName" class="col-form-label">소분류</label>
+                                <h2 th:text="*{vaccineVinfos.get(0).vinfo.third.name}" class="form-control" name="thirdName" id="thirdName"></h2>
                             </div>
                         </div>
                         <div class="row">
@@ -203,30 +202,17 @@
     }
 
 
-    var vaccineIdx = $("#aniId").text();
-    var registerVaccines.get(0).register.aniId = $("#registerVaccines.get(0).register.aniId").text();
-    var registerVaccines.get(0).register.aniName = $("#registerVaccines.get(0).register.aniName").text();
-    var registerVaccines.get(0).register.kind = $("#registerVaccines.get(0).register.kind").text();
-    var registerVaccines.get(0).register.neutralization = $("#registerVaccines.get(0).register.neutralization").text();
-    var vaccineVinfos.get(0).vinfo.VInfoIdx = $("#vaccineVinfos.get(0).vinfo.VInfoIdx").text();
-    var vaccineVinfos.get(0).vinfo.first.name = $("#vaccineVinfos.get(0).vinfo.first.name").text();
-    var vaccineVinfos.get(0).vinfo.second.name = $("#vaccineVinfos.get(0).vinfo.second.name").text();
-    var vaccineVinfos.get(0).vinfo.third.name = $("#vaccineVinfos.get(0).vinfo.third.name").text();
+    var aniId = $("#aniId").text();
+    var aniName = $("#aniName").text();
+    var kind = $("#kind").text();
+    var firstName = $("#firstName").text();
+    var secondName = $("#secondName").text();
+    var thirdName = $("#thirdName").text();
     var VDate = $("#VDate").text();
     var NDate = $("#NDate").text();
-    var fileName = $("#fileName").text(); //??
-    console.log(vaccineIdx, registerVaccines.get(0).register.aniId
-        , registerVaccines.get(0).register.aniName
-        , registerVaccines.get(0).register.kind
-        , registerVaccines.get(0).register.neutralization
-        , vaccineVinfos.get(0).vinfo.VInfoIdx
-        ,vaccineVinfos.get(0).vinfo.first.name
-        ,vaccineVinfos.get(0).vinfo.second.name
-        ,vaccineVinfos.get(0).vinfo.third.name
-        ,VDate
-        ,NDate
-        , fileName)
 
+
+    console.log(aniId, aniName,kind, firstName, secondName, thirdName, VDate, NDate)
 
     //나에게 메세지 보내기
     function sendToKakao() {
@@ -258,8 +244,8 @@
                                     template_object: {
                                         object_type: 'feed',
                                         content: {
-                                            title: 'IDEA',
-                                            description: 'IDEA와 함께 슬기로운 반려문화에 동참하세요',
+                                            title: '동물등록번호',
+                                            description: aniId,
                                             image_url: imgPath,
                                             link: {
                                                 web_url: 'http://localhost:8080/home',
@@ -271,32 +257,32 @@
                                             profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
                                             title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
                                             title_image_text: 'IDEA',
-                                            title_image_category: fileName,
+                                            title_image_category: '백신접종내역',
                                             items: [
-                                                {
-                                                    item: '이름',
-                                                    item_op: aniName,
-                                                },
-                                                {
-                                                    item: '몸무게',
-                                                    item_op: weight,
-                                                },
                                                 {
                                                     item: '견종',
                                                     item_op: kind,
                                                 },
                                                 {
-                                                    item: '모색',
-                                                    item_op: color,
+                                                    item: '대분류',
+                                                    item_op: firstName,
+                                                },
+                                                {
+                                                    item: '중분류',
+                                                    item_op: secondName,
+                                                },
+                                                {
+                                                    item: '소분류',
+                                                    item_op: thirdName,
                                                 },
 
                                                 {
-                                                    item: '중성화',
-                                                    item_op: neutralization,
+                                                    item: '접종날짜',
+                                                    item_op: VDate,
                                                 }
                                             ],
-                                            sum: '대행기관',
-                                            sum_op: "PeterPet",
+                                            sum: '다음 접종날짜',
+                                            sum_op: NDate,
                                         },
 
                                         button_title: 'GO TO IDEA',

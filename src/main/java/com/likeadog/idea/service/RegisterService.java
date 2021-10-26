@@ -53,6 +53,7 @@ public class RegisterService {
         register.setCreater(userId);
         register.setCDate(LocalDateTime.now());
         System.out.println("ani_img " + form.getAniImg());
+        System.out.println("fileName : " + name);
         if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
             imgUrl = "/img/card.png";
             register.setAniImg(imgUrl);
@@ -72,6 +73,7 @@ public class RegisterService {
 
         Register register = findOne(registerIdx);
 
+
         RegisterForm form = RegisterForm.builder()
                 .user(register.getUser())
                 .registerIdx(register.getRegisterIdx())
@@ -83,9 +85,9 @@ public class RegisterService {
                 .gender(register.getGender())
                 .birth(register.getBirth())
                 .neutralization(register.getNeutralization())
-                .fileName(register.getFileName())
                 .hash(register.getHash())
                 .aniImg(register.getAniImg())
+                .fileName(register.getFileName())
                 .build();
         form.setDel(register.getDel());
         form.setCDate(register.getCDate());
@@ -99,6 +101,7 @@ public class RegisterService {
     public void updateAni(String registerIdx, RegisterForm form) {
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
+
 
         Register register = Register.builder()
                 .user(userEntity)
@@ -121,10 +124,9 @@ public class RegisterService {
         register.setCDate(form.getCDate());
         register.setModifier(userEntity.getUserId());
         register.setMDate(LocalDateTime.now());
-
         registerRepository.regSave(register);
-        System.out.println("4 : " + form.getDel());
-        System.out.println("5 : " + register.getDel());
+
+
 
     }
 

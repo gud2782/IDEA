@@ -38,6 +38,7 @@
                 <input type="hidden" th:field="*{qrcode.qrcodeIdx}">
                 <input type="hidden" th:field="*{donationIdx}">
                 <input type="hidden" th:field="*{neutralization}">
+                <input type="hidden" th:field="*{register.fileName}">
 
 
 
@@ -296,8 +297,8 @@
         $.datepicker.setDefaults($.datepicker.regional['ko']);
 
         console.log($.datepicker)
-        $('#dDate').datepicker();
-        $('#dDate').datepicker("option", "maxDate", $("#dDate").val());
+        $('#DDate').datepicker();
+        $('#DDate').datepicker("option", "maxDate", $("#DDate").val());
         console.log("datePicker-fin")
 
 
