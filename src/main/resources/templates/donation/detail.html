@@ -29,7 +29,8 @@
                             <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
                             <br>아래의 QR코드로 우리 강아지의 정보를 손쉽게 열어 볼 수 있어요!</p>
                         <div class="img-box">
-                            <img  style="width: 250px; height:300px" th:scr="*{register.aniImg}" >
+                            <img  style="width: 250px; height:300px" onclick="qrcodeSave()"
+                                  src="/img/lovely.jpg">
                         </div> <!-- img-box  -->
                         <hr>
 
@@ -57,9 +58,9 @@
                                             <div class="row">
                                                 <g transform="translate(-539.17946,-568.85777)" id="layer1">
                                                     <img id="file" style="width: 200px; height:200px"
-                                                         th:src="@{/qrcode/donation/{idx}.png (idx=*{donationIdx})}">
+                                                         th:src="@{/qrcode/animals/peterpet_{idx}.png (idx=*{donationIdx})}">
                                                 </g>
-                                            </div><!--row -->
+                                            </div><!--row     onclick="qrcodeSave()"-->
                                         </div><!--bottom -->
                                     </div><!-- to-contents-->
                                 </div><!--to -->
@@ -108,15 +109,15 @@
             <div class="col-md-6">
                 <div class="box">
                     <form class="mb-5" action="/donation/detail" th:object="${donation}" method="GET" id="contactForm2" name="contactForm2">
-                        <h3 class="heading" th:text="*{register.aniName}" name="aniName" id="aniName"></h3>
+                        <h3 class="heading" th:text="*{register.aniName}" name="register.aniName" id="register.aniName"></h3>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="aniId" class="col-form-label">동물등록번호</label>
-                                <h2 th:text="*{register.aniId}" class="form-control" name="aniId" id="aniId" ></h2>
+                                <label for="register.aniId" class="col-form-label">동물등록번호</label>
+                                <h2 th:text="*{register.aniId}" class="form-control" name="register.aniId" id="register.aniId" ></h2>
                             </div>
                             <div class="col-md-6">
-                                <label for="birth" class="col-form-label">출생년도</label>
-                                <h2 th:text="*{register.birth}" class="form-control" name="birth" id="birth" ></h2>
+                                <label for="register.birth" class="col-form-label">출생년도</label>
+                                <h2 th:text="*{register.birth}" class="form-control" name="register.birth" id="register.birth" ></h2>
                             </div>
                         </div>
                         <div class="row">
@@ -157,10 +158,9 @@
                                    class="btn btn-primary" role="button">수정</a>
                             </div>
                         </div>
-
-                    <form action="/donation/delete" method="post">
-                        <button type="submit" role="button"  class="btn btn-primary" th:value="*{donationIdx}" >삭제</button>
                     </form>
+                    <form action="/donation/delete" method="post">
+                        <button type="submit" role="button" id="donationIdx" name="donationIdx"  class="btn btn-primary" th:value="*{donationIdx}" >삭제</button>
                     </form>
 
                 </div>
@@ -207,18 +207,33 @@
     }
 
 
-
-    var aniId = $("#aniId").text();
-    var aniName = $("#aniName").text();
-    var birth = $("#birth").text();
+    var donationIdx = $("#donationIdx").text();
+    var register.aniId = $("#register.aniId").text();
+    var register.aniName = $("#register.aniName").text();
+    var register.birth = $("#register.birth").text();
+    var register.gender = $("#register.gender").text();
     var DWeight = $("#DWeight").text();
     var kind = $("#kind").text();
     var type = $("#type").text();
+    var neutralization = $("#neutralization").text();
     var DHos = $("#DHos").text();
     var DPack = $("#DPack").text();
     var DDate = $("#DDate").text();
 
-    console.log(aniId, aniName,birth, DWeight, kind, type, DHos, DPack, DDate)
+    console.log(donationIdx
+        , register.aniId
+        , register.aniName
+        , register.birth
+        , register.gender
+        , DWeight
+        , kind
+        , type
+        , neutralization
+        , DHos
+        , DPack
+        , DDate
+        , fileName)
+
 
     //나에게 메세지 보내기
     function sendToKakao() {
@@ -250,8 +265,8 @@
                                     template_object: {
                                         object_type: 'feed',
                                         content: {
-                                            title: '동물등록번호',
-                                            description: aniId,
+                                            title: 'IDEA',
+                                            description: 'IDEA와 함께 슬기로운 반려문화에 동참하세요',
                                             image_url: imgPath,
                                             link: {
                                                 web_url: 'http://localhost:8080/home',
@@ -263,32 +278,32 @@
                                             profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
                                             title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
                                             title_image_text: 'IDEA',
-                                            title_image_category: '헌혈견 등록정보',
+                                            title_image_category: fileName,
                                             items: [
                                                 {
-                                                    item: '헌혈기관',
-                                                    item_op: DHos,
+                                                    item: '이름',
+                                                    item_op: aniName,
+                                                },
+                                                {
+                                                    item: '몸무게',
+                                                    item_op: weight,
                                                 },
                                                 {
                                                     item: '견종',
                                                     item_op: kind,
                                                 },
                                                 {
-                                                    item: '몸무게',
-                                                    item_op: DWeight,
-                                                },
-                                                {
-                                                    item: '혈액형',
-                                                    item_op: type,
+                                                    item: '모색',
+                                                    item_op: color,
                                                 },
 
                                                 {
-                                                    item: '혈액양',
-                                                    item_op: DPack,
+                                                    item: '중성화',
+                                                    item_op: neutralization,
                                                 }
                                             ],
-                                            sum: '헌혈날짜',
-                                            sum_op: DDate,
+                                            sum: '대행기관',
+                                            sum_op: "PeterPet",
                                         },
 
                                         button_title: 'GO TO IDEA',

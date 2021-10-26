@@ -53,7 +53,7 @@ public class QrcodeService {
 
 
             // 큐알이미지를 저장할 디렉토리 지정
-            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\animals";
+            String root = "src\\main\\resources\\static\\qrcode\\animals";
             file = new File(root);
             if(!file.exists()) {
                 file.mkdirs();
@@ -87,7 +87,7 @@ public class QrcodeService {
             File file = null;
 
             // 큐알이미지를 저장할 디렉토리 지정
-            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\donation";
+            String root = "src\\main\\resources\\static\\qrcode\\donation";
 
             file = new File(root);
 
@@ -121,7 +121,7 @@ public class QrcodeService {
 
     public void transfusionQrcode(Long transfusionIdx) {
         try {
-            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\transfusion";
+            String root = "src\\main\\resources\\static\\qrcode\\transfusion";
             File file = null;
 
             // 큐알이미지를 저장할 디렉토리 지정
@@ -154,7 +154,7 @@ public class QrcodeService {
 
     public void vaccineQrcode(Long vaccinIdx) {
         try {
-            String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\vaccine";
+            String root = "src\\main\\resources\\static\\qrcode\\vaccine";
             File file = null;
 
             // 큐알이미지를 저장할 디렉토리 지정
@@ -195,7 +195,7 @@ public class QrcodeService {
 
 
             try {
-                String root = "C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\resources\\static\\qrcode\\bNumber";
+                String root = "src\\main\\resources\\static\\qrcode\\bNumber";
                 File file = null;
 
                 // 큐알이미지를 저장할 디렉토리 지정

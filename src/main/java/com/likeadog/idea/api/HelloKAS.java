@@ -67,7 +67,7 @@ public class HelloKAS {
 
     static {
         try {
-            bytes = Files.readAllBytes(Paths.get("C:\\Users\\lhn14\\Desktop\\merge\\IDEA\\src\\main\\java\\com\\likeadog\\idea\\api\\Abi"));
+            bytes = Files.readAllBytes(Paths.get("src\\main\\java\\com\\likeadog\\idea\\api\\Abi"));
         } catch (IOException e) {
             e.printStackTrace();
         }
