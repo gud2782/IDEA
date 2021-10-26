@@ -36,9 +36,9 @@
 						<p class="step-icon"><span>01</span></p>
 						<span class="step-text">조회</span>
 					</h2>
-
 						<input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
 						<input type="text" id="aniImg" name="aniImg" value="aniImg" hidden>
+						<input type="text" id="neutralization" name="neutralization" value="neutralization" hidden>
 						<section>
 							<div class="inner">
 								<div class="wizard-header">
@@ -66,7 +66,6 @@
 									<div class="form-holder form-holder-1">
 										<input type="text" name="find_bank" id="aniId1" placeholder="동물등록번호" class="form-control" readonly>
 									</div>
-
 								</div>
 							</div>
 						</section>
@@ -399,10 +398,8 @@
 		document.getElementById('aniId').value = aniId;
 		document.getElementById('aniId1').value = aniId;
 		document.getElementById('kind').value = kind;
-		//1. 사용안하는 란이 존재해서 여기에 오류가 걸려서
-		//document.getElementById('neutralization').value = neutralization;
+		document.getElementById('neutralization').value = neutralization;
 
-		//2. 코드를 여기까지 읽지않고 끝내버림
 		document.getElementById('aniName').value=aniName;
 		document.getElementById('aniImg').value=aniImg;
 		console.log(aniImg)
@@ -411,44 +408,7 @@
 
 </script>
 
-<<<<<<< HEAD
 
-=======
-<script type="text/javascript">
-	$(document).ready(function () {
-		$.datepicker.regional['ko'] = {
-			closeText: '닫기',
-			prevText: '이전달',
-			nextText: '다음달',
-			currentText: '오늘',
-			monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
-				'7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
-			monthNamesShort: ['1월','2월','3월','4월','5월','6월',
-				'7월','8월','9월','10월','11월','12월'],
-			dayNames: ['일','월','화','수','목','금','토'],
-			dayNamesShort: ['일','월','화','수','목','금','토'],
-			dayNamesMin: ['일','월','화','수','목','금','토'],
-			weekHeader: 'Wk',
-			dateFormat: 'yy-mm-dd',
-			firstDay: 0,
-			isRTL: false,
-			showMonthAfterYear: true,
-			yearSuffix: '',
-			buttonText: "달력",
-			changeMonth: true,
-			changeYear: true,
-			showButtonPanel: true,
-			yearRange: 'c-99:c+99',
-		};
-		$.datepicker.setDefaults($.datepicker.regional['ko']);
-
-		$('#dDate').datepicker();
-		$('#dDate').datepicker("option", "maxDate", $("#dDate").val());
-
-
-	});
-</script>
->>>>>>> 070e5112773943daa421330f4d02cbc30d898f0e
 </body>
 <!--footer -->
 <div th:replace="fragments/footer_content :: footer_content" />

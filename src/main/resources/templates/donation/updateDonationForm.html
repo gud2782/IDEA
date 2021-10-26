@@ -27,9 +27,22 @@
 <div class="page-content">
     <div class="form-v1-content">
         <div class="wizard-form">
-            <form class="form-register" action="#" method="post">
+            <form class="form-register" name="donationForm" id="donationForm" th:object="${form}" method="post" autocomplete="off">
+                <input type="hidden" id="registerIdx" name="registerIdx" th:field="*{register.registerIdx}" />
+                <input type="hidden" th:field="*{register.user.userId}" />
+                <input type="hidden" th:field="*{del}" />
+                <input type="hidden" th:field="*{CDate}">
+                <input type="hidden" th:field="*{creater}">
+                <input type="hidden" th:field="*{hash}">
+                <input type="hidden" th:field="*{aniImg}">
+                <input type="hidden" th:field="*{qrcode.qrcodeIdx}">
+                <input type="hidden" th:field="*{donationIdx}">
+                <input type="hidden" th:field="*{neutralization}">
+
+
+
+
                 <div id="form-total">
-                    <form id="donationForm" th:action="@{/donation/new}" th:object="${form}" method="post" autocomplete="off">
                         <h2>
                             <span class="step-text">수정하기</span>
                         </h2>
@@ -43,13 +56,13 @@
                                     <div class="form-holder">
                                         <fieldset>
                                             <legend>반려견 이름</legend>
-                                            <input type="text" id="aniName" th:id="aniName" th:for="register" class="form-control" th:field="*{register.aniName}" readonly>
+                                            <input type="text" id="aniName" th:id="aniName" class="form-control" th:field="*{register.aniName}" readonly>
                                         </fieldset>
                                     </div>
                                     <div class="form-holder">
                                         <fieldset>
                                             <legend>동물등록번호</legend>
-                                            <input type="text" id="aniId" th:id="aniId" th:for="register" class="form-control" th:field="*{register.aniId}" readonly>
+                                            <input type="text" id="aniId" th:id="aniId" class="form-control" th:field="*{register.aniId}" readonly>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -71,13 +84,13 @@
                                     <div class="form-holder">
                                         <fieldset>
                                             <legend>헌혈양</legend>
-                                            <input type="text" id="dPack" th:id="dPack" th:for="dPack" class="form-control" th:field="*{dPack}"  required>
+                                            <input type="text" id="DPack" th:id="DPack" th:for="DPack" class="form-control" th:field="*{DPack}"  required>
                                         </fieldset>
                                     </div>
                                     <div class="form-holder">
                                         <fieldset>
                                             <legend>헌혈일시</legend>
-                                            <input type="text" id="dDate" th:id="dDate" th:for="dDate" class="form-control" th:field="*{dDate}" required>
+                                            <input type="text" id="DDate" th:id="DDate" th:for="DDate" class="form-control" th:field="*{DDate}" required>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -116,15 +129,13 @@
 
                                     </div>
                                     <div class="form-holder form-holder-4">
-                                        <input type="submit" name="find_bank" id="check" value="수정" class="form-control" onclick="toAjax()">
+                                        <input type="button" name="find_bank" id="check" value="수정" class="form-control" onclick="toAjax()" >
                                     </div>
                                 </div>
 
                             </div>
                         </section>
 
-
-                    </form>
                 </div>
             </form>
         </div>
@@ -142,7 +153,7 @@
 
         console.log("1");
 
-        // var aniName =$("#aniName").val();
+        var aniName =$("#aniName").val();
         var aniId =$("#aniId").val();
         var kind =$("#kind").val();
         var DWeight =$("#DWeight").val();
@@ -159,7 +170,7 @@
                 "name": "형우테스트",
                 "description": "description example for kip17 token",
                 "image": "https://metadata-store.klaytnapi.com/e2d83vdb-c108-823c-d5f3-69vdf2d871c51/4a85e6be-3215-93e6-d8a9-3a7d633584e7.png",
-                // "aniName": aniName,
+                "aniName": aniName,
                 "aniId" : aniId,
                 "kind" : kind,
                 "DWeight" : DWeight,
@@ -180,26 +191,28 @@
         http.setRequestHeader('x-chain-id', '1001');
 
         http.onreadystatechange = function() {//Call a function when the state changes.
-            //  if(http.readyState == 4 && http.status == 200) {
-
-            //  alert(http.responseText);
-            console.log(http.responseText);
-
             // mintToken(http.responseText);
+            console.log('META-STATE', http.readyState)
+            if(http.readyState !=4) return;
+            console.log(http.response)
             var jsonArray =http.responseText
             var jsonParsedArray = JSON.parse(jsonArray);
 
             mintToken(jsonParsedArray["uri"]);   //토큰생성
-            console.log("222uri >>> "+jsonParsedArray["uri"]);
-            // for (key in jsonParsedArray) {
-            //     if (jsonParsedArray.hasOwnProperty(key)) {
-            //         console.log("%c "+key + " = " + jsonParsedArray[key],"color:cyan");
-            //     }
-            // }
 
-            // }
+
+            console.log("8")
+
+
+
+
         }
         http.send(JSON.stringify(data));
+        console.log("7")
+
+
+
+
 
     }
 
@@ -209,8 +222,8 @@
     function mintToken(uri) {
         let timestamp= Math.floor(new Date().getTime() / 1000);
 
-        console.log("=====start mintToken======");
-        console.log("timestamp >>> " +timestamp);
+        // console.log("=====start mintToken======");
+        // console.log("timestamp >>> " +timestamp);
         let http = new XMLHttpRequest();
         let url = 'https://kip17-api.klaytnapi.com/v1/contract/0x5c8b5eb9571d6e413801737eb16502181df7ff91/token';
         let data= {
@@ -227,23 +240,21 @@
         http.setRequestHeader('x-chain-id', '1001');
 
         http.onreadystatechange = function() {//Call a function when the state changes.
-            //  if(http.readyState == 4 && http.status == 200) {
+            console.log('TOKEN-STATE', http.readyState)
+            if(http.readyState !=4) return;
 
-            //  alert(http.responseText);
-            console.log(http.responseText);
-            console.log("222");
             let jsonResult = JSON.parse(http.responseText);
             let hash = jsonResult.transactionHash;
 
 
             $('#hash').val(hash);
             alert(hash);
-            var form = document.registerForm;
-            form.action="/ani/new";
+            var form = document.donationForm;
+            var registerIDx =$("#registerIdx").val();
+            form.action="/donation/"+ registerIDx +"/update";
             form.submit();
 
 
-            // }
         }
         http.send(JSON.stringify(data));
 
@@ -253,69 +264,7 @@
 </script>
 
 
-<script>
-    const loginText = document.querySelector(".title-text .login");
-    const loginForm = document.querySelector("form.login");
-    const loginBtn = document.querySelector("label.login");
-    const signupBtn = document.querySelector("label.signup");
-    // const signupLink = document.querySelector("form .signup-link a");
-    signupBtn.onclick = (()=>{
-        loginForm.style.marginLeft = "-50%";
-        loginText.style.marginLeft = "-50%";
-    });
-    loginBtn.onclick = (()=>{
-        loginForm.style.marginLeft = "0%";
-        loginText.style.marginLeft = "0%";
-    });
-    signupLink.onclick = (()=>{
-        signupBtn.click();
-        return false;
-    });
-</script>
-<script th:inline="javascript">
 
-    function getType(Event) {
-        document.getElementById('result').innerText =
-            Event.target.value;
-    }
-    function changeValues() {
-
-
-        //select된 값 가져오면서 , 기준 파싱
-        let selectOption = document.getElementById("register").value.split(",");
-
-        //변수 선언
-        let aniId,kind,neutralization,aniName;
-
-        //각각 파싱된 변수들 저장
-        for (let idx=0; idx <  5; idx++){
-            let value = selectOption [idx];
-            if(idx == 1){
-                aniId= value;
-            }else if(idx == 2){
-                kind= value;
-            }else if(idx==3){
-                neutralization= value;
-            }else if(idx==4){
-                aniName=value;
-            }
-        }
-
-
-        //input id값으로 저장된 값 설정 및 뿌려주기
-
-        document.getElementById('aniId').value = aniId;
-        document.getElementById('aniId1').value = aniId;
-        document.getElementById('kind').value = kind;
-        //1. 사용안하는 란이 존재해서 여기에 오류가 걸려서
-        //document.getElementById('neutralization').value = neutralization;
-
-        //2. 코드를 여기까지 읽지않고 끝내버림
-        document.getElementById('aniName').value=aniName;
-
-    }
-
-</script>
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -42,10 +42,10 @@ public class Register extends BaseEntity{
     @Builder.Default
     private List<RegisterVaccine> registerVaccines  = new ArrayList<>();
 
-
+//
 //    @OneToMany(mappedBy = "register")
 //    private List<Donation> donations = new ArrayList<>();
-
+//
 //    @OneToMany(mappedBy = "register")
 //    private List<Transfusion> transfusions = new ArrayList<>();
 

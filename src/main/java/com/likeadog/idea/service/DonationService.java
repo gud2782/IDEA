@@ -56,6 +56,7 @@ public class DonationService {
                 .dWeight(form.getDWeight())
                 .dPack(form.getDPack())
                 .hash(form.getHash())
+                .neutralization(form.getNeutralization())
                 .build();
         donation.setDel(DeleteStatus.NO);
         donation.setCDate(LocalDateTime.now());

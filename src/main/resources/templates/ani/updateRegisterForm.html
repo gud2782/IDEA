@@ -37,9 +37,12 @@
             <div class="card-body">
                 <form   th:object="${form}" method="post"  autocomplete="off">
                     <input type="hidden" th:field="*{registerIdx}" />
-                    <input type="hidden" th:field="*{aniId}" />
                     <input type="hidden" th:field="*{user.userIdx}" />
                     <input type="hidden" th:field="*{del}" />
+                    <input type="hidden" th:field="*{CDate}" />
+                    <input type="hidden" th:field="*{creater}" />
+                    <input type="hidden" th:field="*{aniImg}" />
+
                     <input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
 
 

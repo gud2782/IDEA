@@ -24,7 +24,7 @@
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
-			<form class="formRegister" name="formRegister" th:action="@{/transfusion/new}" th:object="${transfusionForm}" method="post" autocomplete="off">
+			<form class="formRegister" name="formRegister"  th:object="${transfusionForm}" method="post" autocomplete="off">
 				<div id="form-total">
 					<!-- SECTION 1 -->
 					<h2>
@@ -33,7 +33,7 @@
 					</h2>
 					<input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
 					<input type="text" id="aniImg" name="aniImg" value="aniImg"   hidden>
-
+					<input type="text" id="neutralization" name="neutralization" value="neutralization"  hidden>
 					<section>
 							<div class="inner">
 								<div class="wizard-header">
@@ -61,7 +61,6 @@
 									<div class="form-holder form-holder-1">
 										<input type="text" name="find_bank" id="aniId1" placeholder="동물등록번호" class="form-control" readonly>
 									</div>
-
 								</div>
 							</div>
 					</section>
@@ -113,20 +112,8 @@
 										<fieldset>
 											<legend>수혈양</legend>
 
-											<input type="text" id="tPack" th:id="tPack" th:for="tPack" class="form-control" th:field="*{tPack}"  required>
+											<input type="text" id="TPack" th:id="TPack" th:for="TPack" class="form-control" th:field="*{TPack}"  required>
 										</fieldset>
-									</div>
-									<div class="form-holder">
-										<fieldset>
-											<legend>수혈일시</legend>
-											<input type="text" id="tDate" th:id="tDate" th:for="tDate" class="form-control" th:field="*{tDate}" required>
-										</fieldset>
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="form-holder form-holder-2">
-
-
 									</div>
 									<div class="form-holder">
 										<fieldset>
@@ -145,9 +132,7 @@
 								</div>
 								<div class="form-row form-row-date">
 									<div class="form-holder form-holder-2">
-										<!--                              <label class="special-label">혈액형</label>-->
 										<select name="type" id="type" class="form-control">
-
 											<option value="TYPE" disabled selected>혈액형</option>
 											<option value="DEA 1.1">DEA 1.1</option>
 											<option value="DEA 1.2">DEA 1.2</option>
@@ -157,15 +142,13 @@
 										<div class="form-row">
 											<div class="form-holder2 form-holder-2">
 											</div>
-
 										</div>
 
 									</div>
+								</div>
 									<div class="form-holder form-holder-4">
 										<input type="button" name="find_bank" id="check" value="등록" class="form-control" onclick="toAjax()">
-
 									</div>
-								</div>
 
 							</div>
 						</section>
@@ -211,7 +194,6 @@
 								</div>
 							</div>
 						</section>
-
 				</div>
 			</form>
 		</div>
@@ -409,10 +391,8 @@
 		document.getElementById('aniId').value = aniId;
 		document.getElementById('aniId1').value = aniId;
 		document.getElementById('kind').value = kind;
-		//1. 사용안하는 란이 존재해서 여기에 오류가 걸려서
-		//document.getElementById('neutralization').value = neutralization;
+		document.getElementById('neutralization').value = neutralization;
 
-		//2. 코드를 여기까지 읽지않고 끝내버림
 		document.getElementById('aniName').value=aniName;
 		document.getElementById('aniImg').value=aniImg;
 
