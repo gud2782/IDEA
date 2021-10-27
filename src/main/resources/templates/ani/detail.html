@@ -28,12 +28,11 @@
                   <input type="hidden" th:field="*{aniId}" />
                   <input type="hidden" th:field="*{user.userIdx}" />
                   <input type="hidden" th:field="*{del}" />
-                  <input type="text" id="fileName" name="fileName" th:field="*{fileName}" hidden>
                 <p>사랑스러운 우리 강아지의 백신접종 내역을 등록하고,
                   <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
                   <br>아래의 QR코드로 우리 강아지의 정보를 손쉽게 열어 볼 수 있어요!</p>
                   <div class="img-box">
-                    <img  style="width: 250px; height:300px" th:scr="${register.aniImg}">
+                    <img  style="width: 250px; height:300px" th:src="${register.aniImg}">
                   </div> <!-- img-box  -->
                   <hr>
 
@@ -61,7 +60,7 @@
                                   <div class="row">
                                       <g transform="translate(-539.17946,-568.85777)" id="layer1">
                                         <img id="file" style="width: 200px; height:200px"
-                                        th:src="@{/qrcode/animals/peterpet_{idx}.png (idx=*{fileName})}">
+                                        th:src="@{/qrcode/animals/{idx}.png (idx=*{registerIdx})}">
                                       </g>
                                   </div>
                                 </div><!--bottom -->
@@ -218,8 +217,7 @@
     var kind = $("#kind").text();
     var color = $("#color").text();
     var neutralization = $("#neutralization").text();
-    var fileName = $("#fileName").text();
-    console.log(aniId, aniName, weight, kind, color, neutralization, fileName)
+    console.log(aniId, aniName, weight, kind, color, neutralization)
 
 
     //나에게 메세지 보내기
@@ -265,7 +263,7 @@
                               profile_image_url: 'http://k.kakaocdn.net/dn/yEDty/bl3hWCSbQZa/WCdd5n8h5zWD8eYWZvGy61/kakaolink40_original.png',
                               title_image_url: 'http://k.kakaocdn.net/dn/7XmJg/bl3hWCdAcq2/W98I79CS6w1kW1Dgl14BXK/kakaolink40_original.png',
                               title_image_text: 'IDEA',
-                              title_image_category: fileName,
+                              title_image_category: aniId,
                               items: [
                                 {
                                   item: '이름',

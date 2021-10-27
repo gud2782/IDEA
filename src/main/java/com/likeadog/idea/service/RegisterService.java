@@ -30,9 +30,8 @@ public class RegisterService {
 
         String userId = SecurityInfoProvider.getCurrentMemberId();
         UserEntity userEntity = userService.findByUserID(userId);
-        String name = aniId.substring(13,23);
         String imgUrl = "";
-         qrcodeService.registerQrcode(aniId);
+
 
 
 
@@ -46,19 +45,17 @@ public class RegisterService {
                 .gender(form.getGender())
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
-                .fileName(name)
                 .hash(form.getHash())
                 .build();
         register.setDel(DeleteStatus.NO);
         register.setCreater(userId);
         register.setCDate(LocalDateTime.now());
         System.out.println("ani_img " + form.getAniImg());
-        System.out.println("fileName : " + name);
         if (form.getAniImg() == null || form.getAniImg().isEmpty()) {
             imgUrl = "/img/card.png";
             register.setAniImg(imgUrl);
         } else {
-            imgUrl = "https://gateway.ipfs.io/ipfs/"+form.getAniImg();
+            imgUrl = "https://ipfs.io/ipfs/"+form.getAniImg();
             register.setAniImg(imgUrl);
 
         }
@@ -67,6 +64,8 @@ public class RegisterService {
 
 
         registerRepository.regSave(register);
+        Long registerIdx = register.getRegisterIdx();
+        qrcodeService.registerQrcode(registerIdx);
     }
 
     public RegisterForm getUpdateAni(Long registerIdx) {
@@ -87,7 +86,6 @@ public class RegisterService {
                 .neutralization(register.getNeutralization())
                 .hash(register.getHash())
                 .aniImg(register.getAniImg())
-                .fileName(register.getFileName())
                 .build();
         form.setDel(register.getDel());
         form.setCDate(register.getCDate());
@@ -115,7 +113,6 @@ public class RegisterService {
                 .birth(form.getBirth())
                 .neutralization(form.getNeutralization())
                 .user(form.getUser())
-                .fileName(form.getFileName())
                 .hash(form.getHash())
                 .aniImg(form.getAniImg())
                 .build();

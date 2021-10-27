@@ -35,6 +35,7 @@ public class VaccineController {
         model.addAttribute("registers", registers );
         model.addAttribute("vinfos", vinfos );
         System.out.println(model.getAttribute("vinfos"));
+        System.out.println("1111111");
 
         return "vc/createVaccineForm";
 
@@ -51,11 +52,13 @@ public class VaccineController {
 
         //ThirdStatus third;
 
-        if (third == null ) {
+        if (third == null) {
             third = ThirdStatus.none;
         }
+
         System.out.println(first);
         System.out.println(third);
+
 
         // vaccineService.saveVc(vaccine);
 
@@ -84,8 +87,18 @@ public class VaccineController {
     }
 
     @PostMapping("/{vaccineIdx}/update")
-    public String updateVc(@PathVariable String vaccineIdx, @ModelAttribute("form") VaccineForm form) {
-        vaccineService.updateVaccine(vaccineIdx, form);
+    public String updateVc(@PathVariable String vaccineIdx,
+                           @RequestParam("regiIdx") Long regiIdx,
+                           @ModelAttribute("form") VaccineForm form,
+                           @RequestParam("first") FirstStatus first,
+                           @RequestParam("second") SecondStatus second,
+                           @RequestParam(value = "third",required = false) ThirdStatus third
+    ) {
+
+        if (third == null) {
+            third = ThirdStatus.none;
+        }
+        vaccineService.updateVaccine(first,second,third,vaccineIdx, form,regiIdx);
 
         return "redirect:/vc/list";
     }

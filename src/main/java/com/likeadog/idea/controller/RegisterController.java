@@ -1,13 +1,18 @@
 package com.likeadog.idea.controller;
 
+import com.likeadog.idea.api.PublicAPI;
 import com.likeadog.idea.controller.form.RegisterForm;
 import com.likeadog.idea.domain.Donation;
 import com.likeadog.idea.domain.Register;
 import com.likeadog.idea.domain.Transfusion;
+import com.likeadog.idea.domain.UserEntity;
 import com.likeadog.idea.dto.FindByPhoneResponseDto;
+import com.likeadog.idea.provider.SecurityInfoProvider;
 import com.likeadog.idea.service.DonationService;
 import com.likeadog.idea.service.RegisterService;
+import com.likeadog.idea.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +29,34 @@ import java.util.List;
 public class RegisterController {
 
     private final RegisterService registerService;
+    private final UserService userService;
+
+    @Autowired
+    PublicAPI publicAPI;
 
 
+    //API 활용
+    @ResponseBody
+    @GetMapping("/callAPI")
+    public String callAPI(String aniId,String name){
+
+        return publicAPI.callAPI(aniId,name);
+
+    }
 
 
 
     //동물정보 등록
     @GetMapping("/new")
     public String createForm(Model model){
-        model.addAttribute("registerForm", new RegisterForm());
-        return "ani/createRegisterForm";
+
+        UserEntity userEntity = userService.findByUserID(SecurityInfoProvider.getCurrentMemberId());
+
+        RegisterForm registerForm = new RegisterForm();
+        registerForm.setUser(userEntity);
+
+        model.addAttribute("registerForm", registerForm);
+        return "ani/createRegisterFormWithAPI";
     }
 
 
@@ -51,6 +74,7 @@ public class RegisterController {
 
         return "redirect:/ani/list";
     }
+
 
     //등록한 동물정보 리스트조회
     @GetMapping("/list")
@@ -85,7 +109,8 @@ public class RegisterController {
 
         Register register = registerService.findOne(registerIdx);
 
-        String aniId = register.getAniId().substring(13,23);
+        //String aniId = register.getAniId().substring(13,23);
+        String aniId = register.getAniId();
 
         model.addAttribute("register", register);
         return "ani/detail";
