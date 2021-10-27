@@ -25,4 +25,8 @@ public class VaccineVInfoService {
     }
 
 
+    public VaccineVinfo findVvByVaccine(Long vaccineIdx){
+        return vaccineVInfoRepository.findVvByVaccine(vaccineIdx);
+    }
+
 }

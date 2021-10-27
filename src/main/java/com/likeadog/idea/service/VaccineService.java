@@ -133,10 +133,20 @@ public class VaccineService {
 
 
     @Transactional
-    public void updateVaccine(String vaccineIdx, VaccineForm form) {
-        String userId = SecurityInfoProvider.getCurrentMemberId();
-        UserEntity userEntity = userService.findByUserID(userId);
+    public void updateVaccine(FirstStatus firstStatus, SecondStatus secondStatus
+            , ThirdStatus thirdStatus, String vaccineIdx, VaccineForm form,Long regiIdx ) {
+
+
+        Vinfo vinfo = vinfoService.vInfoMaker(firstStatus,secondStatus,thirdStatus);
+        Vinfo dbVinfo = vinfoService.findVInfo(vinfo.getVInfoIdx());
+
+        Register register = registerService.findOne(regiIdx);
+
+        Long lngVaccineIdx = Long.parseLong(vaccineIdx);
+
+        //vaccineIdx 기준으로 update인지 insert 인지 구별하기 떄문에 필요
         Vaccine vaccine = Vaccine.builder()
+                .vaccineIdx(lngVaccineIdx)
                 .vaccineVinfos(form.getVaccineVinfos())
                 .vNumber(form.getVNumber())
                 .vDate(form.getVDate())
@@ -146,22 +156,21 @@ public class VaccineService {
                 .hash(form.getHash())
                 .aniImg(form.getAniImg())
                 .build();
-        vaccine.setCDate(form.getCDate());
-        vaccine.setCreater(form.getCreater());
-        vaccine.setMDate(LocalDateTime.now());
-        vaccine.setModifier(userEntity.getUserId());
-
-
         vaccineRepository.regVc(vaccine);
 
-
+        //위와 동일한 이유, vaccineIdx로 RegisterVaccine Idx 가져와서 바로 집어넣음
         RegisterVaccine registerVaccine = RegisterVaccine.builder()
+                .registerVaccineIdx(registerVaccineService.findRvByVaccine(lngVaccineIdx).getRegisterVaccineIdx())
                 .vaccine(vaccine)
+                .register(register)
                 .build();
         registerVaccineService.saveRV(registerVaccine);
 
+        //위와 동일한 이유, vaccineIdx로 VaccineVinfo Idx 가져와서 바로 집어넣음
         VaccineVinfo vaccineVinfo = VaccineVinfo.builder()
+                .vaccineVinfoIdx(vaccineVInfoService.findVvByVaccine(lngVaccineIdx).getVaccineVinfoIdx())
                 .vaccine(vaccine)
+                .vinfo(dbVinfo)
                 .build();
         vaccineVInfoService.saveVV(vaccineVinfo);
 

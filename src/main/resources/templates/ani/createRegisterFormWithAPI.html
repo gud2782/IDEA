@@ -32,28 +32,34 @@
     <div class="wrapper_form wrapper--w900">
         <div class="card_form card-6">
             <div class="card-heading">
-                <h2 class="title_form">반려견 정보 수정</h2>
+                <h2 class="title_form">반려견 정보 등록</h2>
             </div>
             <div class="card-body">
-                <form   th:object="${form}" method="post"  autocomplete="off">
-                    <input type="hidden" th:field="*{registerIdx}" />
-                    <input type="hidden" th:field="*{user.userIdx}" />
-                    <input type="hidden" th:field="*{del}" />
-                    <input type="hidden" th:field="*{CDate}" />
-                    <input type="hidden" th:field="*{creater}" />
-                    <input type="hidden" th:field="*{aniImg}" />
+                <form id="registerForm" name="registerForm"  th:object="${registerForm}" method="post"  autocomplete="off">
 
 
+                    <!--<input type="text" id="name" name="name" th:value="*{user.name}"  >-->
                     <input type="text" id="hash" name="hash" value="hash" th:id="hash" th:for="hash" th:field="*{hash}" hidden>
+                    <div class="form-row-do" >
+                        <div class="name">소유자 이름</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="full_name" id="phone" th:id="name" th:for="name" th:field="*{user.name}">
+<!--                            <input type="button" class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue-2" id="find" onclick="findByPhone()" value="조회" />-->
+
+                        </div>
+                    </div>
 
 
                     <div class="form-row-do" >
                         <div class="name">동물등록번호</div>
                         <div class="value">
-                            <input  readonly class="input--style-6" type="text" name="full_name" id="aniId" th:id="aniId" th:for="aniId" th:field="*{aniId}"
-                                    th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
+                            <input class="input--style-6" type="text" name="full_name" id="aniId" th:id="aniId" th:for="aniId" th:field="*{aniId}"
+                                   th:class="${#fields.hasErrors('aniId')}? 'form-control fieldError' : 'input--style-6'">
                             <p th:if="${#fields.hasErrors('aniId')}" th:errors="*{aniId}">Incorrect date</p>
-                            <input type="button" class="btn btn--radius-2 btn--blue-2" onclick="findByAniId()" value="조회" />
+<!--                            <input type="button" class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue-2" onclick="findByAniId()" value="조회" />-->
+                            <input type="button" class="btn btn--radius-2 btn--blue-2" onclick="publicAPI()" value="조회" />
+
+
                             <div>
                                 <input class="modal-btn" type="checkbox" id="qrcode" name="modal-btn"/>
                                 <label for="qrcode">QRCODE 조회<i class="fa fa-qrcode" aria-hidden="true" STYLE="text-align: center" ></i></label>
@@ -83,7 +89,7 @@
                     <div class="form-row-do">
                         <div class="name">동물이름</div>
                         <div class="value">
-                            <input readonly class="input--style-6" type="text" name="full_name" id="aniName" th:for="aniName" th:field="*{aniName}" required>
+                            <input class="input--style-6" type="text" name="full_name" id="aniName" th:for="aniName" th:field="*{aniName}" required>
                         </div>
                     </div>
                     <div class="form-row-do">
@@ -125,11 +131,11 @@
                         </div>
                     </div>
                     <div class="card-footer">
-<!--                        <input class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue-2" onclick="toAjax()" type="submit">등록</input>-->
-                        <button class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="submit" >수정</button>
+                        <input class="btn btn--radius-2 btn--blue-2" onclick="toAjax()" type="button">등록</input>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
@@ -268,8 +274,6 @@
 
     });
 </script>
-
-
 <script type="text/javascript" th:inline="javascript">
     function findByAniId(aniId) {
         var sendDataById = "did="+aniId;
@@ -288,7 +292,10 @@
                 document.getElementById('kind').value = result.kind;
                 document.getElementById('birth').value = result.birth;
                 document.getElementById('color').value = result.color;
-                console.log(result.name + result.kind + result.birth  + result.color +result.gender);
+                document.getElementById('aniImg').value = result.img;
+                document.getElementById('neutralization').value = result.isNeutering;
+                console.log(result.name + result.kind + result.birth  + result.color +result.gender );
+                console.log(result.img);
 
 
                 if (result.gender === "male") {
@@ -320,38 +327,96 @@
     }
 </script>
 
+
+
+
 <script type="text/javascript" th:inline="javascript">
-    function findByPhone() {
-        var phone = $("#phone").val();
-        var sendDataByPhone = "phone="+phone;
-        console.log("sendDataByPhone : " + sendDataByPhone)
+    function publicAPI() {
+
+
+        var phone = document.getElementById("name").value;
+        // var phone = $("#phone").val();
+        console.log(phone);
+        //var aniId = document.getElementById("aniId").value;
+        var aniId = $("#aniId").val();
+        console.log(aniId);
+
+
+
+
+        var name = $("#name").val();
+        var sendData =  "aniId="+aniId +"&name="+name;
+        console.log("sendData : " + sendData)
 
         $.ajax({
-            url: "/ani/findByPhone",
-            type: "post",
-            data: sendDataByPhone,
+            url: "callAPI",
+            type: "get",
+            data:sendData,
+
+            //type: "post",
+            //data: sendDataByPhone,
 
 
 
             success: function (result) {
-                if(result){
-                    alert(result);
+                console.log(result);
+                let getResultById = result.split(",");
 
-                    for (let i = 0; i < result.length; i++) {
-                        console.log(result[i].aniId);
-                        console.log(result[i].aniName);
-                        console.log(result[i].color);
-                        console.log(result[i].kind);
+                let aniName, regNo, kindNm, neuterYn, sexNm
+                for (let idx=0; idx < 9; idx++){
+                    let value = getResultById [idx];
+                    if(idx == 0){
+                        aniName= value;
+                    }else if(idx == 1){
+                        regNo= value;
+                    }else if(idx==2){
+                        kindNm= value;
+                    }else if(idx==3) {
+                        neuterYn=value;
+                    }else if(idx==4) {
+                        sexNm=value;
                     }
 
-                }else{
-                    alert("전송 에러");
                 }
-            },
+                if (aniName == ""){
+                    alert("소유자 이름 또는 강아지 등록번호 오류");
+                }else{
+                    console.log(aniName);
+                    console.log(regNo);
+                    console.log(kindNm);
+                    console.log(neuterYn);
+                    console.log(sexNm);
+                    document.getElementById('aniName').value = aniName;
+                    document.getElementById('kind').value = kindNm;
+                    document.getElementById('neutralization').value = neuterYn;
+                    document.getElementById('gender').value = sexNm;
 
-            error: function (sendDataByPhone) {
-                alert("실패 : " + sendDataByPhone);
+                    if (sexNm === "수컷") {
+                        $('input:radio[id="male"]').attr("checked", true);
+
+                    }
+                    else  {
+                        $('input:radio[id="암컷"]').attr("checked", true);
+
+
+                    }
+                    if (neuterYn ==="중성") {
+                        $('input:radio[id="중성"]').attr("checked", true);
+
+                    }
+                    else  {
+                        $('input:radio[id="미중성"]').attr("checked", true);
+
+
+                    }
+                }
+
+            }, error:function(){
+                alert("xml 오류");
+                //불러오지 못했을때 할일 alert('Error loading XML document');
             }
+
+
         });
     };
 
@@ -462,8 +527,7 @@
             $('#hash').val(hash);
             alert(hash);
             var form = document.registerForm;
-
-            form.action="@{/ani/{idx}/update (idx=${registerIdx})}";
+            form.action="/ani/new";
             form.submit();
 
 

@@ -28,4 +28,13 @@ public class VaccineVInfoRepository {
 
         return em.find(VaccineVinfo.class, vaccineIdx);
     }
+
+
+
+    //추가
+    public VaccineVinfo findVvByVaccine(Long vaccineIdx) {
+
+        return em.createQuery("select vv from VaccineVinfo vv where vv.vaccine.vaccineIdx = :vaccineIdx", VaccineVinfo.class)
+                .setParameter("vaccineIdx",vaccineIdx).getResultList().get(0);
+    }
 }

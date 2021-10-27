@@ -24,4 +24,9 @@ public class RegisterVaccineService {
         return registerVaccineRepository.findRv(vaccineIdx);
     }
 
+    public RegisterVaccine findRvByVaccine(Long vaccineIdx){
+        return registerVaccineRepository.findRvByVaccine(vaccineIdx);
+    }
+
+
 }
