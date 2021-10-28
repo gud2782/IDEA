@@ -66,7 +66,7 @@ public class RegisterController {
     public String create(@RequestParam("aniId") String aniId,
                          @Valid RegisterForm form, BindingResult result) {
         if (result.hasErrors()) {
-            return "ani/createRegisterForm";
+            return "ani/createRegisterFormWithAPI";
         }
         System.out.println("get Hash : " + form.getHash());
         System.out.println("get aniName : " + form.getAniName());

@@ -29,7 +29,7 @@
                             <br>IDEA서비스를 통해 다음 접종일 알림을 받아보세요!
                             <br>아래의 QR코드로 우리 강아지의 정보를 손쉽게 열어 볼 수 있어요!</p>
                         <div class="img-box">
-                            <img  style="width: 250px; height:300px" th:scr="*{registerVaccines.get(0).register.aniImg}">
+                            <img  style="width: 250px; height:300px" th:src="*{registerVaccines.get(0).register.aniImg}">
                         </div> <!-- img-box  -->
                         <hr>
 
@@ -151,11 +151,14 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12" style="float: right">
-                                <input id="btn-detail1" type="submit" value="수정하기" >
-                                <input id="btn-detail2" type="submit" value="삭제하기" >
-                            </div>
+                                <a href="#" th:href="@{/vc/{idx}/update (idx=${vaccineIdx})}"
+                                   class="btn btn-primary" role="button">수정</a>
 
+                            </div>
                         </div>
+                    </form>
+                    <form action="/vc/delete" method="post">
+                        <button type="submit" role="button" id="vaccineIdx" name="vaccineIdx"  class="btn btn-primary" th:value="*{vaccineIdx}" >삭제</button>
                     </form>
 
                 </div>
